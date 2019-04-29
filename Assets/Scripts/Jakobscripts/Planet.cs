@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class Planet : MonoBehaviour
 {
     GravityPoint[] gPoints;
@@ -24,7 +25,6 @@ public class Planet : MonoBehaviour
         gPoints = transform.GetComponentsInChildren<GravityPoint>();
         foreach (GravityPoint GP in gPoints)
         {
-            Debug.Log("I'm here");
             GP.setAOE(GP.oppositeEq(Threshold / (rb.mass * GP.pullScale)));
         }
     }
@@ -40,8 +40,10 @@ public class Planet : MonoBehaviour
         {
             Vector3 toG = GP.transform.position - G.transform.position;
             float magG = toG.magnitude;
+            if (magG > 0)
+                toG.Normalize();
             if (GP.areaOfEffect > magG && !(GP.radialCutOff > 0 && GP.radialCutOff < magG))
-                G.GetComponent<Rigidbody>().AddForce(toG * rb.mass * GP.pullMag(magG) * GP.pullScale);
+                G.NewForce(toG * rb.mass * GP.pullMag(magG) * GP.pullScale, magG);
         }
     }
 

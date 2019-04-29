@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlanetManager : MonoBehaviour
 {
     Planet[] planets;
     Gravitized[] affectedByGravity;
+    public bool gravityEnabled = true;
+    public bool showForces = false;
 
     void Awake()
     {
@@ -15,7 +18,10 @@ public class PlanetManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        planetaryPull();
+        if (gravityEnabled)
+        {
+            planetaryPull();
+        }
     }
 
     void planetaryPull()
@@ -42,6 +48,12 @@ public class PlanetManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        foreach (Gravitized g in affectedByGravity)
+        {
+            g.ApplyForces();
+            g.enableForcePointer(showForces && g.showForces);
         }
     }
 }

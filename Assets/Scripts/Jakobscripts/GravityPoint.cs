@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class GravityPoint : MonoBehaviour
 {
     public pullType gEq = pullType.inverseSquared;

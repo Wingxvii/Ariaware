@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972ef498e6b206d4f9709c9df05d7c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gravityEnabled: 1
 --- !u!4 &704621717
 Transform:
   m_ObjectHideFlags: 0
@@ -431,6 +432,11 @@ PrefabInstance:
       propertyPath: gEq
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8997562502342678485, guid: fcb0e115bb10e724584192d740445631,
+        type: 3}
+      propertyPath: pullScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8997562502502656862, guid: fcb0e115bb10e724584192d740445631,
         type: 3}
       propertyPath: isActive
@@ -579,9 +585,19 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8997562502502656857, guid: fcb0e115bb10e724584192d740445631,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8997562502342678485, guid: fcb0e115bb10e724584192d740445631,
         type: 3}
       propertyPath: gEq
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8997562502342678485, guid: fcb0e115bb10e724584192d740445631,
+        type: 3}
+      propertyPath: pullScale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8997562502342678484, guid: fcb0e115bb10e724584192d740445631,
