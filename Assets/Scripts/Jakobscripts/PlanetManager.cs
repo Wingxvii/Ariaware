@@ -7,13 +7,21 @@ public class PlanetManager : MonoBehaviour
 {
     Planet[] planets;
     Gravitized[] affectedByGravity;
+    Atmosphere[] atmosphere;
     public bool gravityEnabled = true;
     public bool showForces = false;
+    public bool showAtmosphere = true;
+    public bool showVelocities = false;
 
     void Awake()
     {
         planets = FindObjectsOfType<Planet>();
         affectedByGravity = FindObjectsOfType<Gravitized>();
+    }
+
+    void Start()
+    {
+
     }
 
     void FixedUpdate()
@@ -26,10 +34,27 @@ public class PlanetManager : MonoBehaviour
 
     void planetaryPull()
     {
+        foreach (Gravitized g in affectedByGravity)
+        {
+            g.transform.SetParent(null);
+        }
+
         foreach (Planet p in planets)
         {
             if (p.isActive)
             {
+                foreach (Atmosphere ATM in p.atmosphere)
+                {
+                    if (showAtmosphere && p.showAtmosphere)
+                    {
+                        ATM.GetComponent<MeshRenderer>().enabled = true;
+                    }
+                    else
+                    {
+                        ATM.GetComponent<MeshRenderer>().enabled = false;
+                    }
+                }
+
                 foreach (Gravitized g in affectedByGravity)
                 {
                     if (g.byAll)
@@ -54,6 +79,7 @@ public class PlanetManager : MonoBehaviour
         {
             g.ApplyForces();
             g.enableForcePointer(showForces && g.showForces);
+            g.enableVelocityPointer(showVelocities && g.showVelocities);
         }
     }
 }

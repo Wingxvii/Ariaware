@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6882140097687244207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2878152204711645174}
+  - component: {fileID: 1601043466338752593}
+  m_Layer: 0
+  m_Name: Tree Sets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2878152204711645174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882140097687244207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.32540607, y: 3.1768322, z: -2.8852472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1601043466338752593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882140097687244207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de9927b525d74d438e264934865b0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeType: {fileID: 3471387813904772149, guid: ea2bae39926498543b9c76cfccef6237,
+    type: 3}
+  connection: {fileID: 2223940798506527771, guid: 88f19490fa2cc204c8ab8a39f7a040c2,
+    type: 3}
+  joint: {fileID: 2100000, guid: 2140d4214c98fcc45aadd04f5571c97d, type: 2}
+  split: {fileID: 2100000, guid: 38289f7793d12ce4aa5a89014e1135ff, type: 2}
+  initialScale: 1
+  cutoffScale: 0.4
+  decay: 0.1
+  splitChance: 1
+  splitAngleUpperBound: 60
+  splitAngleLowerBound: 30
+  radialNoiseUpperBound: 15
+  radialNoiseLowerBound: -15
+  segmentLengthUpperBound: 4
+  segmentLengthLowerBound: 1
+  maximumTrunkSeparation: 0.5
+  minimumTrunkSeparation: 0.5
+  maximumRoll: 180
+  minimumRoll: -180
