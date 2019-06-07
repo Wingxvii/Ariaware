@@ -10,12 +10,21 @@ public class CameraMovement : MonoBehaviour
     public Vector3 storedTurn;
     Vector3 move;
     Vector2 adjustRot;
+
+    bool mouseClicked = false;
     // Start is called before the first frame update
     void Start()
     {
         storedTurn = Vector2.zero;
     }
 
+    private void Update()
+    {
+        mouseClicked = Input.GetMouseButton(0);
+        //move = Movement.receiveCameraKeyboard();
+        //if(mouseClicked)
+        //    adjustRot = Movement.mouseRot();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -27,7 +36,7 @@ public class CameraMovement : MonoBehaviour
             move = Movement.receiveCameraKeyboard();
             move *= Time.fixedDeltaTime * camSpeed;
 
-            if (Input.GetMouseButton(0))
+            if (mouseClicked)
             {
                 adjustRot = Movement.mouseRot();
                 adjustRot *= Time.fixedDeltaTime * camTurnSpeed;

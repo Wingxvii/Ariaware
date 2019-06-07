@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gEq: 1
   pullScale: 1
+  radialCutOff: -1
 --- !u!1 &8997562502502656836
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8997562502502656836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 8997562502342678484}
@@ -152,8 +153,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+  showAtmosphere: 1
+  rotationAxis: {x: 0, y: 0, z: 0}
+  degreesPerSecond: 0
   pName: 0
   attracts: 02000000
+  atmosphere: []
 --- !u!54 &8997562502502656857
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -164,7 +169,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

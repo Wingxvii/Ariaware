@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 [DisallowMultipleComponent]
 public class Gravitized : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class Gravitized : MonoBehaviour
     public bool onlyStrongestPull = false;
     public eType typeOfG = eType.other;
     Rigidbody rb;
-    Vector3 totalForces = Vector3.zero;
+    protected Vector3 totalForces = Vector3.zero;
     float radialDistance = 0f;
     public ForcePointer FP;
     public ForcePointer VP;
@@ -17,16 +18,24 @@ public class Gravitized : MonoBehaviour
     public bool showVelocities = true;
     MeshRenderer FPmesh;
     MeshRenderer VPmesh;
-    Transform suggestedParent;
+    public bool freeze = false;
 
-    Quaternion motionDetect;
+    Vector3 atmosphereForce = Vector3.zero;
+    Vector3 atmosphereRadialForce = Vector3.zero;
+    //Planet suggestedParent;
 
-    Vector3 pInitial;
-    Vector3 pTravel;
+    //Quaternion motionDetect;
+
+    //Vector3 pInitial;
+    //Vector3 pTravel;
 
     void Awake()
     {
-        motionDetect = new Quaternion();
+        Initialize();
+    }
+
+    protected void Initialize()
+    {
         rb = GetComponent<Rigidbody>();
         if (FP != null)
         {
@@ -65,46 +74,37 @@ public class Gravitized : MonoBehaviour
         }
     }
 
-    public void suggestParent(Transform ATM)
+    public Rigidbody GetRB()
     {
-        if (suggestedParent == null)
-        {
-            suggestedParent = ATM;
-            transform.SetParent(ATM);
-            if (motionDetect != null)
-            {
-                motionDetect = Quaternion.Inverse(ATM.transform.rotation);
-            }
-        }
-        else if ((suggestedParent.position - transform.position).magnitude > (transform.position - ATM.position).magnitude)
-        {
-            suggestedParent = ATM;
-            transform.SetParent(ATM);
-            if (motionDetect != null)
-            {
-                motionDetect = Quaternion.Inverse(ATM.transform.rotation);
-            }
-        }
+        return rb;
+    }
+
+    public void AddAtmosphereForce(Planet ATM)
+    {
+
     }
 
     public void ApplyForces()
     {
-        rb.AddForce(totalForces);
-        if (FP != null)
+        if (!freeze)
         {
-            FP.SetRadius(FPradius);
-            FP.SetForceLoc(totalForces);
-            FP.SetBasePosition(transform.position);
-            FP.UpdateLocation();
+            rb.AddForce(totalForces);
+            if (FP != null)
+            {
+                FP.SetRadius(FPradius);
+                FP.SetForceLoc(totalForces);
+                FP.SetBasePosition(transform.position);
+                FP.UpdateLocation();
+            }
+            if (VP != null)
+            {
+                VP.SetRadius(FPradius);
+                VP.SetForceLoc(rb.velocity);
+                VP.SetBasePosition(transform.position);
+                VP.UpdateLocation();
+            }
         }
-        if (VP != null)
-        {
-            VP.SetRadius(FPradius);
-            VP.SetForceLoc(rb.velocity);
-            VP.SetBasePosition(transform.position);
-            VP.UpdateLocation();
-        }
-        ClearForces();
+        //ClearForces();
     }
 
     public void ClearForces()
@@ -129,16 +129,16 @@ public class Gravitized : MonoBehaviour
         }
     }
 
-    public void LateUpdate()
-    {
-        if (suggestedParent != null)
-        {
-            rb.velocity = suggestedParent.rotation * motionDetect * rb.velocity;
-            rb.angularVelocity = suggestedParent.rotation * motionDetect * rb.angularVelocity;
-            Debug.Log(suggestedParent.rotation * motionDetect);
-            suggestedParent = null;
-        }
-    }
+    //public void LateUpdate()
+    //{
+    //    if (suggestedParent != null)
+    //    {
+    //        rb.velocity = suggestedParent.rotation * motionDetect * rb.velocity;
+    //        rb.angularVelocity = suggestedParent.rotation * motionDetect * rb.angularVelocity;
+    //        Debug.Log(suggestedParent.rotation * motionDetect);
+    //        suggestedParent = null;
+    //    }
+    //}
 
     public enum eType
     {
