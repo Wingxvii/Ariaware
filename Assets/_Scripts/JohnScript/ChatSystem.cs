@@ -35,7 +35,7 @@ public class ChatSystem : MonoBehaviour
 
     private IntPtr Client;
 
-    public List<List<string>> messageQueue = new List<List<string>>();
+    //public List<List<string>> messageQueue = new List<List<string>>();
 
     // Start is called before the first frame update
     void Start()
@@ -85,11 +85,22 @@ public class ChatSystem : MonoBehaviour
             for (int counter = 1; counter < parsedData.Count; counter++)
             {
                 message = message + parsedData[counter];
+                Debug.Log("added message");
             }
-            message = "Player " + parsedData[0] + ": ";
-            userLog.text = userLog.text + message + "\n";
-        }
+            message = "Player " + parsedData[0] + ": " + message;
+            Debug.Log(message);
 
+
+            try {
+                userLog.text = userLog.text + message + "\n";
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("Message was not sent");
+            }
+
+
+        }
     }
 
     //called on data recieve action, then process
@@ -97,6 +108,7 @@ public class ChatSystem : MonoBehaviour
         List<string> parsedData = tokenize(',', data);
         //send to parsed data
         parsedData.Insert(0, sender.ToString());
+        Debug.Log(parsedData.Count.ToString());
 
         switch ((PacketType)type) {
             case PacketType.ERROR:
