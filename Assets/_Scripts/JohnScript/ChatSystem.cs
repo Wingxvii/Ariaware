@@ -35,7 +35,7 @@ public class ChatSystem : MonoBehaviour
 
     private IntPtr Client;
 
-    //public List<List<string>> messageQueue = new List<List<string>>();
+    static volatile Queue<List<string>> _appendQueue = new Queue<List<string>>();
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +51,15 @@ public class ChatSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (_appendQueue.Count == 0) return;
+        lock (_appendQueue)
+        {
+            foreach (List<string> data in _appendQueue)
+            {
+                this.ProcessMessage(data);
+            }
+            _appendQueue.Clear();
+        }
     }
 
     public void OnSendMessage()
@@ -64,6 +72,7 @@ public class ChatSystem : MonoBehaviour
     {
         //clean up client
         DeleteClient(Client);
+        
     }
 
     private void ProcessMessage(List<string> parsedData) {
@@ -89,40 +98,31 @@ public class ChatSystem : MonoBehaviour
             }
             message = "Player " + parsedData[0] + ": " + message;
             Debug.Log(message);
-
-
-            try {
-                userLog.text = userLog.text + message + "\n";
-            }
-            catch (NullReferenceException)
-            {
-                Debug.Log("Message was not sent");
-            }
-
-
+            userLog.text = userLog.text + message + "\n";
         }
     }
 
     //called on data recieve action, then process
-    private void PacketRecieved(int type, int sender, string data) {                ///does this get multithreaded because it gets invoked in a seperate thread???s
+    static void PacketRecieved(int type, int sender, string data) {                ///does this get multithreaded because it gets invoked in a seperate thread???s
         List<string> parsedData = tokenize(',', data);
         //send to parsed data
         parsedData.Insert(0, sender.ToString());
         Debug.Log(parsedData.Count.ToString());
 
-        switch ((PacketType)type) {
-            case PacketType.ERROR:
+        lock (_appendQueue){
+            if ((PacketType)type != PacketType.ERROR)
+            {
+                _appendQueue.Enqueue(parsedData);
+            }
+            else {
                 Debug.Log("PACKET SEND ERROR");
-                break;
-            case PacketType.MESSAGE:
-                ProcessMessage(parsedData);
-                break;
+            }
         }
 
     }
 
     //tokenizer migrated from c++
-    private List<string> tokenize(char token, string text)
+    static List<string> tokenize(char token, string text)
     {
         List<string> temp = new List<string>();
         int lastTokenLocation = 0;
