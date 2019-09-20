@@ -12,6 +12,8 @@ public enum PacketType
     ERROR = 0,
     //single string
     MESSAGE = 1,
+    //transformation data
+    TRANSFORMATION = 2,
 }
 
 public class ChatSystem : MonoBehaviour
@@ -23,11 +25,16 @@ public class ChatSystem : MonoBehaviour
     [DllImport("CNET.dll")]
     static extern void Connect(string str, IntPtr client);          //Connects to c++ Server
     [DllImport("CNET.dll")]
-    static extern void SendMsg(string str, IntPtr client);          //Sends Message to all other clients
+    static extern void SendMsg(string str, IntPtr client);          //Sends Message to all other clients    
+    [DllImport("CNET.dll")]
+    static extern void SendTransformation(double px, double py, double pz, double rx, double ry, double rz, double sx, double sy, double sz, IntPtr client);          //Sends Position data to all other clients
     [DllImport("CNET.dll")]
     static extern void StartUpdating(IntPtr client);                //Starts updating
     [DllImport("CNET.dll")]
     static extern void SetupPacketReception(Action<int, int, string> action); //recieve packets from server
+    [DllImport("CNET.dll")]
+    static extern int GetPlayerNumber(IntPtr client);
+
 
     public Button sendButton;
     public Text userLog;
@@ -35,12 +42,11 @@ public class ChatSystem : MonoBehaviour
 
     private IntPtr Client;
 
-    static volatile Queue<List<string>> _appendQueue = new Queue<List<string>>();
+    static Queue<List<string>> _appendQueue = new Queue<List<string>>();
 
     // Start is called before the first frame update
     void Start()
     {
-
         //client Init  
         Client = CreateClient();
         Connect("127.0.0.1", Client);
@@ -51,6 +57,12 @@ public class ChatSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //out data
+        SendTransformation(this.transform.position.x, this.transform.position.y, this.transform.position.z,
+            this.transform.rotation.eulerAngles.x, this.transform.rotation.eulerAngles.y, this.transform.rotation.eulerAngles.z,
+            this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z, Client);
+
+        //in data
         if (_appendQueue.Count == 0) return;
         lock (_appendQueue)
         {
