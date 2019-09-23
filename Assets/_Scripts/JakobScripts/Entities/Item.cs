@@ -38,7 +38,7 @@ public abstract class Item : Puppet
     protected bool AttachInventory()
     {
         Inventory inv = GetComponentInParent<Inventory>();
-        if (inv != null && inv.isActiveAndEnabled)
+        if (inv != null && inv.AE)
         {
             inv.Init();
             inv.InnerInit();
@@ -54,7 +54,7 @@ public abstract class Item : Puppet
         if (hasInventory)
         {
             InvItemType itt = GetInv();
-            if (itt != null && itt.isActiveAndEnabled)
+            if (itt != null && itt.AE)
             {
                 itt.Init();
                 itt.InnerInit();

@@ -67,7 +67,11 @@ public abstract class Puppet : Entity
     {
         if (Container.GetObj(0) != null)
         {
-            ControllerSlot cs = Container.GetObj(0).GetComponent<ControllerSlot>();
+            EntityContainer ec = Container.GetObj(0);
+            ec.Init();
+            ec.InnerInit();
+            ec.WireInit();
+            ControllerSlot cs = ec.GetComponent<ControllerSlot>();
             if (cs != null && cs.ObjectSlot.GetObj(0) != null)
             {
                 Controller c = EType<Controller>.FindType(cs.ObjectSlot.GetObj(0));

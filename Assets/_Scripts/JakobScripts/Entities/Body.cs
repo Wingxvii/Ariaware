@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Body : Puppet
 {
+    public int PlayerNum = 0;
+
     Rigidbody rb;
     public Rigidbody Rb
     {
@@ -34,16 +38,23 @@ public class Body : Puppet
         if (ec != null)
         {
             CameraAnchorSlot cas = ec.GetComponent<CameraAnchorSlot>();
-            if (cas != null && cas.isActiveAndEnabled)
+            if (cas != null && cas.AE)
             {
                 Entity ent = cas.ObjectSlot.GetObj(0);
-                if (ent != null && ent.isActiveAndEnabled)
+                if (ent != null && ent.AE)
                 {
                     CameraAnchor ca = EType<CameraAnchor>.FindType(ent);
                     LocalCamera.Attach(ca.LocalBody);
                 }
             }
         }
+    }
+
+    protected override void InnerInitialize()
+    {
+        base.InnerInitialize();
+
+        CentralManager.CM.ProtectedAddBody(this);
     }
 
     protected override void CreateVars()
@@ -65,6 +76,13 @@ public class Body : Puppet
         LocalCamera.Yeet();
 
         base.DeInitialize();
+    }
+
+    protected override void DeInnerInitialize()
+    {
+        CentralManager.CM.RemoveBody(this);
+
+        base.DeInnerInitialize();
     }
 
     protected override void DestroyVars()

@@ -16,7 +16,7 @@ public abstract class ObjectStat : InitializableObject
     {
         base.Initialize();
 
-        
+
     }
 
     protected override void InnerInitialize()
@@ -60,7 +60,7 @@ public abstract class ObjectStat : InitializableObject
     {
         UpdateData();
     }
-    protected abstract void UpdateData();
+    protected virtual void UpdateData() { }
 
     protected override void PostEnable()
     {

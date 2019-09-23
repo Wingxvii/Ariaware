@@ -45,7 +45,7 @@ public class JoinedVar<T, U> : Joined<T, U> where T : InitializableObject where 
         {
             Joins = null;
             //Debug.Log(Obj.name + " ---> AAAAAAAND! " + (KickFromParentWhenRemoved && EnableKickFromParent));
-            if (Obj.transform.parent != null && KickFromParentWhenRemoved && EnableKickFromParent && Obj.isActiveAndEnabled)
+            if (Obj.transform.parent != null && KickFromParentWhenRemoved && EnableKickFromParent && Obj.AE)
             {
                 //Debug.Log(Obj.name + " ---> THERE!");
                 Obj.transform.SetParent(null);

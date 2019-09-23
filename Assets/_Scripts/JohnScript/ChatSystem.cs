@@ -36,20 +36,20 @@ public class ChatSystem : MonoBehaviour
     static extern int GetPlayerNumber(IntPtr client);
 
 
-    public Button sendButton;
     public Text userLog;
     public InputField userInput;
 
     private IntPtr Client;
 
     static Queue<List<string>> _appendQueue = new Queue<List<string>>();
+    static Queue<List<string>> _appendQueueTransform = new Queue<List<string>>();
 
     // Start is called before the first frame update
     void Start()
     {
         //client Init  
         Client = CreateClient();
-        Connect("127.0.0.1", Client);
+        Connect(ConnectionLoader.ip, Client);
         StartUpdating(Client);
         SetupPacketReception(PacketRecieved);
     }
@@ -57,10 +57,14 @@ public class ChatSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        /*
         //out data
         SendTransformation(this.transform.position.x, this.transform.position.y, this.transform.position.z,
             this.transform.rotation.eulerAngles.x, this.transform.rotation.eulerAngles.y, this.transform.rotation.eulerAngles.z,
             this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z, Client);
+        */  
+
 
         //in data
         if (_appendQueue.Count == 0) return;
@@ -76,8 +80,13 @@ public class ChatSystem : MonoBehaviour
 
     public void OnSendMessage()
     {
-        string message = userInput.text;
-        SendMsg(message, Client);
+        string message = "Player " + GetPlayerNumber(Client) + ": " + userInput.text;
+        Debug.Log(message);
+        userLog.text = userLog.text + message + "\n";
+
+
+        string message2 = userInput.text;
+        SendMsg(message2, Client);
     }
 
     private void OnDestroy()

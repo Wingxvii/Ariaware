@@ -72,7 +72,7 @@ public class EntityContainer : BasePACES
         Entity[] ents = GetComponentsInChildren<Entity>();
         for (int i = ents.Length - 1; i >= 0; i--)
         {
-            if (ents[i].isActiveAndEnabled)
+            if (ents[i].AE)
             {
                 ents[i].Init();
                 ents[i].InnerInit();

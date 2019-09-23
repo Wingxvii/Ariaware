@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public abstract class BasePACES : InitializableObject
+public class InventorySelectable : Inventory
 {
-    public int ID;
-    public bool sendData;
+    public int Selector = 0;
+
+
 
     protected override void Initialize()
     {
@@ -49,4 +49,6 @@ public abstract class BasePACES : InitializableObject
 
         base.DestroyVars();
     }
+
+
 }

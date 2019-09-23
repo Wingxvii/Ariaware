@@ -27,10 +27,10 @@ public class CameraAnchor : Puppet
         if (ec != null)
         {
             BodySlot bs = ec.GetComponent<BodySlot>();
-            if (bs != null && bs.isActiveAndEnabled)
+            if (bs != null && bs.AE)
             {
                 Entity ent = bs.ObjectSlot.GetObj(0);
-                if (ent != null && ent.isActiveAndEnabled)
+                if (ent != null && ent.AE)
                 {
                     Body b = EType<Body>.FindType(ent);
                     LocalBody.Attach(b.LocalCamera);

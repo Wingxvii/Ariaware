@@ -72,14 +72,21 @@ public class Controller : Entity
     {
         Puppets.Yeet();
         if (Container.GetObj(0) != null)
-            for (int i = Container.GetObj(0).ObjectList.Joins.Count - 1; i >= 0; i--)
+        {
+            EntityContainer ec = Container.GetObj(0);
+            ec.Init();
+            ec.InnerInit();
+            ec.WireInit();
+            for (int i = ec.ObjectList.Joins.Count - 1; i >= 0; i--)
             {
-                Puppet p = EType<Puppet>.FindType(Container.GetObj(0).ObjectList.GetObj(i));
+                Puppet p = EType<Puppet>.FindType(ec.ObjectList.GetObj(i));
                 if (p != null)
                 {
                     Puppets.Attach(p.Instructor);
                 }
             }
+        }
+        Debug.Log(Puppets.Joins.Count + ", " + name);
     }
 
     private void SetCommands()

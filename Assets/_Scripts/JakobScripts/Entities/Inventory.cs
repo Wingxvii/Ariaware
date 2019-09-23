@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory : Puppet
 {
+    public ChannelTypes channelType;
+
     JoinedList<Inventory, Item> items;
     public JoinedList<Inventory, Item> Items
     {
@@ -25,6 +27,13 @@ public class Inventory : Puppet
         protected set { playerCursor = value; }
     }
 
+    JoinedList<Inventory, InvStat> invStats;
+    public JoinedList<Inventory, InvStat> InvStats
+    {
+        get { return invStats; }
+        protected set { invStats = value; }
+    }
+
     protected override void Initialize()
     {
         base.Initialize();
@@ -42,7 +51,7 @@ public class Inventory : Puppet
             Inventory inv = itm[i].GetComponentInParent<Inventory>();
             if (inv == this)
             {
-                if (itm[i].isActiveAndEnabled)
+                if (itm[i].AE)
                 {
                     itm[i].Init();
                     itm[i].InnerInit();
@@ -56,13 +65,13 @@ public class Inventory : Puppet
     void AttachCursor()
     {
         EntityContainer cont = Container.GetObj(0);
-        if (cont != null && cont.isActiveAndEnabled)
+        if (cont != null && cont.AE)
         {
             VectorCursorSlot vcs = cont.GetComponent<VectorCursorSlot>();
-            if (vcs != null && vcs.isActiveAndEnabled)
+            if (vcs != null && vcs.AE)
             {
                 VectorCursor vc = EType<VectorCursor>.FindType(vcs.ObjectBase.GetObj(0));
-                if (vc != null && vc.isActiveAndEnabled)
+                if (vc != null && vc.AE)
                 {
                     vc.Init();
                     vc.InnerInit();

@@ -23,7 +23,7 @@ public class GroundCheck : ObjectStat
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isActiveAndEnabled)
+        if (AE)
         {
             if (backCheckGrounded)
             {
@@ -41,7 +41,7 @@ public class GroundCheck : ObjectStat
     {
         //if (DebugShit)
         //    Debug.Log(collision.collider.gameObject.name);
-        if (isActiveAndEnabled)
+        if (AE)
         {
             if (backCheckGrounded)
             {
@@ -63,7 +63,7 @@ public class GroundCheck : ObjectStat
 
     private void OnCollisionExit(Collision collision)
     {
-        if (isActiveAndEnabled)
+        if (AE)
         {
             if (backCheckGrounded)
             {

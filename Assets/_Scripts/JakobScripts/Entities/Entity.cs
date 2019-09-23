@@ -154,7 +154,7 @@ public abstract class Entity : BasePACES
         {
             //EntityContainer ec = transform.parent.GetComponent<EntityContainer>();
             EntityContainer ec = GetComponentInParent<EntityContainer>();
-            if (ec != null && ec.isActiveAndEnabled)
+            if (ec != null && ec.AE)
             {
                 ec.Init();
                 ec.InnerInit();
@@ -166,11 +166,10 @@ public abstract class Entity : BasePACES
         return false;
     }
 
-    private SlotBase ParseSlot()
+    private SlotBase ParseSlot(bool hasContainer)
     {
-        if (Container.GetObj(0) != null)
+        if (hasContainer)
         {
-            //Container.GetObj(0).WireInit();
             return GetSlot();
         }
 
@@ -183,14 +182,16 @@ public abstract class Entity : BasePACES
     {
         if (hasContainer)
         {
-            SlotBase sb = ParseSlot();
-            if (sb != null && sb.isActiveAndEnabled)
+            SlotBase sb = ParseSlot(hasContainer);
+            if (sb != null && sb.AE)
             {
                 sb.Init();
                 sb.InnerInit();
                 EntitySlot.Attach(sb.ObjectBase);
                 return true;
             }
+            //else if (sb != null && !sb.isActiveAndEnabled)
+            //    Debug.Log("OUTTAHERE: " + name);
             EntitySlot.Yeet(true);
             return false;
         }
@@ -221,6 +222,8 @@ public abstract class Entity : BasePACES
 
     protected virtual bool OnReparent()
     {
+        Init();
+        InnerInit();
         //base.OnReparent();
 
         bool hasContainer = AttachContainer();

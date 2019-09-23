@@ -29,6 +29,11 @@ public abstract class InitializableObject : MonoBehaviour
         protected set { wired = value; }
     }
 
+    public bool AE
+    {
+        get { return gameObject.activeInHierarchy && enabled; }
+    }
+
     public void Init()
     {
         if (!Initialized)

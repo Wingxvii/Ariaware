@@ -19,6 +19,13 @@ public class CentralManager : AbstractManager
         protected set { disabledObjects = value; }
     }
 
+    List<Body> sceneBodies;
+    public List<Body> SceneBodies
+    {
+        get { if (sceneBodies == null) { sceneBodies = new List<Body>(); } return sceneBodies; }
+        protected set { sceneBodies = value; }
+    }
+
     private CentralManager() { }
 
     static private CentralManager cM;
@@ -72,12 +79,18 @@ public class CentralManager : AbstractManager
 
         Debug.Log("ACTIVATE");
 
+        SceneBodies.Clear();
+        NetworkManager.NM.InitNetworking();
+
         currentScene[0] = objScene;
          
         InitializableObject[] io = Object.FindObjectsOfType<InitializableObject>();
         for (int i = io.Length - 1; i >= 0; --i)
         {
             io[i].Init();
+
+            Body B = EType<Body>.FindType(io[i]);
+            ProtectedAddBody(B);
         }
 
         for (int i = io.Length - 1; i >= 0; --i)
@@ -89,5 +102,19 @@ public class CentralManager : AbstractManager
         //{
         //    io[i].WireInit();
         //}
+    }
+
+    public void ProtectedAddBody(Body B)
+    {
+        if (B != null)
+        {
+            if (B.AE && !SceneBodies.Contains(B))
+                SceneBodies.Add(B);
+        }
+    }
+
+    public void RemoveBody(Body B)
+    {
+        SceneBodies.Remove(B);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DebugObject : MonoBehaviour
 {
@@ -9,3 +10,4 @@ public class DebugObject : MonoBehaviour
         //Debug.Log("FRAME");
     }
 }
+

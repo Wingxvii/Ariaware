@@ -24,16 +24,16 @@ public class VectorCursor : Puppet
     {
         Inventories.Yeet();
         EntityContainer ec = Container.GetObj(0);
-        if (ec != null && ec.isActiveAndEnabled)
+        if (ec != null && ec.AE)
         {
             InventorySlot invs = ec.GetComponent<InventorySlot>();
-            if (invs != null && invs.isActiveAndEnabled)
+            if (invs != null && invs.AE)
             {
                 Inventory inv;
                 for (int i = invs.ObjectList.Joins.Count - 1; i >= 0; --i)
                 {
                     inv = EType<Inventory>.FindType(invs.ObjectList.GetObj(i));
-                    if (inv != null && inv.isActiveAndEnabled)
+                    if (inv != null && inv.AE)
                     {
                         inv.Init();
                         inv.InnerInit();
