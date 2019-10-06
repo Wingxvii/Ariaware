@@ -4,6 +4,16 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using System;
 
+namespace UnityEngine
+{
+    //public struct Vec3
+    //{
+    //    public float x;
+    //    public float y;
+    //    public float z;
+    //}
+}
+
 [RequireComponent(typeof(Controller))]
 public class ControllerHook : Modifier
 {
@@ -13,7 +23,7 @@ public class ControllerHook : Modifier
     [DllImport("CNET.dll")]
     static extern void SendMsg(string str, IntPtr client);          //Sends Message to all other clients    
     [DllImport("CNET.dll")]
-    static extern void SendTransformation(double px, double py, double pz, double rx, double ry, double rz, double sx, double sy, double sz, IntPtr client);          //Sends Position data to all other clients
+    internal static extern void SendTransformation(Vec3 pos, Vec3 rot, IntPtr client);          //Sends Position data to all other clients
     [DllImport("CNET.dll")]
     static extern int GetPlayerNumber(IntPtr client);
 
@@ -21,8 +31,11 @@ public class ControllerHook : Modifier
     {
         base.Initialize();
 
-        SetControllerSnapToPlayer(GetPlayerNumber(NetworkManager.NM.Client));
-        Debug.Log(GetPlayerNumber(NetworkManager.NM.Client));
+        if (ConnectionLoader.ip != null)
+        {
+            SetControllerSnapToPlayer(GetPlayerNumber(NetworkManager.NM.Client));
+            Debug.Log(GetPlayerNumber(NetworkManager.NM.Client));
+        }
     }
 
     protected override void InnerInitialize()
@@ -63,30 +76,36 @@ public class ControllerHook : Modifier
     public void SetControllerSnapToPlayer(int num)
     {
         StopCoroutine(SendData());
-        for (int i = CentralManager.CM.SceneBodies.Count - 1; i>= 0; --i)
+        if (ConnectionLoader.ip != null)
         {
-            if (CentralManager.CM.SceneBodies[i].PlayerNum == num)
+            for (int i = CentralManager.CM.SceneBodies.Count - 1; i >= 0; --i)
             {
-                transform.SetParent(CentralManager.CM.SceneBodies[i].transform);
-                if (bod != null)
-                    StartCoroutine(SendData());
+                if (CentralManager.CM.SceneBodies[i].PlayerNum == num)
+                {
+                    transform.SetParent(CentralManager.CM.SceneBodies[i].transform);
+                    if (bod != null)
+                        StartCoroutine(SendData());
+                }
             }
         }
     }
 
     private void FixedUpdate()
     {
-        if (bod != null)
+        if (ConnectionLoader.ip != null)
         {
-            if (NetworkManager._transformQueue.Count != 0)
+            if (bod != null)
             {
-                lock (NetworkManager._transformQueue)
+                if (NetworkManager._transformQueue.Count != 0)
                 {
-                    foreach (List<string> data in NetworkManager._transformQueue)
+                    lock (NetworkManager._transformQueue)
                     {
-                        this.ProcessTransform(data);
+                        foreach (List<string> data in NetworkManager._transformQueue)
+                        {
+                            this.ProcessTransform(data);
+                        }
+                        NetworkManager._transformQueue.Clear();
                     }
-                    NetworkManager._transformQueue.Clear();
                 }
             }
         }
@@ -94,31 +113,42 @@ public class ControllerHook : Modifier
 
     IEnumerator SendData()
     {
-        while (true)
+        if (ConnectionLoader.ip != null)
         {
-            if (bod != null)
+            while (true)
             {
-                Transform t = bod.transform;
-                Vector3 p = t.localPosition;
-                Vector3 r = t.localRotation.eulerAngles;
-                Vector4 s = t.localScale;
+                if (bod != null)
+                {
+                    Transform t = bod.transform;
+                    Vector3 p = t.localPosition;
+                    Vector3 r = t.localRotation.eulerAngles;
+                    Vector4 s = t.localScale;
 
-                SendTransformation(p.x, p.y, p.z, r.x, r.y, r.z, s.x, s.y, s.z, NetworkManager.NM.Client);
+                    Vec3 pos, rot;
+                    pos.x = p.x;
+                    pos.y = p.y;
+                    pos.z = p.z;
+                    rot.x = r.x;
+                    rot.y = r.y;
+                    rot.z = r.z;
+                    
+                    SendTransformation(pos, rot, NetworkManager.NM.Client);
 
-                //if (NetworkManager._transformQueue.Count != 0)
-                //{
-                //    lock (NetworkManager._transformQueue)
-                //    {
-                //        foreach (List<string> data in NetworkManager._transformQueue)
-                //        {
-                //            this.ProcessTransform(data);
-                //        }
-                //        NetworkManager._transformQueue.Clear();
-                //    }
-                //}
+                    //if (NetworkManager._transformQueue.Count != 0)
+                    //{
+                    //    lock (NetworkManager._transformQueue)
+                    //    {
+                    //        foreach (List<string> data in NetworkManager._transformQueue)
+                    //        {
+                    //            this.ProcessTransform(data);
+                    //        }
+                    //        NetworkManager._transformQueue.Clear();
+                    //    }
+                    //}
+                }
+
+                yield return new WaitForFixedUpdate();
             }
-
-            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -136,11 +166,11 @@ public class ControllerHook : Modifier
 
         for (int i = CentralManager.CM.SceneBodies.Count - 1; i >= 0; --i)
         {
-            if (int.Parse(parsedData[0]) == CentralManager.CM.SceneBodies[i].PlayerNum)
+            if (sender == CentralManager.CM.SceneBodies[i].PlayerNum)
             {
                 CentralManager.CM.SceneBodies[i].transform.localPosition = ParseVec3(parsedData[1], parsedData[2], parsedData[3]);
                 CentralManager.CM.SceneBodies[i].transform.localRotation = Quaternion.Euler(ParseVec3(parsedData[4], parsedData[5], parsedData[6]));
-                CentralManager.CM.SceneBodies[i].transform.localScale = ParseVec3(parsedData[7], parsedData[8], parsedData[9]);
+                //CentralManager.CM.SceneBodies[i].transform.localScale = ParseVec3(parsedData[7], parsedData[8], parsedData[9]);
             }
         }
     }

@@ -23,10 +23,6 @@ public class NetworkManager
     [DllImport("CNET.dll")]
     static extern void Connect(string str, IntPtr client);          //Connects to c++ Server
     [DllImport("CNET.dll")]
-    static extern void SendMsg(string str, IntPtr client);          //Sends Message to all other clients    
-    [DllImport("CNET.dll")]
-    static extern void SendTransformation(double px, double py, double pz, double rx, double ry, double rz, double sx, double sy, double sz, IntPtr client);          //Sends Position data to all other clients
-    [DllImport("CNET.dll")]
     static extern void StartUpdating(IntPtr client);                //Starts updating
     [DllImport("CNET.dll")]
     static extern void SetupPacketReception(Action<int, int, string> action); //recieve packets from server
@@ -41,15 +37,17 @@ public class NetworkManager
     public void InitNetworking()
     {
 
-
-        if (!init)
+        if (ConnectionLoader.ip != null)
         {
-            Client = CreateClient();
-            Connect(ConnectionLoader.ip, Client);
-            StartUpdating(Client);
-            SetupPacketReception(PacketRecieved);
+            if (!init)
+            {
+                Client = CreateClient();
+                Connect(ConnectionLoader.ip, Client);
+                StartUpdating(Client);
+                SetupPacketReception(PacketRecieved);
 
-            init = true;
+                init = true;
+            }
         }
     }
 

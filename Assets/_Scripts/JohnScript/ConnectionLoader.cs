@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class ConnectionLoader : MonoBehaviour
 {
     public InputField userInput;
-    public static string ip;
+    public static string ip = null;
 
     public void OnLoadMovementScene() {
         ip = userInput.text;

@@ -16,6 +16,13 @@ public enum PacketType
     TRANSFORMATION = 2,
 }
 
+[StructLayout(LayoutKind.Sequential)]
+public struct Vec3 {
+    public float x;
+    public float y;
+    public float z;
+}
+
 public class ChatSystem : MonoBehaviour
 {
     [DllImport("CNET.dll")]
@@ -27,7 +34,7 @@ public class ChatSystem : MonoBehaviour
     [DllImport("CNET.dll")]
     static extern void SendMsg(string str, IntPtr client);          //Sends Message to all other clients    
     [DllImport("CNET.dll")]
-    static extern void SendTransformation(double px, double py, double pz, double rx, double ry, double rz, double sx, double sy, double sz, IntPtr client);          //Sends Position data to all other clients
+    static extern void SendTransformation(Vec3 pos, Vec3 rot, IntPtr client);          //Sends Position data to all other clients
     [DllImport("CNET.dll")]
     static extern void StartUpdating(IntPtr client);                //Starts updating
     [DllImport("CNET.dll")]
@@ -47,11 +54,13 @@ public class ChatSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //client Init  
-        Client = CreateClient();
-        Connect(ConnectionLoader.ip, Client);
-        StartUpdating(Client);
-        SetupPacketReception(PacketRecieved);
+        if (ConnectionLoader.ip != null) {
+            //client Init  
+            Client = CreateClient();
+            Connect(ConnectionLoader.ip, Client);
+            StartUpdating(Client);
+            SetupPacketReception(PacketRecieved);
+        }
     }
 
     // Update is called once per frame
@@ -64,7 +73,6 @@ public class ChatSystem : MonoBehaviour
             this.transform.rotation.eulerAngles.x, this.transform.rotation.eulerAngles.y, this.transform.rotation.eulerAngles.z,
             this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z, Client);
         */  
-
 
         //in data
         if (_appendQueue.Count == 0) return;
