@@ -143,10 +143,10 @@ public class SelectionManager : MonoBehaviour
         {
             if (!Input.GetKey(KeyCode.LeftShift))
             {
-                Object.Destroy(CommandPattern.Instance.prefabObject);
+                Object.Destroy(BuildingManager.Instance.prefabObject);
                 ClearSelection();
             }
-            CommandPattern.Instance.OnPlace(UseFactoryPattern(mousePosition, CommandPattern.Instance.prefabType));
+            BuildingManager.Instance.OnPlace(UseFactoryPattern(mousePosition, BuildingManager.Instance.prefabType));
         }
         else {
 
@@ -192,7 +192,7 @@ public class SelectionManager : MonoBehaviour
             }
             else if (currentEvent == MouseEvent.PrefabBuild && Input.GetKeyUp(KeyCode.LeftShift))
             {
-                Object.Destroy(CommandPattern.Instance.prefabObject);
+                Object.Destroy(BuildingManager.Instance.prefabObject);
                 ClearSelection();
             }
             #endregion
@@ -236,22 +236,27 @@ public class SelectionManager : MonoBehaviour
         switch (type)
         {
 
-            case BuildingEnum.BlueBuilding:
-                temp = new BlueBuilding(pos, out returnObj);
+            case BuildingEnum.Barracks:
+                temp = new Barracks(pos, out returnObj);
                 returnObj.GetComponent<SelectableObject>().type = type;
                 return returnObj;
-            case BuildingEnum.RedBuilding:
-                temp = new RedBuilding(pos, out returnObj);
+            case BuildingEnum.Upgrades:
+                temp = new Upgrades(pos, out returnObj);
                 returnObj.GetComponent<SelectableObject>().type = type;
                 return returnObj;
-            case BuildingEnum.GreenBuilding:
-                temp = new GreenBuilding(pos, out returnObj);
+            case BuildingEnum.Turrert:
+                temp = new Turrert(pos, out returnObj);
                 returnObj.GetComponent<SelectableObject>().type = type;
                 return returnObj;
-            case BuildingEnum.YellowBuilding:
-                temp = new YellowBuilding(pos, out returnObj);
+            case BuildingEnum.Wall:
+                temp = new Wall(pos, out returnObj);
                 returnObj.GetComponent<SelectableObject>().type = type;
                 return returnObj;
+            case BuildingEnum.Trap:
+                temp = new Trap(pos, out returnObj);
+                returnObj.GetComponent<SelectableObject>().type = type;
+                return returnObj;
+
             default:
                 return new GameObject();
 
