@@ -18,30 +18,41 @@ public class Bullet : InitializableObject
     FireStats gunStats;
     Vector3 origin;
     Vector3 direction;
+    Body ignoreThis;
 
     float maxDist;
 
     public AnimationCurve accuracyCalc;
 
-    public void SetBulletStats(FireStats fs, Vector3 pos, Quaternion dir)
+    public void SetBulletStats(FireStats fs, Vector3 pos, Quaternion dir, Body ignore)
     {
         gunStats = fs;
         origin = pos;
         transform.position = pos;
-        transform.rotation = dir;
+        Quaternion newDir = dir * Quaternion.Euler(accuracyCalc.Evaluate(Random.Range(0f, 1f)) * ConeAngle, Random.Range(0, 360f), 0);
+        transform.rotation = newDir;
         maxDist = bulletStats.range + gunStats.range;
-        direction = dir * Quaternion.Euler(accuracyCalc.Evaluate(Random.Range(0, 1) * ConeAngle), Random.Range(0, 360f), 0) * Vector3.up;
+        direction = newDir * Vector3.up;
+        ignoreThis = ignore;
     }
 
     private void FixedUpdate()
     {
+        float bulletDistance = (gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime;
+        origin = transform.position;
+
         if (maxDist <= 0)
         {
             Destroy(gameObject);
         }
         else
         {
-            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, Mathf.Min((gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime, maxDist));
+            if (ignoreThis != null)
+            {
+                ignoreThis.EnableColliders(false);
+            }
+
+            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, Mathf.Min(bulletDistance, maxDist));
 
             if (rhit.Length > 0)
             {
@@ -54,21 +65,36 @@ public class Bullet : InitializableObject
                     }
                 }
 
-                Body b = closest.collider.GetComponent<Body>();
-                if (b != null)
+                EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
+                if (ec != null)
                 {
-                    b.Damage(bulletStats.damage + gunStats.damage);
-                }
-                else
-                    Destroy(gameObject);
+                    for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+                    {
+                        SlotBase sb = ec.AttachedSlots.GetObj(i);
+                        if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
+                        {
+                            Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
+                            if (b != null && b.TreeInit())
+                            {
+                                b.Damage(bulletStats.damage + gunStats.damage);
+                            }
 
-                transform.position += direction * (gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime;
+                            break;
+                        }
+                    }
+                }
+
+                Destroy(gameObject);
+
+                transform.position += direction * bulletDistance;
             }
             else
             {
-                transform.position += direction * (gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime;
+                transform.position += direction * bulletDistance;
 
-                rhit = Physics.RaycastAll(origin, -direction, Mathf.Min((gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime, maxDist));
+                origin = transform.position;
+
+                rhit = Physics.RaycastAll(origin, -direction, Mathf.Min(bulletDistance, maxDist));
 
                 if (rhit.Length > 0)
                 {
@@ -81,17 +107,37 @@ public class Bullet : InitializableObject
                         }
                     }
 
-                    Body b = closest.collider.GetComponent<Body>();
-                    if (b != null)
+                    Debug.Log(closest.collider.name);
+
+                    EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
+                    if (ec != null)
                     {
-                        b.Damage(bulletStats.damage + gunStats.damage);
+                        for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+                        {
+                            SlotBase sb = ec.AttachedSlots.GetObj(i);
+                            if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
+                            {
+                                Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
+                                if (b != null && b.TreeInit())
+                                {
+                                    b.Damage(bulletStats.damage + gunStats.damage);
+                                }
+
+                                break;
+                            }
+                        }
                     }
-                    else
-                        Destroy(gameObject);
+
+                    Destroy(gameObject);
                 }
+            }
+
+            if (ignoreThis != null)
+            {
+                ignoreThis.EnableColliders(true);
             }
         }
 
-        maxDist -= (gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime;
+        maxDist -= bulletDistance;
     }
 }
