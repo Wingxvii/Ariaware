@@ -56,11 +56,10 @@ public abstract class InvItemType : Modifier
 
     protected void AttachInventory()
     {
+        AttachedInventory.Yeet();
         Inventory inv = GetComponent<Inventory>();
-        if (inv.Init())
-        {
-            AttachedInventory.Attach(inv.AllowedItems);
-        }
+        inv.Init();
+        AttachedInventory.Attach(inv.AllowedItems);
     }
 
     protected override bool PostEnable()

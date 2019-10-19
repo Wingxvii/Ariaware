@@ -17,7 +17,7 @@ public class AmmoClip : ObjectStat
 
     public void Shoot()
     {
-        bulletCount = bulletCount > 0 ? bulletCount - 1 : 0;
+        bulletCount--;
     }
 
     protected override bool CreateVars()

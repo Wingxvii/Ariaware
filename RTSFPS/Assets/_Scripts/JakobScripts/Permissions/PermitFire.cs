@@ -20,6 +20,9 @@ public class PermitFire : AbstractPermission<PermitFire, CommandFire, Gun, Contr
 
     protected override void FeedPuppet()
     {
-        SpecificActor.FireBullet(firing);
+        if (firing)
+        {
+            SpecificActor.FireBullet();
+        }
     }
 }

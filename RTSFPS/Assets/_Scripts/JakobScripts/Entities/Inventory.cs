@@ -10,8 +10,6 @@ public class Inventory : Puppet
 
     public JoinedVar<Inventory, VectorCursor> PlayerCursor;
 
-    public JoinedVar<Inventory, Body> body;
-
     JoinedList<Inventory, InvStat> invStats;
     public JoinedList<Inventory, InvStat> InvStats
     {
@@ -26,7 +24,6 @@ public class Inventory : Puppet
             Items = new JoinedList<Inventory, Item>(this);
             AllowedItems = new JoinedList<Inventory, InvItemType>(this);
             PlayerCursor = new JoinedVar<Inventory, VectorCursor>(this, false);
-            body = new JoinedVar<Inventory, Body>(this);
 
             return true;
         }
@@ -71,8 +68,6 @@ public class Inventory : Puppet
         {
             AttachCursor();
 
-            AttachBody();
-
             return true;
         }
 
@@ -104,7 +99,6 @@ public class Inventory : Puppet
         PlayerCursor = null;
         AllowedItems = null;
         Items = null;
-        body = null;
 
         base.DestroyVars();
     }
@@ -133,7 +127,7 @@ public class Inventory : Puppet
             for (int i = 0; i < cont.AttachedSlots.Amount; ++i)
             {
                 SlotBase sb = cont.AttachedSlots.GetObj(i);
-                if (FType.FindIfType(sb.GetSlotType(), typeof(VectorCursorSlot)) && sb.BranchInit())
+                if (sb.BranchInit() && FType.FindIfType(sb.GetSlotType(), typeof(VectorCursorSlot)))
                 {
                     for (int j = 0; j < sb.EntityPlug.Amount; ++j)
                     {
@@ -141,31 +135,6 @@ public class Inventory : Puppet
                         if (vc != null && vc.TreeInit())
                         {
                             PlayerCursor.Attach(vc.Inventories);
-                            return;
-                        }
-                    }
-                    return;
-                }
-            }
-        }
-    }
-
-    void AttachBody()
-    {
-        EntityContainer cont = Container.GetObj(0);
-        if (cont.TreeInit())
-        {
-            for (int i = 0; i < cont.AttachedSlots.Amount; ++i)
-            {
-                SlotBase sb = cont.AttachedSlots.GetObj(i);
-                if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.TreeInit())
-                {
-                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
-                    {
-                        Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(j));
-                        if (b != null && b.TreeInit())
-                        {
-                            body.Attach(b.inventories);
                             return;
                         }
                     }

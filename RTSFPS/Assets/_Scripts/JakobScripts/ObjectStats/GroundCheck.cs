@@ -23,8 +23,6 @@ public class GroundCheck : ObjectStat
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("ENTER " + collision.collider.name);
-
         if (AE)
         {
             if (backCheckGrounded)
@@ -41,7 +39,6 @@ public class GroundCheck : ObjectStat
 
     private void OnCollisionStay(Collision collision)
     {
-        //Debug.Log("STAY " + collision.collider.name);
         //if (DebugShit)
         //    Debug.Log(collision.collider.gameObject.name);
         if (AE)
@@ -66,8 +63,6 @@ public class GroundCheck : ObjectStat
 
     private void OnCollisionExit(Collision collision)
     {
-        //Debug.Log("EXIT " + collision.collider.name);
-
         if (AE)
         {
             if (backCheckGrounded)

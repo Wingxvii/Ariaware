@@ -22,14 +22,6 @@ public abstract class InvItemSlot<T> : InvItemType where T : Item
         {
             if (AttachedInventory.GetObj(0).BranchInit())
             {
-                for (int i = AttachedInventory.GetObj(0).Items.Amount - 1; i >= 0; --i)
-                {
-                    Item it = AttachedInventory.GetObj(0).Items.GetObj(i);
-                    if (CullItem(it) && it.BranchInit())
-                    {
-                        ItemBase.Attach(it.InvType);
-                    }
-                }
 
                 return true;
             }

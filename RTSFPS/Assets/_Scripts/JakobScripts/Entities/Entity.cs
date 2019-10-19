@@ -7,8 +7,8 @@ public abstract class Entity : BasePACES
     public JoinedVar<Entity, EntityContainer> Container;
     public JoinedVar<Entity, SlotBase> AttachedSlot;
 
-    public JoinedList<Entity, Modifier> Modifiers;
-    public JoinedList<Entity, ObjectStat> JoinedStats;
+    public JoinedVar<Entity, Modifier> Modifiers;
+    public JoinedVar<Entity, ObjectStat> JoinedStats;
 
     protected override bool CreateVars()
     {
@@ -17,8 +17,8 @@ public abstract class Entity : BasePACES
             Container = new JoinedVar<Entity, EntityContainer>(this, true);
             AttachedSlot = new JoinedVar<Entity, SlotBase>(this, true);
 
-            Modifiers = new JoinedList<Entity, Modifier>(this);
-            JoinedStats = new JoinedList<Entity, ObjectStat>(this);
+            Modifiers = new JoinedVar<Entity, Modifier>(this);
+            JoinedStats = new JoinedVar<Entity, ObjectStat>(this);
 
             return true;
         }
