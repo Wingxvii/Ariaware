@@ -22,10 +22,10 @@ public class CameraClipPrevention : Modifier
         {
             Anchor = GetComponent<CameraAnchor>();
 
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     protected override void DestroyVars()

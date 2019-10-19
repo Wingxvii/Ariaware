@@ -50,8 +50,10 @@ public class CameraAnchor : Puppet
                             if (b != null && b.TreeInit())
                             {
                                 LocalBody.Attach(b.LocalCamera);
+                                break;
                             }
                         }
+                        break;
                     }
                 }
             }

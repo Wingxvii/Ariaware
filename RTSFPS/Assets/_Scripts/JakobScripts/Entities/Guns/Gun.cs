@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gun : Weapon
 {
     public JoinedList<Gun, AmmoClip> ammo;
+    public JoinedList<Gun, GunVector> gunScope;
     public FireStats gunStats;
     public float FireDelay = 0.1f;
     float cooldown = 0f;
@@ -13,6 +14,7 @@ public class Gun : Weapon
     {
         if (base.CreateVars())
         {
+            gunScope = new JoinedList<Gun, GunVector>(this);
             ammo = new JoinedList<Gun, AmmoClip>(this);
 
             return true;
@@ -40,6 +42,36 @@ public class Gun : Weapon
         return false;
     }
 
+    protected override bool HierarchyInitialize()
+    {
+        if (base.HierarchyInitialize())
+        {
+            GunVector[] gv = GetComponentsInChildren<GunVector>();
+            for (int i = 0; i < gv.Length; i++)
+            {
+                Gun gvGun = gv[i].GetComponentInParent<Gun>();
+                if (gvGun == this)
+                {
+                    if (gv[i].BranchInit())
+                    {
+                        gunScope.Attach(gv[i].parentGun);
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void HierarchyDeInitialize()
+    {
+        gunScope.Yeet();
+
+        base.HierarchyDeInitialize();
+    }
+
     protected override void InnerDeInitialize()
     {
         ammo.Yeet();
@@ -49,15 +81,16 @@ public class Gun : Weapon
 
     protected override void DestroyVars()
     {
+        gunScope = null;
         ammo = null;
 
         base.DestroyVars();
     }
 
-    public void FireBullet()
+    public void FireBullet(bool canFire)
     {
         //Debug.Log("Firing");
-        if (cooldown <= 0)
+        if (canFire && cooldown <= 0)
         {
             //Debug.Log("Firing!!!!");
             if (ammo.Amount > 0)
@@ -68,15 +101,22 @@ public class Gun : Weapon
                 while (time > FireDelay && ammo.GetObj(0).bulletCount > 0)
                 {
                     time -= FireDelay;
-                    ammo.GetObj(0).Shoot();
-                    b = Instantiate(ammo.GetObj(0).bullet);
-                    b.SetBulletStats(gunStats, transform.position, transform.rotation);
+                    for (int i = 0; i < gunScope.Amount; ++i)
+                    {
+                        ammo.GetObj(0).Shoot();
+                        b = Instantiate(ammo.GetObj(0).bullet);
+                        b.SetBulletStats(gunStats, gunScope.GetObj(i).transform.position, gunScope.GetObj(i).transform.rotation, CurrentInventory.GetObj(0).body.GetObj(0));
+                    }
                 }
                 if (ammo.GetObj(0).bulletCount > 0)
                 {
-                    ammo.GetObj(0).Shoot();
-                    b = Instantiate(ammo.GetObj(0).bullet);
-                    b.SetBulletStats(gunStats, transform.position, transform.rotation);
+                    for (int i = 0; i < gunScope.Amount; ++i)
+                    {
+                        ammo.GetObj(0).Shoot();
+                        b = Instantiate(ammo.GetObj(0).bullet);
+                        b.SetBulletStats(gunStats, gunScope.GetObj(i).transform.position, gunScope.GetObj(i).transform.rotation, CurrentInventory.GetObj(0).body.GetObj(0));
+                    }
+
                     cooldown = FireDelay;
                 }
             }

@@ -27,7 +27,7 @@ public class VectorCursor : Puppet
             for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
             {
                 SlotBase sb = ec.AttachedSlots.GetObj(i);
-                if (sb.BranchInit() && FType.FindIfType(sb.GetSlotType(), typeof(Inventory)))
+                if (FType.FindIfType(sb.GetSlotType(), typeof(Inventory)) && sb.BranchInit())
                 {
                     for (int j = 0; j < sb.EntityPlug.Amount; ++j)
                     {
