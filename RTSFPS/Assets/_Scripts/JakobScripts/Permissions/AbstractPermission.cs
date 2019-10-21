@@ -22,6 +22,13 @@ public abstract class AbstractPermission<T, U, V, W> : Permission where T : Abst
         return false;
     }
 
+    protected override void CrossBranchDeInitialize()
+    {
+        SpecificEmitter.Yeet();
+
+        base.CrossBranchDeInitialize();
+    }
+
     protected override void InnerDeInitialize()
     {
         SpecificActor = null;

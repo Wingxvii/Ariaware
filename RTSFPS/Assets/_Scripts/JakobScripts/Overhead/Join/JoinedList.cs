@@ -16,7 +16,7 @@ public class JoinedList<T, U> : Joined<T, U> where T : InitializableObject where
         protected set { joins = value; }
     }
 
-    public override void SetPartner(Joined<U, T> join, int slot = -1)
+    protected override bool SettingPartner(Joined<U, T> join, int slot = -1)
     {
         if (slot >= 0 && slot < Joins.Count)
         {
@@ -26,6 +26,8 @@ public class JoinedList<T, U> : Joined<T, U> where T : InitializableObject where
         }
         else
             Joins.Add(join);
+
+        return true;
     }
 
     public override void Yeet(bool kick = false)
@@ -35,7 +37,7 @@ public class JoinedList<T, U> : Joined<T, U> where T : InitializableObject where
         Joins.Clear();
     }
 
-    public override void Remove(Joined<U, T> join, bool kick = false)
+    protected override void Removing(Joined<U, T> join, bool kick = false)
     {
         Joins.Remove(join);
     }

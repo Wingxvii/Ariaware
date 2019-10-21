@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunVector : Item
+public class GunVector : Empty
 {
     public JoinedVar<GunVector, Gun> parentGun;
 

@@ -8,16 +8,16 @@ public abstract class InitializableObject : MonoBehaviour
     protected float timer = 0f;
     public static float maxTimer = 1f;
 
-    public bool created = false;
+    public bool created { get; set; } = false;
     public bool attemptedCreated { get; set; } = false;
 
-    public bool inner = false;
+    public bool inner { get; set; } = false;
     public bool attemptedInner { get; set; } = false;
 
-    public bool contain = false;
+    public bool contain { get; set; } = false;
     public bool attemptedContain { get; set; } = false;
 
-    public bool wired = false;
+    public bool wired { get; set; } = false;
     public bool attemptedWired { get; set; } = false;
 
     public bool autoDisabled { get; private set; } = false;

@@ -15,14 +15,18 @@ public class JoinedVar<T, U> : Joined<T, U> where T : InitializableObject where 
 
     public Joined<U, T> Joins { get; protected set; }
 
-    public override void SetPartner(Joined<U, T> join, int slot = -1)
+    protected override bool SettingPartner(Joined<U, T> join, int slot = -1)
     {
         if (Joins != join)
         {
             if (Joins != null)
                 Joins.Remove(this, true);
             Joins = join;
+
+            return true;
         }
+
+        return false;
     }
 
     public override void Yeet(bool kick = false)
@@ -34,7 +38,7 @@ public class JoinedVar<T, U> : Joined<T, U> where T : InitializableObject where 
         Remove(Joins, kick);
     }
 
-    public override void Remove(Joined<U, T> join, bool kick = false)
+    protected override void Removing(Joined<U, T> join, bool kick = false)
     {
         if (Joins == join)
         {

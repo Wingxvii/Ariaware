@@ -18,17 +18,21 @@ public class JoinedArray<T, U> : Joined<T, U> where T : InitializableObject wher
         protected set { joins = value; }
     }
 
-    public override void SetPartner(Joined<U, T> join, int slot = -1)
+    protected override bool SettingPartner(Joined<U, T> join, int slot = -1)
     {
         if (slot >= 0 && slot < Joins.Length)
         {
             if (Joins[slot] != null)
             {
                 Joins[slot].Remove(this, true);
-                Remove(Joins[slot], true);
+                //Remove(Joins[slot], true);
             }
             Joins[slot] = join;
+
+            return true;
         }
+
+        return false;
     }
 
     public override void Yeet(bool kick = false)
@@ -43,7 +47,7 @@ public class JoinedArray<T, U> : Joined<T, U> where T : InitializableObject wher
         }
     }
 
-    public override void Remove(Joined<U, T> join, bool kick = false)
+    protected override void Removing(Joined<U, T> join, bool kick = false)
     {
         for (int i = Joins.Length - 1; i >= 0; --i)
         {

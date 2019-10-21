@@ -20,6 +20,13 @@ public abstract class AbstractCommand<T, U, V, W> : Command where T : AbstractCo
         return false;
     }
 
+    protected override void CrossBranchDeInitialize()
+    {
+        SpecificReceiver.Yeet();
+
+        base.CrossBranchDeInitialize();
+    }
+
     protected override void InnerDeInitialize()
     {
         SpecificInstructor = null;

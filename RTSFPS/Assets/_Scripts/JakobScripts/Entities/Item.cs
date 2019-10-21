@@ -8,12 +8,15 @@ public abstract class Item : Puppet
     public JoinedVar<Item, Inventory> CurrentInventory;
     public JoinedVar<Item, InvItemType> InvType;
 
+    MeshRenderer[] mr;
+
     protected override bool CreateVars()
     {
         if (base.CreateVars())
         {
             CurrentInventory = new JoinedVar<Item, Inventory>(this, false);
             InvType = new JoinedVar<Item, InvItemType>(this, true);
+            mr = GetComponents<MeshRenderer>();
 
             return true;
         }
@@ -51,6 +54,7 @@ public abstract class Item : Puppet
     {
         InvType = null;
         CurrentInventory = null;
+        mr = null;
 
         base.DestroyVars();
     }
@@ -92,5 +96,31 @@ public abstract class Item : Puppet
         InvType.Yeet(true);
 
         return false;
+    }
+
+    public void PseudoEnable()
+    {
+        for (int i = 0; i < mr.Length; ++i)
+        {
+            mr[i].enabled = true;
+        }
+
+        for (int i = 0; i < permissions.Amount; ++i)
+        {
+            permissions.GetObj(i).enabled = true;
+        }
+    }
+
+    public void PseudoDisable()
+    {
+        for (int i = 0; i < mr.Length; ++i)
+        {
+            mr[i].enabled = false;
+        }
+
+        for (int i = 0; i < permissions.Amount; ++i)
+        {
+            permissions.GetObj(i).enabled = false;
+        }
     }
 }

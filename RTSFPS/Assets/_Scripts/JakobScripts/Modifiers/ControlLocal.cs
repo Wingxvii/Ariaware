@@ -16,6 +16,28 @@ public class ControlLocal : Modifier
     public bool applyOnPreRender = false;
     public bool applyOnLateUpdate = false;
 
+    public bool SetToInitial = false;
+    Vector3 initialP = Vector3.zero;
+    Quaternion initialR = Quaternion.identity;
+
+    protected override bool CreateVars()
+    {
+        if (base.CreateVars())
+        {
+            initialP = transform.localPosition;
+            initialR = transform.localRotation;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void DestroyVars()
+    {
+        base.DestroyVars();
+    }
+
     private void Update()
     {
         if (applyOnUpdate)
@@ -42,10 +64,18 @@ public class ControlLocal : Modifier
 
     public void ApplyUpdateModifier()
     {
-        if (controlPosition)
-            transform.localPosition = snapPosition;
+        if (SetToInitial)
+        {
+            transform.localPosition = initialP;
+            transform.localRotation = initialR;
+        }
+        else
+        {
+            if (controlPosition)
+                transform.localPosition = snapPosition;
 
-        if (controlRotation)
-            transform.localRotation = Quaternion.Euler(snapAngles);
+            if (controlRotation)
+                transform.localRotation = Quaternion.Euler(snapAngles);
+        }
     }
 }

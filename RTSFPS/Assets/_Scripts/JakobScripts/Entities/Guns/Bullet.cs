@@ -8,11 +8,12 @@ public class FireStats
     public float damage = 1f;
     public float range = 100f;
     public float speed = 20f;
+
+    public float ConeAngle = 5f;
 }
 
 public class Bullet : InitializableObject
 {
-    public float ConeAngle = 5f;
     public FireStats bulletStats;
 
     FireStats gunStats;
@@ -22,14 +23,12 @@ public class Bullet : InitializableObject
 
     float maxDist;
 
-    public AnimationCurve accuracyCalc;
-
-    public void SetBulletStats(FireStats fs, Vector3 pos, Quaternion dir, Body ignore)
+    public void SetBulletStats(FireStats fs, Vector3 pos, Quaternion dir, Body ignore, AnimationCurve acc)
     {
         gunStats = fs;
         origin = pos;
         transform.position = pos;
-        Quaternion newDir = dir * Quaternion.Euler(accuracyCalc.Evaluate(Random.Range(0f, 1f)) * ConeAngle, Random.Range(0, 360f), 0);
+        Quaternion newDir = dir * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (fs.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
         transform.rotation = newDir;
         maxDist = bulletStats.range + gunStats.range;
         direction = newDir * Vector3.up;

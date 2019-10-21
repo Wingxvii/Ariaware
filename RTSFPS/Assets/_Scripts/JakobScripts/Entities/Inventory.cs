@@ -19,6 +19,8 @@ public class Inventory : Puppet
         protected set { invStats = value; }
     }
 
+    public int activeObject = -1;
+
     protected override bool CreateVars()
     {
         if (base.CreateVars())
@@ -27,6 +29,9 @@ public class Inventory : Puppet
             AllowedItems = new JoinedList<Inventory, InvItemType>(this);
             PlayerCursor = new JoinedVar<Inventory, VectorCursor>(this, false);
             body = new JoinedVar<Inventory, Body>(this);
+
+            Items.RunOnAttach.Add(SetActiveObject);
+            Items.RunOnRemove.Add(ResetActiveObject);
 
             return true;
         }
@@ -101,6 +106,9 @@ public class Inventory : Puppet
 
     protected override void DestroyVars()
     {
+        Items.RunOnAttach.Clear();
+        Items.RunOnRemove.Clear();
+
         PlayerCursor = null;
         AllowedItems = null;
         Items = null;
@@ -201,5 +209,58 @@ public class Inventory : Puppet
         }
 
         base.PostDisable();
+    }
+
+    public void SwapActive(int index)
+    {
+        Debug.Log(index);
+        Items.GetObj(activeObject).PseudoDisable();
+        activeObject = index;
+        Items.GetObj(activeObject).PseudoEnable();
+    }
+
+
+    protected void SetActiveObject(Joined<Item, Inventory> join)
+    {
+        if (activeObject < 0)
+        {
+            activeObject = Items.GetPositionOf(join);
+            if (join.Obj.InnerInit())
+            {
+                join.Obj.PseudoEnable();
+            }
+        }
+        else
+        {
+            if (join.Obj.InnerInit())
+            {
+                join.Obj.PseudoDisable();
+            }
+        }
+    }
+
+    protected void ResetActiveObject(Joined<Item, Inventory> join)
+    {
+        int index = Items.GetPositionOf(join);
+
+        if (index >= 0 && index <= activeObject)
+        {
+            if (index < activeObject)
+                --activeObject;
+            else if (index == activeObject)
+            {
+                int unhook = Items.Amount <= 1 ? 1 : 0;
+
+                activeObject -= unhook;
+                if (activeObject >= 0)
+                {
+                    if (join.Obj.InnerInit())
+                    {
+                        Items.GetObj(activeObject + unhook).PseudoEnable();
+                        Item it = Items.GetObj(activeObject + unhook);
+                    }
+                }
+            }
+        }
     }
 }

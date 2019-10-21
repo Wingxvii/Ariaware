@@ -34,7 +34,7 @@ public abstract class InvItemType : Modifier
 
     protected override void HierarchyDeInitialize()
     {
-        ItemBase.Yeet();
+        ItemBase.Yeet(AC);
 
         base.HierarchyDeInitialize();
     }
