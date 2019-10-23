@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/ConnectionLoader.unity
-    guid: 198026a2a5ce02d4c8a19ec415eec493
-  - enabled: 1
-    path: Assets/_Scenes/JakobScene.unity
+    path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/_Scenes/Marshaling Test.unity
-    guid: e7483e34da979da469163450dfa6b44c
   m_configObjects: {}

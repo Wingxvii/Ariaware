@@ -4,8 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Targetable
-  - Container
+  - Ground
+  - SelectableObject
+  - GameManager
+  - Animation
+  - Flag
   layers:
   - Default
   - TransparentFX
@@ -15,12 +18,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Wall
+  - Turret
+  - Droid
+  - Barracks
+  - Background
   - 
   - 
   - 

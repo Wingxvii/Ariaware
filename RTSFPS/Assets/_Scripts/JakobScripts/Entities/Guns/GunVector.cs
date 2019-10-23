@@ -6,6 +6,9 @@ public class GunVector : Empty
 {
     public JoinedVar<GunVector, Gun> parentGun;
 
+    public AnimationCurve Xpattern;
+    public AnimationCurve Zpattern;
+
     protected override bool CreateVars()
     {
         if (base.CreateVars())

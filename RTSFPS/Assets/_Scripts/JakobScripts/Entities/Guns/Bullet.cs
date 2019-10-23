@@ -16,6 +16,7 @@ public class Bullet : InitializableObject
 {
     public FireStats bulletStats;
 
+    GunVector accuser;
     FireStats gunStats;
     Vector3 origin;
     Vector3 direction;
@@ -23,16 +24,17 @@ public class Bullet : InitializableObject
 
     float maxDist;
 
-    public void SetBulletStats(FireStats fs, Vector3 pos, Quaternion dir, Body ignore, AnimationCurve acc)
+    public void SetBulletStats(FireStats fs, GunVector culprit, Body ignore, AnimationCurve acc)
     {
         gunStats = fs;
-        origin = pos;
-        transform.position = pos;
-        Quaternion newDir = dir * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
+        origin = culprit.transform.position;
+        transform.position = origin;
+        Quaternion newDir = culprit.transform.rotation * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
         transform.rotation = newDir;
         maxDist = bulletStats.range + gunStats.range;
         direction = newDir * Vector3.up;
         ignoreThis = ignore;
+        accuser = culprit;
     }
 
     private void FixedUpdate()
@@ -100,7 +102,7 @@ public class Bullet : InitializableObject
                     RaycastHit closest = rhit[0];
                     for (int i = 1; i < rhit.Length; ++i)
                     {
-                        if (rhit[i].distance < closest.distance)
+                        if (rhit[i].distance > closest.distance)
                         {
                             closest = rhit[i];
                         }

@@ -107,7 +107,7 @@ public class Gun : Weapon
                     {
                         ammo.GetObj(0).Shoot();
                         b = Instantiate(ammo.GetObj(0).bullet);
-                        b.SetBulletStats(gunStats, gunScope.GetObj(i).transform.position, gunScope.GetObj(i).transform.rotation, CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
+                        b.SetBulletStats(gunStats, gunScope.GetObj(i), CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
                     }
                 }
                 if (ammo.GetObj(0).bulletCount > 0)
@@ -116,7 +116,7 @@ public class Gun : Weapon
                     {
                         ammo.GetObj(0).Shoot();
                         b = Instantiate(ammo.GetObj(0).bullet);
-                        b.SetBulletStats(gunStats, gunScope.GetObj(i).transform.position, gunScope.GetObj(i).transform.rotation, CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
+                        b.SetBulletStats(gunStats, gunScope.GetObj(i), CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
                     }
 
                     cooldown = FireDelay;
