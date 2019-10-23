@@ -28,7 +28,7 @@ public class Bullet : InitializableObject
         gunStats = fs;
         origin = pos;
         transform.position = pos;
-        Quaternion newDir = dir * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (fs.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
+        Quaternion newDir = dir * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
         transform.rotation = newDir;
         maxDist = bulletStats.range + gunStats.range;
         direction = newDir * Vector3.up;
