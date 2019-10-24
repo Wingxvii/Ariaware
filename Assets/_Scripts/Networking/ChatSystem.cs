@@ -72,7 +72,7 @@ public class ChatSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I)) {
             List<String> messages = new List<string>();
-            for (int x = 0; x < 1000; x++) {
+            for (int x = 0; x < 900; x++) {
                 messages.Add(x.ToString());
             }
 
