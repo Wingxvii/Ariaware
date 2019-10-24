@@ -715,11 +715,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 868323580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4181276ff9550f4488108c43ca78b94, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b83616bdeecf0141992f0d87d090418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   userLog: {fileID: 407665640}
   userInput: {fileID: 1552808675}
+  ip: 10.150.24.120
 --- !u!1 &1431328675
 GameObject:
   m_ObjectHideFlags: 0
