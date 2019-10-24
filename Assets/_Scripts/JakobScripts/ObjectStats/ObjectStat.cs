@@ -5,48 +5,41 @@ using UnityEngine;
 [RequireComponent(typeof(Entity))]
 public abstract class ObjectStat : InitializableObject
 {
-    JoinedVar<ObjectStat, Entity> ent;
-    public JoinedVar<ObjectStat, Entity> Ent
+    public JoinedVar<ObjectStat, Entity> Ent;
+
+    protected override bool CreateVars()
     {
-        get { return ent; }
-        protected set { ent = value; }
+        if (base.CreateVars())
+        {
+            Ent = new JoinedVar<ObjectStat, Entity>(this, false);
+
+            return true;
+        }
+
+        return false;
     }
 
-    protected override void Initialize()
+    protected override bool InnerInitialize()
     {
-        base.Initialize();
+        if (base.InnerInitialize())
+        {
+            Entity e = GetComponent<Entity>();
+            if (e.InnerInit())
+            {
+                Ent.Attach(e.JoinedStats);
+            }
 
+            return true;
+        }
 
+        return false;
     }
 
-    protected override void InnerInitialize()
-    {
-        base.InnerInitialize();
-
-        Entity e = GetComponent<Entity>();
-        e.Init();
-        Ent.Attach(e.JoinedStats);
-    }
-
-    protected override void CreateVars()
-    {
-        base.CreateVars();
-
-        Ent = new JoinedVar<ObjectStat, Entity>(this, false);
-    }
-
-    protected override void DeInitialize()
-    {
-        //Ent.Yeet();
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
+    protected override void InnerDeInitialize()
     {
         Ent.Yeet();
 
-        base.DeInnerInitialize();
+        base.InnerDeInitialize();
     }
 
     protected override void DestroyVars()
@@ -60,13 +53,22 @@ public abstract class ObjectStat : InitializableObject
     {
         UpdateData();
     }
+
     protected virtual void UpdateData() { }
 
-    protected override void PostEnable()
+    protected override bool PostEnable()
     {
-        base.PostEnable();
+        if (base.PostEnable())
+        {
+            if (!Ent.GetObj(0).enabled)
+            {
+                enabled = false;
+                return false;
+            }
 
-        if (Ent.GetObj(0) != null)
-            Ent.GetObj(0).enabled = true;
+            return true;
+        }
+
+        return false;
     }
 }

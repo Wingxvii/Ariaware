@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandInvDebugOutput : AbsInvCommand<CommandInvDebugOutput, PermitInvDebugOutput, Controller, Inventory>
+public class CommandInvDebugOutput : AbstractCommand<CommandInvDebugOutput, PermitInvDebugOutput, Controller, Inventory>
 {
-    public ModuleButton debugButton;
+    public List<UnitButton> debugButton;
 
     protected override void FeedPermission(PermitInvDebugOutput p)
     {
-        if (debugButton != null && p != null)
+        for (int i = 0; i < debugButton.Count; ++i)
         {
-            p.OutputLog(debugButton.pressed);
+            if (ChannelTypes.CheckTypes(debugButton[i].channel, p.channel))
+            if (debugButton[i].module != null)
+            {
+                p.OutputLog(debugButton[i].module.pressed);
+            }
         }
     }
 }

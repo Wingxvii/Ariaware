@@ -2,74 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PermitInvCycle : AbsInvPermission<PermitInvCycle, CommandInvCycle, Inventory, Controller>
+public class PermitInvCycle : AbstractPermission<PermitInvCycle, CommandInvCycle, Inventory, Controller>//AbsInvPermission<PermitInvCycle, CommandInvCycle, Inventory, Controller>
 {
-    int invSelected = 0;
-    int preSelected = 0;
     public float timeDelay = 0f;
-    float timeRem = 0f;
-
-    JoinedVar<PermitInvCycle, Item> attachedItem;
-    public JoinedVar<PermitInvCycle, Item> AttachedItem
-    {
-        get { return attachedItem; }
-        protected set { attachedItem = value; }
-    }
-
-    void SetAttachedItem()
-    {
-        for (int i = SpecificActor.Items.Joins.Count - 1; i >= 0; --i)
-        {
-            
-        }
-    }
-
-    protected override void Initialize()
-    {
-        base.Initialize();
-
-
-    }
-
-    protected override void InnerInitialize()
-    {
-        base.InnerInitialize();
-    }
-
-    protected override void CreateVars()
-    {
-        base.CreateVars();
-
-        AttachedItem = new JoinedVar<PermitInvCycle, Item>(this, false);
-    }
-
-    protected override void DeInitialize()
-    {
-        AttachedItem.Yeet();
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
-    {
-        base.DeInnerInitialize();
-    }
-
-    protected override void DestroyVars()
-    {
-        AttachedItem = null;
-
-        base.DestroyVars();
-    }
+    float timeRem = 0.2f;
 
     public void ReceiveInput(int axisValue)
     {
-        if (timeRem <= 0f)
+        if (axisValue != 0 && timeRem <= 0f && SpecificActor.Items.Amount > 0)
         {
-            invSelected += axisValue;
+            int newVal = axisValue + SpecificActor.activeObject;
+            while (newVal < 0)
+            {
+                newVal += SpecificActor.Items.Amount;
+            }
+            while (newVal >= SpecificActor.Items.Amount)
+            {
+                newVal -= SpecificActor.Items.Amount;
+            }
+
+            SpecificActor.SwapActive(newVal);
+
             timeRem = timeDelay;
         }
-        else
+    }
+
+    private void Update()
+    {
+        if (timeRem > 0f)
         {
             timeRem -= Time.deltaTime;
         }
@@ -77,22 +37,6 @@ public class PermitInvCycle : AbsInvPermission<PermitInvCycle, CommandInvCycle, 
 
     protected override void FeedPuppet()
     {
-        Bound();
 
-        if (preSelected != invSelected)
-        {
-            
-        }
-    }
-
-    public void Bound()
-    {
-        if (SpecificActor.Items.Joins.Count > 0)
-        {
-            if (invSelected < 0)
-                invSelected = 0;
-            else if (invSelected > SpecificActor.Items.Joins.Count - 1)
-                invSelected = SpecificActor.Items.Joins.Count - 1;
-        }
     }
 }

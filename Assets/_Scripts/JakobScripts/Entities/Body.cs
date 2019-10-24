@@ -1,100 +1,129 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Runtime.InteropServices;
-using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Body : Puppet
 {
-    public int PlayerNum = 0;
+    public Rigidbody Rb { get; protected set; }
+    public JoinedVar<Body, CameraAnchor> LocalCamera;
+    public Collider[] Col;
+    public JoinedList<Body, Inventory> inventories;
 
-    Rigidbody rb;
-    public Rigidbody Rb
+    protected override bool CreateVars()
     {
-        get { return rb; }
-        private set { rb = value; }
-    }
-
-    List<Collider> col;
-    public List<Collider> Col
-    {
-        get { if (col == null) { col = new List<Collider>(); } return col; }
-        private set { col = value; }
-    }
-
-    JoinedVar<Body, CameraAnchor> localCamera;
-    public JoinedVar<Body, CameraAnchor> LocalCamera
-    {
-        get { return localCamera; }
-        set { localCamera = value; }
-    }
-
-    protected override void Initialize()
-    {
-        base.Initialize();
-
-        EntityContainer ec = Container.GetObj(0);
-        if (ec != null)
+        if (base.CreateVars())
         {
-            CameraAnchorSlot cas = ec.GetComponent<CameraAnchorSlot>();
-            if (cas != null && cas.AE)
+            Rb = GetComponent<Rigidbody>();
+            LocalCamera = new JoinedVar<Body, CameraAnchor>(this);
+            inventories = new JoinedList<Body, Inventory>(this);
+            Col = GetComponentsInChildren<Collider>();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override bool CrossBranchInitialize()
+    {
+        if (base.CrossBranchInitialize())
+        {
+            AttachCamera();
+
+            AttachInventories();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void CrossBranchDeInitialize()
+    {
+        LocalCamera.Yeet();
+        inventories.Yeet();
+
+        base.CrossBranchDeInitialize();
+    }
+
+    protected override void DestroyVars()
+    {
+        LocalCamera = null;
+        Rb = null;
+        Col = null;
+        inventories = null;
+
+        base.DestroyVars();
+    }
+
+    public void EnableColliders(bool enab)
+    {
+        for (int i = 0; i < Col.Length; ++i)
+        {
+            Col[i].gameObject.layer = enab ? 0 : 2;
+        }
+    }
+
+    public void Damage(float dam)
+    {
+        for (int i = 0; i < JoinedStats.Amount; ++i)
+        {
+            HealthBar hb = EType<HealthBar>.FindType(JoinedStats.GetObj(i));
+            if (hb != null)
             {
-                Entity ent = cas.ObjectSlot.GetObj(0);
-                if (ent != null && ent.AE)
+                hb.Damage(dam);
+            }
+        }
+    }
+
+    public void AttachCamera()
+    {
+        EntityContainer ec = Container.GetObj(0);
+        if (ec.TreeInit())
+        {
+            for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+            {
+                SlotBase sb = ec.AttachedSlots.GetObj(i);
+                if (FType.FindIfType(sb.GetSlotType(), typeof(CameraAnchor)) && sb.BranchInit())
                 {
-                    CameraAnchor ca = EType<CameraAnchor>.FindType(ent);
-                    LocalCamera.Attach(ca.LocalBody);
+                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
+                    {
+                        CameraAnchor ca = EType<CameraAnchor>.FindType(sb.EntityPlug.GetObj(j));
+                        if (ca != null && ca.TreeInit())
+                        {
+                            LocalCamera.Attach(ca.LocalBody);
+                            return;
+                        }
+                    }
+                    return;
                 }
             }
         }
     }
 
-    protected override void InnerInitialize()
+    public void AttachInventories()
     {
-        base.InnerInitialize();
-
-        CentralManager.CM.ProtectedAddBody(this);
-    }
-
-    protected override void CreateVars()
-    {
-        base.CreateVars();
-
-        LocalCamera = new JoinedVar<Body, CameraAnchor>(this, false);
-
-        Collider[] c = GetComponents<Collider>();
-        for (int i = c.Length - 1; i >= 0; --i)
-            Col.Add(c[i]);
-        Rb = GetComponent<Rigidbody>();
-
-        Rb.freezeRotation = true;
-    }
-
-    protected override void DeInitialize()
-    {
-        LocalCamera.Yeet();
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
-    {
-        CentralManager.CM.RemoveBody(this);
-
-        base.DeInnerInitialize();
-    }
-
-    protected override void DestroyVars()
-    {
-        Rb = null;
-        Col = null;
-
-        base.DestroyVars();
-    }
-
-    protected override SlotBase GetSlot()
-    {
-        return Container.GetObj(0).GetComponent<BodySlot>();
+        EntityContainer ec = Container.GetObj(0);
+        if (ec.TreeInit())
+        {
+            for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+            {
+                SlotBase sb = ec.AttachedSlots.GetObj(i);
+                if (FType.FindIfType(sb.GetSlotType(), typeof(Inventory)) && sb.BranchInit())
+                {
+                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
+                    {
+                        Inventory inv = EType<Inventory>.FindType(sb.EntityPlug.GetObj(j));
+                        if (inv != null && inv.TreeInit())
+                        {
+                            inventories.Attach(inv.body);
+                            return;
+                        }
+                    }
+                    return;
+                }
+            }
+        }
     }
 }

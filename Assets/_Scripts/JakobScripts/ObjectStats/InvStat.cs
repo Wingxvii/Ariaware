@@ -11,39 +11,35 @@ public abstract class InvStat : ObjectStat
         protected set { attachedInventory = value; }
     }
 
-    protected override void Initialize()
+    protected override bool CreateVars()
     {
-        base.Initialize();
+        if (base.CreateVars())
+        {
+            AttachedInventory = new JoinedVar<InvStat, Inventory>(this, false);
 
+            return true;
+        }
 
+        return false;
     }
 
-    protected override void InnerInitialize()
+    protected override bool InnerInitialize()
     {
-        base.InnerInitialize();
+        if (base.InnerInitialize())
+        {
+            AttachInventory();
 
-        AttachInventory();
+            return true;
+        }
+
+        return false;
     }
 
-    protected override void CreateVars()
-    {
-        base.CreateVars();
-
-        AttachedInventory = new JoinedVar<InvStat, Inventory>(this, false);
-    }
-
-    protected override void DeInitialize()
-    {
-
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
+    protected override void InnerDeInitialize()
     {
         AttachedInventory.Yeet();
 
-        base.DeInnerInitialize();
+        base.InnerDeInitialize();
     }
 
     protected override void DestroyVars()

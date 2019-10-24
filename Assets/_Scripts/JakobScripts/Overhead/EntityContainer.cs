@@ -1,111 +1,116 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
-//[DisallowMultipleComponent]
 public class EntityContainer : BasePACES
 {
-    JoinedList<EntityContainer, Entity> objectList;
-    public JoinedList<EntityContainer, Entity> ObjectList
+    public JoinedList<EntityContainer, Entity> AttachedEntities;
+    public JoinedList<EntityContainer, SlotBase> AttachedSlots;
+
+    protected override bool CreateVars()
     {
-        get { return objectList; }
-        private set { objectList = value; }
+        if (base.CreateVars())
+        {
+            AttachedSlots = new JoinedList<EntityContainer, SlotBase>(this);
+            AttachedEntities = new JoinedList<EntityContainer, Entity>(this);
+
+            return true;
+        }
+
+        return false;
     }
 
-    JoinedList<EntityContainer, SlotBase> slots;
-    public JoinedList<EntityContainer, SlotBase> Slots
+    protected override bool InnerInitialize()
     {
-        get { return slots; }
-        protected set { slots = value; }
+        if (base.InnerInitialize())
+        {
+            AttachSlots();
+
+            return true;
+        }
+
+        return false;
     }
 
-    protected override void Initialize()
+    protected override bool HierarchyInitialize()
     {
-        //transform.position = Vector3.zero;
-        //transform.rotation = Quaternion.identity;
+        if (base.HierarchyInitialize())
+        {
+            AttachEntities();
 
-        base.Initialize();
+            return true;
+        }
 
-        SetList();
+        return false;
     }
 
-    protected override void InnerInitialize()
+    protected override void HierarchyDeInitialize()
     {
-        base.InnerInitialize();
+        AttachedEntities.Yeet(AC);
 
-        SetSlots();
+        base.HierarchyDeInitialize();
     }
 
-    protected override void CreateVars()
+    protected override void InnerDeInitialize()
     {
-        base.CreateVars();
+        AttachedSlots.Yeet();
 
-        Slots = new JoinedList<EntityContainer, SlotBase>(this);
-        ObjectList = new JoinedList<EntityContainer, Entity>(this);
-    }
-
-    protected override void DeInitialize()
-    {
-        ObjectList.Yeet();
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
-    {
-        Slots.Yeet();
-
-        base.DeInnerInitialize();
+        base.InnerDeInitialize();
     }
 
     protected override void DestroyVars()
     {
-        ObjectList = null;
-        Slots = null;
+        AttachedEntities = null;
+        AttachedSlots = null;
 
         base.DestroyVars();
     }
 
-    protected void SetList()
+    public void AttachSlots()
     {
-        Entity[] ents = GetComponentsInChildren<Entity>();
-        for (int i = ents.Length - 1; i >= 0; i--)
+        SlotBase[] s = GetComponents<SlotBase>();
+        for (int i = s.Length - 1; i >= 0; --i)
         {
-            if (ents[i].AE)
-            {
-                ents[i].Init();
-                ents[i].InnerInit();
-                ents[i].AttachContainerAndSlot();
-                //ObjectList.Attach(ents[i].Container);
-            }
+            if (s[i].InnerInit())
+                AttachedSlots.Attach(s[i].Container);
         }
     }
 
-    protected void SetSlots()
+    public void AttachEntities()
     {
-        SlotBase[] s = GetComponents<SlotBase>();
-        for (int i = 0; i < s.Length; i++)
+        Entity[] e = GetComponentsInChildren<Entity>();
+        for (int i = e.Length - 1; i >= 0; --i)
         {
-            s[i].Init();
-            Slots.Attach(s[i].Container);
+            if (e[i].BranchInit())
+                AttachedEntities.Attach(e[i].Container);
         }
+    }
+
+    protected override bool PostEnable()
+    {
+        if (base.PostEnable())
+        {
+            for (int i = 0; i < AttachedSlots.Amount; i++)
+            {
+                AttachedSlots.GetObj(i).AutoEnable();
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     protected override void PostDisable()
     {
-        if (!enabled)
+        if (AC)
         {
-            for (int i = Slots.Joins.Count - 1; i >= 0; --i)
-                Slots.GetObj(i).enabled = false;
+            for (int i = 0; i < AttachedSlots.Amount; i++)
+            {
+                AttachedSlots.GetObj(i).AutoDisable();
+            }
         }
 
         base.PostDisable();
     }
-
-    //private void Update()
-    //{
-    //    //if (Input.GetKey(KeyCode.Equals) && SceneManager.GetActiveScene().name == "SampleScene")
-    //    //    SceneManager.LoadScene(1);
-    //}
 }

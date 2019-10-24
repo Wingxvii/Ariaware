@@ -8,120 +8,194 @@ public abstract class InitializableObject : MonoBehaviour
     protected float timer = 0f;
     public static float maxTimer = 1f;
 
-    bool initialized = false;
-    public bool Initialized
-    {
-        get { return initialized; }
-        protected set { initialized = value; }
-    }
+    public bool created { get; set; } = false;
+    public bool attemptedCreated { get; set; } = false;
 
-    bool inner = false;
-    public bool Inner
-    {
-        get { return inner; }
-        protected set { inner = value; }
-    }
+    public bool inner { get; set; } = false;
+    public bool attemptedInner { get; set; } = false;
 
-    bool wired = false;
-    public bool Wired
-    {
-        get { return wired; }
-        protected set { wired = value; }
-    }
+    public bool contain { get; set; } = false;
+    public bool attemptedContain { get; set; } = false;
+
+    public bool wired { get; set; } = false;
+    public bool attemptedWired { get; set; } = false;
+
+    public bool autoDisabled { get; private set; } = false;
 
     public bool AE
     {
         get { return gameObject.activeInHierarchy && enabled; }
     }
 
-    public void Init()
+    public bool AC
     {
-        if (!Initialized)
-        {
-            Initialized = true;
+        get { return gameObject.activeInHierarchy; }
+    }
 
-            CreateVars();
+    public bool EN
+    {
+        get { return enabled; }
+    }
+
+    public bool Init()
+    {
+        attemptedCreated = true;
+
+        if (!created && AC)
+        {
+            created = true;
+
+            if (!CreateVars())
+            {
+                DeInit();
+            }
         }
+
+        return created;
     }
 
     public void DeInit()
     {
-        if (Initialized)
+        attemptedCreated = false;
+
+        if (created)
         {
+            InnerDeInit();
+
             DestroyVars();
 
-            Initialized = false;
+            created = false;
         }
     }
 
-    public void InnerInit()
+    public bool InnerInit()
     {
-        if (!Inner)
-        {
-            Inner = true;
+        attemptedInner = true;
 
-            InnerInitialize();
+        if (!inner && Init())
+        {
+            inner = true;
+            if (!InnerInitialize())
+            {
+                InnerDeInit();
+            }
         }
+
+        return inner;
     }
 
-    public void DeInnerInit()
+    public void InnerDeInit()
     {
-        if (Inner)
-        {
-            DeInnerInitialize();
+        attemptedInner = false;
 
-            Inner = false;
+        if (inner)
+        {
+            BranchDeInit();
+
+            InnerDeInitialize();
+
+            inner = false;
         }
     }
 
-    public void WireInit()
+    public bool BranchInit()
     {
-        if (!Wired)
-        {
-            Wired = true;
+        attemptedContain = true;
 
-            Initialize();
+        if (!contain && AE && InnerInit())
+        {
+            contain = true;
+
+            if (!HierarchyInitialize())
+            {
+                BranchDeInit();
+            }
         }
+
+        return contain;
     }
 
-    public void WireDeInit()
+    public void BranchDeInit()
     {
-        if (Wired)
-        {
-            DeInitialize();
+        attemptedContain = false;
 
-            Wired = false;
+        if (contain)
+        {
+            TreeDeInit();
+
+            HierarchyDeInitialize();
+
+            contain = false;
         }
     }
 
-    protected virtual void Initialize()
+    public bool TreeInit()
+    {
+        attemptedWired = true;
+
+        if (!wired && BranchInit())
+        {
+            wired = true;
+
+            if (!CrossBranchInitialize())
+            {
+                TreeDeInit();
+            }
+        }
+
+        return wired;
+    }
+
+    public void TreeDeInit()
+    {
+        attemptedWired = false;
+
+        if (wired)
+        {
+            CrossBranchDeInitialize();
+
+            wired = false;
+        }
+    }
+
+    protected virtual bool CreateVars()
+    {
+        return true;
+    }
+
+    protected virtual bool InnerInitialize()
+    {
+        return true;
+    }
+
+    protected virtual bool HierarchyInitialize()
+    {
+        return true;
+    }
+
+    protected virtual bool CrossBranchInitialize()
+    {
+        return true;
+    }
+
+    protected virtual void CrossBranchDeInitialize()
     {
         
     }
 
-    protected virtual void InnerInitialize()
+    protected virtual void HierarchyDeInitialize()
     {
-
+        
     }
 
-    protected virtual void CreateVars()
+    protected virtual void InnerDeInitialize()
     {
-
-    }
-
-    protected virtual void DeInitialize()
-    {
-
-    }
-
-    protected virtual void DeInnerInitialize()
-    {
-
+        
     }
 
     protected virtual void DestroyVars()
     {
-
+        
     }
 
     protected void OnEnable()
@@ -129,9 +203,11 @@ public abstract class InitializableObject : MonoBehaviour
         PostEnable();
     }
 
-    protected virtual void PostEnable()
+    protected virtual bool PostEnable()
     {
-        WireInit();
+        //BranchInit();
+
+        return TreeInit();
     }
 
     protected void OnDisable()
@@ -141,44 +217,55 @@ public abstract class InitializableObject : MonoBehaviour
 
     protected virtual void PostDisable()
     {
-        WireDeInit();
+        //TreeDeInit();
+
+        BranchDeInit();
     }
 
     protected void Awake()
     {
-        CentralManager.CM.LoadAllSceneObjects(gameObject.scene);
+        //CentralManager.CM.LoadAllSceneObjects(gameObject.scene);
 
-        Init();
+        //Init();
 
         InnerInit();
+        //TreeInit();
     }
 
     protected void OnDestroy()
     {
-        DeInnerInit();
+        //InnerDeInit();
 
         DeInit();
     }
 
-    //private void OnTransformParentChanged()
-    //{
-    //    OnReparent();
-    //}
-    //
-    //protected virtual void OnReparent()
-    //{
-    //
-    //}
-
-    private void Update()
+    public void AutoDisable()
     {
-        timer += Time.deltaTime;
-        if (timer > maxTimer)
+        if (enabled & !autoDisabled)
         {
-            SpitData();
-            timer = 0;
+            autoDisabled = true;
+            enabled = false;
         }
     }
+
+    public void AutoEnable()
+    {
+        if (!enabled && autoDisabled)
+        {
+            autoDisabled = false;
+            enabled = true;
+        }
+    }
+
+    //private void Update()
+    //{
+    //    timer += Time.deltaTime;
+    //    if (timer > maxTimer)
+    //    {
+    //        SpitData();
+    //        timer = 0;
+    //    }
+    //}
 
     protected virtual void SpitData()
     {

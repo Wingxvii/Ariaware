@@ -8,39 +8,66 @@ public abstract class BasePACES : InitializableObject
     public int ID;
     public bool sendData;
 
-    protected override void Initialize()
+    protected override bool CreateVars()
     {
-        base.Initialize();
+        if (base.CreateVars())
+        {
+            return true;
+        }
 
-
+        return false;
     }
 
-    protected override void InnerInitialize()
+    protected override bool InnerInitialize()
     {
-        base.InnerInitialize();
+        if (base.InnerInitialize())
+        {
+            return true;
+        }
 
-
+        return false;
     }
 
-    protected override void CreateVars()
+    protected override bool HierarchyInitialize()
     {
-        base.CreateVars();
+        if( base.HierarchyInitialize())
+        {
+            return true;
+        }
 
-
+        return false;
     }
 
-    protected override void DeInitialize()
+    protected override bool CrossBranchInitialize()
     {
+        if (base.CrossBranchInitialize())
+        {
+            return true;
+        }
 
-
-        base.DeInitialize();
+        return false;
     }
 
-    protected override void DeInnerInitialize()
+    protected override void CrossBranchDeInitialize()
     {
 
 
-        base.DeInnerInitialize();
+        base.CrossBranchDeInitialize();
+    }
+
+
+    protected override void HierarchyDeInitialize()
+    {
+
+
+        base.HierarchyDeInitialize();
+    }
+
+    protected override void InnerDeInitialize()
+    {
+
+
+        base.InnerDeInitialize();
     }
 
     protected override void DestroyVars()

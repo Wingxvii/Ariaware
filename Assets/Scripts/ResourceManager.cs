@@ -12,7 +12,7 @@ public static class ResourceConstants {
 
     public const int SUPPLY_PER_BARRACKS = 20;
 
-    public const bool CREDITS_OFF = false;
+    public const bool CREDITS_OFF = true;
     public const bool UNKILLABLEPLAYER = true;
 
 }

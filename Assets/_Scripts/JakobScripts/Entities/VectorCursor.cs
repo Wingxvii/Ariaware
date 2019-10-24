@@ -5,79 +5,66 @@ using UnityEngine;
 public class VectorCursor : Puppet
 {
     public float magnitude;
+    public JoinedList<VectorCursor, Inventory> Inventories;
 
-    JoinedList<VectorCursor, Inventory> inventories;
-    public JoinedList<VectorCursor, Inventory> Inventories
+    protected override bool CrossBranchInitialize()
     {
-        get { return inventories; }
-        protected set { inventories = value; }
-    }
+        if (base.CrossBranchInitialize())
+        {
+            AttachInventories();
 
-    protected override void Initialize()
-    {
-        base.Initialize();
+            return true;
+        }
 
-        AttachInventories();
+        return false;
     }
 
     void AttachInventories()
     {
-        Inventories.Yeet();
         EntityContainer ec = Container.GetObj(0);
-        if (ec != null && ec.AE)
+        if (ec.TreeInit())
         {
-            InventorySlot invs = ec.GetComponent<InventorySlot>();
-            if (invs != null && invs.AE)
+            for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
             {
-                Inventory inv;
-                for (int i = invs.ObjectList.Joins.Count - 1; i >= 0; --i)
+                SlotBase sb = ec.AttachedSlots.GetObj(i);
+                if (FType.FindIfType(sb.GetSlotType(), typeof(Inventory)) && sb.BranchInit())
                 {
-                    inv = EType<Inventory>.FindType(invs.ObjectList.GetObj(i));
-                    if (inv != null && inv.AE)
+                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
                     {
-                        inv.Init();
-                        inv.InnerInit();
-                        Inventories.Attach(inv.PlayerCursor);
+                        Inventory inv = EType<Inventory>.FindType(sb.EntityPlug.GetObj(j));
+                        if (inv != null && inv.TreeInit())
+                        {
+                            Inventories.Attach(inv.PlayerCursor);
+                        }
                     }
                 }
             }
         }
     }
 
-    protected override void CreateVars()
+    protected override bool CreateVars()
     {
-        base.CreateVars();
+        if (base.CreateVars())
+        {
+            Inventories = new JoinedList<VectorCursor, Inventory>(this);
 
-        Inventories = new JoinedList<VectorCursor, Inventory>(this);
+            return true;
+        }
+
+        return false;
     }
 
-    protected override void DeInitialize()
+    protected override void CrossBranchDeInitialize()
     {
+        Inventories.Yeet();
 
-
-        base.DeInitialize();
+        base.CrossBranchDeInitialize();
     }
 
     protected override void DestroyVars()
     {
-
+        Inventories = null;
 
         base.DestroyVars();
-    }
-
-    protected override SlotBase GetSlot()
-    {
-        return Container.GetObj(0).GetComponent<VectorCursorSlot>();
-    }
-
-    protected override bool OnReparent()
-    {
-        if (base.OnReparent()) 
-        {
-            AttachInventories();
-
-            return true;
-        }
-        return false;
     }
 }

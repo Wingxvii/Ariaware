@@ -4,28 +4,13 @@ using UnityEngine;
 
 public class Inventory : Puppet
 {
-    public ChannelTypes channelType;
+    public JoinedList<Inventory, Item> Items;
 
-    JoinedList<Inventory, Item> items;
-    public JoinedList<Inventory, Item> Items
-    {
-        get { return items; }
-        protected set { items = value; }
-    }
+    public JoinedList<Inventory, InvItemType> AllowedItems;
 
-    JoinedList<Inventory, InvItemType> allowedItems;
-    public JoinedList<Inventory, InvItemType> AllowedItems
-    {
-        get { return allowedItems; }
-        protected set { allowedItems = value; }
-    }
+    public JoinedVar<Inventory, VectorCursor> PlayerCursor;
 
-    JoinedVar<Inventory, VectorCursor> playerCursor;
-    public JoinedVar<Inventory, VectorCursor> PlayerCursor
-    {
-        get { return playerCursor; }
-        protected set { playerCursor = value; }
-    }
+    public JoinedVar<Inventory, Body> body;
 
     JoinedList<Inventory, InvStat> invStats;
     public JoinedList<Inventory, InvStat> InvStats
@@ -34,13 +19,102 @@ public class Inventory : Puppet
         protected set { invStats = value; }
     }
 
-    protected override void Initialize()
+    public int activeObject = -1;
+
+    protected override bool CreateVars()
     {
-        base.Initialize();
+        if (base.CreateVars())
+        {
+            Items = new JoinedList<Inventory, Item>(this);
+            AllowedItems = new JoinedList<Inventory, InvItemType>(this);
+            PlayerCursor = new JoinedVar<Inventory, VectorCursor>(this, false);
+            body = new JoinedVar<Inventory, Body>(this);
 
-        AttachCursor();
+            Items.RunOnAttach.Add(SetActiveObject);
+            Items.RunOnRemove.Add(ResetActiveObject);
 
-        AttachItems();
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override bool InnerInitialize()
+    {
+        if (base.InnerInitialize())
+        {
+            InvItemType[] itt = GetComponents<InvItemType>();
+            for (int i = itt.Length - 1; i >= 0; --i)
+            {
+                if (itt[i].InnerInit())
+                {
+                    AllowedItems.Attach(itt[i].AttachedInventory);
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override bool HierarchyInitialize()
+    {
+        if (base.HierarchyInitialize())
+        {
+            AttachItems();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override bool CrossBranchInitialize()
+    {
+        if (base.CrossBranchInitialize())
+        {
+            AttachCursor();
+
+            AttachBody();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void CrossBranchDeInitialize()
+    {
+        Items.Yeet();
+        PlayerCursor.Yeet();
+
+        base.HierarchyDeInitialize();
+    }
+
+    protected override void HierarchyDeInitialize()
+    {
+        base.HierarchyDeInitialize();
+    }
+
+    protected override void InnerDeInitialize()
+    {
+        AllowedItems.Yeet();
+
+        base.InnerDeInitialize();
+    }
+
+    protected override void DestroyVars()
+    {
+        Items.RunOnAttach.Clear();
+        Items.RunOnRemove.Clear();
+
+        PlayerCursor = null;
+        AllowedItems = null;
+        Items = null;
+        body = null;
+
+        base.DestroyVars();
     }
 
     void AttachItems()
@@ -51,13 +125,10 @@ public class Inventory : Puppet
             Inventory inv = itm[i].GetComponentInParent<Inventory>();
             if (inv == this)
             {
-                if (itm[i].AE)
+                if (itm[i].BranchInit())
                 {
-                    itm[i].Init();
-                    itm[i].InnerInit();
-                    itm[i].AttachInventoryAndType();
+                    Items.Attach(itm[i].CurrentInventory);
                 }
-                //Items.Attach(itm[i].CurrentInventory);
             }
         }
     }
@@ -65,93 +136,131 @@ public class Inventory : Puppet
     void AttachCursor()
     {
         EntityContainer cont = Container.GetObj(0);
-        if (cont != null && cont.AE)
+        if (cont.TreeInit())
         {
-            VectorCursorSlot vcs = cont.GetComponent<VectorCursorSlot>();
-            if (vcs != null && vcs.AE)
+            for (int i = 0; i < cont.AttachedSlots.Amount; ++i)
             {
-                VectorCursor vc = EType<VectorCursor>.FindType(vcs.ObjectBase.GetObj(0));
-                if (vc != null && vc.AE)
+                SlotBase sb = cont.AttachedSlots.GetObj(i);
+                if (FType.FindIfType(sb.GetSlotType(), typeof(VectorCursorSlot)) && sb.BranchInit())
                 {
-                    vc.Init();
-                    vc.InnerInit();
-                    PlayerCursor.Attach(vc.Inventories);
+                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
+                    {
+                        VectorCursor vc = EType<VectorCursor>.FindType(sb.EntityPlug.GetObj(j));
+                        if (vc != null && vc.TreeInit())
+                        {
+                            PlayerCursor.Attach(vc.Inventories);
+                            return;
+                        }
+                    }
                     return;
                 }
             }
         }
-        PlayerCursor.Yeet();
     }
 
-    protected override void InnerInitialize()
+    void AttachBody()
     {
-        base.InnerInitialize();
-
-        InvItemType[] itt = GetComponents<InvItemType>();
-        for (int i = itt.Length - 1; i >= 0; --i)
+        EntityContainer cont = Container.GetObj(0);
+        if (cont.TreeInit())
         {
-            itt[i].Init();
-            AllowedItems.Attach(itt[i].AttachedInventory);
+            for (int i = 0; i < cont.AttachedSlots.Amount; ++i)
+            {
+                SlotBase sb = cont.AttachedSlots.GetObj(i);
+                if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.TreeInit())
+                {
+                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
+                    {
+                        Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(j));
+                        if (b != null && b.TreeInit())
+                        {
+                            body.Attach(b.inventories);
+                            return;
+                        }
+                    }
+                    return;
+                }
+            }
         }
     }
 
-    protected override void CreateVars()
+    protected override bool PostEnable()
     {
-        base.CreateVars();
-
-        Items = new JoinedList<Inventory, Item>(this);
-        AllowedItems = new JoinedList<Inventory, InvItemType>(this);
-        PlayerCursor = new JoinedVar<Inventory, VectorCursor>(this, false);
-    }
-
-    protected override void DeInitialize()
-    {
-        Items.Yeet();
-        PlayerCursor.Yeet();
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
-    {
-        AllowedItems.Yeet();
-
-        base.DeInnerInitialize();
-    }
-
-    protected override void DestroyVars()
-    {
-        PlayerCursor = null;
-        AllowedItems = null;
-        Items = null;
-
-        base.DestroyVars();
-    }
-
-    protected override SlotBase GetSlot()
-    {
-        return Container.GetObj(0).GetComponent<InventorySlot>();
-    }
-
-    protected override bool OnReparent()
-    {
-        if (base.OnReparent())
+        if (base.PostEnable())
         {
-            AttachCursor();
+            for (int i = 0; i < AllowedItems.Amount; i++)
+            {
+                AllowedItems.GetObj(i).AutoEnable();
+            }
 
             return true;
         }
+
         return false;
     }
 
     protected override void PostDisable()
     {
-        if (!enabled)
+        if (AC)
         {
-            for (int i = AllowedItems.Joins.Count - 1; i >= 0; --i)
-                AllowedItems.GetObj(i).enabled = false;
+            for (int i = 0; i < AllowedItems.Amount; i++)
+            {
+                AllowedItems.GetObj(i).AutoDisable();
+            }
         }
 
         base.PostDisable();
+    }
+
+    public void SwapActive(int index)
+    {
+        Debug.Log(index);
+        Items.GetObj(activeObject).PseudoDisable();
+        activeObject = index;
+        Items.GetObj(activeObject).PseudoEnable();
+    }
+
+
+    protected void SetActiveObject(Joined<Item, Inventory> join)
+    {
+        if (activeObject < 0)
+        {
+            activeObject = Items.GetPositionOf(join);
+            if (join.Obj.InnerInit())
+            {
+                join.Obj.PseudoEnable();
+            }
+        }
+        else
+        {
+            if (join.Obj.InnerInit())
+            {
+                join.Obj.PseudoDisable();
+            }
+        }
+    }
+
+    protected void ResetActiveObject(Joined<Item, Inventory> join)
+    {
+        int index = Items.GetPositionOf(join);
+
+        if (index >= 0 && index <= activeObject)
+        {
+            if (index < activeObject)
+                --activeObject;
+            else if (index == activeObject)
+            {
+                int unhook = Items.Amount <= 1 ? 1 : 0;
+
+                activeObject -= unhook;
+                if (activeObject >= 0)
+                {
+                    if (join.Obj.InnerInit())
+                    {
+                        Items.GetObj(activeObject + unhook).PseudoEnable();
+                        Item it = Items.GetObj(activeObject + unhook);
+                    }
+                }
+            }
+        }
     }
 }

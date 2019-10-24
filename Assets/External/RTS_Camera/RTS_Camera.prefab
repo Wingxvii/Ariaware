@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetsTag:
-  - Targetable
+  - SelectableObject
 --- !u!114 &5758283557947862367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef8c68bade09b41aca258d42a632f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastTab: 1
+  lastTab: 0
   movementSettingsFoldout: 1
   zoomingSettingsFoldout: 0
   rotationSettingsFoldout: 1
@@ -141,26 +141,26 @@ MonoBehaviour:
   keyboardMovementSpeed: 30
   screenEdgeMovementSpeed: 3
   followingSpeed: 25
-  rotationSped: 50
+  rotationSped: 70
   panningSpeed: 5
   mouseRotationSpeed: 100
-  autoHeight: 1
+  autoHeight: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 55
   maxHeight: 50
-  minHeight: 5
+  minHeight: 30
   heightDampening: 5
   keyboardZoomingSensitivity: 2
   scrollWheelZoomingSensitivity: 100
   limitMap: 1
-  limitX: 15
-  limitY: 15
+  limitX: 100
+  limitY: 100
   targetFollow: {fileID: 0}
-  targetOffset: {x: 0, y: 0, z: 0}
+  targetOffset: {x: 0, y: 0, z: -20}
   useScreenEdgeInput: 1
   screenEdgeBorder: 25
-  useKeyboardInput: 1
+  useKeyboardInput: 0
   horizontalAxis: Horizontal
   verticalAxis: Vertical
   usePanning: 1

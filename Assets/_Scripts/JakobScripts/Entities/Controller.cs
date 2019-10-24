@@ -4,147 +4,137 @@ using UnityEngine;
 
 public class Controller : Entity
 {
-    JoinedList<Controller, Command> commands;
-    public JoinedList<Controller, Command> Commands
+    public JoinedList<Controller, Puppet> puppets;
+    public JoinedList<Controller, Command> commands;
+
+    protected override bool CreateVars()
     {
-        get { return commands; }
-        protected set { commands = value; }
+        if (base.CreateVars())
+        {
+            puppets = new JoinedList<Controller, Puppet>(this);
+            commands = new JoinedList<Controller, Command>(this);
+
+            return true;
+        }
+
+        return false;
     }
 
-    JoinedList<Controller, Puppet> puppets;
-    public JoinedList<Controller, Puppet> Puppets
+    protected override bool InnerInitialize()
     {
-        get { return puppets; }
-        protected set { puppets = value; }
+        if (base.InnerInitialize())
+        {
+            AttachCommands();
+
+            return true;
+        }
+
+        return false;
     }
 
-    protected override void Initialize()
+    protected override bool CrossBranchInitialize()
     {
-        base.Initialize();
+        if (base.CrossBranchInitialize())
+        {
+            AttachPuppets();
 
-        SetPuppets();
-        WireCommands();
+            return true;
+        }
+
+        return false;
     }
 
-    protected override void InnerInitialize()
+    protected override void CrossBranchDeInitialize()
     {
-        base.InnerInitialize();
+        puppets.Yeet();
 
-        SetCommands();
+        base.CrossBranchDeInitialize();
     }
 
-    protected override void CreateVars()
+    protected override void InnerDeInitialize()
     {
-        base.CreateVars();
+        commands.Yeet();
 
-        Puppets = new JoinedList<Controller, Puppet>(this);
-        Commands = new JoinedList<Controller, Command>(this);
-    }
-
-    protected override void DeInitialize()
-    {
-        Puppets.Yeet();
-
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
-    {
-        Commands.Yeet();
-
-        base.DeInnerInitialize();
+        base.InnerDeInitialize();
     }
 
     protected override void DestroyVars()
     {
-        Commands = null;
-        Puppets = null;
+        commands = null;
+        puppets = null;
 
         base.DestroyVars();
     }
 
-    protected override SlotBase GetSlot()
+    void AttachPuppets()
     {
-        return Container.GetObj(0).GetComponent<ControllerSlot>();
-    }
-
-    private void SetPuppets()
-    {
-        Puppets.Yeet();
-        if (Container.GetObj(0) != null)
+        EntityContainer ec = Container.GetObj(0);
+        if (ec.TreeInit())
         {
-            EntityContainer ec = Container.GetObj(0);
-            ec.Init();
-            ec.InnerInit();
-            ec.WireInit();
-            for (int i = ec.ObjectList.Joins.Count - 1; i >= 0; i--)
+            for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
             {
-                Puppet p = EType<Puppet>.FindType(ec.ObjectList.GetObj(i));
-                if (p != null)
+                SlotBase sb = ec.AttachedSlots.GetObj(i);
+                if (sb.BranchInit() && FType.FindIfType(sb.GetSlotType(), typeof(Puppet)))
                 {
-                    Puppets.Attach(p.Instructor);
+                    for (int j = 0; j < sb.EntityPlug.Amount; ++j)
+                    {
+                        Puppet p = EType<Puppet>.FindType(sb.EntityPlug.GetObj(j));
+                        if (p != null && p.TreeInit())
+                        {
+                            puppets.Attach(p.controller);
+                        }
+                    }
                 }
             }
         }
-        Debug.Log(Puppets.Joins.Count + ", " + name);
     }
 
-    private void SetCommands()
+    void AttachCommands()
     {
         Command[] c = GetComponents<Command>();
-        for (int i = 0; i < c.Length; i++)
+        for (int i = c.Length - 1; i >= 0; --i)
         {
-            c[i].Init();
-            Commands.Attach(c[i].Instructor);
-        }
-    }
-
-    private void WireCommands()
-    {
-        for (int i = Commands.Joins.Count - 1; i >= 0; i--)
-        {
-            Commands.GetObj(i).AttachPermissions();
-        }
-    }
-
-    protected override void OnBeforeTransformParentChanged()
-    {
-        base.OnBeforeTransformParentChanged();
-    }
-
-    //protected override void OnTransformParentChanged()
-    //{
-    //    base.OnTransformParentChanged();
-    //
-    //    SetPuppets();
-    //    for (int i = 0; i < Commands.Joins.Count; i++)
-    //    {
-    //        Commands.GetObj(i).YeetPerm();
-    //        Commands.GetObj(i).AttachPermissions();
-    //    }
-    //}
-
-    protected override bool OnReparent()
-    {
-        if (base.OnReparent())
-        {
-            SetPuppets();
-            for (int i = 0; i < Commands.Joins.Count; i++)
+            if (c[i].InnerInit())
             {
-                Commands.GetObj(i).YeetPerm();
-                Commands.GetObj(i).AttachPermissions();
+                if (!c[i].SetInstructor(this))
+                {
+
+                }
             }
+        }
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < commands.Amount; ++i)
+        {
+            commands.GetObj(i).FeedPermissions();
+        }
+    }
+
+    protected override bool PostEnable()
+    {
+        if (base.PostEnable())
+        {
+            for (int i = 0; i < commands.Amount; i++)
+            {
+                commands.GetObj(i).AutoEnable();
+            }
+
             return true;
         }
+
         return false;
     }
 
     protected override void PostDisable()
     {
-        if (!enabled)
+        if (AC)
         {
-            for (int i = Commands.Joins.Count - 1; i >= 0; --i)
-                Commands.GetObj(i).enabled = false;
+            for (int i = 0; i < commands.Amount; i++)
+            {
+                commands.GetObj(i).AutoDisable();
+            }
         }
 
         base.PostDisable();

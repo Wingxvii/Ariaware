@@ -19,50 +19,63 @@ public class CameraAnchor : Puppet
         set { localBody = value; }
     }
 
-    protected override void Initialize()
+    protected override bool CreateVars()
     {
-        base.Initialize();
-
-        EntityContainer ec = Container.GetObj(0);
-        if (ec != null)
+        if (base.CreateVars())
         {
-            BodySlot bs = ec.GetComponent<BodySlot>();
-            if (bs != null && bs.AE)
+            Cam = GetComponent<Camera>();
+            LocalBody = new JoinedVar<CameraAnchor, Body>(this, false);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override bool CrossBranchInitialize()
+    {
+        if (base.CrossBranchInitialize())
+        {
+            EntityContainer ec = Container.GetObj(0);
+            if (ec.TreeInit())
             {
-                Entity ent = bs.ObjectSlot.GetObj(0);
-                if (ent != null && ent.AE)
+                for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
                 {
-                    Body b = EType<Body>.FindType(ent);
-                    LocalBody.Attach(b.LocalCamera);
+                    SlotBase sb = ec.AttachedSlots.GetObj(i);
+                    if (sb.BranchInit() && FType.FindIfType(sb.GetSlotType(), typeof(Body)))
+                    {
+                        for (int j = 0; j < sb.EntityPlug.Amount; ++j)
+                        {
+                            Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(j));
+                            if (b != null && b.TreeInit())
+                            {
+                                LocalBody.Attach(b.LocalCamera);
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
             }
+
+            return true;
         }
+
+        return false;
     }
 
-    protected override void CreateVars()
-    {
-        base.CreateVars();
-
-        Cam = GetComponent<Camera>();
-        LocalBody = new JoinedVar<CameraAnchor, Body>(this, false);
-    }
-
-    protected override void DeInitialize()
+    protected override void CrossBranchDeInitialize()
     {
         LocalBody.Yeet();
 
-        base.DeInitialize();
+        base.HierarchyDeInitialize();
     }
 
     protected override void DestroyVars()
     {
-
+        LocalBody = null;
+        Cam = null;
 
         base.DestroyVars();
-    }
-
-    protected override SlotBase GetSlot()
-    {
-        return Container.GetObj(0).GetComponent<CameraAnchorSlot>();
     }
 }

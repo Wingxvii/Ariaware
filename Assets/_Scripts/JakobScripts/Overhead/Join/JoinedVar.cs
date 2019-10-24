@@ -2,54 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Set this back to removing transforms
 public class JoinedVar<T, U> : Joined<T, U> where T : InitializableObject where U : InitializableObject
 {
-    public JoinedVar(T targ, bool kickWhenRemoved)
+    public JoinedVar(T targ, bool kick = false)
     {
         Obj = targ;
-        KickFromParentWhenRemoved = kickWhenRemoved;
+        KickOnRemove = kick;
     }
 
-    bool kickFromParentWhenRemoved = false;
-    public bool KickFromParentWhenRemoved
-    {
-        get { return kickFromParentWhenRemoved; }
-        protected set { kickFromParentWhenRemoved = value; }
-    }
+    public bool KickOnRemove { get; private set; }
 
     public Joined<U, T> Joins { get; protected set; }
 
-    public override void SetPartner(Joined<U, T> join, int slot = -1)
+    protected override bool SettingPartner(Joined<U, T> join, int slot = -1)
     {
         if (Joins != join)
         {
             if (Joins != null)
                 Joins.Remove(this, true);
             Joins = join;
+
+            return true;
         }
+
+        return false;
     }
 
-    public override void Yeet(bool EnableKickFromParent = false)
+    public override void Yeet(bool kick = false)
     {
         if (Joins != null)
         {
-            Joins.Remove(this, true);
+            Joins.Remove(this, kick);
         }
-        Remove(Joins, EnableKickFromParent);
+        Remove(Joins, kick);
     }
 
-    public override void Remove(Joined<U, T> join, bool EnableKickFromParent = false)
+    protected override void Removing(Joined<U, T> join, bool kick = false)
     {
-        //Debug.Log(Obj.name + " ---> Aaaand");
-        if (Joins == join)// && Joins != null)
+        if (Joins == join)
         {
             Joins = null;
-            //Debug.Log(Obj.name + " ---> AAAAAAAND! " + (KickFromParentWhenRemoved && EnableKickFromParent));
-            if (Obj.transform.parent != null && KickFromParentWhenRemoved && EnableKickFromParent && Obj.AE)
-            {
-                //Debug.Log(Obj.name + " ---> THERE!");
+
+            if (kick && KickOnRemove)
                 Obj.transform.SetParent(null);
-            }
         }
     }
 
@@ -68,5 +64,20 @@ public class JoinedVar<T, U> : Joined<T, U> where T : InitializableObject where 
     public override bool checkInBounds(int index)
     {
         return true;
+    }
+
+    public override int Contains(Joined<U, T> j)
+    {
+        return SelfContains(j);
+    }
+
+    public override int SelfContains(Joined<U, T> j)
+    {
+        return Joins == j ? 0 : -1;
+    }
+
+    protected override int JoinSize()
+    {
+        return 1;
     }
 }

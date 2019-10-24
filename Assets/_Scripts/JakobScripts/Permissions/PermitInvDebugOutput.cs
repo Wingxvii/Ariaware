@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PermitInvDebugOutput : AbsInvPermission<PermitInvDebugOutput, CommandInvDebugOutput, Inventory, Controller>
+public class PermitInvDebugOutput : AbstractPermission<PermitInvDebugOutput, CommandInvDebugOutput, Inventory, Controller>
 {
     bool putLog = false;
 

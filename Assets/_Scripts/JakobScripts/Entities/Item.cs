@@ -5,119 +5,122 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public abstract class Item : Puppet
 {
-    JoinedVar<Item, Inventory> currentInventory;
-    public JoinedVar<Item, Inventory> CurrentInventory
+    public JoinedVar<Item, Inventory> CurrentInventory;
+    public JoinedVar<Item, InvItemType> InvType;
+
+    MeshRenderer[] mr;
+
+    protected override bool CreateVars()
     {
-        get { return currentInventory; }
-        protected set { currentInventory = value; }
-    }
-
-    JoinedVar<Item, InvItemType> invType;
-    public JoinedVar<Item, InvItemType> InvType
-    {
-        get { return invType; }
-        protected set { invType = value; }
-
-    }
-
-    protected override void Initialize()
-    {
-        base.Initialize();
-
-        AttachInventoryAndType();
-    }
-
-    public void AttachInventoryAndType()
-    {
-        bool hasInventory = AttachInventory();
-        AttachInvType(hasInventory);
-    }
-
-    protected abstract InvItemType GetInv();
-
-    protected bool AttachInventory()
-    {
-        Inventory inv = GetComponentInParent<Inventory>();
-        if (inv != null && inv.AE)
+        if (base.CreateVars())
         {
-            inv.Init();
-            inv.InnerInit();
-            CurrentInventory.Attach(inv.Items);
+            CurrentInventory = new JoinedVar<Item, Inventory>(this, false);
+            InvType = new JoinedVar<Item, InvItemType>(this, true);
+            mr = GetComponents<MeshRenderer>();
+
             return true;
         }
-        CurrentInventory.Yeet();
+
         return false;
     }
 
-    protected bool AttachInvType(bool hasInventory)
+    protected override bool HierarchyInitialize()
     {
-        if (hasInventory)
+        if (base.HierarchyInitialize())
         {
-            InvItemType itt = GetInv();
-            if (itt != null && itt.AE)
-            {
-                itt.Init();
-                itt.InnerInit();
-                InvType.Attach(itt.ItemBase);
-                return true;
-            }
-            InvType.Yeet(true);
-            return false;
+            if (!AttachInventory())
+                return false;
+
+            if (!AttachInvType())
+                return false;
+
+            return true;
         }
-        InvType.Yeet();
-        return true;
+
+        return false;
     }
 
-    protected override void InnerInitialize()
-    {
-        base.InnerInitialize();
+    
 
-
-    }
-
-    protected override void CreateVars()
-    {
-        base.CreateVars();
-
-        CurrentInventory = new JoinedVar<Item, Inventory>(this, false);
-        InvType = new JoinedVar<Item, InvItemType>(this, true);
-    }
-
-    protected override void DeInitialize()
+    protected override void HierarchyDeInitialize()
     {
         InvType.Yeet();
         CurrentInventory.Yeet();
 
-        base.DeInitialize();
-    }
-
-    protected override void DeInnerInitialize()
-    {
-
-
-        base.DeInnerInitialize();
+        base.HierarchyDeInitialize();
     }
 
     protected override void DestroyVars()
     {
         InvType = null;
         CurrentInventory = null;
+        mr = null;
 
         base.DestroyVars();
     }
 
-    protected override SlotBase GetSlot()
+    protected bool AttachInventory()
     {
-        return Container.GetObj(0).GetComponent<ItemSlot>();
+        Inventory[] inv = GetComponentsInParent<Inventory>();
+        if (inv.Length > 0)
+        {
+            for (int i = 0; i < inv.Length; ++i)
+            {
+                if (inv[i].BranchInit())
+                {
+                    CurrentInventory.Attach(inv[i].Items);
+                    return true;
+                }
+            }
+
+            CurrentInventory.Yeet(true);
+        }
+
+        return false;
     }
 
-    protected override bool OnReparent()
+    protected bool AttachInvType()
     {
-        if (base.OnReparent())
+        for (int i = CurrentInventory.GetObj(0).AllowedItems.Amount - 1; i >= 0; --i)
         {
-            bool hasInventory = AttachInventory();
-            return AttachInvType(hasInventory);
+            InvItemType itt = CurrentInventory.GetObj(0).AllowedItems.GetObj(i);
+            if (itt.BranchInit() && itt.CullItem(this))
+            {
+                InvType.Attach(itt.ItemBase);
+                return true;
+            }
         }
+
+        Debug.Log("OUTTA HERE");
+
+        InvType.Yeet(true);
+
         return false;
+    }
+
+    public void PseudoEnable()
+    {
+        for (int i = 0; i < mr.Length; ++i)
+        {
+            mr[i].enabled = true;
+        }
+
+        for (int i = 0; i < permissions.Amount; ++i)
+        {
+            permissions.GetObj(i).enabled = true;
+        }
+    }
+
+    public void PseudoDisable()
+    {
+        for (int i = 0; i < mr.Length; ++i)
+        {
+            mr[i].enabled = false;
+        }
+
+        for (int i = 0; i < permissions.Amount; ++i)
+        {
+            permissions.GetObj(i).enabled = false;
+        }
     }
 }
