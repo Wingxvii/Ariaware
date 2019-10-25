@@ -43,8 +43,11 @@ public class ChatSystem : MonoBehaviour
 
     private IntPtr Client;
 
-    static Queue<List<string>> _appendQueue = new Queue<List<string>>();
-    static Queue<List<string>> _appendQueueTransform = new Queue<List<string>>();
+    //THIS IS ONLY FOR RTS
+    static Queue<List<string>> _appendQueueMessage = new Queue<List<string>>();
+    static Queue<List<string>> _appendQueuePlayerData = new Queue<List<string>>();
+    static Queue<List<string>> _appendQueueWeaponState = new Queue<List<string>>();
+    static Queue<List<string>> _appendQueueDamageDealt = new Queue<List<string>>();
 
     // Start is called before the first frame update
     void Start()
@@ -62,19 +65,54 @@ public class ChatSystem : MonoBehaviour
     void Update()
     {
 
-        //in data
-        if (_appendQueue.Count == 0) return;
-        lock (_appendQueue)
+        //cycle through data processing
+        if (_appendQueueMessage.Count == 0) return;
+        lock (_appendQueueMessage)
         {
 
-            foreach (List<string> data in _appendQueue)
+            foreach (List<string> data in _appendQueueMessage)
             {
                 this.ProcessMessage(data);
             }
-            _appendQueue.Clear();
+            _appendQueueMessage.Clear();
+
+        }
+        if (_appendQueuePlayerData.Count == 0) return;
+        lock (_appendQueuePlayerData)
+        {
+
+            foreach (List<string> data in _appendQueuePlayerData)
+            {
+                //this.ProcessPlayerData(data);
+            }
+            _appendQueuePlayerData.Clear();
+
+        }
+        if (_appendQueueWeaponState.Count == 0) return;
+        lock (_appendQueueWeaponState)
+        {
+
+            foreach (List<string> data in _appendQueueWeaponState)
+            {
+                //this.ProcessWeaponState(data);
+            }
+            _appendQueueWeaponState.Clear();
+
+        }
+        if (_appendQueueDamageDealt.Count == 0) return;
+        lock (_appendQueueDamageDealt)
+        {
+
+            foreach (List<string> data in _appendQueueDamageDealt)
+            {
+                //this.ProcessDamageDealt(data);
+            }
+            _appendQueueDamageDealt.Clear();
 
         }
     }
+
+    #region Broadcasting
 
     public void OnSendMessage(List<String> messageStack)
     {
@@ -107,12 +145,58 @@ public class ChatSystem : MonoBehaviour
         SendMsg(message2, Client);
     }
 
-    private void OnDestroy()
-    {
-        //clean up client
-        DeleteClient(Client);
-        
+    public void OnSendDroidLocations() {
+        //do this later
     }
+
+    public void OnSendBuildLocations(int id, EntityType type, Vector3 location )
+    {
+        char[] finalData = new char[20];
+
+        char[] data1 = ByteTools.ParseByte(id);
+        char[] data2 = ByteTools.ParseByte((int)type);
+        char[] data3 = ByteTools.ParseByte(location);
+
+
+        //how do i fix this without using string concatenation???
+        finalData[0] = data1[0];
+        finalData[1] = data1[1];
+        finalData[2] = data1[2];
+        finalData[3] = data1[3];
+        finalData[4] = data2[0];
+        finalData[5] = data2[1];
+        finalData[6] = data2[2];
+        finalData[7] = data2[3];
+        finalData[8] = data3[0];
+        finalData[9] = data3[1];
+        finalData[10] = data3[2];
+        finalData[11] = data3[3];
+        finalData[12] = data3[4];
+        finalData[13] = data3[5];
+        finalData[14] = data3[6];
+        finalData[15] = data3[7];
+        finalData[16] = data3[8];
+        finalData[17] = data3[9];
+        finalData[18] = data3[10];
+        finalData[19] = data3[11];
+
+
+        SendMsg(finalData, Client);
+
+    }
+
+    public void OnSendKillLocations()
+    {
+        //do this later
+    }
+
+    public void OnSendDamageLocations()
+    {
+        //do this later
+    }
+    #endregion
+
+    #region Processing
 
     private void ProcessMessage(List<string> parsedData) {
         int sender = int.Parse(parsedData[0]);
@@ -129,6 +213,7 @@ public class ChatSystem : MonoBehaviour
         }
         else
         {
+
             StringBuilder sb = new StringBuilder();
             sb.Append("Player ");
             sb.Append(parsedData[0]);
@@ -144,6 +229,8 @@ public class ChatSystem : MonoBehaviour
         }
     }
 
+    #endregion
+
     //called on data recieve action, then process
     static void PacketRecieved(int type, int sender, string data) {                ///does this get multithreaded because it gets invoked in a seperate thread???s
 
@@ -156,34 +243,62 @@ public class ChatSystem : MonoBehaviour
         }
         parsedData.Insert(0, sender.ToString());
 
-        lock (_appendQueue)
+        lock (_appendQueueMessage)
         {
             if ((PacketType)type != PacketType.ERROR)
             {
-                _appendQueue.Enqueue(parsedData);
+                _appendQueueMessage.Enqueue(parsedData);
             }
             else
             {
                 Debug.Log("PACKET SEND ERROR");
             }
         }
-    }
 
-    //tokenizer migrated from c++
-    static List<string> tokenize(char token, string text)
-    {
-        List<string> temp = new List<string>();
-        int lastTokenLocation = 0;
-
-        for (int i = 0; i < text.Length; i++)
+        lock (_appendQueuePlayerData)
         {
-            if (text[i] == token)
+            if ((PacketType)type != PacketType.ERROR)
             {
-                temp.Add(text.Substring(lastTokenLocation, i - lastTokenLocation));
-                lastTokenLocation = i + 1;
+                _appendQueuePlayerData.Enqueue(parsedData);
+            }
+            else
+            {
+                Debug.Log("PACKET SEND ERROR");
             }
         }
-        return temp;
+
+        lock (_appendQueueMessage)
+        {
+            if ((PacketType)type != PacketType.ERROR)
+            {
+                _appendQueueMessage.Enqueue(parsedData);
+            }
+            else
+            {
+                Debug.Log("PACKET SEND ERROR");
+            }
+        }
+
+        lock (_appendQueueMessage)
+        {
+            if ((PacketType)type != PacketType.ERROR)
+            {
+                _appendQueueMessage.Enqueue(parsedData);
+            }
+            else
+            {
+                Debug.Log("PACKET SEND ERROR");
+            }
+        }
+
+
+    }
+
+    private void OnDestroy()
+    {
+        //clean up client
+        DeleteClient(Client);
+
     }
 
 }
