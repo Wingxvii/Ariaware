@@ -17,11 +17,6 @@ public enum PacketType
 }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct Vec3 {
-    public float x;
-    public float y;
-    public float z;
-}
 
 public class ChatSystem : MonoBehaviour
 {
@@ -33,8 +28,6 @@ public class ChatSystem : MonoBehaviour
     static extern void Connect(string str, IntPtr client);          //Connects to c++ Server
     [DllImport("CNET.dll")]
     static extern void SendMsg(string str, IntPtr client);          //Sends Message to all other clients    
-    [DllImport("CNET.dll")]
-    static extern void SendTransformation(Vec3 pos, Vec3 rot, IntPtr client);          //Sends Position data to all other clients
     [DllImport("CNET.dll")]
     static extern void StartUpdating(IntPtr client);                //Starts updating
     [DllImport("CNET.dll")]
@@ -181,6 +174,5 @@ public class ChatSystem : MonoBehaviour
         }
         return temp;
     }
-
 
 }
