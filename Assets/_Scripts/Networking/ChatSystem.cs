@@ -45,9 +45,6 @@ public class ChatSystem : MonoBehaviour
 
     public Text userLog;
     public InputField userInput;
-    public float timeSend = 5;
-    public int xe = 0;
-    public static int ab = 0;
 
     public string ip;
 
@@ -71,21 +68,6 @@ public class ChatSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeSend > 0) {
-            List<String> messages = new List<string>();
-            for (int x = 0; x < 900; x++) {
-                messages.Add(x.ToString());
-            }
-            OnSendMultipleMessage(messages);
-            timeSend -= Time.deltaTime;
-        }
-
-        /*
-        //out data
-        SendTransformation(this.transform.position.x, this.transform.position.y, this.transform.position.z,
-            this.transform.rotation.eulerAngles.x, this.transform.rotation.eulerAngles.y, this.transform.rotation.eulerAngles.z,
-            this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z, Client);
-        */
 
         //in data
         if (_appendQueue.Count == 0) return;
@@ -114,7 +96,6 @@ public class ChatSystem : MonoBehaviour
     public void OnSendMessage()
     {
         string message = "Player " + GetPlayerNumber(Client) + ": " + userInput.text;
-        Debug.Log(message);
         userLog.text = userLog.text + message + "\n";
 
 
@@ -154,10 +135,6 @@ public class ChatSystem : MonoBehaviour
                 sb.Append(parsedData[counter]);
                 //Debug.Log("added message");
             }
-
-            sb.Clear();
-            sb.Append(xe.ToString());
-            ++xe;
             Debug.Log("Processed" + sb.ToString());
             userLog.text = userLog.text + sb.ToString() + "\n";
         }
@@ -175,8 +152,6 @@ public class ChatSystem : MonoBehaviour
         }
         parsedData.Insert(0, sender.ToString());
 
-        Debug.Log("Recieved" + ab.ToString());
-        ++ab;
         lock (_appendQueue)
         {
             if ((PacketType)type != PacketType.ERROR)
@@ -207,63 +182,5 @@ public class ChatSystem : MonoBehaviour
         return temp;
     }
 
-
-    //Sending types
-    char[] ParseByte(float data)
-    {
-        byte[] bytes = BitConverter.GetBytes(data);
-       return new char[4]{(char)bytes[0], (char)bytes[1], (char)bytes[2], (char)bytes[3] };
-    }
-    char[] ParseByte(Vector3 data)
-    {
-        byte[] bytes = BitConverter.GetBytes(data.x);
-        byte[] bytes2 = BitConverter.GetBytes(data.y);
-        byte[] bytes3 = BitConverter.GetBytes(data.z);
-
-        return new char[12] { (char)bytes[0], (char)bytes[1], (char)bytes[2], (char)bytes[3], (char)bytes[4], (char)bytes[5], (char)bytes[6], (char)bytes[7], (char)bytes[8], (char)bytes[9], (char)bytes[10], (char)bytes[11] };
-    }
-    char[] ParseByte(int data)
-    {
-        byte[] bytes = BitConverter.GetBytes(data);
-        return new char[4] { (char)bytes[0], (char)bytes[1], (char)bytes[2], (char)bytes[3] };
-    }
-    //Sending types with string return
-    string ParseBytetoString(float data)
-    {
-        byte[] bytes = BitConverter.GetBytes(data);
-        return "" + (char)bytes[0] + (char)bytes[1] + (char)bytes[2] + (char)bytes[3];
-    }
-    string ParseBytetoString(Vector3 data)
-    {
-        byte[] bytes = BitConverter.GetBytes(data.x);
-        byte[] bytes2 = BitConverter.GetBytes(data.y);
-        byte[] bytes3 = BitConverter.GetBytes(data.z);
-        return "" + (char)bytes[0] + (char)bytes[1] + (char)bytes[2] + (char)bytes[3] + (char)bytes2[0] + (char)bytes2[1] + (char)bytes2[2] + (char)bytes2[3] + (char)bytes3[0] + (char)bytes3[1] + (char)bytes3[2] + (char)bytes3[3];
-    }
-    string ParseBytetoString(int data)
-    {
-        byte[] bytes = BitConverter.GetBytes(data);
-        return "" + (char)bytes[0] + (char)bytes[1] + (char)bytes[2] + (char)bytes[3];
-    }
-
-    //Recieving types
-    float ToByteFloat(string s)
-    {
-        byte[] bytes = { (byte)s[0], (byte)s[1], (byte)s[2], (byte)s[3] };
-        return BitConverter.ToSingle(bytes, 0);
-    }
-    Vector3 ToByteVector(string s)
-    {
-        byte[] bytes = { (byte)s[0], (byte)s[1], (byte)s[2], (byte)s[3] };
-        byte[] bytes2 = { (byte)s[4], (byte)s[5], (byte)s[6], (byte)s[7] };
-        byte[] bytes3 = { (byte)s[8], (byte)s[9], (byte)s[10], (byte)s[11] };
-
-        return new Vector3(BitConverter.ToSingle(bytes, 0), BitConverter.ToSingle(bytes2, 0), BitConverter.ToSingle(bytes3, 0));
-    }
-    int ToByteInt(string s)
-    {
-        byte[] bytes = { (byte)s[0], (byte)s[1], (byte)s[2], (byte)s[3] };
-        return BitConverter.ToInt32(bytes, 0);
-    }
 
 }
