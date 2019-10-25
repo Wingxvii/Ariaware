@@ -45,6 +45,9 @@ public class ChatSystem : MonoBehaviour
 
     public Text userLog;
     public InputField userInput;
+    public float timeSend = 5;
+    public int xe = 0;
+    public static int ab = 0;
 
     public string ip;
 
@@ -63,20 +66,19 @@ public class ChatSystem : MonoBehaviour
             StartUpdating(Client);
             SetupPacketReception(PacketRecieved);
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.I)) {
+        if (timeSend > 0) {
             List<String> messages = new List<string>();
             for (int x = 0; x < 900; x++) {
                 messages.Add(x.ToString());
             }
-
             OnSendMultipleMessage(messages);
+            timeSend -= Time.deltaTime;
         }
 
         /*
@@ -84,17 +86,19 @@ public class ChatSystem : MonoBehaviour
         SendTransformation(this.transform.position.x, this.transform.position.y, this.transform.position.z,
             this.transform.rotation.eulerAngles.x, this.transform.rotation.eulerAngles.y, this.transform.rotation.eulerAngles.z,
             this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z, Client);
-        */  
+        */
 
         //in data
         if (_appendQueue.Count == 0) return;
         lock (_appendQueue)
         {
+
             foreach (List<string> data in _appendQueue)
             {
                 this.ProcessMessage(data);
             }
             _appendQueue.Clear();
+
         }
     }
 
@@ -145,10 +149,12 @@ public class ChatSystem : MonoBehaviour
             for (int counter = 1; counter < parsedData.Count; counter++)
             {
                 message = message + parsedData[counter];
-                Debug.Log("added message");
+                //Debug.Log("added message");
             }
             message = "Player " + parsedData[0] + ": " + message;
-            Debug.Log(message);
+            message = xe.ToString();
+            ++xe;
+            Debug.Log("Processed" + message);
             userLog.text = userLog.text + message + "\n";
         }
     }
@@ -158,14 +164,17 @@ public class ChatSystem : MonoBehaviour
         List<string> parsedData = tokenize(',', data);
         //send to parsed data
         parsedData.Insert(0, sender.ToString());
-        Debug.Log(parsedData.Count.ToString());
+        Debug.Log("Recieved" + ab.ToString());
+        ++ab;
+        lock (_appendQueue)
+        {
 
-        lock (_appendQueue){
             if ((PacketType)type != PacketType.ERROR)
             {
                 _appendQueue.Enqueue(parsedData);
             }
-            else {
+            else
+            {
                 Debug.Log("PACKET SEND ERROR");
             }
         }
