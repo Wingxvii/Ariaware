@@ -71,7 +71,6 @@ public class ChatSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (timeSend > 0) {
             List<String> messages = new List<string>();
             for (int x = 0; x < 900; x++) {
@@ -103,12 +102,12 @@ public class ChatSystem : MonoBehaviour
     }
 
     public void OnSendMultipleMessage(List<String> messageStack) {
-        string finalMessage = "";
+        StringBuilder finalMessage = new StringBuilder();
         foreach (String message in messageStack) {
-            finalMessage += message;
-            finalMessage += ",";
+            finalMessage.Append(message);
+            finalMessage.Append(",");
         }
-        SendMsg(finalMessage, Client);
+        SendMsg(finalMessage.ToString(), Client);
 
     }
 
@@ -136,39 +135,50 @@ public class ChatSystem : MonoBehaviour
         //filter by sender
         if (sender == 0)
         {
-            string message = "";
+            StringBuilder sb = new StringBuilder();
             for (int counter = 1; counter < parsedData.Count; counter++)
             {
-                message = message + parsedData[counter];
+                sb.Append(parsedData[counter]);
             }
-            userLog.text += "CONSOLE: " + message + "\n";
+            userLog.text += "CONSOLE: " + sb.ToString() + "\n";
         }
         else
         {
-            string message = "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Player ");
+            sb.Append(parsedData[0]);
+            sb.Append(": ");
+
             for (int counter = 1; counter < parsedData.Count; counter++)
             {
-                message = message + parsedData[counter];
+                sb.Append(parsedData[counter]);
                 //Debug.Log("added message");
             }
-            message = "Player " + parsedData[0] + ": " + message;
-            message = xe.ToString();
+
+            sb.Clear();
+            sb.Append(xe.ToString());
             ++xe;
-            Debug.Log("Processed" + message);
-            userLog.text = userLog.text + message + "\n";
+            Debug.Log("Processed" + sb.ToString());
+            userLog.text = userLog.text + sb.ToString() + "\n";
         }
     }
 
     //called on data recieve action, then process
     static void PacketRecieved(int type, int sender, string data) {                ///does this get multithreaded because it gets invoked in a seperate thread???s
-        List<string> parsedData = tokenize(',', data);
+
+        string[] parsedDataSplit = data.Split(',');
+        List<string> parsedData = new List<string>();
+
         //send to parsed data
+        for (int counter = 0; counter < parsedDataSplit.Length; counter++) {
+            parsedData.Add(parsedDataSplit[counter]);
+        }
         parsedData.Insert(0, sender.ToString());
+
         Debug.Log("Recieved" + ab.ToString());
         ++ab;
         lock (_appendQueue)
         {
-
             if ((PacketType)type != PacketType.ERROR)
             {
                 _appendQueue.Enqueue(parsedData);
@@ -178,7 +188,6 @@ public class ChatSystem : MonoBehaviour
                 Debug.Log("PACKET SEND ERROR");
             }
         }
-
     }
 
     //tokenizer migrated from c++
