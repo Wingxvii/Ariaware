@@ -56,6 +56,14 @@ public class ChatSystem : MonoBehaviour
             StartUpdating(Client);
             SetupPacketReception(PacketRecieved);
         }
+
+
+        List<String> messages = new List<String>();
+        messages.Add(new String(ByteTools.ParseByte(41222)));
+        messages.Add(new String(ByteTools.ParseByte(41512)));
+        messages.Add(new String(ByteTools.ParseByte(34555)));
+
+        OnSendMessage(messages);
     }
 
     // Update is called once per frame
@@ -83,8 +91,11 @@ public class ChatSystem : MonoBehaviour
         {
             finalMessage.Append(message);
             finalMessage.Append(",");
+            //Debug.Log(finalMessage.Length);
         }
-        SendMsg(finalMessage.ToString(), Client);
+        char[] temp = new char[finalMessage.Length];
+
+        SendMsg(new String(temp), Client);
 
     }
 
@@ -93,7 +104,9 @@ public class ChatSystem : MonoBehaviour
         StringBuilder finalMessage = new StringBuilder();
         finalMessage.Append(message);
         finalMessage.Append(",");
-        SendMsg(finalMessage.ToString(), Client);
+        char[] temp = new char[finalMessage.Length];
+
+        SendMsg(new String(temp), Client);
 
     }
 
@@ -125,7 +138,10 @@ public class ChatSystem : MonoBehaviour
             {
                 sb.Append(parsedData[counter]);
             }
-            userLog.text += "CONSOLE: " + sb.ToString() + "\n";
+
+            char[] temp = new char[sb.Length];
+
+            userLog.text += "CONSOLE: " + new String(temp) + "\n";
         }
         else
         {
@@ -136,11 +152,17 @@ public class ChatSystem : MonoBehaviour
 
             for (int counter = 1; counter < parsedData.Count; counter++)
             {
-                sb.Append(parsedData[counter]);
+                //Debug.Log(parsedData[counter]);
+
+                sb.Append(ByteTools.ToByteInt(parsedData[counter]).ToString());
                 //Debug.Log("added message");
             }
-            Debug.Log("Processed" + sb.ToString());
-            userLog.text = userLog.text + sb.ToString() + "\n";
+
+            char[] temp = new char[sb.Length];
+
+            Debug.Log("Processed" + new String(temp));
+            
+            userLog.text = userLog.text + new String(temp) + "\n";
         }
     }
 
@@ -154,6 +176,7 @@ public class ChatSystem : MonoBehaviour
         for (int counter = 0; counter < parsedDataSplit.Length; counter++) {
             parsedData.Add(parsedDataSplit[counter]);
         }
+
         parsedData.Insert(0, sender.ToString());
 
         lock (_appendQueue)
@@ -161,6 +184,8 @@ public class ChatSystem : MonoBehaviour
             if ((PacketType)type != PacketType.ERROR)
             {
                 _appendQueue.Enqueue(parsedData);
+                //Debug.Log("Recieved:");
+                //Debug.Log(data);
             }
             else
             {
@@ -169,21 +194,5 @@ public class ChatSystem : MonoBehaviour
         }
     }
 
-    //tokenizer migrated from c++
-    static List<string> tokenize(char token, string text)
-    {
-        List<string> temp = new List<string>();
-        int lastTokenLocation = 0;
-
-        for (int i = 0; i < text.Length; i++)
-        {
-            if (text[i] == token)
-            {
-                temp.Add(text.Substring(lastTokenLocation, i - lastTokenLocation));
-                lastTokenLocation = i + 1;
-            }
-        }
-        return temp;
-    }
 
 }
