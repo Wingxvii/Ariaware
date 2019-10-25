@@ -76,12 +76,23 @@ public class ChatSystem : MonoBehaviour
         }
     }
 
-    public void OnSendMultipleMessage(List<String> messageStack) {
+    public void OnSendMessage(List<String> messageStack)
+    {
         StringBuilder finalMessage = new StringBuilder();
-        foreach (String message in messageStack) {
+        foreach (String message in messageStack)
+        {
             finalMessage.Append(message);
             finalMessage.Append(",");
         }
+        SendMsg(finalMessage.ToString(), Client);
+
+    }
+
+    public void OnSendMessage(string message)
+    {
+        StringBuilder finalMessage = new StringBuilder();
+        finalMessage.Append(message);
+        finalMessage.Append(",");
         SendMsg(finalMessage.ToString(), Client);
 
     }
