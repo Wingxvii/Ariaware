@@ -720,9 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userLog: {fileID: 407665640}
   userInput: {fileID: 1552808675}
-  timeSend: 5
-  xe: 0
-  ip: 10.190.2.101
+  ip: 192.168.0.22
 --- !u!1 &1431328675
 GameObject:
   m_ObjectHideFlags: 0
