@@ -76,7 +76,7 @@ public class NetworkManager : MonoBehaviour
     static extern int GetPlayerNumber(IntPtr client);
 
     public string ip;
-    private IntPtr Client;
+    private static IntPtr Client;
     private static int playerNumber = -1;
 
     #endregion
@@ -146,8 +146,7 @@ public class NetworkManager : MonoBehaviour
     {
         SwitchBuffers();
 
-        
-
+       
         #region Fixed Tick
         //count down
         --fixedTimeStep;
@@ -178,7 +177,7 @@ public class NetworkManager : MonoBehaviour
     }
 
     //send list of string message to all others
-    public void OnSendMessage(List<String> messageStack)
+    public static void OnSendMessage(List<String> messageStack)
     {
         StringBuilder finalMessage = new StringBuilder();
         foreach (String message in messageStack)
@@ -191,12 +190,12 @@ public class NetworkManager : MonoBehaviour
     }
 
     //send single string message to all others
-    public void OnSendMessage(string message)
+    public static void OnSendMessage(string message)
     {
         StringBuilder finalMessage = new StringBuilder();
         finalMessage.Append(message);
         finalMessage.Append(",");
-        SendData(1, finalMessage.ToString(), Client);
+        SendData((int)PacketType.MESSAGE, finalMessage.ToString(), Client);
 
     }
 
@@ -308,6 +307,53 @@ public class NetworkManager : MonoBehaviour
 
                 break;
         }
+    }
+
+
+    public static void SendDroidPositions() {
+        //this sends all droid positions
+    }
+
+    public static void SendBuildEntity(SelectableObject obj) {
+        StringBuilder dataToSend = new StringBuilder();
+
+        //add object id
+        dataToSend.Append(obj.id.ToString());
+        dataToSend.Append(",");
+
+        //add object type
+        dataToSend.Append(((int)obj.type).ToString());
+        dataToSend.Append(",");
+
+        //add object position x
+        dataToSend.Append(obj.transform.position.x.ToString());
+        dataToSend.Append(",");
+
+        //add object position y
+        dataToSend.Append(obj.transform.position.y.ToString());
+        dataToSend.Append(",");
+
+        //add object position z
+        dataToSend.Append(obj.transform.position.z.ToString());
+        dataToSend.Append(",");
+
+        SendData((int)PacketType.BUILD, dataToSend.ToString(), Client);
+    }
+
+    public static void SendKilledEntity(SelectableObject obj)
+    {
+        StringBuilder dataToSend = new StringBuilder();
+
+        //add object id
+        dataToSend.Append(obj.id.ToString());
+        dataToSend.Append(",");
+
+        SendData((int)PacketType.KILL, dataToSend.ToString(), Client);
+    }
+
+    public static void SendGameState(SelectableObject obj)
+    {
+        //send game state
     }
 
 }
