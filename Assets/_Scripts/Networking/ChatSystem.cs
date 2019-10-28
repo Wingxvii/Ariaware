@@ -5,17 +5,36 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System;
 using System.Collections.Generic;
-
+/*
 public enum PacketType
 {
     //initialization connection
     ERROR = 0,
+
     //single string
     MESSAGE = 1,
-    //transformation data
-    TRANSFORMATION = 2,
-}
 
+    //FPS DATA TYPES
+
+    //2vec3 + int
+    PLAYERDATA = 2,
+    //int
+    WEAPONSTATE = 3,
+    //int
+    DAMAGEDEALT = 4,
+
+    //RTS DATA TYPES
+
+    //vec4[0-100]
+    DROIDLOCATIONS = 5,
+    //2int + vec3
+    BUILD = 6,
+    //int
+    KILL = 7,
+    //int
+    GAMESTATE = 8,
+}
+*/
 [StructLayout(LayoutKind.Sequential)]
 
 public class ChatSystem : MonoBehaviour
@@ -167,23 +186,6 @@ public class ChatSystem : MonoBehaviour
                 Debug.Log("PACKET SEND ERROR");
             }
         }
-    }
-
-    //tokenizer migrated from c++
-    static List<string> tokenize(char token, string text)
-    {
-        List<string> temp = new List<string>();
-        int lastTokenLocation = 0;
-
-        for (int i = 0; i < text.Length; i++)
-        {
-            if (text[i] == token)
-            {
-                temp.Add(text.Substring(lastTokenLocation, i - lastTokenLocation));
-                lastTokenLocation = i + 1;
-            }
-        }
-        return temp;
     }
 
 }
