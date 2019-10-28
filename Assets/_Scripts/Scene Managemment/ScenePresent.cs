@@ -28,6 +28,7 @@ public class ScenePresent : MonoBehaviour {
     public bool gameStart = false;
     public int loadedScene = 0;
 
+
     //use to swap scene
     public void SwapScene(int scene) {
         UnloadScene(loadedScene);

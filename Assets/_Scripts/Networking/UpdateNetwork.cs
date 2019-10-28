@@ -22,12 +22,10 @@ public class UpdateNetwork : MonoBehaviour
     //single pattern ends here
     #endregion
 
-    int fixedTimeStep = 50;
+    int fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
 
     private void FixedUpdate()
     {
-
-
 
         #region Fixed Tick
         //count down
@@ -43,7 +41,7 @@ public class UpdateNetwork : MonoBehaviour
         if (fixedTimeStep <= 0)
         {
             //updates 50Hz
-            fixedTimeStep = 50;
+            fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
         }
         #endregion
 

@@ -85,9 +85,9 @@ public class NetworkManager : MonoBehaviour
     static Queue<Tuple<int, string[]>> _InstanceDamageDealt = new Queue<Tuple<int, string[]>>();
 
     //Incomming state updates
-    static string updatedWeaponP1;
-    static string updatedWeaponP2;
-    static string updatedWeaponP3;
+    static string[] updatedWeaponP1;
+    static string[] updatedWeaponP2;
+    static string[] updatedWeaponP3;
 
     //dirty flag for state updates
     static bool updatedWeaponP1Flag = false;
@@ -96,10 +96,10 @@ public class NetworkManager : MonoBehaviour
 
     //buffers
     public static FPSDataBuffer ReadBuffer;
-    public static FPSDataBuffer WriteBuffer;
+    private static FPSDataBuffer WriteBuffer;
     private static FPSDataBuffer tempBuffer;
 
-    int fixedTimeStep = 50;
+    int fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
 
     // Start is called before the first frame update
     void Start()
@@ -146,7 +146,6 @@ public class NetworkManager : MonoBehaviour
     {
         SwitchBuffers();
 
-       
         #region Fixed Tick
         //count down
         --fixedTimeStep;
@@ -159,7 +158,7 @@ public class NetworkManager : MonoBehaviour
         //reset the clock
         if (fixedTimeStep <= 0) {
             //updates 50Hz
-            fixedTimeStep = 50;
+            fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
         }
         #endregion
     }
@@ -171,6 +170,7 @@ public class NetworkManager : MonoBehaviour
     
     //switches the buffers
     private void SwitchBuffers() {
+        
         tempBuffer = ReadBuffer;
         ReadBuffer = WriteBuffer;
         WriteBuffer = tempBuffer;
@@ -227,7 +227,7 @@ public class NetworkManager : MonoBehaviour
             case PacketType.PLAYERDATA:
                 if (parsedData.Length == 7) {
                     //lock and update by sender
-                    lock (ReadBuffer)
+                    lock (WriteBuffer)
                     {
                         switch (sender)
                         {
@@ -273,21 +273,25 @@ public class NetworkManager : MonoBehaviour
                 break;
             case PacketType.WEAPONSTATE:
                 //update state by sender type
+                if (parsedData.Length != 1) {
+                    Debug.Log("Error: Invalid WEAPONSTATE Parsed Array Size");
+                    Debug.Break();
+                }
                 switch (sender) {
                     case 2:
                         //set dirty flag on
                         updatedWeaponP1Flag = true;
-                        updatedWeaponP1 = data;
+                        updatedWeaponP1 = parsedData;
                         break;
                     case 3:
                         //set dirty flag on
                         updatedWeaponP2Flag = true;
-                        updatedWeaponP2 = data;
+                        updatedWeaponP2 = parsedData;
                         break;
                     case 4:
                         //set dirty flag on
                         updatedWeaponP3Flag = true;
-                        updatedWeaponP3 = data;
+                        updatedWeaponP3 = parsedData;
                         break;
                     default:
                         Debug.Log("Error: WEAPONSTATE Sender Invalid");
@@ -296,6 +300,12 @@ public class NetworkManager : MonoBehaviour
                 }
                 break;
             case PacketType.DAMAGEDEALT:
+                if (parsedData.Length != 2)
+                {
+                    Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
+                    Debug.Break();
+                }
+
                 //pair sender with data
                 Tuple<int, string[]> temp = Tuple.Create(sender, parsedData);
                 _InstanceDamageDealt.Enqueue(temp);
