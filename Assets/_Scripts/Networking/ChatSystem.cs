@@ -177,7 +177,7 @@ public class ChatSystem : MonoBehaviour
 
         lock (_appendQueue)
         {
-            if ((PacketType)type != PacketType.ERROR)
+            if ((PacketType)type != PacketType.INIT)
             {
                 _appendQueue.Enqueue(parsedData);
             }
