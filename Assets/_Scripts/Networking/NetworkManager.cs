@@ -46,14 +46,17 @@ namespace netcodeRTS
         public Vector3 Player1Pos = new Vector3(0, 0, 0);
         public Vector3 Player1Rot = new Vector3(0, 0, 0);
         public int Player1State = -1;
+        public bool updated1 = false;
 
         public Vector3 Player2Pos = new Vector3(0, 0, 0);
         public Vector3 Player2Rot = new Vector3(0, 0, 0);
         public int Player2State = -1;
+        public bool updated2 = false;
 
         public Vector3 Player3Pos = new Vector3(0, 0, 0);
         public Vector3 Player3Rot = new Vector3(0, 0, 0);
         public int Player3State = -1;
+        public bool updated3 = false;
 
     }
 
@@ -122,6 +125,26 @@ namespace netcodeRTS
         // Update is called once per frame
         void Update()
         {
+            if (Input.GetKey(KeyCode.F)) {
+                StringBuilder finalMessage = new StringBuilder();
+                finalMessage.Append("0");
+                finalMessage.Append(",");
+                finalMessage.Append("0");
+                finalMessage.Append(",");
+                finalMessage.Append("100");
+                finalMessage.Append(",");
+                finalMessage.Append("0");
+                finalMessage.Append(",");
+                finalMessage.Append("0");
+                finalMessage.Append(",");
+                finalMessage.Append("0");
+                finalMessage.Append(",");
+                finalMessage.Append("0");
+                finalMessage.Append(",");
+
+                SendData((int)PacketType.PLAYERDATA, finalMessage.ToString(), Client);
+            }
+
             //process instanced information recieved
             if (updatedWeaponP1Flag)
             {
@@ -145,7 +168,11 @@ namespace netcodeRTS
                     foreach (Tuple<int, string[]> data in _InstanceDamageDealt)
                     {
                         //process instance damage
-                        //data.Item2[2]
+                        if (int.Parse(data.Item2[2]) > SelectableObject.indexedList.Count) {
+                            Debug.Log("Error: Indexed Object is Undefined");
+                            break;
+                        }
+                        SelectableObject.indexedList[int.Parse(data.Item2[2])].OnDamage(int.Parse(data.Item2[1]), SelectableObject.indexedList[data.Item1-1]);
                         _InstanceDamageDealt.Dequeue();
                     }
                 }
@@ -157,9 +184,20 @@ namespace netcodeRTS
         {
             SwitchBuffers();
             //buffer processing
-            SelectionManager.Instance.players[0].GetComponent<Player>().SendUpdate(ReadBuffer.Player1Pos, ReadBuffer.Player1Rot, ReadBuffer.Player1State);
-            SelectionManager.Instance.players[1].GetComponent<Player>().SendUpdate(ReadBuffer.Player2Pos, ReadBuffer.Player2Rot, ReadBuffer.Player2State);
-            SelectionManager.Instance.players[2].GetComponent<Player>().SendUpdate(ReadBuffer.Player3Pos, ReadBuffer.Player3Rot, ReadBuffer.Player3State);
+            if (ReadBuffer.updated1) {
+                SelectableObject.indexedList[1].GetComponent<Player>().SendUpdate(ReadBuffer.Player1Pos, ReadBuffer.Player1Rot, ReadBuffer.Player1State);
+                ReadBuffer.updated1 = false;
+            }
+            if (ReadBuffer.updated2)
+            {
+                SelectableObject.indexedList[2].GetComponent<Player>().SendUpdate(ReadBuffer.Player2Pos, ReadBuffer.Player2Rot, ReadBuffer.Player2State);
+                ReadBuffer.updated2 = false;
+            }
+            if (ReadBuffer.updated3)
+            {
+                SelectableObject.indexedList[3].GetComponent<Player>().SendUpdate(ReadBuffer.Player3Pos, ReadBuffer.Player3Rot, ReadBuffer.Player3State);
+                ReadBuffer.updated3 = false;
+            }
 
 
         }
@@ -223,14 +261,16 @@ namespace netcodeRTS
                     }
                     break;
                 case PacketType.PLAYERDATA:
-                    if (parsedData.Length == 7)
+                    if (parsedData.Length == 8)
                     {
                         //lock and update by sender
                         lock (WriteBuffer)
                         {
                             switch (sender)
                             {
-                                case 2:
+                                //REMOVE THIS
+                                case 1:
+                                    Debug.Log("Recieved info");
                                     WriteBuffer.Player1Pos.x = float.Parse(parsedData[0]);
                                     WriteBuffer.Player1Pos.y = float.Parse(parsedData[1]);
                                     WriteBuffer.Player1Pos.z = float.Parse(parsedData[2]);
@@ -238,6 +278,19 @@ namespace netcodeRTS
                                     WriteBuffer.Player1Rot.y = float.Parse(parsedData[4]);
                                     WriteBuffer.Player1Rot.z = float.Parse(parsedData[5]);
                                     WriteBuffer.Player1State = int.Parse(parsedData[6]);
+                                    WriteBuffer.updated1 = true;
+                                    break;
+
+                                case 2:
+                             
+                                    WriteBuffer.Player1Pos.x = float.Parse(parsedData[0]);
+                                    WriteBuffer.Player1Pos.y = float.Parse(parsedData[1]);
+                                    WriteBuffer.Player1Pos.z = float.Parse(parsedData[2]);
+                                    WriteBuffer.Player1Rot.x = float.Parse(parsedData[3]);
+                                    WriteBuffer.Player1Rot.y = float.Parse(parsedData[4]);
+                                    WriteBuffer.Player1Rot.z = float.Parse(parsedData[5]);
+                                    WriteBuffer.Player1State = int.Parse(parsedData[6]);
+                                    WriteBuffer.updated1 = true;
                                     break;
                                 case 3:
                                     WriteBuffer.Player2Pos.x = float.Parse(parsedData[0]);
@@ -247,6 +300,7 @@ namespace netcodeRTS
                                     WriteBuffer.Player2Rot.y = float.Parse(parsedData[4]);
                                     WriteBuffer.Player2Rot.z = float.Parse(parsedData[5]);
                                     WriteBuffer.Player2State = int.Parse(parsedData[6]);
+                                    WriteBuffer.updated2 = true;
                                     break;
                                 case 4:
                                     WriteBuffer.Player3Pos.x = float.Parse(parsedData[0]);
@@ -256,6 +310,7 @@ namespace netcodeRTS
                                     WriteBuffer.Player3Rot.y = float.Parse(parsedData[4]);
                                     WriteBuffer.Player3Rot.z = float.Parse(parsedData[5]);
                                     WriteBuffer.Player3State = int.Parse(parsedData[6]);
+                                    WriteBuffer.updated3 = true;
                                     break;
                                 default:
                                     Debug.Log("Error: PLAYERDATA Sender Invalid");

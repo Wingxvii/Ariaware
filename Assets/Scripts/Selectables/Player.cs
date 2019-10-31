@@ -32,7 +32,9 @@ public class Player : SelectableObject
     }
 
     public void SendUpdate(Vector3 pos, Vector3 rot, int state) {
-        Debug.Log("Recieved");
+        Debug.Log("Force Added");
+        this.GetComponent<Rigidbody>().AddForce((pos - this.transform.position) * 10000);
+        this.transform.rotation = Quaternion.Euler(rot);
     }
 
     // Update is called once per frame
