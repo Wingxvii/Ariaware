@@ -8,6 +8,8 @@ public class Player : SelectableObject
     public Transform playerTransform;
     public Rigidbody playerBody;
 
+    public int activeWeapon = 0;
+
     static public Vector3 pos = new Vector3(0, 0, 0);
     public float moveSpeed = 1;
     public float maxSpeed = 20.0f;
@@ -23,6 +25,14 @@ public class Player : SelectableObject
         playerTransform = this.GetComponent<Transform>();
         playerBody = this.GetComponent<Rigidbody>();
 
+    }
+
+    public void SendWeapon(int weaponNum) {
+        activeWeapon = weaponNum;
+    }
+
+    public void SendUpdate(Vector3 pos, Vector3 rot, int state) {
+        Debug.Log("Recieved");
     }
 
     // Update is called once per frame

@@ -27,6 +27,8 @@ public class SelectableObject : MonoBehaviour
     public EntityType type;
     public bool destructable = false;
     public static int idtracker { get; private set; }
+    public static List<SelectableObject> indexedList = new List<SelectableObject>();
+
     public bool selected = false;
     public Slider healthBar;
 
@@ -39,7 +41,7 @@ public class SelectableObject : MonoBehaviour
         halo = (Behaviour)this.GetComponent("Halo");
         halo.enabled = false;
         id = ++idtracker;
-
+        indexedList.Add(this);
         //call base function
         BaseStart();
     }

@@ -99,8 +99,8 @@ namespace netcodeRTS
         static bool updatedWeaponP3Flag = false;
 
         //buffers
-        public static FPSDataBuffer ReadBuffer;
-        private static FPSDataBuffer WriteBuffer;
+        public static FPSDataBuffer ReadBuffer = new FPSDataBuffer();
+        private static FPSDataBuffer WriteBuffer = new FPSDataBuffer();
         private static FPSDataBuffer tempBuffer;
 
 
@@ -125,23 +125,29 @@ namespace netcodeRTS
             //process instanced information recieved
             if (updatedWeaponP1Flag)
             {
-                //process weapon update
+                SelectionManager.Instance.players[0].GetComponent<Player>().SendWeapon(int.Parse(updatedWeaponP1[0]));
+                updatedWeaponP1Flag = false;
             }
             if (updatedWeaponP2Flag)
             {
-                //process weapon update
+                SelectionManager.Instance.players[1].GetComponent<Player>().SendWeapon(int.Parse(updatedWeaponP2[0]));
+                updatedWeaponP2Flag = false;
             }
             if (updatedWeaponP3Flag)
             {
-                //process weapon update
+                SelectionManager.Instance.players[2].GetComponent<Player>().SendWeapon(int.Parse(updatedWeaponP3[0]));
+                updatedWeaponP3Flag = false;
             }
             if (_InstanceDamageDealt.Count > 0)
             {
-                foreach (Tuple<int, string[]> data in _InstanceDamageDealt)
+                lock (_InstanceDamageDealt)
                 {
-                    //process instance damage
-
-                    _InstanceDamageDealt.Dequeue();
+                    foreach (Tuple<int, string[]> data in _InstanceDamageDealt)
+                    {
+                        //process instance damage
+                        //data.Item2[2]
+                        _InstanceDamageDealt.Dequeue();
+                    }
                 }
             }
 
@@ -150,12 +156,17 @@ namespace netcodeRTS
         private void FixedUpdate()
         {
             SwitchBuffers();
+            //buffer processing
+            SelectionManager.Instance.players[0].GetComponent<Player>().SendUpdate(ReadBuffer.Player1Pos, ReadBuffer.Player1Rot, ReadBuffer.Player1State);
+            SelectionManager.Instance.players[1].GetComponent<Player>().SendUpdate(ReadBuffer.Player2Pos, ReadBuffer.Player2Rot, ReadBuffer.Player2State);
+            SelectionManager.Instance.players[2].GetComponent<Player>().SendUpdate(ReadBuffer.Player3Pos, ReadBuffer.Player3Rot, ReadBuffer.Player3State);
+
+
         }
 
         //switches the buffers
         private void SwitchBuffers()
         {
-
             tempBuffer = ReadBuffer;
             ReadBuffer = WriteBuffer;
             WriteBuffer = tempBuffer;
@@ -256,7 +267,6 @@ namespace netcodeRTS
                     else
                     {
                         Debug.Log("Error: Invalid PLAYERDATA Parsed Array Size");
-                        
                     }
                     break;
                 case PacketType.WEAPONSTATE:
@@ -290,19 +300,18 @@ namespace netcodeRTS
                     }
                     break;
                 case PacketType.DAMAGEDEALT:
-                    Debug.Log("Recieved player DAMAGEDEALT");
 
-
-                    /*
-                    else if (parsedData.Length != 3)
+                    if (parsedData.Length != 4)
                     {
                         Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
 
                     }
                     //pair sender with data
                     Tuple<int, string[]> temp = Tuple.Create(sender, parsedData);
-                    _InstanceDamageDealt.Enqueue(temp);
-                    */
+                    lock (_InstanceDamageDealt)
+                    {
+                        _InstanceDamageDealt.Enqueue(temp);
+                    }
 
                     break;
 
@@ -399,8 +408,10 @@ namespace netcodeRTS
         {
             StringBuilder dataToSend = new StringBuilder();
 
+            //RESET THIS
             //dataToSend.Append(player.ToString());
             dataToSend.Append("1");
+
             dataToSend.Append(",");
             dataToSend.Append(damage.ToString());
             dataToSend.Append(",");
