@@ -73,7 +73,7 @@ public class SelectableObject : MonoBehaviour
         BaseOnDestory();
     }
 
-    public void OnDamage(int num) {
+    public virtual void OnDamage(int num, SelectableObject culprit) {
         if (destructable || type == EntityType.Player) {
             currentHealth -= num;
         }

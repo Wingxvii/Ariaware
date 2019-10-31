@@ -3331,7 +3331,8 @@ MonoBehaviour:
   currentEvent: 0
   AllObjects: []
   SelectedObjects: []
-  PrimarySelectable: {fileID: 0}
+  PrimarySelectable: {fileID: 6304387413709053227, guid: 529508816a634614b898583372ae9b5c,
+    type: 3}
   selectedTypeFlag: 0
   selectionChanged: 0
   mousePosition: {x: 0, y: 0, z: 0}
@@ -3459,7 +3460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aefa684106bce947879142fc2b27f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 10.190.5.219
+  ip: 10.160.63.163
 --- !u!1 &966270732
 GameObject:
   m_ObjectHideFlags: 0

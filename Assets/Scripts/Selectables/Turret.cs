@@ -93,7 +93,7 @@ public class Turret : SelectableObject
                         muzzle.Play();
                         if (!HitWall() && accuracy - (shortestDist / 100.0f) > Random.Range(0.0f, 1.0f))
                         {
-                            attackPoint.OnDamage(attackDamage);
+                            attackPoint.OnDamage(attackDamage, this);
                         }
                         currentAmno--;
                         state = TurretState.Recoil;
@@ -131,7 +131,7 @@ public class Turret : SelectableObject
 
                         if (!HitWall() && accuracy - (shortestDist / 100.0f) > Random.Range(0.0f, 1.0f))
                         {
-                            attackPoint.OnDamage(attackDamage);
+                            attackPoint.OnDamage(attackDamage, this);
                         }
                         currentAmno--;
                         state = TurretState.Recoil;
@@ -216,7 +216,7 @@ public class Turret : SelectableObject
             {
                 Debug.Log("Hit Wall");
                 hit.transform.GetComponent<Wall>().WallIsHit(hit.point);
-                hit.transform.GetComponent<Wall>().OnDamage(attackDamage);
+                hit.transform.GetComponent<Wall>().OnDamage(attackDamage, this);
                 return true;
             }
             else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player) {

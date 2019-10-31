@@ -175,7 +175,7 @@ public class Droid : SelectableObject
     }
     private void OnAttack() {
         if (currentCoolDown <= 0.0f) {
-            attackPoint.OnDamage(attackDamage);
+            attackPoint.OnDamage(attackDamage, this);
             currentCoolDown = coolDown;
         }
     }

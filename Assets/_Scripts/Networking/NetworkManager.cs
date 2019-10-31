@@ -290,15 +290,19 @@ namespace netcodeRTS
                     }
                     break;
                 case PacketType.DAMAGEDEALT:
-                    if (parsedData.Length != 2)
+                    Debug.Log("Recieved player DAMAGEDEALT");
+
+
+                    /*
+                    else if (parsedData.Length != 3)
                     {
                         Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
-                        
-                    }
 
+                    }
                     //pair sender with data
                     Tuple<int, string[]> temp = Tuple.Create(sender, parsedData);
                     _InstanceDamageDealt.Enqueue(temp);
+                    */
 
                     break;
 
@@ -311,9 +315,8 @@ namespace netcodeRTS
                 case PacketType.KILL:
                     Debug.Log("Recieved KILLDATA");
                     break;
-
                 default:
-                    Debug.Log("Error: Invalid Datatype recieved");
+                    Debug.Log("Error: Invalid Datatype recieved:" + type.ToString());
                     
                     break;
             }
@@ -396,14 +399,15 @@ namespace netcodeRTS
         {
             StringBuilder dataToSend = new StringBuilder();
 
-            dataToSend.Append(player.ToString());
+            //dataToSend.Append(player.ToString());
+            dataToSend.Append("1");
             dataToSend.Append(",");
             dataToSend.Append(damage.ToString());
             dataToSend.Append(",");
             dataToSend.Append(culprit.ToString());
             dataToSend.Append(",");
 
-            SendData((int)PacketType.GAMESTATE, dataToSend.ToString(), Client);
+            SendData((int)PacketType.DAMAGEDEALT, dataToSend.ToString(), Client);
 
         }
 

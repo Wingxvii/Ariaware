@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using netcodeRTS;
 
 public class Player : SelectableObject
 {
@@ -64,5 +65,11 @@ public class Player : SelectableObject
         {
             base.OnDeath();
         }
+    }
+
+    public override void OnDamage(int num, SelectableObject culprit)
+    {
+        NetworkManager.SendDamagePlayer(num, this.id + 1, culprit.id);
+        base.OnDamage(num, culprit);
     }
 }
