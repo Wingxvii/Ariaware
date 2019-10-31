@@ -205,9 +205,7 @@ public class Turret : SelectableObject
     public override void OnDeath()
     {
         Debug.Log("Dead Turret");
-        OnDeactivation();
-        SelectionManager.Instance.AllObjects.Remove(this);
-        Object.Destroy(this);
+        base.OnDeath();
     }
 
 

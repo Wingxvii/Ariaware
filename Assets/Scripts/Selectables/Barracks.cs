@@ -98,9 +98,7 @@ public class Barracks : SelectableObject
     public override void OnDeath()
     {
         Debug.Log("Dead Barracks");
-        OnDeactivation();
-        SelectionManager.Instance.AllObjects.Remove(this);
-        Object.Destroy(this);
+        base.OnDeath();
     }
 
 }

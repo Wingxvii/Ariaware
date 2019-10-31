@@ -157,7 +157,6 @@ public class DroidManager : MonoBehaviour
 
         NetworkManager.SendBuildEntity(Droidpool[Droidpool.Count - 1]);
 
-
         SelectionManager.Instance.AllObjects.Add(Droidpool[Droidpool.Count - 1]);
         ActiveDroidPool.Add(Droidpool[Droidpool.Count - 1]);
 

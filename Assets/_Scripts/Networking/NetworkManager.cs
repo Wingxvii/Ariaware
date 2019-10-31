@@ -308,6 +308,9 @@ namespace netcodeRTS
                 case PacketType.BUILD:
                     Debug.Log("Recieved BUILDDATA");
                     break;
+                case PacketType.KILL:
+                    Debug.Log("Recieved KILLDATA");
+                    break;
 
                 default:
                     Debug.Log("Error: Invalid Datatype recieved");

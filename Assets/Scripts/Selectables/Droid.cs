@@ -164,6 +164,7 @@ public class Droid : SelectableObject
     {
         Debug.Log("Dead droid");
         DroidManager.Instance.KillDroid(this);
+        base.OnDeath();
     }
 
     //unique classes

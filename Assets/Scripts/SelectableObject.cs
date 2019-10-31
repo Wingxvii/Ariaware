@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using netcodeRTS;
 
 public enum EntityType
 {
@@ -106,6 +107,7 @@ public class SelectableObject : MonoBehaviour
     public virtual void OnDeath() {
         OnDeselect();
         OnDeactivation();
+        NetworkManager.SendKilledEntity(this);
         SelectionManager.Instance.DeselectItem(this);
         SelectionManager.Instance.AllObjects.Remove(this);
         Object.Destroy(this.gameObject);
