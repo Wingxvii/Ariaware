@@ -9,6 +9,7 @@ TagManager:
   - GameManager
   - Animation
   - Flag
+  - Weapon
   layers:
   - Default
   - TransparentFX

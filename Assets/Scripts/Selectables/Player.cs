@@ -14,6 +14,8 @@ public class Player : SelectableObject
     public float moveSpeed = 1;
     public float maxSpeed = 20.0f;
 
+    public GameObject[] weapons;
+
     // Start is called before the first frame update
     protected override void BaseStart()
     {
@@ -25,10 +27,16 @@ public class Player : SelectableObject
         playerTransform = this.GetComponent<Transform>();
         playerBody = this.GetComponent<Rigidbody>();
 
+        foreach(GameObject weapon in weapons) {
+            weapon.SetActive(false);
+        }
+        weapons[0].SetActive(true);
     }
 
     public void SendWeapon(int weaponNum) {
-        activeWeapon = weaponNum;
+        weapons[activeWeapon].SetActive(false);
+        activeWeapon = weaponNum-1;
+        weapons[activeWeapon].SetActive(true);
     }
 
     public void SendUpdate(Vector3 pos, Vector3 rot, int state) {
