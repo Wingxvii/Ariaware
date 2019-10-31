@@ -51,6 +51,8 @@ public class Droid : SelectableObject
             selfRigid.velocity = selfRigid.velocity.normalized * maxSpeed;
         }
 
+        float shortestDist;
+
         //AI STATE MACHINE
         switch (state) {
             case DroidState.Moving:
@@ -71,18 +73,40 @@ public class Droid : SelectableObject
             case DroidState.AttackMoving:
                 //check if gameobject is seeable
                 MoveTo(new Vector2(journeyPoint.x, journeyPoint.z));
-                if (Vector3.Distance(DroidManager.Instance.playerTarget.transform.position, this.transform.position) < visualRange)
+                shortestDist = float.MaxValue;
+
+                //check shortest in range for each player
+                foreach (Player player in DroidManager.Instance.playerTargets) {
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    if (dist < shortestDist) {
+                        shortestDist = dist;
+                        attackPoint = player;
+                    }
+                }
+                if (shortestDist < visualRange)
                 {
                     state = DroidState.TetherAttacking;
-                    attackPoint = DroidManager.Instance.playerTarget;
                 }
+
                 break;
             case DroidState.Standing:
-                if (Vector3.Distance(DroidManager.Instance.playerTarget.transform.position, this.transform.position) < visualRange)
+                shortestDist = float.MaxValue;
+
+                foreach (Player player in DroidManager.Instance.playerTargets)
+                {
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    if (dist < shortestDist)
+                    {
+                        shortestDist = dist;
+                        attackPoint = player;
+                    }
+                }
+                if (shortestDist < visualRange)
                 {
                     state = DroidState.TetherAttacking;
-                    attackPoint = DroidManager.Instance.playerTarget;
                 }
+
+
                 break;
 
         }
@@ -134,8 +158,11 @@ public class Droid : SelectableObject
     {
         if (other.tag == "SelectableObject" && other.gameObject.GetComponent<SelectableObject>().type == EntityType.Player)
         {
-            state = DroidState.TetherAttacking;
-            attackPoint = other.gameObject.GetComponent<Player>();
+            if (state != DroidState.AttackMoving && state != DroidState.Moving ) {
+                state = DroidState.TetherAttacking;
+            }if (!(state == DroidState.TetherAttacking && attackPoint != other.gameObject.GetComponent<Player>())) {
+                attackPoint = other.gameObject.GetComponent<Player>();
+            }
             OnAttack();
         }
     }

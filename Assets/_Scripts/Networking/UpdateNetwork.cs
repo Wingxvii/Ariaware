@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using netcodeRTS;
 public class UpdateNetwork : MonoBehaviour
 {
     //this is for example, not to be actually used

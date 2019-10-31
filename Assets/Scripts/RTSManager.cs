@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using netcodeRTS;
 
 public class RTSManager : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class RTSManager : MonoBehaviour
     //stack of undo and redo commands
     private Stack<ICommand> _Undocommands = new Stack<ICommand>();
     private Stack<ICommand> _Redocommands = new Stack<ICommand>();
-    
+
     #region UndoRedo
     public void undo()
     {
@@ -56,11 +57,13 @@ public class RTSManager : MonoBehaviour
     }
     #endregion
 
-    public void OnPrefabSelect(int prefab) {
+    public void OnPrefabSelect(int prefab)
+    {
         SelectionManager.Instance.OnPrefabCreation();
         Object.Destroy(prefabObject);
 
-        switch (prefab) {
+        switch (prefab)
+        {
             case 1:
                 prefabObject = (GameObject)Instantiate(turretPrefab);
                 prefabType = EntityType.Turret;
@@ -98,7 +101,8 @@ public class RTSManager : MonoBehaviour
     void Update()
     {
         #region hotkeys
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z)) {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z))
+        {
             undo();
         }
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y))
@@ -140,8 +144,9 @@ public class RTSManager : MonoBehaviour
 
         #endregion
 
-        if (prefabObject != null && prefabObject.activeSelf) {
-            prefabObject.GetComponent<Transform>().position = new Vector3(SelectionManager.Instance.mousePosition.x, SelectionManager.Instance.mousePosition.y + prefabObject.GetComponent<Transform>().localScale.y , SelectionManager.Instance.mousePosition.z);
+        if (prefabObject != null && prefabObject.activeSelf)
+        {
+            prefabObject.GetComponent<Transform>().position = new Vector3(SelectionManager.Instance.mousePosition.x, SelectionManager.Instance.mousePosition.y + prefabObject.GetComponent<Transform>().localScale.y, SelectionManager.Instance.mousePosition.z);
             //prefabObject.GetComponent<Transform>().position = SelectionManager.Instance.mousePosition;
         }
 
@@ -154,10 +159,11 @@ public class RTSManager : MonoBehaviour
         return result * multiple;
     }
 
-    public void OnPlace(GameObject placeObject) {
+    public void OnPlace(GameObject placeObject)
+    {
         ClearCommands();
         _Undocommands.Push(new AddCommand(placeObject.GetComponent<SelectableObject>()));
-
+        NetworkManager.SendBuildEntity(placeObject.GetComponent<SelectableObject>());
 
         SelectionManager.Instance.ClearSelection();
         if (Input.GetKey(KeyCode.LeftShift))
@@ -166,7 +172,8 @@ public class RTSManager : MonoBehaviour
         }
     }
 
-    public void OnUpgrade() {
+    public void OnUpgrade()
+    {
         ClearCommands();
         foreach (SelectableObject obj in SelectionManager.Instance.SelectedObjects)
         {
@@ -174,15 +181,18 @@ public class RTSManager : MonoBehaviour
             {
                 _Undocommands.Push(new UpgradeCommand(obj));
             }
-            else {
+            else
+            {
                 Debug.Log("Object is already at Max Level");
             }
         }
     }
 
-    public void OnDelete() {
+    public void OnDelete()
+    {
         ClearCommands();
-        foreach (SelectableObject obj in SelectionManager.Instance.SelectedObjects) {
+        foreach (SelectableObject obj in SelectionManager.Instance.SelectedObjects)
+        {
             if (obj.destructable)
             {
                 _Undocommands.Push(new DeleteCommand(obj));
@@ -191,7 +201,7 @@ public class RTSManager : MonoBehaviour
         SelectionManager.Instance.ClearSelection();
     }
 
-    public void OnDeleteAll()                                               
+    public void OnDeleteAll()
     {
         ClearCommands();
         SelectionManager.Instance.ClearSelection();
@@ -212,7 +222,8 @@ public class RTSManager : MonoBehaviour
 
     }
 
-    public void ClearCommands() {
+    public void ClearCommands()
+    {
         foreach (ICommand command in _Redocommands)
         {
             command.Cleanup();
@@ -220,9 +231,10 @@ public class RTSManager : MonoBehaviour
         _Redocommands.Clear();
     }
 
-    public void OnTrainBarracks(int unitType) {
-            if (SelectionManager.Instance.PrimarySelectable.type == EntityType.Barracks)
-            {
+    public void OnTrainBarracks(int unitType)
+    {
+        if (SelectionManager.Instance.PrimarySelectable.type == EntityType.Barracks)
+        {
             foreach (SelectableObject obj in SelectionManager.Instance.SelectedObjects)
             {
                 if (obj.type == EntityType.Barracks)
@@ -242,7 +254,8 @@ public class RTSManager : MonoBehaviour
         }
     }
 
-    public void OnSelectMove() {
+    public void OnSelectMove()
+    {
 
         Object.Destroy(prefabObject);
 
@@ -275,18 +288,5 @@ public class RTSManager : MonoBehaviour
                 temp.Reload();
             }
         }
-
     }
-
-    public void OnRally() {
-        Object.Destroy(prefabObject);
-
-        prefabObject = (GameObject)Instantiate(rallyPrefab);
-        prefabObject.SetActive(true);
-
-        SelectionManager.Instance.currentEvent = MouseEvent.Rally;
-
-    }
-
-
 }

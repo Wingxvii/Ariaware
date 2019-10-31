@@ -35,7 +35,7 @@ public class SelectionManager : MonoBehaviour
     public Vector2 boxStart;
     public Vector2 boxEnd;
 
-    public GameObject player;
+    public GameObject[] players;
     public bool boxActive = false;
     public Texture selectionBox;
 
@@ -68,7 +68,9 @@ public class SelectionManager : MonoBehaviour
     void Start()
     {
         SelectedObjects = new List<SelectableObject>();
-        AllObjects.Add(player.GetComponent<SelectableObject>());
+        foreach (GameObject player in players) {
+            AllObjects.Add(player.GetComponent<SelectableObject>());
+        }
 
         selectables = LayerMask.GetMask("Default");
         selectables += LayerMask.GetMask("Player");

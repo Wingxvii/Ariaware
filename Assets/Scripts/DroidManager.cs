@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using netcodeRTS;
 public enum DroidType {
     Base,
 }
@@ -33,14 +34,49 @@ public class DroidManager : MonoBehaviour
     public float spawnRange;
     public float spawnHeight;
 
-    public Player playerTarget;
+    public Player[] playerTargets;
+
+    int fixedTimeStep;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //CALL THIS DURING LOADING SCREEN
         InitPool();
+
+        fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
     }
+
+    private void FixedUpdate()
+    {
+        #region Fixed Tick
+        //count down
+        --fixedTimeStep;
+
+        //tick is called 10 times per 50 updates
+        if (fixedTimeStep % 5 == 0)
+        {
+            TickUpdate();
+        }
+
+        //reset the clock
+        if (fixedTimeStep <= 0)
+        {
+            //updates 50Hz
+            fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
+        }
+        #endregion
+
+    }
+
+    //called 10 times per second
+    public void TickUpdate()
+    {
+        NetworkManager.SendDroidPositions();
+    }
+
+
 
     //init a pool of droids to use
     void InitPool()
@@ -118,6 +154,9 @@ public class DroidManager : MonoBehaviour
     public void SpawnDroid(EntityType type, Vector3 pos) {
         Droidpool[Droidpool.Count - 1].transform.position = pos;
         Droidpool[Droidpool.Count - 1].gameObject.SetActive(true);
+
+        NetworkManager.SendBuildEntity(Droidpool[Droidpool.Count - 1]);
+
 
         SelectionManager.Instance.AllObjects.Add(Droidpool[Droidpool.Count - 1]);
         ActiveDroidPool.Add(Droidpool[Droidpool.Count - 1]);

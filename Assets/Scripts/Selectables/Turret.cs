@@ -20,7 +20,7 @@ public class Turret : SelectableObject
     public float maxRange = 50.0f;
     private Player attackPoint;
     private Vector3 attackTarget;
-
+    public float shortestDist;
     public ParticleSystem muzzle;
 
     //stats
@@ -33,6 +33,7 @@ public class Turret : SelectableObject
 
     public float reloadTimer = 0.0f;
     public int currentAmno = 10;
+
 
 
     //hit ray
@@ -49,31 +50,50 @@ public class Turret : SelectableObject
     }
     protected override void BaseFixedUpdate()
     {
-        float dist = Vector3.Distance(DroidManager.Instance.playerTarget.transform.position, this.transform.position);
+
+        shortestDist = float.MaxValue;
 
         switch (state)
         {
             case TurretState.Idle:
-
-                if (dist < visionRange)
+                //search for shortest player
+                foreach (Player player in DroidManager.Instance.playerTargets)
+                {
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    //Debug.Log(dist);
+                    if (dist < shortestDist)
+                    {
+                        shortestDist = dist;
+                        attackPoint = player;
+                        //Debug.Log("Seen");
+                    }
+                }
+                if (shortestDist < maxRange)
                 {
                     state = TurretState.IdleShooting;
-                    attackPoint = DroidManager.Instance.playerTarget;
                 }
                 break;
             case TurretState.IdleShooting:
-                //look at
-
-                if (dist < maxRange)
+                //search for shortest player
+                foreach (Player player in DroidManager.Instance.playerTargets)
                 {
-                    this.transform.LookAt(DroidManager.Instance.playerTarget.transform.position);
-
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    if (dist < shortestDist)
+                    {
+                        shortestDist = dist;
+                        attackPoint = player;
+                    }
+                }
+                if (shortestDist < maxRange)
+                {
+                    state = TurretState.IdleShooting;
+                    this.transform.LookAt(attackPoint.transform.position);
                     if (currentAmno > 0)
                     {
                         muzzle.Play();
-                        if (!HitWall() && accuracy - (dist / 100.0f) > Random.Range(0.0f, 1.0f))
+                        if (!HitWall() && accuracy - (shortestDist / 100.0f) > Random.Range(0.0f, 1.0f))
                         {
-                            DroidManager.Instance.playerTarget.OnDamage(attackDamage);
+                            attackPoint.OnDamage(attackDamage);
                         }
                         currentAmno--;
                         state = TurretState.Recoil;
@@ -86,23 +106,32 @@ public class Turret : SelectableObject
                         state = TurretState.Reloading;
                     }
                 }
-                else{
-                        state = TurretState.Idle;
-                }
+
                 break;
             case TurretState.TargetedShooting:
-                //look at
-                if (dist < maxRange)
+                //search for shortest player
+                foreach (Player player in DroidManager.Instance.playerTargets)
                 {
-                    this.transform.LookAt(DroidManager.Instance.playerTarget.transform.position);
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    if (dist < shortestDist)
+                    {
+                        shortestDist = dist;
+                        attackPoint = player;
+                    }
+                }
+
+                //look at
+                if (shortestDist < maxRange)
+                {
+                    this.transform.LookAt(attackPoint.transform.position);
 
                     if (currentAmno > 0)
                     {
                         muzzle.Play();
 
-                        if (!HitWall() && accuracy - (dist / 100.0f) > Random.Range(0.0f, 1.0f))
+                        if (!HitWall() && accuracy - (shortestDist / 100.0f) > Random.Range(0.0f, 1.0f))
                         {
-                            DroidManager.Instance.playerTarget.OnDamage(attackDamage);
+                            attackPoint.OnDamage(attackDamage);
                         }
                         currentAmno--;
                         state = TurretState.Recoil;
@@ -123,8 +152,19 @@ public class Turret : SelectableObject
 
                 break;
             case TurretState.Recoil:
+                //search for shortest player
+                foreach (Player player in DroidManager.Instance.playerTargets)
+                {
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    if (dist < shortestDist)
+                    {
+                        shortestDist = dist;
+                        attackPoint = player;
+                    }
+                }
+
                 //look at
-                this.transform.LookAt(DroidManager.Instance.playerTarget.transform.position);
+                this.transform.LookAt(attackPoint.transform.position);
 
                 if (reloadTimer <= 0.0f)
                 {
@@ -172,7 +212,7 @@ public class Turret : SelectableObject
 
 
     private bool HitWall() {
-        if (Physics.Raycast(this.transform.position, (DroidManager.Instance.playerTarget.transform.position - this.transform.position), out hit, maxRange, turretLayerMask))
+        if (Physics.Raycast(this.transform.position, (attackPoint.transform.position - this.transform.position), out hit, maxRange, turretLayerMask))
         {
             if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Wall)
             {
