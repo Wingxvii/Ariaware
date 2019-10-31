@@ -7,6 +7,7 @@ public enum DroidState {
     Moving = 1,
     AttackMoving = 2,
     TetherAttacking = 3,
+    TargetAttacking = 4,
 }
 
 public class Droid : SelectableObject
@@ -65,7 +66,31 @@ public class Droid : SelectableObject
                     MoveTo(new Vector2(journeyPoint.x, journeyPoint.z));
                 }
                 break;
+            case DroidState.TargetAttacking:
+                //check if gameobject is seeable
+                journeyPoint = attackPoint.transform.position;
+                MoveTo(new Vector2(journeyPoint.x, journeyPoint.z));
+                break;
+
             case DroidState.TetherAttacking:
+                shortestDist = float.MaxValue;
+
+                //check shortest in range for each player
+                foreach (Player player in DroidManager.Instance.playerTargets)
+                {
+                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    if (dist < shortestDist)
+                    {
+                        shortestDist = dist;
+                        attackPoint = player;
+                    }
+                }
+                if (shortestDist < visualRange)
+                {
+                    state = DroidState.TetherAttacking;
+                }
+
+
                 //check if gameobject is seeable
                 journeyPoint = attackPoint.transform.position;
                 MoveTo(new Vector2(journeyPoint.x, journeyPoint.z));
@@ -131,7 +156,7 @@ public class Droid : SelectableObject
     }
     public void IssueAttack(Player attackee)
     {
-        state = DroidState.TetherAttacking;
+        state = DroidState.TargetAttacking;
         attackPoint = attackee;
     }
 
@@ -158,9 +183,9 @@ public class Droid : SelectableObject
     {
         if (other.tag == "SelectableObject" && other.gameObject.GetComponent<SelectableObject>().type == EntityType.Player)
         {
-            if (state != DroidState.AttackMoving && state != DroidState.Moving ) {
+            if (state != DroidState.AttackMoving && state != DroidState.Moving && state != DroidState.TargetAttacking) {
                 state = DroidState.TetherAttacking;
-            }if (!(state == DroidState.TetherAttacking && attackPoint != other.gameObject.GetComponent<Player>())) {
+            }if (!(state == DroidState.TetherAttacking && attackPoint != other.gameObject.GetComponent<Player>()) && state != DroidState.TargetAttacking) {
                 attackPoint = other.gameObject.GetComponent<Player>();
             }
             OnAttack();
