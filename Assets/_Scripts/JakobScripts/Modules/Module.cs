@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public abstract class Module : InitializableObject
+public abstract class Module : UpdateableObject
 {
     protected KeyCode Key(KeyType kt)
     {

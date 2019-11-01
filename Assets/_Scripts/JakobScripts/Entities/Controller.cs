@@ -11,6 +11,8 @@ public class Controller : Entity
     {
         if (base.CreateVars())
         {
+            AddUpdate();
+            
             puppets = new JoinedList<Controller, Puppet>(this);
             commands = new JoinedList<Controller, Command>(this);
 
@@ -104,7 +106,7 @@ public class Controller : Entity
         }
     }
 
-    private void Update()
+    protected override void UpdateObject()
     {
         for (int i = 0; i < commands.Amount; ++i)
         {

@@ -5,9 +5,15 @@ using System;
 
 public class DebugObject : MonoBehaviour
 {
-    private void FixedUpdate()
+    float FPSaverage = 0f;
+    int samples = 0;
+
+    private void Update()
     {
-        //Debug.Log("FRAME");
+        FPSaverage = (FPSaverage * samples + Time.deltaTime) / (samples + 1);
+        if (samples < 50)
+            samples++;
+        Debug.Log((int)(1f / FPSaverage) + ", " + FPSaverage);
     }
 }
 

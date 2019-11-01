@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityContainer))]
-public abstract class SlotBase : InitializableObject
+public abstract class SlotBase : UpdateableObject
 {
     public JoinedVar<SlotBase, EntityContainer> Container;
     public Joined<SlotBase, Entity> EntityPlug;

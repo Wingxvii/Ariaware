@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public abstract class BasePACES : InitializableObject
+public abstract class BasePACES : UpdateableObject
 {
     public int ID;
     public bool sendData;

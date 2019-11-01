@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Entity))]
-public abstract class ObjectStat : InitializableObject
+public abstract class ObjectStat : UpdateableObject
 {
     public JoinedVar<ObjectStat, Entity> Ent;
 
@@ -11,6 +11,8 @@ public abstract class ObjectStat : InitializableObject
     {
         if (base.CreateVars())
         {
+            AddFixedUpdate();
+
             Ent = new JoinedVar<ObjectStat, Entity>(this, false);
 
             return true;
@@ -49,7 +51,7 @@ public abstract class ObjectStat : InitializableObject
         base.DestroyVars();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdateObject()
     {
         UpdateData();
     }

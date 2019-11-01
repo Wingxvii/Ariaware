@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Controller))]
-public abstract class Command : InitializableObject
+public abstract class Command : UpdateableObject
 {
     public JoinedVar<Command, Controller> Instructor;
 
