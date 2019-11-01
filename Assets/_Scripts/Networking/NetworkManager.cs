@@ -127,11 +127,13 @@ namespace netcodeRTS
         {
             if (Input.GetKey(KeyCode.F)) {
                 StringBuilder finalMessage = new StringBuilder();
-                finalMessage.Append("0");
+
+
+                finalMessage.Append(SelectionManager.Instance.mousePosition.x.ToString());
                 finalMessage.Append(",");
                 finalMessage.Append("0");
                 finalMessage.Append(",");
-                finalMessage.Append("100");
+                finalMessage.Append(SelectionManager.Instance.mousePosition.z.ToString());
                 finalMessage.Append(",");
                 finalMessage.Append("0");
                 finalMessage.Append(",");
@@ -359,8 +361,12 @@ namespace netcodeRTS
                     if (parsedData.Length != 4)
                     {
                         Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
-
+                        break;
                     }
+                    if (sender == 1) {
+                        Debug.Log("Error: Self Damage Recieved");
+                    }
+
                     //pair sender with data
                     Tuple<int, string[]> temp = Tuple.Create(sender, parsedData);
                     lock (_InstanceDamageDealt)

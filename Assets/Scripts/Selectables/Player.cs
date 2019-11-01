@@ -41,7 +41,9 @@ public class Player : SelectableObject
 
     public void SendUpdate(Vector3 pos, Vector3 rot, int state) {
         Debug.Log("Force Added");
-        this.GetComponent<Rigidbody>().AddForce((pos - this.transform.position) * 10000);
+        this.GetComponent<Rigidbody>().velocity = (pos - this.transform.position) * 10f;
+
+        //this.GetComponent<Rigidbody>().AddForce((pos - this.transform.position) * (pos - this.transform.position).sqrMagnitude * 100);
         this.transform.rotation = Quaternion.Euler(rot);
     }
 
@@ -66,6 +68,7 @@ public class Player : SelectableObject
         }
     }
 
+    /*
     protected override void BaseFixedUpdate()
     {
         if (playerBody.velocity.magnitude > maxSpeed)
@@ -73,7 +76,7 @@ public class Player : SelectableObject
             playerBody.velocity = playerBody.velocity.normalized * maxSpeed;
         }
     }
-
+    */
     public override void OnDeath()
     {
         Debug.Log("Player's Dead");
