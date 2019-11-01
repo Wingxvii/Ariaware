@@ -213,7 +213,6 @@ public class Inventory : Puppet
 
     public void SwapActive(int index)
     {
-        Debug.Log(index);
         Items.GetObj(activeObject).PseudoDisable();
         activeObject = index;
         Items.GetObj(activeObject).PseudoEnable();

@@ -108,8 +108,6 @@ public class Bullet : InitializableObject
                         }
                     }
 
-                    Debug.Log(closest.collider.name);
-
                     EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
                     if (ec != null)
                     {
