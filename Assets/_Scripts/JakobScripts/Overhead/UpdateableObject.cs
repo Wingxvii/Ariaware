@@ -104,7 +104,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddFirst()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActFirst.Add(DoFirst);
             FirstAdded = true;
@@ -113,7 +113,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddSecond()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActSecond.Add(DoSecond);
             SecondAdded = true;
@@ -122,7 +122,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddThird()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActThird.Add(DoThird);
             ThirdAdded = true;
@@ -131,7 +131,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddFourth()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActFourth.Add(DoFourth);
             FourthAdded = true;
@@ -140,7 +140,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddFifth()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActFifth.Add(DoFifth);
             FifthAdded = true;
@@ -149,7 +149,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddUpdate()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActUpdate.Add(DoUpdate);
             UpdateAdded = true;
@@ -158,7 +158,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddLateUpdate()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActLateUpdate.Add(DoLateUpdate);
             LateUpdateAdded = true;
@@ -167,7 +167,7 @@ public abstract class UpdateableObject : InitializableObject
 
     protected void AddFixedUpdate()
     {
-        if (FPSManager.FM.MU != null)
+        if (FPSManager.FM.MU != null && FPSManager.FM.MU.Init())
         {
             FPSManager.FM.MU.ActFixedUpdate.Add(DoFixedUpdate);
             FixedUpdateAdded = true;
