@@ -15,6 +15,20 @@ public class ModuleDirectionalMouse : ModuleDirectional
     public static Vector3 mousePrevious;
     Vector3 deltaMouse = Vector3.zero;
 
+    protected override bool CreateVars()
+    {
+        if (base.CreateVars())
+        {
+            AddUpdate();
+
+            AddLateUpdate();
+
+            return true;
+        }
+
+        return false;
+    }
+
     protected override bool CrossBranchInitialize()
     {
         if (base.CrossBranchInitialize())
@@ -38,12 +52,12 @@ public class ModuleDirectionalMouse : ModuleDirectional
         return output;
     }
 
-    private void Update()
+    protected override void UpdateObject()
     {
         deltaMouse = Input.mousePosition - mousePrevious;
     }
 
-    private void LateUpdate()
+    protected override void LateUpdateObject()
     {
         if (!toggleLock)
         {

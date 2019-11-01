@@ -12,6 +12,18 @@ public class ModuleAxisMouse : ModuleAxis
     Vector3 mousePrevious;
     Vector3 deltaMouse = Vector3.zero;
 
+    protected override bool CreateVars()
+    {
+        if (base.CreateVars())
+        {
+            AddUpdate();
+
+            return true;
+        }
+
+        return false;
+    }
+
     protected override bool CrossBranchInitialize()
     {
         if (base.CrossBranchInitialize())
@@ -29,7 +41,7 @@ public class ModuleAxisMouse : ModuleAxis
         return mouseDirection(mouseAxis);
     }
 
-    private void Update()
+    protected override void UpdateObject()
     {
         deltaMouse = Input.mousePosition - mousePrevious;
         mousePrevious = Input.mousePosition;

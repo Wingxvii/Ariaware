@@ -12,7 +12,7 @@ public class FireStats
     public float ConeAngle = 5f;
 }
 
-public class Bullet : InitializableObject
+public class Bullet : UpdateableObject
 {
     public FireStats bulletStats;
 
@@ -23,6 +23,37 @@ public class Bullet : InitializableObject
     Body ignoreThis;
 
     float maxDist;
+
+    protected override bool CreateVars()
+    {
+        if (base.CreateVars())
+        {
+            AddFixedUpdate();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override bool InnerInitialize()
+    {
+        if (base.InnerInitialize())
+        {
+
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected override void InnerDeInitialize()
+    {
+
+
+        base.InnerDeInitialize();
+    }
 
     public void SetBulletStats(FireStats fs, GunVector culprit, Body ignore, AnimationCurve acc)
     {
@@ -37,7 +68,8 @@ public class Bullet : InitializableObject
         accuser = culprit;
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdateObject()
+    //private void FixedUpdate()
     {
         float bulletDistance = (gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime;
         origin = transform.position;
@@ -107,8 +139,6 @@ public class Bullet : InitializableObject
                             closest = rhit[i];
                         }
                     }
-
-                    Debug.Log(closest.collider.name);
 
                     EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
                     if (ec != null)

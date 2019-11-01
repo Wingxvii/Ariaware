@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Entity))]
-public abstract class Modifier : InitializableObject
+public abstract class Modifier : UpdateableObject
 {
     public JoinedVar<Modifier, Entity> BaseEntity;
 

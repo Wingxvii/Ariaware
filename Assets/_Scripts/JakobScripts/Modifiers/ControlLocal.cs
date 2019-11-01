@@ -24,6 +24,10 @@ public class ControlLocal : Modifier
     {
         if (base.CreateVars())
         {
+            AddUpdate();
+            AddLateUpdate();
+            AddFixedUpdate();
+
             initialP = transform.localPosition;
             initialR = transform.localRotation;
 
@@ -38,19 +42,19 @@ public class ControlLocal : Modifier
         base.DestroyVars();
     }
 
-    private void Update()
+    protected override void UpdateObject()
     {
         if (applyOnUpdate)
             ApplyUpdateModifier();
     }
 
-    private void LateUpdate()
+    protected override void LateUpdateObject()
     {
         if (applyOnLateUpdate)
             ApplyUpdateModifier();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdateObject()
     {
         if (applyOnFixedUpdate)
             ApplyUpdateModifier();

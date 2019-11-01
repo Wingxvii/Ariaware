@@ -15,6 +15,8 @@ public class HealthBar : ObjectStat
     {
         if (base.CreateVars())
         {
+            AddUpdate();
+
             health = maxHealth;
 
             slide = GetComponentInChildren<Slider>();
@@ -53,7 +55,7 @@ public class HealthBar : ObjectStat
         base.DestroyVars();
     }
 
-    private void Update()
+    protected override void UpdateObject()
     {
         if (slide != null)
         {

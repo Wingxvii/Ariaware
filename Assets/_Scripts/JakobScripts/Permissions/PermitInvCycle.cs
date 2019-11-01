@@ -7,6 +7,18 @@ public class PermitInvCycle : AbstractPermission<PermitInvCycle, CommandInvCycle
     public float timeDelay = 0f;
     float timeRem = 0.2f;
 
+    protected override bool CreateVars()
+    {
+        if (base.CreateVars())
+        {
+            AddUpdate();
+
+            return true;
+        }
+
+        return false;
+    }
+
     public void ReceiveInput(int axisValue)
     {
         if (axisValue != 0 && timeRem <= 0f && SpecificActor.Items.Amount > 0)
@@ -27,7 +39,7 @@ public class PermitInvCycle : AbstractPermission<PermitInvCycle, CommandInvCycle
         }
     }
 
-    private void Update()
+    protected override void UpdateObject()
     {
         if (timeRem > 0f)
         {

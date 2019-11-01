@@ -18,6 +18,8 @@ public class AirResistance : Modifier
     {
         if (base.CreateVars())
         {
+            AddFixedUpdate();
+
             rb = GetComponent<Rigidbody>();
 
             return true;
@@ -33,7 +35,7 @@ public class AirResistance : Modifier
         base.DestroyVars();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdateObject()
     {
         ApplyFixedUpdateModifier();
     }

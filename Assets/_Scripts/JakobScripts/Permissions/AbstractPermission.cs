@@ -14,6 +14,8 @@ public abstract class AbstractPermission<T, U, V, W> : Permission where T : Abst
     {
         if (base.CreateVars())
         {
+            AddFixedUpdate();
+
             SpecificEmitter = new JoinedVar<T, U>((T)this);
 
             return true;
@@ -67,7 +69,7 @@ public abstract class AbstractPermission<T, U, V, W> : Permission where T : Abst
         return false;
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdateObject()
     {
         FeedPuppet();
     }

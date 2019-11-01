@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Puppet))]
-public abstract class Permission : InitializableObject
+public abstract class Permission : UpdateableObject
 {
     public JoinedVar<Permission, Puppet> Actor;
 
