@@ -113,4 +113,14 @@ public class EntityContainer : BasePACES
 
         base.PostDisable();
     }
+
+    public enum ContainerType
+    {
+        None,
+        Player,
+        Enemy,
+        Turret,
+        Barrack,
+        Wall
+    }
 }

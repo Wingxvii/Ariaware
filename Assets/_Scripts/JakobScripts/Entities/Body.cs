@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerState
+{
+    Alive = 1,
+    Shooting = 2
+}
+
 [RequireComponent(typeof(Rigidbody))]
 public class Body : Puppet
 {
@@ -9,6 +15,8 @@ public class Body : Puppet
     public JoinedVar<Body, CameraAnchor> LocalCamera;
     public Collider[] Col;
     public JoinedList<Body, Inventory> inventories;
+
+    public uint pState = (int)(PlayerState.Alive);
 
     protected override bool CreateVars()
     {
