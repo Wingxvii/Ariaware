@@ -125,15 +125,16 @@ namespace netcodeRTS
         // Update is called once per frame
         void Update()
         {
+            /*
             if (Input.GetKey(KeyCode.F)) {
                 StringBuilder finalMessage = new StringBuilder();
 
 
-                finalMessage.Append(SelectionManager.Instance.mousePosition.x.ToString());
+                finalMessage.Append(SelectionManager.Instance.mousePosition.x);
                 finalMessage.Append(",");
                 finalMessage.Append("0");
                 finalMessage.Append(",");
-                finalMessage.Append(SelectionManager.Instance.mousePosition.z.ToString());
+                finalMessage.Append(SelectionManager.Instance.mousePosition.z);
                 finalMessage.Append(",");
                 finalMessage.Append("0");
                 finalMessage.Append(",");
@@ -146,6 +147,7 @@ namespace netcodeRTS
 
                 SendData((int)PacketType.PLAYERDATA, finalMessage.ToString(), Client);
             }
+            */
 
             //process instanced information recieved
             if (updatedWeaponP1Flag)
@@ -270,6 +272,7 @@ namespace netcodeRTS
                         {
                             switch (sender)
                             {
+                                /*
                                 //REMOVE THIS
                                 case 1:
                                     Debug.Log("Recieved info");
@@ -282,7 +285,7 @@ namespace netcodeRTS
                                     WriteBuffer.Player1State = int.Parse(parsedData[6]);
                                     WriteBuffer.updated1 = true;
                                     break;
-
+                                    */
                                 case 2:
                              
                                     WriteBuffer.Player1Pos.x = float.Parse(parsedData[0]);
@@ -401,7 +404,7 @@ namespace netcodeRTS
             {
 
                 //send object id
-                dataToSend.Append(droid.id.ToString());
+                dataToSend.Append(droid.id);
                 dataToSend.Append(",");
 
                 //send object positions
@@ -421,23 +424,23 @@ namespace netcodeRTS
             StringBuilder dataToSend = new StringBuilder();
 
             //add object id
-            dataToSend.Append(obj.id.ToString());
+            dataToSend.Append(obj.id);
             dataToSend.Append(",");
 
             //add object type
-            dataToSend.Append(((int)obj.type).ToString());
+            dataToSend.Append(((int)obj.type));
             dataToSend.Append(",");
 
             //add object position x
-            dataToSend.Append(obj.transform.position.x.ToString());
+            dataToSend.Append(obj.transform.position.x);
             dataToSend.Append(",");
 
             //add object position y
-            dataToSend.Append(obj.transform.position.y.ToString());
+            dataToSend.Append(obj.transform.position.y);
             dataToSend.Append(",");
 
             //add object position z
-            dataToSend.Append(obj.transform.position.z.ToString());
+            dataToSend.Append(obj.transform.position.z);
             dataToSend.Append(",");
 
             SendData((int)PacketType.BUILD, dataToSend.ToString(), Client);
@@ -448,7 +451,7 @@ namespace netcodeRTS
             StringBuilder dataToSend = new StringBuilder();
 
             //add object id
-            dataToSend.Append(obj.id.ToString());
+            dataToSend.Append(obj.id);
             dataToSend.Append(",");
 
             SendData((int)PacketType.KILL, dataToSend.ToString(), Client);
@@ -458,7 +461,7 @@ namespace netcodeRTS
         public static void SendGameState(int state)
         {
             StringBuilder dataToSend = new StringBuilder();
-            dataToSend.Append(state.ToString());
+            dataToSend.Append(state);
             dataToSend.Append(",");
             SendData((int)PacketType.GAMESTATE, dataToSend.ToString(), Client);
 
@@ -470,13 +473,13 @@ namespace netcodeRTS
             StringBuilder dataToSend = new StringBuilder();
 
             //RESET THIS
-            //dataToSend.Append(player.ToString());
-            dataToSend.Append("1");
+            dataToSend.Append(player);
+            //dataToSend.Append("1");
 
             dataToSend.Append(",");
-            dataToSend.Append(damage.ToString());
+            dataToSend.Append(damage);
             dataToSend.Append(",");
-            dataToSend.Append(culprit.ToString());
+            dataToSend.Append(culprit);
             dataToSend.Append(",");
 
             SendData((int)PacketType.DAMAGEDEALT, dataToSend.ToString(), Client);

@@ -233,7 +233,7 @@ MonoBehaviour:
   halo: {fileID: 0}
   level: 1
   id: 0
-  type: 5
+  type: 4
   destructable: 1
   selected: 0
   healthBar: {fileID: 5602078410055458512}
@@ -242,6 +242,7 @@ MonoBehaviour:
   state: 0
   visionRange: 30
   maxRange: 45
+  shortestDist: 0
   muzzle: {fileID: 0}
   reloadRate: 5
   recoilRate: 0.5

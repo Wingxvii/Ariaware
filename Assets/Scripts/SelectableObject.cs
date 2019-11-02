@@ -11,8 +11,8 @@ public enum EntityType
     Wall,
     Barracks,
     Droid,
-    Player,
     Turret,
+    Player,
 }
 
 //literally just send all instances of this over to make networking work
