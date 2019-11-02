@@ -27,11 +27,11 @@ public class WritePlayerData : WriteBase
         sb.Append(transform.position.x); sb.Append(",");
         sb.Append(transform.position.y); sb.Append(",");
         sb.Append(transform.position.z); sb.Append(",");
-        sb.Append(transform.position.x); sb.Append(",");
-        sb.Append(transform.position.y); sb.Append(",");
-        sb.Append(transform.position.z); sb.Append(",");
-        sb.Append(transform.position.x); sb.Append(",");
+        sb.Append(transform.rotation.eulerAngles.x); sb.Append(",");
+        sb.Append(transform.rotation.eulerAngles.y); sb.Append(",");
+        sb.Append(transform.rotation.eulerAngles.z); sb.Append(",");
+        sb.Append(p.ID); sb.Append(",");
 
-        NET_PACKET.NetworkDataManager.SendNetData()
+        NET_PACKET.NetworkDataManager.SendNetData((int)NET_PACKET.PacketType.PLAYERDATA, sb.ToString());
     }
 }
