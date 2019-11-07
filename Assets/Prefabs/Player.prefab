@@ -63,7 +63,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311159785474871763}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1.138}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6666667, y: 0.666667, z: 0.3333335}
   m_Children:
   - {fileID: 311159785917245855}
@@ -72,7 +72,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.099999994, y: 0.888}
+  m_AnchoredPosition: {x: 0, y: 1.37}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &311159785474871775
@@ -243,7 +243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.09, y: 1.61}
+  m_AnchoredPosition: {x: 0.09, y: -0.01}
   m_SizeDelta: {x: 85.878, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &311159785917245848
@@ -443,6 +443,7 @@ MonoBehaviour:
   destructable: 0
   selected: 0
   healthBar: {fileID: 311159785917245848}
+  canvas: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
   playerTransform: {fileID: 0}

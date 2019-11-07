@@ -177,9 +177,9 @@ MonoBehaviour:
   destructable: 1
   selected: 0
   healthBar: {fileID: 5602078410055458512}
+  canvas: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
-  meshModel: {fileID: 0}
   state: 0
   visionRange: 30
   maxRange: 45
@@ -5108,7 +5108,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7993932040517935505}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0.51}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6666667, y: 0.666667, z: 0.3333335}
   m_Children:
   - {fileID: 3809502347253289420}
@@ -5117,7 +5117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.14, y: 2.06}
+  m_AnchoredPosition: {x: 0, y: 2.14}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3082441220959394005
