@@ -51,15 +51,15 @@ public class Turret : SelectableObject
         turretLayerMask += LayerMask.GetMask("Wall");
 
     }
+
+    protected override void BaseLateUpdate()
+    {
+
+    }
+
+
     protected override void BaseFixedUpdate()
     {
-        if (state != TurretState.Idle)
-        {
-            //calculate rotations
-            var q = Quaternion.LookRotation(faceingPoint - transform.position);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed);
-        }
-
         shortestDist = float.MaxValue;
 
         switch (state)
@@ -193,6 +193,19 @@ public class Turret : SelectableObject
 
     protected override void BaseUpdate()
     {
+        if (state != TurretState.Idle)
+        {
+            Vector3 targetDir = new Vector3(faceingPoint.x - transform.position.x, 0, faceingPoint.z - transform.position.z);
+
+            // The step size is equal to speed times frame time.
+            float step = rotateSpeed * Time.deltaTime;
+
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0f);
+
+            // Move our position a step closer to the target.
+            transform.rotation = Quaternion.LookRotation(newDir);
+        }
+
         if (reloadTimer >= 0.0f)
         {
             reloadTimer -= Time.deltaTime;

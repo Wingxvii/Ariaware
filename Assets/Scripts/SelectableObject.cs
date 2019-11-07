@@ -71,6 +71,7 @@ public class SelectableObject : MonoBehaviour
     private void LateUpdate()
     {
         canvasTransform.eulerAngles = new Vector3(90, 0, 0);
+        BaseLateUpdate();
     }
 
     private void FixedUpdate()
@@ -106,6 +107,7 @@ public class SelectableObject : MonoBehaviour
     //base class overrides
     protected virtual void BaseStart() { }
     protected virtual void BaseUpdate() { }
+    protected virtual void BaseLateUpdate() { }
     protected virtual void BaseFixedUpdate() { }
     protected virtual void BaseOnDestory() { }
     protected virtual void BaseResetValues() { }

@@ -142,7 +142,7 @@ public class SelectionManager : MonoBehaviour
         switch (type)
         {
             case EntityType.Turret:
-                pos = new Vector3(pos.x, 2.0f, pos.z);
+                pos = new Vector3(pos.x, 0.0f, pos.z);
                 return GameObject.Instantiate(RTSManager.Instance.turretPrefab, pos, Quaternion.identity);
             case EntityType.Barracks:
                 pos = new Vector3(pos.x, 1.0f, pos.z);
