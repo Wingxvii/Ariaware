@@ -26,7 +26,9 @@ public class RTSManager : MonoBehaviour
 
     public GameObject turretBlueprint;
     public GameObject turretPrefab;
+    public GameObject barracksBlueprint;
     public GameObject barracksPrefab;
+    public GameObject wallBlueprint;
     public GameObject wallPrefab;
 
     public GameObject moveCursorPrefab;
@@ -61,44 +63,41 @@ public class RTSManager : MonoBehaviour
     public void OnPrefabSelect(int prefab)
     {
         SelectionManager.Instance.OnPrefabCreation();
-        Object.Destroy(prefabObject);
+        prefabObject.SetActive(false);
 
         switch (prefab)
         {
             case 1:
-                prefabObject = (GameObject)Instantiate(turretBlueprint);
+                turretBlueprint.SetActive(true);
+                prefabObject = turretBlueprint;
                 prefabType = EntityType.Turret;
                 break;
             case 2:
-                prefabObject = (GameObject)Instantiate(barracksPrefab);
+                barracksBlueprint.SetActive(true);
+                prefabObject = barracksBlueprint;
                 prefabType = EntityType.Barracks;
                 break;
             case 3:
-                prefabObject = (GameObject)Instantiate(wallPrefab);
+                wallBlueprint.SetActive(true);
+                prefabObject = wallBlueprint;
                 prefabType = EntityType.Wall;
                 break;
         }
-        //define the variable changes required for the prefab
-        //prefabObject.GetComponent<Collider>().enabled = false;
-        //prefabObject.GetComponentInChildren<Collider>().enabled = false;
-        //prefabObject.GetComponentInChildren<Canvas>().enabled = false;
-        //prefabObject.GetComponent<SelectableObject>().enabled = false;
-        //((Behaviour)prefabObject.GetComponent("Halo")).enabled = false;
-        /*
-        if (prefabType == EntityType.Turret)
-        {
-            prefabObject.GetComponentInChildren<ParticleSystem>().Pause();
-        }
-        prefabObject.SetActive(true);
-        */
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        prefabObject = (GameObject)Instantiate(turretPrefab);
-        prefabObject.SetActive(false);
+        turretBlueprint = (GameObject)Instantiate(turretBlueprint);
+        turretBlueprint.SetActive(false);
+        barracksBlueprint = (GameObject)Instantiate(barracksBlueprint);
+        barracksBlueprint.SetActive(false);
+        wallBlueprint = (GameObject)Instantiate(wallBlueprint);
+        wallBlueprint.SetActive(false);
+
+        prefabObject = turretBlueprint;
+
     }
 
     // Update is called once per frame

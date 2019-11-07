@@ -35,8 +35,6 @@ public class SelectableObject : MonoBehaviour
     public int currentHealth = 1;
     public int maxHealth = 1;
 
-    public Transform meshModel;
-
     // Start is called before the first frame update
     void Start()
     {

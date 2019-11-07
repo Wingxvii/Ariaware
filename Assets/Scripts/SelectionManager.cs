@@ -214,10 +214,10 @@ public class SelectionManager : MonoBehaviour
     private void HandleKeys()
     {
 
-        //destroy preset on shift hold up
+        //deactivate preset on shift hold up
         if (Input.GetKeyUp(KeyCode.LeftShift) && currentEvent == MouseEvent.PrefabBuild)
         {
-            Object.Destroy(RTSManager.Instance.prefabObject);
+            RTSManager.Instance.prefabObject.SetActive(false);
             ClearSelection();
         }
 
@@ -262,7 +262,7 @@ public class SelectionManager : MonoBehaviour
             {
                 if (!Input.GetKey(KeyCode.LeftShift))
                 {
-                    Object.Destroy(RTSManager.Instance.prefabObject);
+                    RTSManager.Instance.prefabObject.SetActive(false);
                     ClearSelection();
                 }
 
@@ -289,7 +289,7 @@ public class SelectionManager : MonoBehaviour
                 }
 
                 AnimationManager.Instance.PlayMove(mousePosition);
-                Object.Destroy(RTSManager.Instance.prefabObject);
+                RTSManager.Instance.prefabObject.SetActive(false);
                 currentEvent = MouseEvent.Selection;
 
             }
@@ -326,7 +326,7 @@ public class SelectionManager : MonoBehaviour
                             break;
                     }
                     AnimationManager.Instance.PlayAttack(mousePosition);
-                    Object.Destroy(RTSManager.Instance.prefabObject);
+                    RTSManager.Instance.prefabObject.SetActive(false);
                     currentEvent = MouseEvent.Selection;
                 }
                 else
@@ -348,7 +348,7 @@ public class SelectionManager : MonoBehaviour
                             break;
                     }
                     AnimationManager.Instance.PlayAttack(mousePosition);
-                    Object.Destroy(RTSManager.Instance.prefabObject);
+                    RTSManager.Instance.prefabObject.SetActive(false);
                     currentEvent = MouseEvent.Selection;
                 }
 
@@ -364,7 +364,7 @@ public class SelectionManager : MonoBehaviour
                     }
                 }
 
-                Object.Destroy(RTSManager.Instance.prefabObject);
+                RTSManager.Instance.prefabObject.SetActive(false);
                 currentEvent = MouseEvent.Selection;
 
             }
@@ -436,7 +436,7 @@ public class SelectionManager : MonoBehaviour
         {
             if (currentEvent == MouseEvent.PrefabBuild || currentEvent == MouseEvent.UnitMove || currentEvent == MouseEvent.UnitAttack || currentEvent == MouseEvent.Rally)
             {
-                Object.Destroy(RTSManager.Instance.prefabObject);
+                RTSManager.Instance.prefabObject.SetActive(false);
                 currentEvent = MouseEvent.Selection;
             }
 

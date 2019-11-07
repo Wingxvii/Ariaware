@@ -47,7 +47,6 @@ public class Turret : SelectableObject
         maxHealth = 500;
         turretLayerMask = LayerMask.GetMask("Player");
         turretLayerMask += LayerMask.GetMask("Wall");
-        meshModel = this.transform.Find("ObjectModel");
 
     }
     protected override void BaseFixedUpdate()
@@ -89,7 +88,7 @@ public class Turret : SelectableObject
                 if (shortestDist < maxRange)
                 {
                     state = TurretState.IdleShooting;
-                    meshModel.LookAt(attackPoint.transform.position);
+                    this.transform.LookAt(attackPoint.transform.position);
                     if (currentAmno > 0)
                     {
                         muzzle.Play();
@@ -125,7 +124,7 @@ public class Turret : SelectableObject
                 //look at
                 if (shortestDist < maxRange)
                 {
-                    meshModel.LookAt(attackPoint.transform.position);
+                    this.transform.LookAt(attackPoint.transform.position);
 
                     if (currentAmno > 0)
                     {
@@ -166,7 +165,7 @@ public class Turret : SelectableObject
                 }
 
                 //look at
-                meshModel.LookAt(attackPoint.transform.position);
+                this.transform.LookAt(attackPoint.transform.position);
 
                 if (reloadTimer <= 0.0f)
                 {
