@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectionButton : MonoBehaviour
+namespace RTSUI
 {
-    public EntityType prefabType;
-    public SelectableObject parentObject;
-
-    // Update is called once per frame
-    void Update()
+    public class SelectionButton : MonoBehaviour
     {
-        
-    }
+        public EntityType prefabType;
+        public SelectableObject parentObject;
 
-    public void OnCreate(SelectableObject parentObj) {
-        parentObject = parentObj;
-        prefabType = parentObj.type;
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    public void OnClick()
-    {
-        SelectionUI.Instance.OnElementSelected(this);
-    }
+        }
 
+        public void OnCreate(SelectableObject parentObj)
+        {
+            parentObject = parentObj;
+            prefabType = parentObj.type;
+        }
+
+        public void OnClick()
+        {
+            SelectionUI.Instance.OnElementSelected(this);
+        }
+
+    }
 }

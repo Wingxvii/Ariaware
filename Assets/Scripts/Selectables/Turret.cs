@@ -152,11 +152,10 @@ public class Turret : SelectableObject
                         reloadTimer += reloadRate;
                         state = TurretState.Reloading;
                     }
-
                 }
                 else
                 {
-                        state = TurretState.Idle;
+                    state = TurretState.Idle;
                 }
 
                 break;
