@@ -681,7 +681,7 @@ MonoBehaviour:
   destructable: 1
   selected: 0
   healthBar: {fileID: 5579517486079486857}
-  canvas: {fileID: 0}
+  canvas: {fileID: 5614229466656179386}
   currentHealth: 1
   maxHealth: 1
   buildProcess: {fileID: 5113889428305574001}

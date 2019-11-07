@@ -65,6 +65,7 @@ public class Droid : SelectableObject
                 else
                 {
                     MoveTo(new Vector2(journeyPoint.x, journeyPoint.z));
+                   
                 }
                 break;
             case DroidState.TargetAttacking:
@@ -170,6 +171,7 @@ public class Droid : SelectableObject
 
     //unique classes
     public void MoveTo(Vector2 pos) {
+        this.transform.LookAt(journeyPoint);
 
         Vector2 dir = new Vector2(pos.x - this.transform.position.x, pos.y - this.transform.position.z).normalized;
         selfRigid.velocity = new Vector3(dir.x, 0, dir.y) * maxSpeed;

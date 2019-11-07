@@ -31,7 +31,7 @@ public class SelectableObject : MonoBehaviour
 
     public bool selected = false;
     public Slider healthBar;
-    public Transform canvas;
+    public RectTransform canvasTransform;
 
     public int currentHealth = 1;
     public int maxHealth = 1;
@@ -41,12 +41,13 @@ public class SelectableObject : MonoBehaviour
     {
         halo = (Behaviour)this.GetComponent("Halo");
         halo.enabled = false;
-        canvas = this.transform.Find("Canvas");
+        canvasTransform = this.transform.Find("Canvas").GetComponent<RectTransform>();
 
         id = ++idtracker;
         indexedList.Add(this);
         //call base function
         BaseStart();
+
     }
 
     public void OnSelect()
@@ -63,7 +64,7 @@ public class SelectableObject : MonoBehaviour
     private void Update()
     {
         healthBar.value = (float)currentHealth / (float)maxHealth;
-        canvas.eulerAngles = new Vector3(90,0,0);
+        canvasTransform.eulerAngles = new Vector3(90,0,0);
         //call base function
         BaseUpdate();
     }
