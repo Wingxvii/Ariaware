@@ -177,7 +177,7 @@ MonoBehaviour:
   destructable: 1
   selected: 0
   healthBar: {fileID: 5602078410055458512}
-  canvas: {fileID: 0}
+  canvasTransform: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
   state: 0
@@ -192,6 +192,8 @@ MonoBehaviour:
   accuracy: 0.75
   reloadTimer: 0
   currentAmno: 10
+  rotateSpeed: 4
+  faceingPoint: {x: 0, y: 0, z: 0}
   turretLayerMask:
     serializedVersion: 2
     m_Bits: 768

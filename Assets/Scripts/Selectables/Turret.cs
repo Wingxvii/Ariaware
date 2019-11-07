@@ -33,8 +33,10 @@ public class Turret : SelectableObject
 
     public float reloadTimer = 0.0f;
     public int currentAmno = 10;
-    
 
+    //rotation
+    public float rotateSpeed;
+    public Vector3 faceingPoint = new Vector3(0, 0, 0);
 
     //hit ray
     private RaycastHit hit;
@@ -51,6 +53,12 @@ public class Turret : SelectableObject
     }
     protected override void BaseFixedUpdate()
     {
+        if (state != TurretState.Idle)
+        {
+            //calculate rotations
+            var q = Quaternion.LookRotation(faceingPoint - transform.position);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed);
+        }
 
         shortestDist = float.MaxValue;
 
@@ -88,7 +96,7 @@ public class Turret : SelectableObject
                 if (shortestDist < maxRange)
                 {
                     state = TurretState.IdleShooting;
-                    this.transform.LookAt(attackPoint.transform.position);
+                    faceingPoint = attackPoint.transform.position;
                     if (currentAmno > 0)
                     {
                         muzzle.Play();
@@ -124,7 +132,7 @@ public class Turret : SelectableObject
                 //look at
                 if (shortestDist < maxRange)
                 {
-                    this.transform.LookAt(attackPoint.transform.position);
+                    faceingPoint = attackPoint.transform.position;
 
                     if (currentAmno > 0)
                     {
@@ -165,7 +173,7 @@ public class Turret : SelectableObject
                 }
 
                 //look at
-                this.transform.LookAt(attackPoint.transform.position);
+                faceingPoint = attackPoint.transform.position;
 
                 if (reloadTimer <= 0.0f)
                 {

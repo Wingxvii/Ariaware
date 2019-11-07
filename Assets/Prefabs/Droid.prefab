@@ -225,7 +225,7 @@ MonoBehaviour:
   destructable: 1
   selected: 0
   healthBar: {fileID: 5842039648812889439}
-  canvas: {fileID: 0}
+  canvasTransform: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
   maxSpeed: 10
@@ -236,6 +236,8 @@ MonoBehaviour:
   coolDown: 1
   currentCoolDown: 0
   visualRange: 30
+  rotateSpeed: 6
+  faceingPoint: {x: 0, y: 0, z: 0}
 --- !u!54 &7709805804806494388
 Rigidbody:
   m_ObjectHideFlags: 0

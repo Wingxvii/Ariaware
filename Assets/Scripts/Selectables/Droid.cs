@@ -28,6 +28,12 @@ public class Droid : SelectableObject
     public float currentCoolDown = 0.0f;
 
     public float visualRange = 20.0f;
+
+    //rotation
+    public float rotateSpeed;
+    public Vector3 faceingPoint = new Vector3(0, 0, 0);
+
+
     protected override void BaseStart()
     {
 
@@ -39,6 +45,12 @@ public class Droid : SelectableObject
 
     protected override void BaseUpdate()
     {
+        if (state != DroidState.Standing) { 
+            //calculate rotations
+            var q = Quaternion.LookRotation(faceingPoint - transform.position);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, rotateSpeed);
+        } 
+
         //tick attack cooldown
         if (currentCoolDown > 0.0f) {
             currentCoolDown -= Time.deltaTime;
@@ -171,7 +183,7 @@ public class Droid : SelectableObject
 
     //unique classes
     public void MoveTo(Vector2 pos) {
-        this.transform.LookAt(journeyPoint);
+        faceingPoint = journeyPoint;
 
         Vector2 dir = new Vector2(pos.x - this.transform.position.x, pos.y - this.transform.position.z).normalized;
         selfRigid.velocity = new Vector3(dir.x, 0, dir.y) * maxSpeed;

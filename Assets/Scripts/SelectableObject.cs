@@ -64,9 +64,13 @@ public class SelectableObject : MonoBehaviour
     private void Update()
     {
         healthBar.value = (float)currentHealth / (float)maxHealth;
-        canvasTransform.eulerAngles = new Vector3(90,0,0);
         //call base function
         BaseUpdate();
+    }
+
+    private void LateUpdate()
+    {
+        canvasTransform.eulerAngles = new Vector3(90, 0, 0);
     }
 
     private void FixedUpdate()
