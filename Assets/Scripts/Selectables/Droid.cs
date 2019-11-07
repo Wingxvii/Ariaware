@@ -30,6 +30,7 @@ public class Droid : SelectableObject
     public float visualRange = 20.0f;
     protected override void BaseStart()
     {
+
         selfRigid = this.GetComponent<Rigidbody>();
         currentHealth = 100;
         maxHealth = 100;

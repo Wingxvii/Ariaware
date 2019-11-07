@@ -72,8 +72,8 @@ public class SelectionManager : MonoBehaviour
             AllObjects.Add(player.GetComponent<SelectableObject>());
         }
 
-        selectables = LayerMask.GetMask("Default");
-        selectables += LayerMask.GetMask("Player");
+        //selectables = LayerMask.GetMask("Default");
+        selectables = LayerMask.GetMask("Player");
         selectables += LayerMask.GetMask("Background");
         selectables += LayerMask.GetMask("Wall");
         selectables += LayerMask.GetMask("Turret");
@@ -266,7 +266,7 @@ public class SelectionManager : MonoBehaviour
                     ClearSelection();
                 }
 
-                if (ResourceManager.Instance.Purchase(RTSManager.Instance.prefabObject.GetComponent<SelectableObject>().type))
+                if (ResourceManager.Instance.Purchase(RTSManager.Instance.prefabType))
                 {
 
                     RTSManager.Instance.OnPlace(UseFactoryPattern(mousePosition, RTSManager.Instance.prefabType));

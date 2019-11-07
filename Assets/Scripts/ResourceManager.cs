@@ -14,7 +14,6 @@ public static class ResourceConstants {
 
     public const bool CREDITS_OFF = true;
     public const bool UNKILLABLEPLAYER = true;
-
 }
 
 public class ResourceManager : MonoBehaviour

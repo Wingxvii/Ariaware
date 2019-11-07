@@ -2780,7 +2780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabObject: {fileID: 0}
   prefabType: 0
-  turretPrefab: {fileID: 5508097730102920826, guid: 529508816a634614b898583372ae9b5c,
+  turretPrefab: {fileID: 1436627955740270682, guid: 59f234e42d154974f9442df9747bfa4a,
     type: 3}
   barracksPrefab: {fileID: 5243640246768292037, guid: cd8126f404d7ca9439d766667b571fd4,
     type: 3}

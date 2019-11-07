@@ -24,6 +24,7 @@ public class RTSManager : MonoBehaviour
     public GameObject prefabObject;
     public EntityType prefabType;
 
+    public GameObject turretBlueprint;
     public GameObject turretPrefab;
     public GameObject barracksPrefab;
     public GameObject wallPrefab;
@@ -65,7 +66,7 @@ public class RTSManager : MonoBehaviour
         switch (prefab)
         {
             case 1:
-                prefabObject = (GameObject)Instantiate(turretPrefab);
+                prefabObject = (GameObject)Instantiate(turretBlueprint);
                 prefabType = EntityType.Turret;
                 break;
             case 2:
@@ -78,15 +79,18 @@ public class RTSManager : MonoBehaviour
                 break;
         }
         //define the variable changes required for the prefab
-        prefabObject.GetComponent<Collider>().enabled = false;
-        prefabObject.GetComponentInChildren<Canvas>().enabled = false;
-        prefabObject.GetComponent<SelectableObject>().enabled = false;
-        ((Behaviour)prefabObject.GetComponent("Halo")).enabled = false;
+        //prefabObject.GetComponent<Collider>().enabled = false;
+        //prefabObject.GetComponentInChildren<Collider>().enabled = false;
+        //prefabObject.GetComponentInChildren<Canvas>().enabled = false;
+        //prefabObject.GetComponent<SelectableObject>().enabled = false;
+        //((Behaviour)prefabObject.GetComponent("Halo")).enabled = false;
+        /*
         if (prefabType == EntityType.Turret)
         {
             prefabObject.GetComponentInChildren<ParticleSystem>().Pause();
         }
         prefabObject.SetActive(true);
+        */
     }
 
 
