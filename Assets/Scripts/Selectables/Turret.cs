@@ -100,7 +100,7 @@ public class Turret : SelectableObject
                     if (currentAmno > 0)
                     {
                         muzzle.Play();
-                        if (!HitWall() && accuracy - (shortestDist / 100.0f) > Random.Range(0.0f, 1.0f))
+                        if (HitPlayer())
                         {
                             attackPoint.OnDamage(attackDamage, this);
                         }
@@ -138,7 +138,7 @@ public class Turret : SelectableObject
                     {
                         muzzle.Play();
 
-                        if (!HitWall() && accuracy - (shortestDist / 100.0f) > Random.Range(0.0f, 1.0f))
+                        if (HitPlayer())
                         {
                             attackPoint.OnDamage(attackDamage, this);
                         }
@@ -231,19 +231,19 @@ public class Turret : SelectableObject
     }
 
 
-    private bool HitWall() {
-        if (Physics.Raycast(this.transform.position, (attackPoint.transform.position - this.transform.position), out hit, maxRange, turretLayerMask))
+    private bool HitPlayer() {
+        if (Physics.Raycast(this.transform.position, transform.forward , out hit, maxRange, turretLayerMask))
         {
             if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Wall)
             {
                 Debug.Log("Hit Wall");
                 hit.transform.GetComponent<Wall>().WallIsHit(hit.point);
                 hit.transform.GetComponent<Wall>().OnDamage(attackDamage, this);
-                return true;
+                return false;
             }
             else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player) {
                 Debug.Log("Hit Player");
-                return false;
+                return true;
             }
             else
             {
