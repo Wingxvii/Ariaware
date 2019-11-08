@@ -122,6 +122,31 @@ namespace RTSManagers
                     return false;
             }
         }
+
+        public void Refund(EntityType type)
+        {
+            switch (type)
+            {
+                case EntityType.Barracks:
+                    credits += ResourceConstants.COST_BARRACKS;
+                    break;
+                case EntityType.Droid:
+                    credits += ResourceConstants.COST_DROIDS;
+                    supplyCurrent--;
+                    break;
+                case EntityType.Turret:
+                    credits += ResourceConstants.COST_TURRERT;
+                    break;
+                case EntityType.Wall:
+                    credits += ResourceConstants.COST_WALL;
+                    break;
+                default:
+                    Debug.Log("REFUND ERROR");
+                    break;
+            }
+        }
+
+
         public void UpdateSupply()
         {
             totalSupply = numBarracksActive * ResourceConstants.SUPPLY_PER_BARRACKS;
