@@ -28,7 +28,7 @@ public class Barracks : SelectableObject
         buildProcess.gameObject.SetActive(false);
 
         buildTimes = new Queue<float>();
-
+        
         //create a flag from the prefab
         flagObj = Instantiate(flagObj, Vector3.zero, Quaternion.identity);
         flagObj.SetActive(false);
@@ -91,9 +91,16 @@ public class Barracks : SelectableObject
 
     //child-sepific functions
     public void OnTrainRequest() {
-        if (ResourceManager.Instance.Purchase(EntityType.Droid))
+        if (ResourceManager.Instance.Purchase(EntityType.Droid) && buildTimes.Count < 20)
         {
             buildTimes.Enqueue(DroidManager.Instance.RequestQueue(EntityType.Droid));
+        }
+        else if (buildTimes.Count >= 20)
+        {
+            Debug.Log("QUEUE IS FULL");
+        }
+        else {
+            Debug.Log("NOT ENOUGH CREDITS");
         }
     }
     public override void OnDeath()
