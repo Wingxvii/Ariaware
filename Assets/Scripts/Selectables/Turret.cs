@@ -12,7 +12,6 @@ public enum TurretState
     Reloading,
 }
 
-
 public class Turret : SelectableObject
 {
     public TurretState state = TurretState.Idle;

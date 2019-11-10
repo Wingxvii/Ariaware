@@ -912,13 +912,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b94b6dd5067fa8468c4470e2f16382b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonPrefab: {fileID: 1420409244201435278, guid: 46107a3739fa89243beb02a2c6d00b44,
+  ButtonPrefab: {fileID: 1420409244201435278, guid: ee13b41c5455c0947abacae0e374f9e7,
     type: 3}
   buildProcess: {fileID: 561522953}
   UIParent: {fileID: 278254554}
-  XStart: -200
+  XStart: 210
   XOffset: -15
-  numOfCols: 20
+  numOfCols: 24
   YStart: -6.5
   YOffset: 0
   numOfRows: 1
@@ -1815,7 +1815,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1555530742}
   m_HandleRect: {fileID: 0}
@@ -6623,8 +6623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -975, y: -22}
-  m_SizeDelta: {x: 160, y: 88.42}
+  m_AnchoredPosition: {x: -851.14, y: -22}
+  m_SizeDelta: {x: 407.72, y: 88.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2129753658
 MonoBehaviour:

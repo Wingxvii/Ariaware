@@ -59,6 +59,7 @@ namespace RTSUI
                         EnableUI(UIBarracks);
                         GetStats(UIBarracks, SelectionManager.Instance.PrimarySelectable);
                         break;
+
                     case EntityType.Droid:
                         EnableUI(UIDroid);
                         GetStats(UIDroid, SelectionManager.Instance.PrimarySelectable);

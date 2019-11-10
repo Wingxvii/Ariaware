@@ -5,7 +5,6 @@ using netcodeRTS;
 
 namespace RTSManagers
 {
-
     public class RTSManager : MonoBehaviour
     {
         #region SingletonCode

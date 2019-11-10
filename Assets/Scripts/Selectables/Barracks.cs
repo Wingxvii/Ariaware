@@ -91,11 +91,11 @@ public class Barracks : SelectableObject
 
     //child-sepific functions
     public void OnTrainRequest() {
-        if (ResourceManager.Instance.Purchase(EntityType.Droid) && buildTimes.Count < 20)
+        if (ResourceManager.Instance.Purchase(EntityType.Droid) && buildTimes.Count < 25)
         {
             buildTimes.Enqueue(DroidManager.Instance.RequestQueue(EntityType.Droid));
         }
-        else if (buildTimes.Count >= 20)
+        else if (buildTimes.Count >= 25)
         {
             Debug.Log("QUEUE IS FULL");
         }

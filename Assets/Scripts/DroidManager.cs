@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using netcodeRTS;
 using RTSManagers;
+using RTSUI;
 
-public enum DroidType {
+public enum DroidType
+{
     Base,
 }
+
 public class DroidManager : MonoBehaviour
 {
     #region SingletonCode
