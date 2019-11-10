@@ -443,6 +443,8 @@ namespace netcodeRTS
             dataToSend.Append(obj.transform.position.z);
             dataToSend.Append(",");
 
+            //Debug.Log(dataToSend.ToString());
+
             SendData((int)PacketType.BUILD, dataToSend.ToString(), Client);
         }
 

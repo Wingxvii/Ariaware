@@ -101,6 +101,8 @@ public class SelectableObject : MonoBehaviour
     {
         this.gameObject.transform.position = Vector3.zero;
         this.gameObject.transform.rotation = Quaternion.identity;
+        this.currentHealth = maxHealth;
+        this.level = 1;
 
         BaseResetValues();
     }
@@ -123,8 +125,9 @@ public class SelectableObject : MonoBehaviour
         OnDeactivation();
         NetworkManager.SendKilledEntity(this);
         SelectionManager.Instance.DeselectItem(this);
-        SelectionManager.Instance.AllObjects.Remove(this);
-        Object.Destroy(this.gameObject);
+        //SelectionManager.Instance.AllObjects.Remove(this);
+        gameObject.SetActive(false);
+        //Object.Destroy(this.gameObject);
     }
 
 }

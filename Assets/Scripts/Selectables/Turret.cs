@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RTSManagers;
 
 public enum TurretState
 {
@@ -225,6 +226,7 @@ public class Turret : SelectableObject
     public override void OnDeath()
     {
         Debug.Log("Dead Turret");
+        SelectionManager.Instance.deactivatedObjects[0].Enqueue(this);
         base.OnDeath();
     }
 

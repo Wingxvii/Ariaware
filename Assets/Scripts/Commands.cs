@@ -30,7 +30,6 @@ class AddCommand : ICommand
     {
         buildingElement.gameObject.SetActive(true);
         buildingElement.OnActivation();
-        SelectionManager.Instance.AllObjects.Add(buildingElement);
         done = true;
     }
     public void UnExecuteAction()
