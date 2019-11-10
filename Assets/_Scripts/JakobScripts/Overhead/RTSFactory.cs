@@ -8,7 +8,7 @@ public class RTSFactory : InitializableObject
 
     Queue<EntityContainer>[] InactiveContainers;
 
-    List<EntityContainer> allContainers;
+    public List<EntityContainer> allContainers;
     //int listIter = 0;
     public int BatchAmount = 1;
 
@@ -24,17 +24,27 @@ public class RTSFactory : InitializableObject
                 InactiveContainers[i] = new Queue<EntityContainer>();
             }
 
+            for (int i = 0; i < 3; ++i)
+            {
+                allContainers.Add(null);
+            }
+
             return true;
         }
 
         return false;
     }
 
-    public EntityContainer SpawnObject(EntityType et, Vector3 position)
+    public EntityContainer SpawnObject(EntityType et, int requestedID, Vector3 position)
     {
-        int nextID = FetchInactiveContainer(et);
+        //Debug.Log(allContainers.Count);
+        int nextID = -1;
+        nextID = FetchInactiveContainer(et);
+
+        //Debug.Log(nextID);
         EntityContainer reference = allContainers[nextID];
         reference.gameObject.SetActive(true);
+        reference.transform.SetParent(null);
         reference.transform.position = position;
         reference.transform.rotation = Quaternion.identity;
 
@@ -84,7 +94,7 @@ public class RTSFactory : InitializableObject
             GenerateNewContainers(et);
         }
 
-        return InactiveContainers[(int)et].Dequeue().ID;
+        return InactiveContainers[(int)et].Dequeue().ID - 1;
     }
 
     void GenerateNewContainers(EntityType et)
@@ -112,12 +122,13 @@ public class RTSFactory : InitializableObject
         {
             EntityContainer reference = Instantiate(prefabList[inst]);
 
-            reference.ID = allContainers.Count;
+            reference.ID = allContainers.Count + 1;
             reference.et = et;
             reference.transform.SetParent(transform);
+            //Debug.Log(reference.ID);
 
             allContainers.Add(reference);
-            InactiveContainers[(int)et].Enqueue(Instantiate(prefabList[inst]));
+            InactiveContainers[(int)et].Enqueue(reference);
         }
     }
 
@@ -141,8 +152,8 @@ public class RTSFactory : InitializableObject
         //    }
         //}
 
-        allContainers[id].gameObject.SetActive(false);
-        allContainers[id].transform.SetParent(transform);
-        InactiveContainers[(int)allContainers[id].et].Enqueue(allContainers[id]);
+        allContainers[id - 1].gameObject.SetActive(false);
+        allContainers[id - 1].transform.SetParent(transform);
+        InactiveContainers[(int)allContainers[id - 1].et].Enqueue(allContainers[id - 1]);
     }
 }

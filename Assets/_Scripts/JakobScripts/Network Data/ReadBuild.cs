@@ -58,7 +58,7 @@ public class ReadBuild : ReadBase
 
         while (Build.Count > 0)
         {
-            RTSF.SpawnObject((EntityType)Build.Peek().type, Build.Peek().position);
+            RTSF.SpawnObject((EntityType)Build.Peek().type, (int)Build.Peek().ID, Build.Peek().position);
             Build.Dequeue();
         }
     }

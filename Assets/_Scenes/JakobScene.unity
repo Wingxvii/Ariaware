@@ -1602,9 +1602,9 @@ MonoBehaviour:
     cName: 0
     cNum: 0
     allChannelNums: 0
-  acceleration: 50
-  airborneAcceleration: 5
-  globalSpeedLimit: 4
+  acceleration: 300
+  airborneAcceleration: 60
+  globalSpeedLimit: 40
   axisSpeedLimits: {x: 0, y: 100, z: 0}
   tilt: 1
 --- !u!114 &662140479
@@ -1624,8 +1624,8 @@ MonoBehaviour:
     cName: 0
     cNum: 0
     allChannelNums: 0
-  jumpForce: 300
-  globalSpeedLimit: 4
+  jumpForce: 1200
+  globalSpeedLimit: 40
   axisSpeedLimits: {x: 0, y: 100, z: 0}
   tilt: 1
 --- !u!114 &662140480
@@ -2066,7 +2066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &820798099
 Transform:
   m_ObjectHideFlags: 0
@@ -2284,6 +2284,8 @@ MonoBehaviour:
   - {fileID: 2453387009412316863, guid: 216c7d19adf9c144384a1f52a4dcb9f2, type: 3}
   - {fileID: 257337023182453201, guid: 15ae635c1a869c44d81a6a9683fe8640, type: 3}
   - {fileID: 2859891266663086089, guid: fa97bbac8c68cb145b062e044d428ac9, type: 3}
+  allContainers: []
+  BatchAmount: 1
 --- !u!114 &879297955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3967,7 +3969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e38f09ff8a99d44a9e105819fe4357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 10.10.120.11
+  ip: 169.254.230.4
 --- !u!4 &1855617077
 Transform:
   m_ObjectHideFlags: 0
@@ -4565,7 +4567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df60d2ba35f6344283a988361abfcda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 1
   sendData: 0
 --- !u!4 &2132504759
 Transform:

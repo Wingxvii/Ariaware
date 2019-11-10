@@ -17,6 +17,7 @@ public class Body : Puppet
     public JoinedList<Body, Inventory> inventories;
 
     public uint pState = (int)(PlayerState.Alive);
+    //public float IDENT_VELOCITY = 0f;
 
     protected override bool CreateVars()
     {

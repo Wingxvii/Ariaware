@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Runtime.InteropServices;
-using System;
+using UnityEngine;
 
 namespace NET_PACKET
 {
@@ -121,14 +120,14 @@ namespace NET_PACKET
         const int droidMax = 100;
         const int FPSmax = 3;
 
-        public static List<ReadBuild>           builds { get; protected set; }
-        public static List<ReadDamagePlayer>    damagesPlayer { get; protected set; }
-        public static List<ReadDamageNPC>       damagesNPC { get; protected set; }
-        public static List<ReadDroid>           droids { get; protected set; }
-        public static List<ReadGameState>       gameStates { get; protected set; }
-        public static List<ReadKilled>          kills { get; protected set; }
-        public static List<ReadPlayerData>      playersData { get; protected set; }
-        public static List<ReadWeaponSwitch>    weaponsSwitch { get; protected set; }
+        public static List<ReadBuild> builds { get; protected set; }
+        public static List<ReadDamagePlayer> damagesPlayer { get; protected set; }
+        public static List<ReadDamageNPC> damagesNPC { get; protected set; }
+        public static List<ReadDroid> droids { get; protected set; }
+        public static List<ReadGameState> gameStates { get; protected set; }
+        public static List<ReadKilled> kills { get; protected set; }
+        public static List<ReadPlayerData> playersData { get; protected set; }
+        public static List<ReadWeaponSwitch> weaponsSwitch { get; protected set; }
 
         #region Netcode
 
@@ -227,11 +226,11 @@ namespace NET_PACKET
 
                 }
 
-               //AddFirst();
-               //AddSecond();
-               //AddThird();
-               //AddFourth();
-               //AddFifth();
+                //AddFirst();
+                //AddSecond();
+                //AddThird();
+                //AddFourth();
+                //AddFifth();
 
                 return true;
             }
@@ -274,7 +273,7 @@ namespace NET_PACKET
 
         public void ChugDamagePlayerQueue()
         {
-            while(damagePlayer.Count > 0)
+            while (damagePlayer.Count > 0)
             {
                 for (int j = 0; j < damagesPlayer.Count; ++j)
                 {
@@ -398,16 +397,17 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.DAMAGEDEALT:
-                    if (sender == 1 && parsedData.Length != 4)
+                    if (sender == 1 && (parsedData.Length != 4 || parsedData.Length != 3))
                     {
+                        Debug.Log(parsedData.Length);
                         Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
                         Debug.Break();
                     }
-                    else if (parsedData.Length != 3)
-                    {
-                        Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
-                        Debug.Break();
-                    }
+                    //else if (parsedData.Length != 3)
+                    //{
+                    //    Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
+                    //    Debug.Break();
+                    //}
                     if (sender == 1)
                     {
                         DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]), int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
