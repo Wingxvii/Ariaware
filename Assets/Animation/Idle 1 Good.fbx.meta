@@ -1,0 +1,600 @@
+fileFormatVersion: 2
+guid: 85c189cf66668a9418cd08cdc5c0ca89
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      74: -515054513200535320
+    second: Idle 1 Good
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Idle 1 Good' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'Alex:ChestNull' has translation animation that
+      will be discarded.\n\t'Alex:HeadNull' has translation animation that will be
+      discarded.\n\t'Alex:LHandNull' has translation animation that will be discarded.\n\t'Alex:RHandNull'
+      has translation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle 1 Good
+      takeName: Idle 1 Good
+      internalID: 0
+      firstFrame: 236
+      lastFrame: 729
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Alex:HipNull
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LThighNull
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RThighNull
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LShinNull
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RShinNull
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LFootNull
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RFootNull
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:AbNull
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:ChestNull
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:NeckNull
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:HeadNull
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LShoulderNull
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RShoulderNull
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LUArmNull
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RUArmNull
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LFArmNull
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RFArmNull
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LHandNull
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RHandNull
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:LToeNull
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Alex:RToeNull
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Idle 1 Good(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:optical
+      parentName: Idle 1 Good(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_WaistLFront
+      parentName: C3D:optical
+      position: {x: 0.00661, y: 0.99008, z: 0.12687}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_WaistRFront
+      parentName: C3D:optical
+      position: {x: 0.03244, y: 0.99458, z: -0.14971}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_WaistLBack
+      parentName: C3D:optical
+      position: {x: -0.16837999, y: 0.98026, z: 0.08409999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_WaistRBack
+      parentName: C3D:optical
+      position: {x: -0.14927, y: 0.97679, z: -0.15529999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_BackTop
+      parentName: C3D:optical
+      position: {x: -0.15906, y: 1.43251, z: -0.029849999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_Chest
+      parentName: C3D:optical
+      position: {x: 0.06808, y: 1.26299, z: 0.01574}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_BackLeft
+      parentName: C3D:optical
+      position: {x: -0.19839, y: 1.26036, z: 0.04519}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_BackRight
+      parentName: C3D:optical
+      position: {x: -0.19128999, y: 1.27166, z: -0.11151}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_HeadTop
+      parentName: C3D:optical
+      position: {x: -0.0405, y: 1.71024, z: -0.026849998}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_HeadFront
+      parentName: C3D:optical
+      position: {x: 0.07403, y: 1.68309, z: -0.03992}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_HeadSide
+      parentName: C3D:optical
+      position: {x: -0.07236, y: 1.6059899, z: -0.11444}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LShoulderBack
+      parentName: C3D:optical
+      position: {x: -0.16228999, y: 1.38567, z: 0.13428}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LShoulderTop
+      parentName: C3D:optical
+      position: {x: -0.0602, y: 1.43778, z: 0.094359994}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LElbowOut
+      parentName: C3D:optical
+      position: {x: -0.080369994, y: 1.3288299, z: 0.40355}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LUArmHigh
+      parentName: C3D:optical
+      position: {x: -0.10516, y: 1.30616, z: 0.24468999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LHandOut
+      parentName: C3D:optical
+      position: {x: 0.01567, y: 1.3604499, z: 0.70769995}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LWristOut
+      parentName: C3D:optical
+      position: {x: -0.01513, y: 1.3442999, z: 0.63104}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LWristIn
+      parentName: C3D:optical
+      position: {x: 0.07619999, y: 1.35565, z: 0.61701}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RShoulderBack
+      parentName: C3D:optical
+      position: {x: -0.16274999, y: 1.37303, z: -0.18135}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RShoulderTop
+      parentName: C3D:optical
+      position: {x: -0.04261, y: 1.4414799, z: -0.12615}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RElbowOut
+      parentName: C3D:optical
+      position: {x: -0.08564, y: 1.40283, z: -0.46818998}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RUArmHigh
+      parentName: C3D:optical
+      position: {x: -0.10364, y: 1.3332001, z: -0.30791}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RHandOut
+      parentName: C3D:optical
+      position: {x: -0.024159998, y: 1.4319501, z: -0.76014}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RWristOut
+      parentName: C3D:optical
+      position: {x: -0.030380001, y: 1.42979, z: -0.69441}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RWristIn
+      parentName: C3D:optical
+      position: {x: 0.04952, y: 1.4210099, z: -0.68231}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LKneeOut
+      parentName: C3D:optical
+      position: {x: -0.086109996, y: 0.51251, z: 0.15256}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LThigh
+      parentName: C3D:optical
+      position: {x: 0.01877, y: 0.70358, z: 0.13998}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LAnkleOut
+      parentName: C3D:optical
+      position: {x: -0.118319996, y: 0.06736, z: 0.13336}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LShin
+      parentName: C3D:optical
+      position: {x: -0.0345, y: 0.23160999, z: 0.10418999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LToeOut
+      parentName: C3D:optical
+      position: {x: -0.0191, y: 0.040409997, z: 0.15367}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_LToeIn
+      parentName: C3D:optical
+      position: {x: 0.0016699999, y: 0.05577, z: 0.06461}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RKneeOut
+      parentName: C3D:optical
+      position: {x: -0.07913, y: 0.4993, z: -0.18122}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RThigh
+      parentName: C3D:optical
+      position: {x: 0.01878, y: 0.62333, z: -0.10998999}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RAnkleOut
+      parentName: C3D:optical
+      position: {x: -0.114420004, y: 0.049359996, z: -0.13662}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RShin
+      parentName: C3D:optical
+      position: {x: -0.040419996, y: 0.32410997, z: -0.12691}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RToeOut
+      parentName: C3D:optical
+      position: {x: -0.040430002, y: 0.03821, z: -0.14983}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C3D:Alex_RToeIn
+      parentName: C3D:optical
+      position: {x: -0.0005, y: 0.06118, z: -0.06933}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:HipNull
+      parentName: Idle 1 Good(Clone)
+      position: {x: -0.000000007450581, y: 0.92385495, z: -0.01628}
+      rotation: {x: -0.03327371, y: -0.0027369505, z: -0.020523136, w: 0.9992318}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:AbNull
+      parentName: Alex:HipNull
+      position: {x: -0, y: 0.07619999, z: 0}
+      rotation: {x: 0.038778886, y: 0.018113786, z: 0.009564106, w: 0.99903786}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:ChestNull
+      parentName: Alex:AbNull
+      position: {x: -0, y: 0.20420998, z: 0}
+      rotation: {x: 0.007286475, y: 0.006058219, z: 0.03243757, w: 0.99942887}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:NeckNull
+      parentName: Alex:ChestNull
+      position: {x: -0, y: 0.21212, z: 0}
+      rotation: {x: 0.00663153, y: 0.13080539, z: -0.04812495, w: 0.99021715}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:HeadNull
+      parentName: Alex:NeckNull
+      position: {x: -0, y: 0.13682999, z: 0.017649999}
+      rotation: {x: -0.004597063, y: 0.12461532, z: 0.033093322, w: 0.9916425}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LShoulderNull
+      parentName: Alex:ChestNull
+      position: {x: -0.037219997, y: 0.16955999, z: -0.00064000004}
+      rotation: {x: 0.015438038, y: -0.033574272, z: -0.15359552, w: 0.9874426}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LUArmNull
+      parentName: Alex:LShoulderNull
+      position: {x: -0.12884, y: 0, z: 0}
+      rotation: {x: -0.0060869525, y: 0.047795657, z: 0.14586145, w: 0.9881311}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LFArmNull
+      parentName: Alex:LUArmNull
+      position: {x: -0.28796, y: 0, z: 0}
+      rotation: {x: -0.045044117, y: 0.0073087597, z: -0.0083267, w: 0.99892354}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LHandNull
+      parentName: Alex:LFArmNull
+      position: {x: -0.22221, y: 0, z: 0}
+      rotation: {x: -0.044943288, y: -0.023773644, z: -0.028016731, w: 0.9983136}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RShoulderNull
+      parentName: Alex:ChestNull
+      position: {x: 0.03707, y: 0.16955999, z: -0.00064000004}
+      rotation: {x: 0.021278957, y: -0.009281077, z: 0.13386588, w: 0.99072754}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RUArmNull
+      parentName: Alex:RShoulderNull
+      position: {x: 0.12884, y: 0, z: 0}
+      rotation: {x: 0.038700648, y: -0.038354434, z: -0.11383669, w: 0.9920042}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RFArmNull
+      parentName: Alex:RUArmNull
+      position: {x: 0.28796, y: 0, z: 0}
+      rotation: {x: -0.017636217, y: 0.01051158, z: 0.002531921, w: 0.999786}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RHandNull
+      parentName: Alex:RFArmNull
+      position: {x: 0.22511, y: 0, z: 0}
+      rotation: {x: -0.017576654, y: 0.044913, z: 0.06984327, w: 0.9963914}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LThighNull
+      parentName: Alex:HipNull
+      position: {x: -0.09292, y: 0, z: 0}
+      rotation: {x: 0.0410204, y: 0.031120578, z: 0.0032416545, w: 0.9986683}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LShinNull
+      parentName: Alex:LThighNull
+      position: {x: -0, y: -0.39941, z: 0}
+      rotation: {x: 0.02320869, y: -0.03683931, z: 0.02721976, w: 0.99868083}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LFootNull
+      parentName: Alex:LShinNull
+      position: {x: -0, y: -0.44345, z: 0}
+      rotation: {x: -0.026563006, y: -0.010867932, z: -0.032503936, w: 0.99905944}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:LToeNull
+      parentName: Alex:LFootNull
+      position: {x: -0, y: -0.060399998, z: 0.13938}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RThighNull
+      parentName: Alex:HipNull
+      position: {x: 0.09292, y: 0, z: 0}
+      rotation: {x: 0.054454897, y: 0.052213356, z: 0.054705944, w: 0.9956484}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RShinNull
+      parentName: Alex:RThighNull
+      position: {x: -0, y: -0.39941, z: 0}
+      rotation: {x: 0.017891003, y: -0.016744936, z: -0.0546428, w: 0.99820524}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RFootNull
+      parentName: Alex:RShinNull
+      position: {x: -0, y: -0.44345, z: 0}
+      rotation: {x: -0.07479977, y: 0.04890763, z: -0.0029983378, w: 0.99599403}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Alex:RToeNull
+      parentName: Alex:RFootNull
+      position: {x: -0, y: -0.060399998, z: 0.13938}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: Alex:HipNull
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
