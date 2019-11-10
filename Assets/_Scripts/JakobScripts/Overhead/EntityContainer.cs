@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EntityContainer : BasePACES
 {
+    public EntityType et { get; set; }
+
     public JoinedList<EntityContainer, Entity> AttachedEntities;
     public JoinedList<EntityContainer, SlotBase> AttachedSlots;
 
