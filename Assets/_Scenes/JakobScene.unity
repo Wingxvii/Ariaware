@@ -1874,7 +1874,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1.3845e-41, z: 0, w: 0.0000000026047928}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4680,6 +4680,11 @@ PrefabInstance:
       propertyPath: gunStats.speed
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 1494941908761096164, guid: 422260327b5e9c645959972fd4e67182,
+        type: 3}
+      propertyPath: gunStats.damage
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422260327b5e9c645959972fd4e67182, type: 3}
 --- !u!1001 &4224107387633219659
@@ -4753,6 +4758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gunStats.speed
       value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224107387672683163, guid: 53bc2f414e8e81d4d8d5806980aac903,
+        type: 3}
+      propertyPath: gunStats.damage
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53bc2f414e8e81d4d8d5806980aac903, type: 3}
@@ -4895,7 +4905,7 @@ PrefabInstance:
     - target: {fileID: 7015133690035238359, guid: 516f1c1dc4b630c409f6c7dd08e285d9,
         type: 3}
       propertyPath: gunStats.damage
-      value: 25
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7015133690035238359, guid: 516f1c1dc4b630c409f6c7dd08e285d9,
         type: 3}

@@ -47,6 +47,12 @@ public class ToggleMouseLock : MonoBehaviour
         POINT p;
         GetCursorPos(out p);
 
+        //Debug.Log(Screen.currentResolution + ", " + Screen.safeArea + ", " + Screen.height + ", " + Screen.width);
+        //for (int i = 0; i < Screen.resolutions.Length; ++i)
+        //{
+        //    Debug.Log(Screen.resolutions[i].ToString());
+        //}
+
         return new Vector3(p.X, Screen.currentResolution.height - p.Y, 0);
     }
 
