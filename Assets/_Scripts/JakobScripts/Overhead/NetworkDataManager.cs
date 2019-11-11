@@ -228,6 +228,7 @@ namespace NET_PACKET
                     Connect(ip, Client);
                     StartUpdating(Client);
                     SetupPacketReception(PacketRecieved);
+                    //blah
 
                 }
 
