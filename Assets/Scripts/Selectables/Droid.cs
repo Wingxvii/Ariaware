@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using netcodeRTS;
+using RTSManagers;
 
 public enum DroidState {
     Standing = 0,
@@ -186,6 +187,7 @@ public class Droid : SelectableObject
         Debug.Log("Dead droid");
         DroidManager.Instance.KillDroid(this);
         NetworkManager.SendKilledEntity(this);
+        SelectionManager.Instance.DeselectItem(this);
     }
 
     //unique classes

@@ -123,6 +123,9 @@ public class DroidManager : MonoBehaviour
     //called when drone is requested to be built
     public void QueueFinished(Transform home, EntityType type)
     {
+        if (home.gameObject.activeSelf) {
+        
+
         switch (type)
         {
             case EntityType.Droid:
@@ -136,24 +139,29 @@ public class DroidManager : MonoBehaviour
                 Debug.Log("ERROR: DROID TYPE INVALID");
                 break;
         }
+        }
     }
 
     //called when drone is requested to be built, with a rally
     public void QueueFinished(Transform home, EntityType type, Vector3 rally)
     {
-        switch (type)
+        if (home.gameObject.activeSelf)
         {
-            case EntityType.Droid:
-                //add offset here
-                Vector3 pos = new Vector3(Random.Range(-1.0f, 1.0f), spawnHeight, Random.Range(-1.0f, 1.0f));
-                pos = pos.normalized * spawnRange;
 
-                SpawnDroid(type, new Vector3(home.position.x + pos.x, pos.y, home.position.z + pos.z));
-                ActiveDroidPool[ActiveDroidPool.Count - 1].IssueLocation(rally);
-                break;
-            default:
-                Debug.Log("ERROR: DROID TYPE INVALID");
-                break;
+            switch (type)
+            {
+                case EntityType.Droid:
+                    //add offset here
+                    Vector3 pos = new Vector3(Random.Range(-1.0f, 1.0f), spawnHeight, Random.Range(-1.0f, 1.0f));
+                    pos = pos.normalized * spawnRange;
+
+                    SpawnDroid(type, new Vector3(home.position.x + pos.x, pos.y, home.position.z + pos.z));
+                    ActiveDroidPool[ActiveDroidPool.Count - 1].IssueLocation(rally);
+                    break;
+                default:
+                    Debug.Log("ERROR: DROID TYPE INVALID");
+                    break;
+            }
         }
     }
 
@@ -176,11 +184,6 @@ public class DroidManager : MonoBehaviour
         
         Droidpool.Add(droid);
         droid.gameObject.SetActive(false);
-
-        //Debug.Log("This worked");
-
-
-        //SelectionManager.Instance.AllObjects.Remove(droid);
         ActiveDroidPool.Remove(droid);
     }
 }

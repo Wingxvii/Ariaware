@@ -250,7 +250,8 @@ namespace RTSManagers
                         if (obj.GetComponent<Transform>().position.x >= Mathf.Min(worldSelection1.x, mousePosition.x) &&
                             obj.GetComponent<Transform>().position.x <= Mathf.Max(worldSelection1.x, mousePosition.x) &&
                             obj.GetComponent<Transform>().position.z >= Mathf.Min(worldSelection1.z, mousePosition.z) &&
-                            obj.GetComponent<Transform>().position.z <= Mathf.Max(worldSelection1.z, mousePosition.z) && !SelectedObjects.Contains(obj))
+                            obj.GetComponent<Transform>().position.z <= Mathf.Max(worldSelection1.z, mousePosition.z) && !SelectedObjects.Contains(obj) &&
+                            obj.gameObject.activeSelf)
                         {
                             //Debug.Log(obj.name);
                             SelectedObjects.Add(obj);
@@ -445,7 +446,7 @@ namespace RTSManagers
                             }
                             SelectedObjects.Clear();
                         }
-                        else if (hit.transform.gameObject.tag == "SelectableObject")
+                        else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.gameObject.activeSelf)
                         {
                             //check to see if already selected
                             if (SelectedObjects.Contains(hit.transform.GetComponent<SelectableObject>()))
@@ -693,7 +694,7 @@ namespace RTSManagers
                     {
                         if (obj.type == hit.transform.GetComponent<SelectableObject>().type &&
                             GeometryUtility.TestPlanesAABB(planes, obj.GetComponent<Renderer>().bounds) &&
-                            !SelectedObjects.Contains(obj))
+                            !SelectedObjects.Contains(obj) && obj.gameObject.activeSelf) 
                         {
                             SelectedObjects.Add(obj);
                             currentEvent = MouseEvent.Selection;
