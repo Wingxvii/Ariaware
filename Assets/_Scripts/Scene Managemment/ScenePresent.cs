@@ -31,6 +31,7 @@ namespace SceneManagement
 
         public bool gameStart = false;
         public int loadedScene = 0;
+        public string IP;
 
         private void Start()
         {

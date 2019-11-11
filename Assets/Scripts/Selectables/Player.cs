@@ -37,7 +37,7 @@ public class Player : SelectableObject
 
     public void SendWeapon(int weaponNum) {
         weapons[activeWeapon].SetActive(false);
-        activeWeapon = weaponNum-1;
+        activeWeapon = weaponNum;
         weapons[activeWeapon].SetActive(true);
     }
 

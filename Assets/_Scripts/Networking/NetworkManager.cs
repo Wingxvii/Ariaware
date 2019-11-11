@@ -6,6 +6,7 @@ using System.Text;
 using System;
 using System.Collections.Generic;
 using RTSManagers;
+using SceneManagement;
 
 namespace netcodeRTS
 {
@@ -110,6 +111,12 @@ namespace netcodeRTS
         // Start is called before the first frame update
         void Start()
         {
+            /*
+            if (ScenePresent.Instance.IP != null)
+            {
+                ip = ScenePresent.Instance.IP;
+
+            } else*/
             if (ip != null)
             {
                 //client Init  
@@ -119,7 +126,6 @@ namespace netcodeRTS
                 SetupPacketReception(PacketRecieved);
 
             }
-
         }
 
         // Update is called once per frame
@@ -190,20 +196,19 @@ namespace netcodeRTS
             SwitchBuffers();
             //buffer processing
             if (ReadBuffer.updated1) {
-                SelectableObject.indexedList[1].GetComponent<Player>().SendUpdate(ReadBuffer.Player1Pos, ReadBuffer.Player1Rot, ReadBuffer.Player1State);
+                SelectionManager.Instance.players[0].GetComponent<Player>().SendUpdate(ReadBuffer.Player1Pos, ReadBuffer.Player1Rot, ReadBuffer.Player1State);
                 ReadBuffer.updated1 = false;
             }
             if (ReadBuffer.updated2)
             {
-                SelectableObject.indexedList[2].GetComponent<Player>().SendUpdate(ReadBuffer.Player2Pos, ReadBuffer.Player2Rot, ReadBuffer.Player2State);
+                SelectionManager.Instance.players[1].GetComponent<Player>().SendUpdate(ReadBuffer.Player2Pos, ReadBuffer.Player2Rot, ReadBuffer.Player2State);
                 ReadBuffer.updated2 = false;
             }
             if (ReadBuffer.updated3)
             {
-                SelectableObject.indexedList[3].GetComponent<Player>().SendUpdate(ReadBuffer.Player3Pos, ReadBuffer.Player3Rot, ReadBuffer.Player3State);
+                SelectionManager.Instance.players[2].GetComponent<Player>().SendUpdate(ReadBuffer.Player3Pos, ReadBuffer.Player3Rot, ReadBuffer.Player3State);
                 ReadBuffer.updated3 = false;
             }
-
 
         }
 
