@@ -409,7 +409,7 @@ Animator:
   m_GameObject: {fileID: 311159786221882674}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1d116603e3ab9cf4288d0e66a9d2857a, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fef38cdb3ebb6724497d26e6d3a3d562, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -485,6 +485,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   playerBody: {fileID: 0}
   activeWeapon: 0
+  anim: {fileID: 5625769189715965191}
   moveSpeed: 1
   maxSpeed: 20
   weapons:

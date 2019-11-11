@@ -10,6 +10,7 @@ public class Player : SelectableObject
     public Rigidbody playerBody;
 
     public int activeWeapon = 0;
+    public Animator anim;
 
     static public Vector3 pos = new Vector3(0, 0, 0);
     public float moveSpeed = 1;
@@ -44,6 +45,8 @@ public class Player : SelectableObject
         Debug.Log("Force Added");
         this.GetComponent<Rigidbody>().velocity = (pos - this.transform.position) * 10f;
         this.transform.rotation = Quaternion.Euler(new Vector3(0f, rot.y, 0f));
+
+
     }
 
     // Update is called once per frame
@@ -65,7 +68,15 @@ public class Player : SelectableObject
         {
             playerBody.velocity += new Vector3(0, 0, 1 * -moveSpeed);
         }
+
+        Debug.Log(Vector3.Project(this.GetComponent<Rigidbody>().velocity.normalized, transform.forward).magnitude);
+
+        anim.SetFloat("Walk", Vector3.Dot(this.GetComponent<Rigidbody>().velocity.normalized, transform.forward));
+        anim.SetFloat("Turn", Vector3.Dot(this.GetComponent<Rigidbody>().velocity.normalized, transform.right));
+
     }
+
+
 
     /*
     protected override void BaseFixedUpdate()

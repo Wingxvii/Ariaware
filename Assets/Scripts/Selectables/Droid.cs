@@ -12,7 +12,6 @@ public enum DroidState {
 
 public class Droid : SelectableObject
 {
-
     public float maxSpeed = 5.0f;
     public float minSpeed = 2.0f;
     private Rigidbody selfRigid;
