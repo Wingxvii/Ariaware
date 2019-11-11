@@ -118,11 +118,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4287435776433992426}
+  - component: {fileID: 4184662110482489706}
+  - component: {fileID: 1415050088120583538}
   - component: {fileID: 3731368387600513932}
+  - component: {fileID: 9149880214096162882}
   - component: {fileID: 6304387413709053227}
-  - component: {fileID: 2302977801427763807}
-  - component: {fileID: 6404894503455487544}
-  - component: {fileID: 8621859342103246918}
   m_Layer: 10
   m_Name: Turret
   m_TagString: SelectableObject
@@ -141,77 +141,12 @@ Transform:
   m_LocalPosition: {x: -13.99, y: 2, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
-  - {fileID: 4097925220657942296}
   - {fileID: 5209582401711450115}
+  - {fileID: 4097925220657942296}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!122 &3731368387600513932
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5508097730102920826}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278251519
-  m_Size: 5
---- !u!114 &6304387413709053227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5508097730102920826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ff6b35e59198a046bc800605ada96fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  halo: {fileID: 0}
-  level: 1
-  id: 0
-  type: 4
-  destructable: 1
-  selected: 0
-  healthBar: {fileID: 5602078410055458512}
-  canvasTransform: {fileID: 0}
-  currentHealth: 1
-  maxHealth: 1
-  state: 0
-  visionRange: 30
-  maxRange: 45
-  shortestDist: 0
-  muzzle: {fileID: 0}
-  reloadRate: 5
-  recoilRate: 0.5
-  attackAmno: 10
-  attackDamage: 5
-  accuracy: 0.75
-  reloadTimer: 0
-  currentAmno: 10
-  rotateSpeed: 3
-  faceingPoint: {x: 0, y: 0, z: 0}
-  turretLayerMask:
-    serializedVersion: 2
-    m_Bits: 768
---- !u!64 &2302977801427763807
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5508097730102920826}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2432090755550338912, guid: 2520d57eb9f13b04e9b505c61d18f13b, type: 3}
---- !u!33 &6404894503455487544
+--- !u!33 &4184662110482489706
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,7 +154,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5508097730102920826}
   m_Mesh: {fileID: -2432090755550338912, guid: 2520d57eb9f13b04e9b505c61d18f13b, type: 3}
---- !u!23 &8621859342103246918
+--- !u!23 &1415050088120583538
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,6 +192,68 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!122 &3731368387600513932
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508097730102920826}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278251519
+  m_Size: 5
+--- !u!64 &9149880214096162882
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508097730102920826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -2432090755550338912, guid: 2520d57eb9f13b04e9b505c61d18f13b, type: 3}
+--- !u!114 &6304387413709053227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508097730102920826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff6b35e59198a046bc800605ada96fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  halo: {fileID: 0}
+  level: 1
+  id: 0
+  type: 4
+  destructable: 1
+  selected: 0
+  healthBar: {fileID: 5602078410055458512}
+  currentHealth: 1
+  maxHealth: 1
+  state: 0
+  visionRange: 30
+  maxRange: 45
+  shortestDist: 0
+  muzzle: {fileID: 0}
+  reloadRate: 5
+  recoilRate: 0.5
+  attackAmno: 10
+  attackDamage: 5
+  accuracy: 0.75
+  reloadTimer: 0
+  currentAmno: 10
+  turretLayerMask:
+    serializedVersion: 2
+    m_Bits: 768
 --- !u!1 &5643998181816298562
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,12 +352,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7778292360663637285}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.71999997, z: 0.43}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.72, z: 0.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4287435776433992426}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &4176829704521851602
 ParticleSystem:
@@ -5110,16 +5107,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7993932040517935505}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.51}
   m_LocalScale: {x: 0.6666667, y: 0.666667, z: 0.3333335}
   m_Children:
   - {fileID: 3809502347253289420}
   m_Father: {fileID: 4287435776433992426}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.14}
+  m_AnchoredPosition: {x: -0.14, y: 2.06}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3082441220959394005
