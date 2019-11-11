@@ -147,6 +147,8 @@ namespace RTSManagers
                 Application.Quit();
             }
 
+
+
             #endregion
 
             if (prefabObject != null && prefabObject.activeSelf)
@@ -170,7 +172,6 @@ namespace RTSManagers
             _Undocommands.Push(new AddCommand(placeObject.GetComponent<SelectableObject>()));
             NetworkManager.SendBuildEntity(placeObject.GetComponent<SelectableObject>());
 
-            SelectionManager.Instance.ClearSelection();
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 SelectionManager.Instance.currentEvent = MouseEvent.PrefabBuild;

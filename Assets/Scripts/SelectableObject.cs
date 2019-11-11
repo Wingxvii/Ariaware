@@ -121,10 +121,27 @@ public class SelectableObject : MonoBehaviour
 
 
     public virtual void OnDeath() {
-        OnDeselect();
-        NetworkManager.SendKilledEntity(this);
-        SelectionManager.Instance.DeselectItem(this);
-        gameObject.SetActive(false);
-    }
+        if (gameObject.activeSelf)
+        {
 
+            switch (type) {
+                case EntityType.Barracks:
+                    SelectionManager.Instance.deactivatedObjects[1].Enqueue(this);
+                    break;
+                case EntityType.Turret:
+                    SelectionManager.Instance.deactivatedObjects[0].Enqueue(this);
+                    break;
+                case EntityType.Wall:
+                    SelectionManager.Instance.deactivatedObjects[2].Enqueue(this);
+                    break;
+                default:
+                    break;
+            }
+
+            OnDeselect();
+            NetworkManager.SendKilledEntity(this);
+            SelectionManager.Instance.DeselectItem(this);
+            gameObject.SetActive(false);
+        }
+    }
 }

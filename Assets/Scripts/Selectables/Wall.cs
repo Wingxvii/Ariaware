@@ -20,12 +20,5 @@ public class Wall : SelectableObject
         Wallhit.transform.position = hitPoint;
         Wallhit.Play();
     }
-    public override void OnDeath()
-    {
-        Debug.Log("Dead Wall");
-        SelectionManager.Instance.deactivatedObjects[2].Enqueue(this);
-        base.OnDeath();
-    }
-
 
 }
