@@ -45,6 +45,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   sendData: 0
+  Xpattern:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Zpattern:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4224107387672683136
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +155,7 @@ MonoBehaviour:
   ID: 0
   sendData: 0
   gunStats:
-    damage: 2
+    damage: 17
     range: 100
     speed: 80
     ConeAngle: 3

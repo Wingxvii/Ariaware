@@ -436,7 +436,7 @@ namespace NET_PACKET
                                     int index = int.Parse(parsedData[i]);
                                     //WriteRTS.droidData[i / 4].index = uint.Parse(parsedData[i]);
                                     ParseVector3(ref WriteRTS.droidData[index].position, parsedData, i + 1);
-                                    Debug.Log(index + ", " + WriteRTS.droidData[index].position);
+                                    //Debug.Log(index + ", " + WriteRTS.droidData[index].position);
                                     WriteRTS.droidData[index].flag = true;
                                 }
                             }
@@ -481,6 +481,7 @@ namespace NET_PACKET
                     }
                     if (sender == 1)
                     {
+                        //Debug.Log("KILLED! " + parsedData[0] + ", " + parsedData[1]);
                         kill.Enqueue(int.Parse(parsedData[0]));
                     }
                     else

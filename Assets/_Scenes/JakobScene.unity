@@ -4675,6 +4675,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1494941908761096164, guid: 422260327b5e9c645959972fd4e67182,
+        type: 3}
+      propertyPath: gunStats.speed
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422260327b5e9c645959972fd4e67182, type: 3}
 --- !u!1001 &4224107387633219659
@@ -4743,6 +4748,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224107387672683163, guid: 53bc2f414e8e81d4d8d5806980aac903,
+        type: 3}
+      propertyPath: gunStats.speed
+      value: 240
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53bc2f414e8e81d4d8d5806980aac903, type: 3}
@@ -4881,6 +4891,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015133690035238359, guid: 516f1c1dc4b630c409f6c7dd08e285d9,
+        type: 3}
+      propertyPath: gunStats.damage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015133690035238359, guid: 516f1c1dc4b630c409f6c7dd08e285d9,
+        type: 3}
+      propertyPath: gunStats.speed
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516f1c1dc4b630c409f6c7dd08e285d9, type: 3}

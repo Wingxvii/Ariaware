@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 [System.Serializable]
 public class FireStats
 {
-    public float damage = 1f;
+    public int damage = 1;
     public float range = 100f;
     public float speed = 20f;
 
@@ -101,20 +102,32 @@ public class Bullet : UpdateableObject
                 EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
                 if (ec != null)
                 {
-                    for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+                    if (ec.ID > 3)
                     {
-                        SlotBase sb = ec.AttachedSlots.GetObj(i);
-                        if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
-                        {
-                            Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
-                            if (b != null && b.TreeInit())
-                            {
-                                b.Damage(bulletStats.damage + gunStats.damage);
-                            }
-
-                            break;
-                        }
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append(1);
+                        sb.Append(",");
+                        sb.Append(bulletStats.damage + gunStats.damage);
+                        sb.Append(",");
+                        sb.Append(ec.ID - 1);
+                        sb.Append(",");
+                        NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
                     }
+
+                    //for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+                    //{
+                    //    SlotBase sb = ec.AttachedSlots.GetObj(i);
+                    //    if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
+                    //    {
+                    //        Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
+                    //        if (b != null && b.TreeInit())
+                    //        {
+                    //            b.Damage(bulletStats.damage + gunStats.damage);
+                    //        }
+                    //
+                    //        break;
+                    //    }
+                    //}
                 }
 
                 Destroy(gameObject);
@@ -143,20 +156,32 @@ public class Bullet : UpdateableObject
                     EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
                     if (ec != null)
                     {
-                        for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+                        if (ec.ID > 3)
                         {
-                            SlotBase sb = ec.AttachedSlots.GetObj(i);
-                            if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
-                            {
-                                Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
-                                if (b != null && b.TreeInit())
-                                {
-                                    b.Damage(bulletStats.damage + gunStats.damage);
-                                }
-
-                                break;
-                            }
+                            StringBuilder sb = new StringBuilder();
+                            sb.Append(1);
+                            sb.Append(",");
+                            sb.Append(bulletStats.damage + gunStats.damage);
+                            sb.Append(",");
+                            sb.Append(ec.ID - 1);
+                            sb.Append(",");
+                            NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
                         }
+
+                        //for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
+                        //{
+                        //    SlotBase sb = ec.AttachedSlots.GetObj(i);
+                        //    if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
+                        //    {
+                        //        Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
+                        //        if (b != null && b.TreeInit())
+                        //        {
+                        //            b.Damage(bulletStats.damage + gunStats.damage);
+                        //        }
+                        //
+                        //        break;
+                        //    }
+                        //}
                     }
 
                     Destroy(gameObject);
