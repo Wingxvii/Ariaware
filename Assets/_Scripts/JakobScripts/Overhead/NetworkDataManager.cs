@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Runtime.InteropServices;
-using System;
+using UnityEngine;
 
 namespace NET_PACKET
 {
@@ -37,7 +36,7 @@ namespace NET_PACKET
 
     public class RTSsingle
     {
-        public uint index;
+        //public uint index;
         public Vector3 position = Vector3.zero;
         public bool flag = false;
     }
@@ -116,16 +115,19 @@ namespace NET_PACKET
         public Vector3 position;
     }
 
-    public class NetworkDataManager : UpdateableObject
+    public class NetworkDataManager : InitializableObject
     {
         const int droidMax = 100;
         const int FPSmax = 3;
 
         public static List<ReadBuild> builds { get; protected set; }
-        public static List<ReadDamage> damages { get; protected set; }
+        public static List<ReadDamagePlayer> damagesPlayer { get; protected set; }
+        public static List<ReadDamageNPC> damagesNPC { get; protected set; }
         public static List<ReadDroid> droids { get; protected set; }
         public static List<ReadGameState> gameStates { get; protected set; }
-        public static List<ReadKilled> killed { get; protected set; }
+        public static List<ReadKilled> kills { get; protected set; }
+        public static List<ReadPlayerData> playersData { get; protected set; }
+        public static List<ReadWeaponSwitch> weaponsSwitch { get; protected set; }
 
         #region Netcode
 
@@ -144,6 +146,11 @@ namespace NET_PACKET
         static extern void SetupPacketReception(Action<int, int, string> action); //recieve packets from server
         [DllImport("CNET.dll")]
         static extern int GetPlayerNumber(IntPtr client);
+
+        public static void SendNetData(int type, string str)
+        {
+            SendData(type, str, Client);
+        }
 
         public string ip;
         private static IntPtr Client;
@@ -165,23 +172,16 @@ namespace NET_PACKET
 
         public static Queue<BuildPackage> build = new Queue<BuildPackage>();
         public static Queue<int> kill = new Queue<int>();
-        public static Queue<int> gameState = new Queue<int>();
+        public static uint gameState;
 
-        private void Update()
-        {
-            SendData((int)PacketType.PLAYERDATA,
-                (0.3f).ToString() + "," + (0.3f).ToString() + "," + (0.3f).ToString() + "," + (0.3f).ToString() + "," + (0.3f).ToString() + "," + (0.3f).ToString() + "," + (1).ToString() + ",", 
-                Client);
-        }
-
-        private void SwitchRTSBuffers()
+        private static void SwitchRTSBuffers()
         {
             tempRTS = ReadRTS;
             ReadRTS = WriteRTS;
             WriteRTS = tempRTS;
         }
 
-        private void SwitchFPSBuffers()
+        private static void SwitchFPSBuffers()
         {
             tempFPS = ReadFPS;
             ReadFPS = WriteFPS;
@@ -190,8 +190,32 @@ namespace NET_PACKET
 
         protected override bool CreateVars()
         {
+            FPSManager.FM.netParsed = false;
+
             if (base.CreateVars())
             {
+                builds = new List<ReadBuild>();
+                damagesPlayer = new List<ReadDamagePlayer>();
+                damagesNPC = new List<ReadDamageNPC>();
+                droids = new List<ReadDroid>();
+                gameStates = new List<ReadGameState>();
+                kills = new List<ReadKilled>();
+                playersData = new List<ReadPlayerData>();
+                weaponsSwitch = new List<ReadWeaponSwitch>();
+
+                for (int i = 0; i < FPSmax; ++i)
+                {
+                    weaponStates[i] = new WeaponDataPackage();
+                    ReadFPS.playerData[i] = new FPSsingle();
+                    WriteFPS.playerData[i] = new FPSsingle();
+                }
+
+                for (int i = 0; i < droidMax; ++i)
+                {
+                    ReadRTS.droidData[i] = new RTSsingle();
+                    WriteRTS.droidData[i] = new RTSsingle();
+                }
+
                 if (ip != null)
                 {
                     //client Init  
@@ -201,6 +225,12 @@ namespace NET_PACKET
                     SetupPacketReception(PacketRecieved);
 
                 }
+
+                //AddFirst();
+                //AddSecond();
+                //AddThird();
+                //AddFourth();
+                //AddFifth();
 
                 return true;
             }
@@ -216,15 +246,100 @@ namespace NET_PACKET
             base.DestroyVars();
         }
 
+        //protected override void First()
+        //{
+        //    
+        //}
+        //
+        //protected override void Second()
+        //{
+        //    
+        //}
+        //
+        //protected override void Third()
+        //{
+        //    
+        //}
+        //
+        //protected override void Fourth()
+        //{
+        //    
+        //}
+        //
+        //protected override void Fifth()
+        //{
+        //    
+        //}
+
+        public void ChugDamagePlayerQueue()
+        {
+            while (damagePlayer.Count > 0)
+            {
+                for (int j = 0; j < damagesPlayer.Count; ++j)
+                {
+                    if (damagesPlayer[j].b.ID == damagePlayer.Peek().receiver)
+                    {
+                        damagesPlayer[j].Damages.Enqueue(new DamagePlayerUnit(damagePlayer.Peek().damage, damagePlayer.Peek().culprit));
+                        //break;
+                    }
+                }
+                damagePlayer.Dequeue();
+            }
+        }
+
+        public void ChugDamageNPCQueue()
+        {
+            while (damageNPC.Count > 0)
+            {
+                for (int j = 0; j < damagesNPC.Count; ++j)
+                {
+                    damagesNPC[j].Damages.Enqueue(damageNPC.Peek().damage);
+                }
+                damagePlayer.Dequeue();
+            }
+        }
+
+        public void ChugBuildQueue()
+        {
+            while (build.Count > 0)
+            {
+                for (int j = 0; j < builds.Count; ++j)
+                {
+                    builds[j].Build.Enqueue(new BuildUnit(build.Peek().ID, build.Peek().type, build.Peek().position));
+                }
+                build.Dequeue();
+            }
+        }
+
+        public void ChugKillQueue()
+        {
+            while (kill.Count > 0)
+            {
+                for (int j = 0; j < kills.Count; ++j)
+                {
+                    kills[j].Kills.Enqueue(kill.Peek());
+                }
+
+                kill.Dequeue();
+            }
+        }
+
         static void PacketRecieved(int type, int sender, string data)
         {
+            //Debug.Log(type);
+            //Debug.Log(sender);
+            //Debug.Log(data);
             //parse the data
             string[] parsedData = data.Split(',');
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    Debug.Log(parsedData[i]);
+            //}
 
             switch ((PacketType)type)
             {
                 case PacketType.INIT:
-                    if (parsedData.Length == 1)
+                    if (parsedData.Length == 2)
                     {
                         playerNumber = Convert.ToInt32(parsedData[0]);
                     }
@@ -235,7 +350,7 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.PLAYERDATA:
-                    if (parsedData.Length == 7)
+                    if (parsedData.Length == 8)
                     {
                         //lock and update by sender
                         lock (WriteFPS)
@@ -246,7 +361,7 @@ namespace NET_PACKET
                                 ParseVector3(ref WriteFPS.playerData[sender - 2].rotation, parsedData, 3);
                                 WriteFPS.playerData[sender - 2].state = int.Parse(parsedData[6]);
                                 WriteFPS.playerData[sender - 2].flag = true;
-                                Debug.Log(data);
+                                //Debug.Log(data);
                             }
                             else
                             {
@@ -254,6 +369,8 @@ namespace NET_PACKET
                                 Debug.Break();
                             }
                         }
+
+                        SwitchFPSBuffers();
                     }
                     else
                     {
@@ -263,7 +380,7 @@ namespace NET_PACKET
                     break;
                 case PacketType.WEAPONSTATE:
                     //update state by sender type
-                    if (parsedData.Length != 1)
+                    if (parsedData.Length != 2)
                     {
                         Debug.Log("Error: Invalid WEAPONSTATE Parsed Array Size");
                         Debug.Break();
@@ -280,16 +397,17 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.DAMAGEDEALT:
-                    if (sender == 1 && parsedData.Length != 3)
+                    if (sender == 1 && (parsedData.Length != 4 || parsedData.Length != 3))
                     {
+                        Debug.Log(parsedData.Length);
                         Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
                         Debug.Break();
                     }
-                    else if (parsedData.Length != 2)
-                    {
-                        Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
-                        Debug.Break();
-                    }
+                    //else if (parsedData.Length != 3)
+                    //{
+                    //    Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
+                    //    Debug.Break();
+                    //}
                     if (sender == 1)
                     {
                         DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]), int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
@@ -307,17 +425,19 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.DROIDLOCATIONS:
-                    if (parsedData.Length % 4 == 0)
+                    if (parsedData.Length % 4 - 1 == 0)
                     {
                         lock (WriteRTS)
                         {
                             if (sender == 1)
                             {
-                                for (int i = 0; i < parsedData.Length; i += 4)
+                                for (int i = 0; i < parsedData.Length - 1; i += 4)
                                 {
-                                    WriteRTS.droidData[i / 4].index = uint.Parse(parsedData[i]);
-                                    ParseVector3(ref WriteRTS.droidData[i / 4].position, parsedData, i + 1);
-                                    WriteRTS.droidData[i / 4].flag = true;
+                                    int index = int.Parse(parsedData[i]);
+                                    //WriteRTS.droidData[i / 4].index = uint.Parse(parsedData[i]);
+                                    ParseVector3(ref WriteRTS.droidData[index].position, parsedData, i + 1);
+                                    //Debug.Log(index + ", " + WriteRTS.droidData[index].position);
+                                    WriteRTS.droidData[index].flag = true;
                                 }
                             }
                             else
@@ -326,6 +446,8 @@ namespace NET_PACKET
                                 Debug.Break();
                             }
                         }
+
+                        SwitchRTSBuffers();
                     }
                     else
                     {
@@ -334,13 +456,14 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.BUILD:
-                    if (parsedData.Length != 5)
+                    if (parsedData.Length != 6)
                     {
                         Debug.Log("Error: Invalid BUILD Parsed Array Size");
                         Debug.Break();
                     }
                     if (sender == 1)
                     {
+                        //Debug.Log(parsedData[1]);
                         BuildPackage bp = new BuildPackage(uint.Parse(parsedData[0]), uint.Parse(parsedData[1]), ParseIntoVector3(parsedData, 2));
                         build.Enqueue(bp);
                     }
@@ -351,13 +474,14 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.KILL:
-                    if (parsedData.Length != 1)
+                    if (parsedData.Length != 2)
                     {
                         Debug.Log("Error: Invalid KILL Parsed Array Size");
                         Debug.Break();
                     }
                     if (sender == 1)
                     {
+                        //Debug.Log("KILLED! " + parsedData[0] + ", " + parsedData[1]);
                         kill.Enqueue(int.Parse(parsedData[0]));
                     }
                     else
@@ -367,14 +491,14 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.GAMESTATE:
-                    if (parsedData.Length != 1)
+                    if (parsedData.Length != 2)
                     {
                         Debug.Log("Error: Invalid GAMESTATE Parsed Array Size");
                         Debug.Break();
                     }
                     if (sender == 1)
                     {
-                        gameState.Enqueue(int.Parse(parsedData[0]));
+                        gameState = uint.Parse(parsedData[0]);
                     }
                     else
                     {

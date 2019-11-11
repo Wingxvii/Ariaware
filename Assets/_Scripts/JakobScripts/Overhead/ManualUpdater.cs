@@ -51,6 +51,7 @@ public class ManualUpdater : InitializableObject
 
     protected void Update()
     {
+        //Debug.Log("UPDATE");
         for (int i = ActFirst.Count - 1; i >= 0; --i)
         {
             ActFirst[i]();
@@ -65,10 +66,12 @@ public class ManualUpdater : InitializableObject
         {
             ActSecond[i]();
         }
+        //Debug.Log("ENDOF");
     }
 
     protected void LateUpdate()
     {
+        //Debug.Log("LATEUPDATE");
         for (int i = ActLateUpdate.Count - 1; i >= 0; --i)
         {
             ActLateUpdate[i]();
@@ -78,10 +81,12 @@ public class ManualUpdater : InitializableObject
         {
             ActThird[i]();
         }
+        //Debug.Log("ENDOF");
     }
 
     protected void FixedUpdate()
     {
+        //Debug.Log("FIXEDUPDATE");
         for (int i = ActFourth.Count - 1; i >= 0; --i)
         {
             ActFourth[i]();
@@ -96,5 +101,6 @@ public class ManualUpdater : InitializableObject
         {
             ActFifth[i]();
         }
+        //Debug.Log("ENDOF");
     }
 }

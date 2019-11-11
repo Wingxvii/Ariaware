@@ -14,6 +14,7 @@ public enum EntityType
     Droid,
     Turret,
     Player,
+    TOTAL
 }
 
 //literally just send all instances of this over to make networking work
