@@ -216,11 +216,16 @@ namespace NET_PACKET
                     WriteRTS.droidData[i] = new RTSsingle();
                 }
 
-                if (SceneManagement.ScenePresent.Instance != null && SceneManagement.ScenePresent.Instance.IP != null)
+                if (SceneManagement.ScenePresent.Instance != null)
+                {
+                    ip = SceneManagement.ScenePresent.Instance.IP;
+                }
+
+                if (ip != null)
                 {
                     //client Init  
                     Client = CreateClient();
-                    Connect(SceneManagement.ScenePresent.Instance.IP, Client);
+                    Connect(ip, Client);
                     StartUpdating(Client);
                     SetupPacketReception(PacketRecieved);
 
