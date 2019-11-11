@@ -101,6 +101,7 @@ namespace RTSManagers
         // Update is called once per frame
         void Update()
         {
+
             //handle selection box first
             HandleSelectionBox();
 

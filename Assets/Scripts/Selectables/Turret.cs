@@ -223,13 +223,6 @@ public class Turret : SelectableObject
         reloadTimer += reloadRate;
         state = TurretState.Reloading;
     }
-    public override void OnDeath()
-    {
-        Debug.Log("Dead Turret");
-        SelectionManager.Instance.deactivatedObjects[0].Enqueue(this);
-        base.OnDeath();
-    }
-
 
     private bool HitPlayer() {
         if (Physics.Raycast(this.transform.position, transform.forward , out hit, maxRange, turretLayerMask))

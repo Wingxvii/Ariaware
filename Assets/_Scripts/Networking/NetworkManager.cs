@@ -452,7 +452,7 @@ namespace netcodeRTS
         public static void SendKilledEntity(SelectableObject obj)
         {
 
-            Debug.Log("Dead Droid Sent");
+            //Debug.Log("Dead Droid Sent");
             StringBuilder dataToSend = new StringBuilder();
 
             //add object id
