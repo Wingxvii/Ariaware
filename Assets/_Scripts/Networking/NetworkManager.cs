@@ -111,12 +111,16 @@ namespace netcodeRTS
         // Start is called before the first frame update
         void Start()
         {
-           
+
+            Debug.Break();
             if (ScenePresent.Instance.IP != null)
             {
+                Debug.Break();
                 ip = ScenePresent.Instance.IP;
+                Debug.Break();
+            }
+            
 
-            } else
             if (ip != null)
             {
                 //client Init  

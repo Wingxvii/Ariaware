@@ -31,7 +31,7 @@ namespace SceneManagement
 
         public bool gameStart = false;
         public int loadedScene = 1;
-        public string IP;
+        public string IP = "";
         //use to swap scene
         public void SwapScene(int scene)
         {
