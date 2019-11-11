@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using netcodeRTS;
 
 public class Inventory : Puppet
 {
