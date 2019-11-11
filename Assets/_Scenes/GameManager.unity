@@ -150,7 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStart: 0
-  loadedScene: 0
+  loadedScene: 1
+  IP: 
 --- !u!4 &619149914
 Transform:
   m_ObjectHideFlags: 0

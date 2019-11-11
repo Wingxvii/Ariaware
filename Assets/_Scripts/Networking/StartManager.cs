@@ -6,7 +6,7 @@ using SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
-    Text ipText;
+    public Text ipText;
 
     public void SelectFPS() {
         ScenePresent.Instance.IP = ipText.text;
