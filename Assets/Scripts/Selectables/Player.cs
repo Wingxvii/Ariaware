@@ -69,7 +69,7 @@ public class Player : SelectableObject
             playerBody.velocity += new Vector3(0, 0, 1 * -moveSpeed);
         }
 
-        Debug.Log(Vector3.Project(this.GetComponent<Rigidbody>().velocity.normalized, transform.forward).magnitude);
+        //Debug.Log(Vector3.Project(this.GetComponent<Rigidbody>().velocity.normalized, transform.forward).magnitude);
 
         anim.SetFloat("Walk", Vector3.Dot(this.GetComponent<Rigidbody>().velocity, transform.forward) / 10);
         anim.SetFloat("Turn", Vector3.Dot(this.GetComponent<Rigidbody>().velocity, transform.right) / 10);

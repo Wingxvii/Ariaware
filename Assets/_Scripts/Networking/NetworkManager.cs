@@ -169,15 +169,16 @@ namespace netcodeRTS
             {
                 lock (_InstanceDamageDealt)
                 {
-                    foreach (Tuple<int, string[]> data in _InstanceDamageDealt)
-                    {
+                    while (_InstanceDamageDealt.Count > 0) {
+                        Tuple<int, string[]> data = _InstanceDamageDealt.Dequeue();
                         //process instance damage
-                        if (int.Parse(data.Item2[2]) > SelectableObject.indexedList.Count) {
+                        if (int.Parse(data.Item2[2]) > SelectableObject.indexedList.Count)
+                        {
                             Debug.Log("Error: Indexed Object is Undefined");
                             break;
                         }
-                        SelectableObject.indexedList[int.Parse(data.Item2[2])].OnDamage(int.Parse(data.Item2[1]), SelectableObject.indexedList[data.Item1-1]);
-                        _InstanceDamageDealt.Dequeue();
+                        SelectableObject.indexedList[int.Parse(data.Item2[2])].OnDamage(int.Parse(data.Item2[1]), SelectableObject.indexedList[data.Item1 - 1]);
+
                     }
                 }
             }
@@ -450,6 +451,8 @@ namespace netcodeRTS
 
         public static void SendKilledEntity(SelectableObject obj)
         {
+
+            Debug.Log("Dead Droid Sent");
             StringBuilder dataToSend = new StringBuilder();
 
             //add object id

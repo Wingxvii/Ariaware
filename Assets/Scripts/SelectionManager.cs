@@ -160,44 +160,55 @@ namespace RTSManagers
                 case EntityType.Turret:
                     pos = new Vector3(pos.x, 0.0f, pos.z);
                     if (deactivatedObjects[0].Count > 0) {
-                        deactivatedObjects[0].Peek().gameObject.SetActive(true);
-                        deactivatedObjects[0].Peek().ResetValues();
-                        deactivatedObjects[0].Peek().transform.position = pos;
-                        deactivatedObjects[0].Peek().transform.rotation = Quaternion.identity;
-                        return deactivatedObjects[0].Dequeue().gameObject;
-                    }
-                    returnObject = GameObject.Instantiate(RTSManager.Instance.turretPrefab, pos, Quaternion.identity);
-                    SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
-                    return returnObject;
+                        returnObject = deactivatedObjects[0].Dequeue().gameObject;
 
+                        returnObject.SetActive(true);
+                        returnObject.GetComponent<SelectableObject>().ResetValues();
+                        returnObject.transform.position = pos;
+                    }
+                    else { 
+                        returnObject = GameObject.Instantiate(RTSManager.Instance.turretPrefab, pos, Quaternion.identity);
+                        SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                    }
+                    return returnObject;
+                    break;
                 case EntityType.Barracks:
                     pos = new Vector3(pos.x, 1.0f, pos.z);
                     if (deactivatedObjects[1].Count > 0)
                     {
-                        deactivatedObjects[1].Peek().ResetValues();
-                        deactivatedObjects[1].Peek().transform.position = pos;
-                        deactivatedObjects[1].Peek().transform.rotation = Quaternion.identity;
-                        return deactivatedObjects[1].Dequeue().gameObject;
+                        returnObject = deactivatedObjects[1].Dequeue().gameObject;
+
+                        returnObject.SetActive(true);
+                        returnObject.GetComponent<SelectableObject>().ResetValues();
+                        returnObject.transform.position = pos;
                     }
-                    returnObject = GameObject.Instantiate(RTSManager.Instance.barracksPrefab, pos, Quaternion.identity);
-                    SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                    else
+                    {
+                        returnObject = GameObject.Instantiate(RTSManager.Instance.barracksPrefab, pos, Quaternion.identity);
+                        SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                    }
                     return returnObject;
+                    break;
                 case EntityType.Wall:
                     pos = new Vector3(pos.x, 2.0f, pos.z);
                     if (deactivatedObjects[2].Count > 0)
                     {
-                        deactivatedObjects[2].Peek().gameObject.SetActive(true);
-                        deactivatedObjects[2].Peek().ResetValues();
-                        deactivatedObjects[2].Peek().transform.position = pos;
-                        deactivatedObjects[2].Peek().transform.rotation = Quaternion.identity;
-                        return deactivatedObjects[2].Dequeue().gameObject;
+                        returnObject = deactivatedObjects[2].Dequeue().gameObject;
+
+                        returnObject.SetActive(true);
+                        returnObject.GetComponent<SelectableObject>().ResetValues();
+                        returnObject.transform.position = pos;
                     }
-                    returnObject = GameObject.Instantiate(RTSManager.Instance.wallPrefab, pos, Quaternion.identity);
-                    SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                    else
+                    {
+                        returnObject = GameObject.Instantiate(RTSManager.Instance.wallPrefab, pos, Quaternion.identity);
+                        SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                    }
                     return returnObject;
+                    break;
                 default:
                     return new GameObject();
-
+                    break;
             }
 
         }
@@ -604,7 +615,7 @@ namespace RTSManagers
                     SelectionUI.Instance.ProcessUI(false);
                 }
             }
-            else
+            else if(currentEvent != MouseEvent.PrefabBuild)
             {
                 ClearSelection();
             }

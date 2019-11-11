@@ -122,12 +122,9 @@ public class SelectableObject : MonoBehaviour
 
     public virtual void OnDeath() {
         OnDeselect();
-        OnDeactivation();
         NetworkManager.SendKilledEntity(this);
         SelectionManager.Instance.DeselectItem(this);
-        //SelectionManager.Instance.AllObjects.Remove(this);
         gameObject.SetActive(false);
-        //Object.Destroy(this.gameObject);
     }
 
 }

@@ -159,14 +159,15 @@ public class DroidManager : MonoBehaviour
 
 
     public void SpawnDroid(EntityType type, Vector3 pos) {
-        Droidpool[Droidpool.Count - 1].transform.position = pos;
         Droidpool[Droidpool.Count - 1].gameObject.SetActive(true);
+        Droidpool[Droidpool.Count - 1].ResetValues();
+        
+        Droidpool[Droidpool.Count - 1].transform.position = pos;
 
         NetworkManager.SendBuildEntity(Droidpool[Droidpool.Count - 1]);
 
         SelectionManager.Instance.AllObjects.Add(Droidpool[Droidpool.Count - 1]);
         ActiveDroidPool.Add(Droidpool[Droidpool.Count - 1]);
-
         Droidpool.RemoveAt(Droidpool.Count-1);
     }
 
@@ -176,7 +177,10 @@ public class DroidManager : MonoBehaviour
         Droidpool.Add(droid);
         droid.gameObject.SetActive(false);
 
-        SelectionManager.Instance.AllObjects.Remove(droid);
+        //Debug.Log("This worked");
+
+
+        //SelectionManager.Instance.AllObjects.Remove(droid);
         ActiveDroidPool.Remove(droid);
     }
 }

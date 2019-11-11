@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using netcodeRTS;
 
 public enum DroidState {
     Standing = 0,
@@ -160,7 +161,7 @@ public class Droid : SelectableObject
 
     public override void OnDeactivation()
     {
-        OnDeath();
+        //OnDeath();
     }
 
     public override void IssueLocation(Vector3 location)
@@ -184,7 +185,7 @@ public class Droid : SelectableObject
     {
         Debug.Log("Dead droid");
         DroidManager.Instance.KillDroid(this);
-        base.OnDeath();
+        NetworkManager.SendKilledEntity(this);
     }
 
     //unique classes

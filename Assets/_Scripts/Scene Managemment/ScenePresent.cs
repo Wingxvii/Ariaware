@@ -2,60 +2,71 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class ScenePresent : MonoBehaviour {
 
-    #region SingletonCode
-    private static ScenePresent _instance;
-    public static ScenePresent Instance { get { return _instance; } }
-    private void Awake()
+namespace SceneManagement
+{
+    public class ScenePresent : MonoBehaviour
     {
-        if (_instance != null && _instance != this)
+
+        #region SingletonCode
+        private static ScenePresent _instance;
+        public static ScenePresent Instance { get { return _instance; } }
+        private void Awake()
         {
-            Destroy(this.gameObject);
+            if (_instance != null && _instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                _instance = this;
+            }
+
+            //loads start menu
+            SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            gameStart = true;
         }
-        else
+        //single pattern ends here
+        #endregion
+
+        public bool gameStart = false;
+        public int loadedScene = 0;
+
+        private void Start()
         {
-            _instance = this;
+            LoadScene(1);
         }
 
-        //loads start menu
-        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
-        gameStart = true;
+        //use to swap scene
+        public void SwapScene(int scene)
+        {
+            UnloadScene(loadedScene);
+            LoadScene(scene);
+        }
+
+        //use to load scene
+        public void LoadScene(int scene)
+        {
+            loadedScene = scene;
+            SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        }
+
+        //use to unload scene
+        public void UnloadScene(int scene)
+        {
+            SceneManager.UnloadSceneAsync(scene);
+        }
+
     }
-    //single pattern ends here
-    #endregion
-
-    public bool gameStart = false;
-    public int loadedScene = 0;
-
-
-    //use to swap scene
-    public void SwapScene(int scene) {
-        UnloadScene(loadedScene);
-        LoadScene(scene);
-    }
-
-    //use to load scene
-    public void LoadScene(int scene) {
-        loadedScene = scene;
-        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-    }
-
-    //use to unload scene
-    public void UnloadScene(int scene) {
-        SceneManager.UnloadSceneAsync(scene);
-    }
-
 }
-
 
 /*
  * Scenes Index:
  * 
  * 0 - Master manager
  * 1 - Start Menu
- * 2 - 
- * 3 - 
+ * 2 - RTS
+ * 3 - FPS
  * 4 - 
  * 5 - 
  * 
