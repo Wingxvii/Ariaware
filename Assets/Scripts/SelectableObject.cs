@@ -98,13 +98,14 @@ public class SelectableObject : MonoBehaviour
     }
 
 
-    public void ResetValues()
+    public virtual void ResetValues()
     {
         this.gameObject.transform.position = Vector3.zero;
         this.gameObject.transform.rotation = Quaternion.identity;
         this.currentHealth = maxHealth;
         this.level = 1;
 
+        OnDeactivation();
         BaseResetValues();
     }
 
