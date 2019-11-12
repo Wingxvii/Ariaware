@@ -60,7 +60,7 @@ namespace RTSUI {
                     buttonPool[buttonPool.Count-1].GetComponent<QueueButton>().queuePlace = counter;
                 }
             }
-            
+
             foreach (GameObject button in buttonPool)
             {
                 button.transform.SetParent(UIParent.transform);
