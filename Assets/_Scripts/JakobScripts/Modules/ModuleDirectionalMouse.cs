@@ -14,11 +14,14 @@ public class ModuleDirectionalMouse : ModuleDirectional
 
     public static Vector3 mousePrevious;
     Vector3 deltaMouse = Vector3.zero;
+    Vector3 midscreen;
 
     protected override bool CreateVars()
     {
         if (base.CreateVars())
         {
+            midscreen = new Vector3(Screen.currentResolution.width / 2, Screen.currentResolution.height / 2, 0);
+
             AddUpdate();
 
             AddLateUpdate();
@@ -54,7 +57,10 @@ public class ModuleDirectionalMouse : ModuleDirectional
 
     protected override void UpdateObject()
     {
-        deltaMouse = Input.mousePosition - mousePrevious;
+        if (!toggleLock)
+            deltaMouse = Input.mousePosition - mousePrevious;
+        else
+            deltaMouse = ToggleMouseLock.GetCursorInvY() - mousePrevious;
     }
 
     protected override void LateUpdateObject()
@@ -65,15 +71,18 @@ public class ModuleDirectionalMouse : ModuleDirectional
         }
         else
         {
-            Vector3 midscreen = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+            //Vector3 midscreen = new Vector3(Screen.currentResolution.width / 2, Screen.currentResolution.height / 2, 0);
             //Vector3 winCent = (ToggleMouseLock.GetCursorInvY() - Input.mousePosition + midscreen);
             //mousePrevious = Input.mousePosition;
             //Debug.Log(winCent + ", WINDOWS CENTER");
             //Debug.Log(midscreen + ", UNITY CENTER");
             //Debug.Log(ToggleMouseLock.GetCursorInvY() + ", WINDOWS CURSOR");
             //Debug.Log(Input.mousePosition + ", UNITY CURSOR");
-            mousePrevious = ToggleMouseLock.GetCursorInvY() - Input.mousePosition + midscreen;
-            ToggleMouseLock.SetCursorInvY(ToggleMouseLock.GetCursorInvY() - Input.mousePosition + midscreen);
+            //mousePrevious = ToggleMouseLock.GetCursorInvY() - Input.mousePosition + midscreen;
+            //Debug.Log(mousePrevious + ", <-------- PREVIOUS");
+            mousePrevious = midscreen;
+            //Debug.Log(mousePrevious + ", <----------- NEW!!!!!!!!!");
+            ToggleMouseLock.SetCursorInvY(mousePrevious);
 
             mousePrevious = midscreen;
         }

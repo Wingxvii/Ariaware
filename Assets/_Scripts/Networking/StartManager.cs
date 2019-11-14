@@ -6,13 +6,14 @@ using SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
-    Text ipText;
+    public InputField ipText;
 
-
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SelectFPS() {
+        ScenePresent.Instance.IP = ipText.text;
+        ScenePresent.Instance.SwapScene(3);
+    }
+    public void SelectRTS() {
+        ScenePresent.Instance.IP = ipText.text;
+        ScenePresent.Instance.SwapScene(2);
     }
 }

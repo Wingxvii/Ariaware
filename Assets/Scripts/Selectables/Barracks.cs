@@ -87,6 +87,15 @@ public class Barracks : SelectableObject
     {
         ResourceManager.Instance.numBarracksActive--;
         ResourceManager.Instance.UpdateSupply();
+
+        while(buildTimes.Count > 0) {
+            buildTimes.Dequeue();
+            ResourceManager.Instance.Refund(EntityType.Droid);
+        }
+
+        currentBuildTime = 0;
+        flagActive = false;
+        buildTimes.Clear();
     }
 
     //child-sepific functions
@@ -102,6 +111,13 @@ public class Barracks : SelectableObject
         else {
             Debug.Log("NOT ENOUGH CREDITS");
         }
+    }
+
+    public override void OnDeath()
+    {
+
+
+        base.OnDeath();
     }
 
 }

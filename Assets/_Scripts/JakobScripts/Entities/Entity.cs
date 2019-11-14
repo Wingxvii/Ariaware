@@ -136,6 +136,7 @@ public abstract class Entity : BasePACES
                 if (ec[i].BranchInit())
                 {
                     Container.Attach(ec[i].AttachedEntities);
+                    ID = ec[i].ID;
                     return true;
                 }
             }

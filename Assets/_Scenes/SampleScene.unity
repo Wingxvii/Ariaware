@@ -2574,7 +2574,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.942e-42, y: 1.05e-43, z: 9.1835e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4708,7 +4708,7 @@ PrefabInstance:
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 173.6
       objectReference: {fileID: 0}
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
@@ -6119,7 +6119,7 @@ PrefabInstance:
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.372859
+      value: 175.97287
       objectReference: {fileID: 0}
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
@@ -6870,15 +6870,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 311159786221882680, guid: 63cac48023e4fe143a027c492edaeb46,
-        type: 3}
-      propertyPath: type
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 10.4
       objectReference: {fileID: 0}
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
@@ -6888,7 +6883,7 @@ PrefabInstance:
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 100
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 311159786221882687, guid: 63cac48023e4fe143a027c492edaeb46,
         type: 3}

@@ -48,6 +48,7 @@ public class PermitMovement : AbstractPermission<PermitMovement, CommandMovement
 
         SpecificActor.Rb.AddForce(groundtransform *
             SP.ForceAdjustment(direction * (SP.GC.Grounded ? acceleration : airborneAcceleration), tilt, globalSpeedLimit, axisSpeedLimits.x, axisSpeedLimits.y, axisSpeedLimits.z));
+        //SpecificActor.IDENT_VELOCITY = Mathf.Sqrt(SpecificActor.Rb.velocity.x * SpecificActor.Rb.velocity.x + SpecificActor.Rb.velocity.z * SpecificActor.Rb.velocity.z);
 
         direction = Vector3.zero;
     }

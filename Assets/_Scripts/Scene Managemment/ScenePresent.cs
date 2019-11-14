@@ -30,13 +30,8 @@ namespace SceneManagement
         #endregion
 
         public bool gameStart = false;
-        public int loadedScene = 0;
-
-        private void Start()
-        {
-            LoadScene(1);
-        }
-
+        public int loadedScene = 1;
+        public string IP = "";
         //use to swap scene
         public void SwapScene(int scene)
         {

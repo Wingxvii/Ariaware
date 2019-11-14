@@ -489,9 +489,9 @@ MonoBehaviour:
   moveSpeed: 1
   maxSpeed: 20
   weapons:
-  - {fileID: 1742807997613248759}
-  - {fileID: 3179726239517243243}
   - {fileID: 8960884383412306859}
+  - {fileID: 3179726239517243243}
+  - {fileID: 1742807997613248759}
 --- !u!1 &311159787028679423
 GameObject:
   m_ObjectHideFlags: 0
