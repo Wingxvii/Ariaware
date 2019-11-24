@@ -73,7 +73,7 @@ public class HealthBar : ObjectStat
             if (HIT != null)
             {
                 HIT.gameObject.SetActive(false);
-                Destroy(HIT.gameObject);
+                //Destroy(HIT.gameObject);
             }
         }
     }
