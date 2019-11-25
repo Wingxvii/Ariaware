@@ -12,6 +12,7 @@ TagManager:
   - Weapon
   - Shell
   - Prefab
+  - StaticObject
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Barracks
   - Background
   - Shell
-  - 
+  - StaticObject
   - 
   - 
   - 
