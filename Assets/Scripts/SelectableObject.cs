@@ -14,11 +14,8 @@ public enum EntityType
     Droid,
     Turret,
     Player,
-    TOTAL
+    TOTAL,
 }
-
-//literally just send all instances of this over to make networking work
-//plus MAYBE a few resources
 
 public class SelectableObject : MonoBehaviour
 {

@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/StartScene.unity
     guid: 193de104b44114e44bf3e94732eeb167
   - enabled: 1
-    path: Assets/_Scenes/SampleScene.unity
+    path: Assets/_Scenes/RTSScene.unity
     guid: 758636be986512b4c8e81d1be9b88f74
   - enabled: 1
     path: Assets/_Scenes/JakobScene.unity
