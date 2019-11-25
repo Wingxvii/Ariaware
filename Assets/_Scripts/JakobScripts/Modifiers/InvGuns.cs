@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class InvGuns : InvItemList<Gun>
+public class InvGuns : InvItemList<PACES.Gun>
 {
 
 }

@@ -51,6 +51,8 @@ public class ManualUpdater : InitializableObject
 
     protected void Update()
     {
+        TOBIIkeeper.TK.UPDATE_TOBII();
+        //TOBIIkeeper.TK.DEBUG_TOBII();
         //Debug.Log("UPDATE");
         for (int i = ActFirst.Count - 1; i >= 0; --i)
         {
@@ -103,4 +105,9 @@ public class ManualUpdater : InitializableObject
         }
         //Debug.Log("ENDOF");
     }
+
+    //protected void OnPostRender()
+    //{
+    //    TOBIIkeeper.TK.UPDATE_SCREEN();
+    //}
 }

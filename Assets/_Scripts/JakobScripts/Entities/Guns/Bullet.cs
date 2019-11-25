@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using netcodeRTS;
+using Tobii.Gaming;
 
 [System.Serializable]
 public class FireStats
@@ -76,14 +77,47 @@ public class Bullet : UpdateableObject
 
     public void SetBulletStats(FireStats fs, GunVector culprit, Body ignore, AnimationCurve acc)
     {
+        //Quaternion offset = TOBIIkeeper.TK.tobiiPos;
         gunStats = fs;
+        ignoreThis = ignore;
         origin = culprit.transform.position;
         transform.position = origin;
-        Quaternion newDir = culprit.transform.rotation * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
-        transform.rotation = newDir;
+
         maxDist = bulletStats.range + gunStats.range;
+
+        if (ignoreThis != null)
+        {
+            ignoreThis.EnableColliders(false);
+        }
+
+        RaycastHit[] rhit = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, maxDist);
+
+        Quaternion whereTo = Quaternion.identity;
+
+        if (rhit.Length > 0)
+        {
+            RaycastHit closest = rhit[0];
+
+            for (int i = 1; i < rhit.Length; ++i)
+            {
+                if (closest.distance > rhit[i].distance)
+                {
+                    closest = rhit[i];
+                }
+            }
+
+            whereTo = Quaternion.FromToRotation(culprit.transform.up, (closest.point - culprit.transform.position).normalized);
+        }
+
+        if (ignoreThis != null)
+        {
+            ignoreThis.EnableColliders(true);
+        }
+
+        Quaternion newDir = whereTo * culprit.transform.rotation * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
+        //Quaternion newDir = offset * culprit.transform.rotation; //Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
+        transform.rotation = newDir;
         direction = newDir * Vector3.up;
-        ignoreThis = ignore;
         accuser = culprit;
     }
 

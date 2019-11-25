@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PermitFire : AbstractPermission<PermitFire, CommandFire, Gun, Controller>
+public class PermitFire : AbstractPermission<PermitFire, CommandFire, PACES.Gun, Controller>
 {
     bool firing = false;
 
