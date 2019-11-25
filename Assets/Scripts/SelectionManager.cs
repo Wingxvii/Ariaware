@@ -52,6 +52,9 @@ namespace RTSManagers
         public List<SelectableObject> SelectedObjects;
         //primary selected object
         public SelectableObject PrimarySelectable;
+        //currently hit object
+        public SelectableObject HitObject;
+
 
         //list of all deactivated object
         public List<Queue<SelectableObject>> deactivatedObjects;
@@ -110,6 +113,15 @@ namespace RTSManagers
             if (Physics.Raycast(ray, out hit, 500, selectables))
             {
                 mousePosition = hit.point;
+            }
+
+            //check to see if anything gets hit
+            if (hit.collider.gameObject.tag == "SelectableObject")
+            {
+                HitObject = hit.collider.gameObject.GetComponent<SelectableObject>();
+            }
+            else {
+                HitObject = null;
             }
 
             //handle left mouse click events
@@ -357,7 +369,7 @@ namespace RTSManagers
                 }
                 else if (currentEvent == MouseEvent.UnitAttack)
                 {
-                    if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player)
+                    if (HitObject!= null && HitObject.type == EntityType.Player)
                     {
                         switch (PrimarySelectable.type)
                         {
@@ -368,7 +380,7 @@ namespace RTSManagers
                                     if (obj.type == EntityType.Droid)
                                     {
                                         Droid temp = (Droid)obj;
-                                        temp.IssueAttack(hit.transform.gameObject.GetComponent<Player>());
+                                        temp.IssueAttack((Player)HitObject);
                                     }
                                 }
                                 break;
@@ -379,7 +391,7 @@ namespace RTSManagers
                                     if (obj.type == EntityType.Turret)
                                     {
                                         Turret temp = (Turret)obj;
-                                        temp.IssueAttack(hit.transform.gameObject.GetComponent<Player>());
+                                        temp.IssueAttack((Player)HitObject);
                                     }
                                 }
                                 break;
@@ -436,9 +448,8 @@ namespace RTSManagers
                     //selection checking
                     if (!EventSystem.current.IsPointerOverGameObject())
                     {
-                        //Debug.Log(hit.transform.gameObject.name);
 
-                        if (hit.collider == null)
+                        if (HitObject == null)
                         {
                             foreach (SelectableObject obj in SelectedObjects)
                             {
@@ -446,24 +457,24 @@ namespace RTSManagers
                             }
                             SelectedObjects.Clear();
                         }
-                        else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.gameObject.activeSelf)
+                        else if (HitObject.gameObject.activeSelf)
                         {
                             //check to see if already selected
-                            if (SelectedObjects.Contains(hit.transform.GetComponent<SelectableObject>()))
+                            if (SelectedObjects.Contains(HitObject))
                             {
                                 if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
                                 {
                                     ClearSelection();
-                                    SelectedObjects.Add(hit.transform.gameObject.GetComponent<SelectableObject>());
-                                    SwitchPrimarySelected(hit.transform.gameObject.GetComponent<SelectableObject>());
+                                    SelectedObjects.Add(HitObject);
+                                    SwitchPrimarySelected(HitObject);
 
                                     currentEvent = MouseEvent.Selection;
-                                    hit.transform.gameObject.GetComponent<SelectableObject>().OnSelect();
+                                    HitObject.OnSelect();
                                 }
                                 //refocus to one selection
                                 else
                                 {
-                                    DeselectItem(hit.transform.GetComponent<SelectableObject>());
+                                    DeselectItem(HitObject);
                                 }
                             }
                             else
@@ -473,15 +484,15 @@ namespace RTSManagers
                                     ClearSelection();
                                 }
 
-                                SelectedObjects.Add(hit.transform.gameObject.GetComponent<SelectableObject>());
-                                SwitchPrimarySelected(hit.transform.gameObject.GetComponent<SelectableObject>());
+                                SelectedObjects.Add(HitObject);
+                                SwitchPrimarySelected(HitObject);
 
                                 currentEvent = MouseEvent.Selection;
-                                hit.transform.gameObject.GetComponent<SelectableObject>().OnSelect();
+                                HitObject.OnSelect();
                             }
                         }
                         //deselect on ground selection, with selection exceptions
-                        else if (hit.transform.gameObject.tag == "Ground" && !((currentEvent == MouseEvent.PrefabBuild || (currentEvent == MouseEvent.Selection && boxActive)) && Input.GetKey(KeyCode.LeftShift)))
+                        else if (HitObject.gameObject.tag == "Ground" && !((currentEvent == MouseEvent.PrefabBuild || (currentEvent == MouseEvent.Selection && boxActive)) && Input.GetKey(KeyCode.LeftShift)))
                         {
                             foreach (SelectableObject obj in SelectedObjects)
                             {
@@ -510,7 +521,7 @@ namespace RTSManagers
                 {
 
                     //check if enemy selected
-                    if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player)
+                    if (HitObject != null && HitObject.type == EntityType.Player)
                     {
                         switch (PrimarySelectable.type)
                         {
@@ -521,7 +532,7 @@ namespace RTSManagers
                                     if (obj.type == EntityType.Droid)
                                     {
                                         Droid temp = (Droid)obj;
-                                        temp.IssueAttack(hit.transform.gameObject.GetComponent<Player>());
+                                        temp.IssueAttack((Player)HitObject);
                                     }
                                 }
                                 break;
@@ -532,7 +543,7 @@ namespace RTSManagers
                                     if (obj.type == EntityType.Turret)
                                     {
                                         Turret temp = (Turret)obj;
-                                        temp.IssueAttack(hit.transform.gameObject.GetComponent<Player>());
+                                        temp.IssueAttack((Player)HitObject);
                                     }
                                 }
                                 break;
@@ -686,13 +697,13 @@ namespace RTSManagers
             //Debug.Log("Double Clicked");
             if (currentEvent == MouseEvent.Nothing || currentEvent == MouseEvent.Selection)
             {
-                if (hit.transform.gameObject.tag == "SelectableObject" && Input.GetKey(KeyCode.LeftShift))
+                if (HitObject != null && Input.GetKey(KeyCode.LeftShift))
                 {
                     Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
 
                     foreach (SelectableObject obj in AllObjects)
                     {
-                        if (obj.type == hit.transform.GetComponent<SelectableObject>().type &&
+                        if (obj.type == HitObject.type &&
                             GeometryUtility.TestPlanesAABB(planes, obj.GetComponent<Renderer>().bounds) &&
                             !SelectedObjects.Contains(obj) && obj.gameObject.activeSelf) 
                         {

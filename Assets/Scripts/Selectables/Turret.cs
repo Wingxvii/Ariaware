@@ -42,6 +42,11 @@ public class Turret : SelectableObject
     private RaycastHit hit;
     public LayerMask turretLayerMask;
 
+    //models
+    public GameObject head;
+    public GameObject body;
+
+
     protected override void BaseStart()
     {
         muzzle = GetComponentInChildren<ParticleSystem>();
@@ -194,15 +199,19 @@ public class Turret : SelectableObject
     {
         if (state != TurretState.Idle)
         {
-            Vector3 targetDir = new Vector3(faceingPoint.x - transform.position.x, 0, faceingPoint.z - transform.position.z);
+            Vector3 targetDir = new Vector3(faceingPoint.x - head.transform.position.x, faceingPoint.y - head.transform.position.y, faceingPoint.z - head.transform.position.z);
 
             // The step size is equal to speed times frame time.
             float step = rotateSpeed * Time.deltaTime;
 
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0f);
+            Vector3 newDir = Vector3.RotateTowards(head.transform.forward, targetDir, step, 0.0f);
+
 
             // Move our position a step closer to the target.
-            transform.rotation = Quaternion.LookRotation(newDir);
+            head.transform.rotation = Quaternion.LookRotation(newDir);
+            body.transform.rotation = Quaternion.LookRotation(new Vector3(newDir.x, 0, newDir.z).normalized);
+            
+
         }
 
         if (reloadTimer >= 0.0f)
