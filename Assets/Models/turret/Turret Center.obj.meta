@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2520d57eb9f13b04e9b505c61d18f13b
+guid: e8163b47da5c25143a8527697bad3bf3
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
@@ -31,12 +31,12 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
