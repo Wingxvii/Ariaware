@@ -23,6 +23,7 @@ namespace RTSManagers
         }
         #endregion
 
+        //used to get reference to current active blueprint
         public GameObject prefabObject;
         public EntityType prefabType;
 

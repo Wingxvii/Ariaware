@@ -71,6 +71,9 @@ namespace RTSManagers
         private RaycastHit hit;
         public LayerMask selectables;
 
+        //layermask for placements
+        public LayerMask groundMask;
+
         //double click
         private float doubleClickTimeLimit = 0.2f;
 
@@ -91,6 +94,8 @@ namespace RTSManagers
             selectables += LayerMask.GetMask("Droid");
             selectables += LayerMask.GetMask("Barracks");
 
+            groundMask = LayerMask.GetMask("Background");
+
             StartCoroutine(DoubleClickListener());
 
             //deactivated object pool
@@ -110,9 +115,20 @@ namespace RTSManagers
 
             //raycast the mouse
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 500, selectables))
+            if (currentEvent == MouseEvent.PrefabBuild)
             {
-                mousePosition = hit.point;
+                if (Physics.Raycast(ray, out hit, 500, groundMask))
+                {
+                    mousePosition = hit.point;
+                }
+
+            }
+            else
+            {
+                if (Physics.Raycast(ray, out hit, 500, selectables))
+                {
+                    mousePosition = hit.point;
+                }
             }
 
             //check to see if anything gets hit
@@ -331,17 +347,15 @@ namespace RTSManagers
             if (Input.GetMouseButtonDown(0))
             {
 
-                if (currentEvent == MouseEvent.PrefabBuild)
+                if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable)
                 {
                     if (!Input.GetKey(KeyCode.LeftShift))
                     {
                         RTSManager.Instance.prefabObject.SetActive(false);
                         ClearSelection();
                     }
-
                     if (ResourceManager.Instance.Purchase(RTSManager.Instance.prefabType))
                     {
-
                         RTSManager.Instance.OnPlace(UseFactoryPattern(mousePosition, RTSManager.Instance.prefabType));
                     }
                     else
@@ -350,6 +364,8 @@ namespace RTSManagers
 
                     }
 
+                } else if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && !RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable) {
+                    Debug.Log("INVALID PLACEMENT");
                 }
                 else if (currentEvent == MouseEvent.UnitMove)
                 {
@@ -369,7 +385,7 @@ namespace RTSManagers
                 }
                 else if (currentEvent == MouseEvent.UnitAttack)
                 {
-                    if (HitObject!= null && HitObject.type == EntityType.Player)
+                    if (HitObject != null && HitObject.type == EntityType.Player)
                     {
                         switch (PrimarySelectable.type)
                         {

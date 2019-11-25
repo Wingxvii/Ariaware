@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4212266301343252319}
   - component: {fileID: 146495371128933830}
   - component: {fileID: 2665443636952284350}
+  - component: {fileID: -2555694556439721221}
   m_Layer: 14
   m_Name: WallShell
   m_TagString: Shell
@@ -92,3 +93,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 2, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2555694556439721221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943965205063777523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4703aa40c2e8f045860c1859576b697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  red: {fileID: 2100000, guid: 3294da82c91c88a4caa80ac106aa9d79, type: 2}
+  green: {fileID: 2100000, guid: 3e37a4d7b1882b44083956529200fef0, type: 2}
+  selfCollider: {fileID: 0}
+  selfRenderer: {fileID: 0}
+  placeable: 0

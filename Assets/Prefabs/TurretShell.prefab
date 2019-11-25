@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1794353788709505666}
   - component: {fileID: 892674384751640563}
   - component: {fileID: 3348022310264832715}
+  - component: {fileID: 8394695437777111199}
   m_Layer: 14
   m_Name: TurretShell
   m_TagString: Shell
@@ -93,3 +94,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: -2432090755550338912, guid: 9f4392875d10a574f9ebbd4e798403b9, type: 3}
+--- !u!114 &8394695437777111199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436627955740270682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4703aa40c2e8f045860c1859576b697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  red: {fileID: 2100000, guid: 3294da82c91c88a4caa80ac106aa9d79, type: 2}
+  green: {fileID: 2100000, guid: 3e37a4d7b1882b44083956529200fef0, type: 2}
+  selfCollider: {fileID: 0}
+  selfRenderer: {fileID: 0}
+  placeable: 0
