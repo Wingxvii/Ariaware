@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 7968567172630224583}
   - component: {fileID: 7851334804536336535}
   - component: {fileID: 1632655809336897201}
-  m_Layer: 0
+  - component: {fileID: -299976831919657323}
+  m_Layer: 8
   m_Name: window_single
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1156145385476642775
 Transform:
@@ -51,7 +52,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 7f453bf8551001e47b48d58c2e08934c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,11 +83,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.030342815, y: 0.9012605, z: 1.0174274}
+  m_Extents: {x: 0.030342815, y: 1, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 5.973558, y: 0.9994859, z: 16.26906}
+  m_Center: {x: 5.973558, y: 1, z: 16.26906}
   m_TimeToStationary: 0.5
 --- !u!65 &1632655809336897201
 BoxCollider:
@@ -99,8 +100,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.060685635, y: 1.802521, z: 2.034855}
-  m_Center: {x: 5.9735584, y: 0.99948585, z: 16.269064}
+  m_Size: {x: 0.060685635, y: 2, z: 2}
+  m_Center: {x: 5.9735584, y: 1, z: 16.269064}
+--- !u!54 &-299976831919657323
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2760756885737711044}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8528805512545091673
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,12 +129,12 @@ GameObject:
   - component: {fileID: 8675529187719152879}
   - component: {fileID: 8225098351151697980}
   - component: {fileID: 794825507069836492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8675529187719152879
 Transform:
@@ -158,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3033667219593020291, guid: 5dcdf4eb8e4b0bb49a30457c8a6897ca, type: 3}
+  - {fileID: 2100000, guid: 7f453bf8551001e47b48d58c2e08934c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 1246768126169905552}
   - component: {fileID: 519430074963704831}
   - component: {fileID: 7413998585560348827}
-  m_Layer: 0
+  - component: {fileID: 824361519452892785}
+  m_Layer: 8
   m_Name: concrete barrier
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &96209670189194842
 Transform:
@@ -102,6 +103,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!54 &824361519452892785
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967275411020409929}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7422738506830285268
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,12 +130,12 @@ GameObject:
   - component: {fileID: 7582674059919871330}
   - component: {fileID: 7168553485532862897}
   - component: {fileID: 1898675863085282625}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7582674059919871330
 Transform:
@@ -159,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c335107232d5264ab54e6cb9739f1c4, type: 2}
+  - {fileID: 2100000, guid: ca36e3385370a4141a4ed87cc121638f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
