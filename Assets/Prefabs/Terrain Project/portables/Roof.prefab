@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 2221893559971311290}
   - component: {fileID: 1483092615792802409}
   - component: {fileID: 7905965967934019225}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2221893559971311290
 Transform:
@@ -89,12 +89,12 @@ GameObject:
   - component: {fileID: 8555466711192780162}
   - component: {fileID: 7840892158186829986}
   - component: {fileID: 169495224362492557}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Roof
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8555466711192780162
 Transform:

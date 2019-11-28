@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3045632870297134251}
   - component: {fileID: 2307112388439355512}
   - component: {fileID: 6423857889672813704}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3045632870297134251
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 5735701404819049291}
   - component: {fileID: 4620536538177094235}
   - component: {fileID: 7632049380385999551}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor Edge
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4767796032603043731
 Transform:

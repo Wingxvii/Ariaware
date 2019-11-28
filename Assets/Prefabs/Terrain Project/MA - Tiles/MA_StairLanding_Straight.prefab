@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3048508432144690250}
   - component: {fileID: 2309989059646240921}
   - component: {fileID: 6425537185740346473}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3048508432144690250
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 795407724557577656}
   - component: {fileID: 4769722256315127030}
   - component: {fileID: 4135678087678569782}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: MA_StairLanding_Straight
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4764990421678309234
 Transform:

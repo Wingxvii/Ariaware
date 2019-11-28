@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 4402715490656274687}
   - component: {fileID: 7185370178458535458}
   - component: {fileID: 7609719645719867109}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PipeL_3m
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1178912322585883064
 Transform:
@@ -112,12 +112,12 @@ GameObject:
   - component: {fileID: 8661135994836066944}
   - component: {fileID: 8246734989199767123}
   - component: {fileID: 815409981209975459}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8661135994836066944
 Transform:

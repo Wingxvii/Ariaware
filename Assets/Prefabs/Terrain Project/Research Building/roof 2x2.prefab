@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 2456745404073255824}
   - component: {fileID: 2907315891703707459}
   - component: {fileID: 5871144354558876595}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2456745404073255824
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 4928524263458087227}
   - component: {fileID: 5572700362739492541}
   - component: {fileID: 3557385293931801082}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: roof 2x2
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5365690561885794472
 Transform:

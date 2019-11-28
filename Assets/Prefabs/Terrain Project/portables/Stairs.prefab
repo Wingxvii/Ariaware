@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 557966102142522177}
   - component: {fileID: 1008397011875973010}
   - component: {fileID: 8420650981556202338}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &557966102142522177
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 6500530461728055064}
   - component: {fileID: 2655635667154217499}
   - component: {fileID: 6916724962012426380}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Stairs
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8057103526782320761
 Transform:
