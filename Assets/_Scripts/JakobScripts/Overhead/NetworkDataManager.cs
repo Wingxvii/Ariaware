@@ -429,7 +429,7 @@ namespace NET_PACKET
                     //}
                     if (sender == 1)
                     {
-                        DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]), int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
+                        DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]) - 1, int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
                         damagePlayer.Enqueue(dpp);
                     }
                     else if (sender > 1 && sender <= FPSmax + 1)
