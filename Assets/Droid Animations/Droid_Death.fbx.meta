@@ -1,0 +1,435 @@
+fileFormatVersion: 2
+guid: 927e0e1e3de2fae44a7548c878ca9bd1
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      74: -2804462183362406714
+    second: Matt_Hips|Matt_Hips|Droid_Death|Base Layer
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Matt_Hips|Matt_Hips|Droid_Death|Base Layer'
+      has import animation warnings that might lower retargeting quality:\nNote: Activate
+      translation DOF on avatar to improve retargeting quality.\n\t'Matt_Head' has
+      translation animation that will be discarded.\n\t'Matt_LeftHand' has translation
+      animation that will be discarded.\n\t'Matt_RightHand' has translation animation
+      that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Matt_Hips|Matt_Hips|Droid_Death|Base Layer
+      takeName: Matt_Hips|Matt_Hips|Droid_Death|Base Layer
+      internalID: 0
+      firstFrame: 85
+      lastFrame: 408
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Matt_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Matt_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Droid_Death(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Matt_Hips
+      parentName: Droid_Death(Clone)
+      position: {x: 0, y: 0.8209344, z: -0.020804899}
+      rotation: {x: -0.02816724, y: 0.025682697, z: -0.01857866, w: 0.9991005}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: Matt_Spine
+      parentName: Matt_Hips
+      position: {x: -0, y: 0.07519233, z: 0}
+      rotation: {x: 0.025686463, y: -0.015183646, z: 0.012112159, w: 0.9994813}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: Matt_Spine1
+      parentName: Matt_Spine
+      position: {x: 5.587935e-10, y: 0.2008465, z: -8.0093737e-10}
+      rotation: {x: 0.0039694733, y: -0.005060524, z: 0.020832052, w: 0.9997623}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Matt_Neck
+      parentName: Matt_Spine1
+      position: {x: 0.0000000018626451, y: 0.2191861, z: -0.0000000014156103}
+      rotation: {x: 0.037416346, y: 0.038694933, z: 0.0017014012, w: 0.99854887}
+      scale: {x: 0.99999994, y: 0.9999998, z: 0.9999999}
+    - name: Matt_Head
+      parentName: Matt_Neck
+      position: {x: 0.0000000093877315, y: 0.13698201, z: 0.017674983}
+      rotation: {x: 0.08596539, y: 0.039058335, z: 0.009829438, w: 0.9954837}
+      scale: {x: 1, y: 0.99999994, z: 0.9999998}
+    - name: Matt_Head_end
+      parentName: Matt_Head
+      position: {x: -0, y: 0.14331016, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Matt_LeftShoulder
+      parentName: Matt_Spine1
+      position: {x: -0.03745009, y: 0.17173368, z: -0.0024617075}
+      rotation: {x: -0.017401757, y: -0.00927864, z: -0.18182775, w: 0.98313266}
+      scale: {x: 1, y: 0.9999999, z: 0.9999999}
+    - name: Matt_LeftArm
+      parentName: Matt_LeftShoulder
+      position: {x: -0.14428224, y: 0.00000004030764, z: 0.0000000017881393}
+      rotation: {x: 0.07817341, y: 0.051846318, z: 0.16675033, w: 0.98152703}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: Matt_LeftForeArm
+      parentName: Matt_LeftArm
+      position: {x: -0.29042462, y: 0.00000001847744, z: -0.000000009536743}
+      rotation: {x: 0.07007735, y: -0.010467226, z: 0.032475416, w: 0.9969579}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.9999998}
+    - name: Matt_LeftHand
+      parentName: Matt_LeftForeArm
+      position: {x: -0.22981897, y: -0.00000015497207, z: -0.000000028610229}
+      rotation: {x: 0.056890164, y: 0.22488575, z: 0.6306987, w: 0.74054646}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: Matt_LeftHand_end
+      parentName: Matt_LeftHand
+      position: {x: -0, y: 0.22557648, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Matt_RightShoulder
+      parentName: Matt_Spine1
+      position: {x: 0.035819564, y: 0.17173372, z: -0.0024617093}
+      rotation: {x: -0.024121298, y: -0.06498705, z: 0.13557109, w: 0.9883397}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Matt_RightArm
+      parentName: Matt_RightShoulder
+      position: {x: 0.14428219, y: -0.000000013113022, z: 0.0000000037252903}
+      rotation: {x: 0.085161544, y: 0.015812693, z: -0.17074767, w: 0.9815002}
+      scale: {x: 0.9999999, y: 1, z: 1}
+    - name: Matt_RightForeArm
+      parentName: Matt_RightArm
+      position: {x: 0.29042464, y: -0.000000010728836, z: -0.000000009536743}
+      rotation: {x: -0.039522395, y: 0.042511366, z: 0.02271632, w: 0.9980555}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Matt_RightHand
+      parentName: Matt_RightForeArm
+      position: {x: 0.23547138, y: -0.00000054955484, z: -0.000000030994414}
+      rotation: {x: -0.051613584, y: -0.041046467, z: -0.67072845, w: 0.73876566}
+      scale: {x: 0.9999999, y: 0.9999998, z: 1}
+    - name: Matt_RightHand_end
+      parentName: Matt_RightHand
+      position: {x: -0, y: 0.22557648, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Matt_LeftUpLeg
+      parentName: Matt_Hips
+      position: {x: -0.09169796, y: 0, z: 0}
+      rotation: {x: 0.076335065, y: 0.025340423, z: -0.042141553, w: 0.9958689}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Matt_LeftLeg
+      parentName: Matt_LeftUpLeg
+      position: {x: 0.000000011920928, y: -0.36627394, z: 0.0000000020861626}
+      rotation: {x: 0.004228999, y: 0.04718901, z: 0.057660583, w: 0.99721146}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Matt_LeftFoot
+      parentName: Matt_LeftLeg
+      position: {x: -0.0000000011920929, y: -0.3714287, z: -0.00000000834465}
+      rotation: {x: -0.063712396, y: -0.06552263, z: 0.0015096978, w: 0.9958139}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: Matt_LeftToeBase
+      parentName: Matt_LeftFoot
+      position: {x: -0.0000000027415807, y: -0.059603695, z: 0.13754694}
+      rotation: {x: -0.000000001778972, y: 5.820766e-11, z: -8.6492946e-10, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Matt_LeftToeBase_end
+      parentName: Matt_LeftToeBase
+      position: {x: -0, y: 0.14990585, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Matt_RightUpLeg
+      parentName: Matt_Hips
+      position: {x: 0.09169796, y: 0, z: 0}
+      rotation: {x: 0.07029874, y: -0.03975132, z: 0.038774557, w: 0.9959792}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Matt_RightLeg
+      parentName: Matt_RightUpLeg
+      position: {x: 8.9406965e-10, y: -0.36627394, z: -0.0000000047683715}
+      rotation: {x: 0.037087597, y: 0.002093485, z: -0.087424465, w: 0.99547833}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Matt_RightFoot
+      parentName: Matt_RightLeg
+      position: {x: 0.000000002980232, y: -0.37142864, z: 0.0000000023841857}
+      rotation: {x: -0.08011155, y: 0.113225654, z: -0.054077666, w: 0.9888568}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: Matt_RightToeBase
+      parentName: Matt_RightFoot
+      position: {x: 0.00000001752749, y: -0.05960368, z: 0.13754694}
+      rotation: {x: 9.313227e-10, y: 0.0000000023283067, z: 0.000000002561137, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: Matt_RightToeBase_end
+      parentName: Matt_RightToeBase
+      position: {x: -0, y: 0.14990585, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: Matt_Hips
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
