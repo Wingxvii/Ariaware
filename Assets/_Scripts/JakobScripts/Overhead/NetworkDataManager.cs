@@ -117,8 +117,10 @@ namespace NET_PACKET
 
     public class NetworkDataManager : InitializableObject
     {
+
+
         const int droidMax = 100;
-        const int FPSmax = 3;
+        public const int FPSmax = 3;
 
         public static List<ReadBuild> builds { get; protected set; }
         public static List<ReadDamagePlayer> damagesPlayer { get; protected set; }
@@ -147,12 +149,17 @@ namespace NET_PACKET
         [DllImport("CNET.dll")]
         static extern int GetPlayerNumber(IntPtr client);
 
+        public int GetPlayerNum()
+        {
+            return yourID;
+        }
+
         public static void SendNetData(int type, string str)
         {
             SendData(type, str, Client);
         }
 
-        public string ip;
+        public string ip = null;
         private static IntPtr Client;
         private static int playerNumber = -1;
 
@@ -173,6 +180,8 @@ namespace NET_PACKET
         public static Queue<BuildPackage> build = new Queue<BuildPackage>();
         public static Queue<int> kill = new Queue<int>();
         public static uint gameState;
+
+        int yourID = 0;
 
         private static void SwitchRTSBuffers()
         {
@@ -218,6 +227,7 @@ namespace NET_PACKET
 
                 if (SceneManagement.ScenePresent.Instance != null)
                 {
+                    //Debug.Log(ip);
                     ip = SceneManagement.ScenePresent.Instance.IP;
                 }
 
@@ -229,7 +239,10 @@ namespace NET_PACKET
                     StartUpdating(Client);
                     SetupPacketReception(PacketRecieved);
                     //blah
-
+                    yourID = GetPlayerNumber(Client) - 2;
+                    if (yourID < 0)
+                        yourID = 0;
+                    //Debug.Log(yourID);
                 }
 
                 //AddFirst();

@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerState
+{
+    Alive = 1,
+    Shooting = 2
+}
+
 public class EntityContainer : BasePACES
 {
     public EntityType et { get; set; }
 
     public JoinedList<EntityContainer, Entity> AttachedEntities;
     public JoinedList<EntityContainer, SlotBase> AttachedSlots;
+
+    public uint pState = (int)(PlayerState.Alive);
 
     protected override bool CreateVars()
     {
@@ -114,6 +122,15 @@ public class EntityContainer : BasePACES
         }
 
         base.PostDisable();
+    }
+
+    public void SetContainerID(int idNum)
+    {
+        ID = idNum;
+        for (int i = 0; i < AttachedEntities.Amount; ++i)
+        {
+            AttachedEntities.GetObj(i).ID = idNum;
+        }
     }
 
     public enum ContainerType

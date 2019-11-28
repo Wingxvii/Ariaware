@@ -53,7 +53,8 @@ public class ReadPlayerData : ReadBase
                 transform.localRotation = Quaternion.Euler(VectorSplit(NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].rotation, transform.localRotation.eulerAngles, bindPos));
 
                 if (bindState && b != null)
-                    b.pState = (uint)NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].state;
+                    if (b.Container.GetObj(0) != null)
+                        b.Container.GetObj(0).pState = (uint)NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].state;
             }
         }
     }

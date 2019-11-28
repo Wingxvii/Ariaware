@@ -19,9 +19,14 @@ public class TOBIIkeeper
 
     public void UPDATE_TOBII()
     {
-        realPoint = TobiiAPI.GetGazePoint().Screen;
-        SaveRay = Camera.main.ScreenPointToRay(realPoint);
-        tobiiPos = Quaternion.FromToRotation(Camera.main.transform.forward, SaveRay.direction);
+        if (TobiiAPI.IsConnected)
+        {
+            realPoint = TobiiAPI.GetGazePoint().Screen;
+            realPoint.x = Mathf.Clamp(realPoint.x, 0, Screen.width - 1);
+            realPoint.y = Mathf.Clamp(realPoint.y, 0, Screen.height - 1);
+            SaveRay = Camera.main.ScreenPointToRay(realPoint);
+            tobiiPos = Quaternion.FromToRotation(Camera.main.transform.forward, SaveRay.direction);
+        }
     }
 
     public void UPDATE_SCREEN()
@@ -31,8 +36,11 @@ public class TOBIIkeeper
 
     public void DEBUG_TOBII()
     {
-        Debug.Log(Camera.main);
-        Debug.Log(Screen.width + ", " + Screen.height);
-        Debug.Log(SaveRay.direction);
+        if (TobiiAPI.IsConnected)
+        {
+            Debug.Log(Camera.main);
+            Debug.Log(Screen.width + ", " + Screen.height);
+            Debug.Log(SaveRay.direction);
+        }
     }
 }

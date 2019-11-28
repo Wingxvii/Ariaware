@@ -30,7 +30,7 @@ public class WritePlayerData : WriteBase
         sb.Append(transform.rotation.eulerAngles.x); sb.Append(",");
         sb.Append(transform.rotation.eulerAngles.y); sb.Append(",");
         sb.Append(transform.rotation.eulerAngles.z); sb.Append(",");
-        sb.Append(p.ID); sb.Append(",");
+        sb.Append(p.Container.GetObj(0).pState); sb.Append(",");
 
         NET_PACKET.NetworkDataManager.SendNetData((int)NET_PACKET.PacketType.PLAYERDATA, sb.ToString());
     }

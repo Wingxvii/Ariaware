@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState
-{
-    Alive = 1,
-    Shooting = 2
-}
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class Body : Puppet
@@ -17,7 +13,7 @@ public class Body : Puppet
     public Collider[] Col;
     public JoinedList<Body, Inventory> inventories;
 
-    public uint pState = (int)(PlayerState.Alive);
+
     //public float IDENT_VELOCITY = 0f;
 
     protected override bool CreateVars()
@@ -171,13 +167,18 @@ public class Body : Puppet
 
     protected override void LateUpdateObject()
     {
-        if ((pState & (uint)PlayerState.Alive) == 0)
+        if (Container.GetObj(0) != null)
         {
-            pState = pState | (uint)PlayerState.Alive;
-            
-            if (spawn.GetObj(0) != null)
+            uint pState = Container.GetObj(0).pState;
+
+            if ((pState & (uint)PlayerState.Alive) == 0)
             {
-                transform.position = spawn.GetObj(0).transform.position;
+                pState = pState | (uint)PlayerState.Alive;
+
+                if (spawn.GetObj(0) != null)
+                {
+                    transform.position = spawn.GetObj(0).transform.position;
+                }
             }
         }
     }

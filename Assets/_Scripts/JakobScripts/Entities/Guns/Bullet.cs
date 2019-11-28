@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using netcodeRTS;
-using Tobii.Gaming;
+//using Tobii.Gaming;
 
 [System.Serializable]
 public class FireStats
@@ -85,12 +85,12 @@ public class Bullet : UpdateableObject
 
         maxDist = bulletStats.range + gunStats.range;
 
-        if (ignoreThis != null)
-        {
-            ignoreThis.EnableColliders(false);
-        }
+        //if (ignoreThis != null)
+        //{
+        //    ignoreThis.EnableColliders(false);
+        //}
 
-        RaycastHit[] rhit = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, maxDist);
+        RaycastHit[] rhit = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, maxDist, ManualUpdater.raycastPlayerLayer);
 
         Quaternion whereTo = Quaternion.identity;
 
@@ -109,10 +109,10 @@ public class Bullet : UpdateableObject
             whereTo = Quaternion.FromToRotation(culprit.transform.up, (closest.point - culprit.transform.position).normalized);
         }
 
-        if (ignoreThis != null)
-        {
-            ignoreThis.EnableColliders(true);
-        }
+        //if (ignoreThis != null)
+        //{
+        //    ignoreThis.EnableColliders(true);
+        //}
 
         Quaternion newDir = whereTo * culprit.transform.rotation * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
         //Quaternion newDir = offset * culprit.transform.rotation; //Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
@@ -141,12 +141,12 @@ public class Bullet : UpdateableObject
         }
         else
         {
-            if (ignoreThis != null)
-            {
-                ignoreThis.EnableColliders(false);
-            }
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(false);
+            //}
 
-            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, Mathf.Min(bulletDistance, maxDist));
+            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, Mathf.Min(bulletDistance, maxDist), ManualUpdater.raycastPlayerLayer);
 
             if (rhit.Length > 0)
             {
@@ -185,7 +185,7 @@ public class Bullet : UpdateableObject
 
                 origin = transform.position;
 
-                rhit = Physics.RaycastAll(origin, -direction, Mathf.Min(bulletDistance, maxDist));
+                rhit = Physics.RaycastAll(origin, -direction, Mathf.Min(bulletDistance, maxDist), ManualUpdater.raycastPlayerLayer);
 
                 if (rhit.Length > 0)
                 {
@@ -218,10 +218,10 @@ public class Bullet : UpdateableObject
                 }
             }
 
-            if (ignoreThis != null)
-            {
-                ignoreThis.EnableColliders(true);
-            }
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(true);
+            //}
         }
 
         maxDist -= bulletDistance;
@@ -231,13 +231,13 @@ public class Bullet : UpdateableObject
     {
         if (!hasReached)
         {
-            if (ignoreThis != null)
-            {
-                ignoreThis.EnableColliders(false);
-            }
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(false);
+            //}
 
             float place = maxDist;
-            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, maxDist);
+            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, maxDist, ManualUpdater.raycastPlayerLayer);
 
             if (rhit.Length > 0)
             {
@@ -272,10 +272,10 @@ public class Bullet : UpdateableObject
                 }
             }
 
-            if (ignoreThis != null)
-            {
-                ignoreThis.EnableColliders(true);
-            }
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(true);
+            //}
 
             hasReached = true;
             transform.position += direction * place;
