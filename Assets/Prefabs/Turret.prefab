@@ -317,6 +317,7 @@ MonoBehaviour:
   destructable: 1
   selected: 0
   healthBar: {fileID: 5602078410055458512}
+  canvasTransform: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
   state: 0
@@ -331,6 +332,8 @@ MonoBehaviour:
   accuracy: 0.75
   reloadTimer: 0
   currentAmno: 10
+  rotateSpeed: 0
+  faceingPoint: {x: 0, y: 0, z: 0}
   turretLayerMask:
     serializedVersion: 2
     m_Bits: 768
@@ -5256,7 +5259,7 @@ RectTransform:
   m_Children:
   - {fileID: 3809502347253289420}
   m_Father: {fileID: 4287435776433992426}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

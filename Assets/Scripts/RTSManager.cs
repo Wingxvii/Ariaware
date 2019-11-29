@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using netcodeRTS;
+using UnityEngine.SceneManagement;
 
 namespace RTSManagers
 {
@@ -92,6 +93,10 @@ namespace RTSManagers
         // Start is called before the first frame update
         void Start()
         {
+            //set this as active scene
+            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(2));
+
+
             turretBlueprint = (GameObject)Instantiate(turretBlueprint);
             turretBlueprint.SetActive(false);
             barracksBlueprint = (GameObject)Instantiate(barracksBlueprint);
@@ -100,6 +105,7 @@ namespace RTSManagers
             wallBlueprint.SetActive(false);
 
             prefabObject = turretBlueprint;
+
 
         }
 

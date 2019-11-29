@@ -35,6 +35,13 @@ public class SelectableObject : MonoBehaviour
     public int currentHealth = 1;
     public int maxHealth = 1;
 
+
+    private void Awake()
+    {
+        id = ++idtracker;
+        indexedList.Add(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +49,8 @@ public class SelectableObject : MonoBehaviour
         halo.enabled = false;
         canvasTransform = this.transform.Find("Canvas").GetComponent<RectTransform>();
 
-        id = ++idtracker;
-        indexedList.Add(this);
         //call base function
         BaseStart();
-
     }
 
     public void OnSelect()

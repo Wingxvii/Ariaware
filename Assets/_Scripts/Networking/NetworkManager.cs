@@ -428,6 +428,12 @@ namespace netcodeRTS
         public static void SendBuildEntity(SelectableObject obj)
         {
             StringBuilder dataToSend = new StringBuilder();
+            //Debug.Log(obj.type);
+
+            if (obj.id == 0) {
+                Debug.Log("Error Invalid ID Sent");
+                Debug.Break();
+            }
 
             //add object id
             dataToSend.Append(obj.id);
