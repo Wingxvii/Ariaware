@@ -293,7 +293,7 @@ namespace netcodeRTS
                                     break;
                                     */
                                 case 2:
-                             
+
                                     WriteBuffer.Player1Pos.x = float.Parse(parsedData[0]);
                                     WriteBuffer.Player1Pos.y = float.Parse(parsedData[1]);
                                     WriteBuffer.Player1Pos.z = float.Parse(parsedData[2]);
@@ -302,6 +302,9 @@ namespace netcodeRTS
                                     WriteBuffer.Player1Rot.z = float.Parse(parsedData[5]);
                                     WriteBuffer.Player1State = int.Parse(parsedData[6]);
                                     WriteBuffer.updated1 = true;
+
+                                    Debug.Log(WriteBuffer.Player1Pos);
+
                                     break;
                                 case 3:
                                     WriteBuffer.Player2Pos.x = float.Parse(parsedData[0]);
