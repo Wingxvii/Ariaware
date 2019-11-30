@@ -48,6 +48,7 @@ public class RTSFactory : InitializableObject
             nextID = FetchInactiveContainer(et);
         else
         {
+            //Debug.Log(requestedID);
             nextID = requestedID;
             MakeObject(et, nextID);
         }
@@ -100,7 +101,7 @@ public class RTSFactory : InitializableObject
 
     void MakeObject(EntityType et, int forceID)
     {
-        while (allContainers.Count < forceID - 1)
+        while (allContainers.Count < forceID + 1)
         {
             allContainers.Add(null);
         }
@@ -135,7 +136,7 @@ public class RTSFactory : InitializableObject
             {
                 EntityContainer reference = Instantiate(prefabList[inst]);
 
-                reference.ID = forceID + 1;
+                reference.ID = forceID;
                 reference.et = et;
                 reference.transform.SetParent(transform);
 
@@ -211,9 +212,9 @@ public class RTSFactory : InitializableObject
         //    }
         //}
 
-        allContainers[id - 1].gameObject.SetActive(false);
-        allContainers[id - 1].transform.SetParent(transform);
+        allContainers[id].gameObject.SetActive(false);
+        allContainers[id].transform.SetParent(transform);
         if (!proper)
-            InactiveContainers[(int)allContainers[id - 1].et].Enqueue(allContainers[id - 1]);
+            InactiveContainers[(int)allContainers[id].et].Enqueue(allContainers[id]);
     }
 }

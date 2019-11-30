@@ -290,6 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   sendData: 0
+  pState: 1
 --- !u!114 &3515611950326396679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,7 +1076,6 @@ MonoBehaviour:
   ID: 0
   sendData: 0
   Col: []
-  pState: 1
 --- !u!114 &3515611950996173299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,7 +1229,6 @@ GameObject:
   - component: {fileID: 3515611951314552970}
   - component: {fileID: 3515611951314552965}
   - component: {fileID: 3515611951314552971}
-  - component: {fileID: 3515611951314552968}
   m_Layer: 20
   m_Name: Pivot
   m_TagString: Untagged
@@ -1308,18 +1307,6 @@ MonoBehaviour:
     y: 0
     z: 0
   bindState: 0
---- !u!114 &3515611951314552968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515611951314552967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 265aa5713f614c84fb16c1d12c1e6abe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3515611951478144526
 GameObject:
   m_ObjectHideFlags: 0

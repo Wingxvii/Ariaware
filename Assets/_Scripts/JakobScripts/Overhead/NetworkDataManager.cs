@@ -452,7 +452,7 @@ namespace NET_PACKET
                             {
                                 for (int i = 0; i < parsedData.Length - 1; i += 4)
                                 {
-                                    int index = int.Parse(parsedData[i]);
+                                    int index = int.Parse(parsedData[i]) - FPSmax - 1;
                                     //WriteRTS.droidData[i / 4].index = uint.Parse(parsedData[i]);
                                     ParseVector3(ref WriteRTS.droidData[index].position, parsedData, i + 1);
                                     //Debug.Log(index + ", " + WriteRTS.droidData[index].position);
@@ -483,6 +483,7 @@ namespace NET_PACKET
                     if (sender == 1)
                     {
                         //Debug.Log(parsedData[1]);
+                        //Debug.Log(uint.Parse(parsedData[0]));
                         BuildPackage bp = new BuildPackage(uint.Parse(parsedData[0]), uint.Parse(parsedData[1]), ParseIntoVector3(parsedData, 2));
                         build.Enqueue(bp);
                     }
