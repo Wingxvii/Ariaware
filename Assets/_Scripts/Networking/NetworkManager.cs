@@ -303,7 +303,7 @@ namespace netcodeRTS
                                     WriteBuffer.Player1State = int.Parse(parsedData[6]);
                                     WriteBuffer.updated1 = true;
 
-                                    Debug.Log(WriteBuffer.Player1Pos);
+                                    //Debug.Log(WriteBuffer.Player1Pos);
 
                                     break;
                                 case 3:
