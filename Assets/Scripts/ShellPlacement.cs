@@ -20,10 +20,12 @@ public class ShellPlacement : MonoBehaviour
     {
         selfCollider = this.GetComponent<Collider>();
         selfRenderer = this.GetComponent<MeshRenderer>();
-        collisionCount = 0;
 
     }
 
+    void OnEnable() {
+        collisionCount = 0;
+    }
 
     // Update is called once per frame
     void Update()

@@ -34,6 +34,9 @@ public class Droid : SelectableObject
     public float rotateSpeed;
     public Vector3 faceingPoint = new Vector3(0, 0, 0);
 
+    //models
+    public GameObject body;
+
 
     protected override void BaseStart()
     {
@@ -41,6 +44,8 @@ public class Droid : SelectableObject
         selfRigid = this.GetComponent<Rigidbody>();
         currentHealth = 100;
         maxHealth = 100;
+
+
 
     }
 
