@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(NET_PACKET.NetworkDataManager))]
-public class SpawnPlayer : InitializableObject
+public class SpawnPlayer : UpdateableObject
 {
     public EntityContainer ControllablePlayer;
     public EntityContainer OtherPlayer;
 
     NET_PACKET.NetworkDataManager NDM;
+
+    bool spawned = false;
 
     // Start is called before the first frame update
     protected override bool CreateVars()
@@ -33,29 +35,36 @@ public class SpawnPlayer : InitializableObject
     {
         if (base.InnerInitialize())
         {
-            if (NDM.Init())
-            {
-                for (int i = 0; i < NET_PACKET.NetworkDataManager.FPSmax; ++i)
-                {
-                    EntityContainer EC = null;
-                    //Debug.Log(NDM.GetPlayerNum());
-                    if (i == NDM.GetPlayerNum())
-                    {
-                        EC = Instantiate(ControllablePlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
-                    }
-                    else
-                    {
-                        EC = Instantiate(OtherPlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
-                    }
-
-                    EC.SetContainerID(i);
-                }
-            }
+            AddFirst();
 
             return true;
         }
 
         return false;
+    }
+
+    protected override void First()
+    {
+        if (!spawned && NDM.Init() && NDM.GetPlayerNum() >= 0)
+        {
+            for (int i = 0; i < NET_PACKET.NetworkDataManager.FPSmax; ++i)
+            {
+                EntityContainer EC = null;
+                //Debug.Log(NDM.GetPlayerNum());
+                if (i == NDM.GetPlayerNum())
+                {
+                    EC = Instantiate(ControllablePlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    EC = Instantiate(OtherPlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
+                }
+
+                EC.SetContainerID(i);
+
+                spawned = true;
+            }
+        }
     }
 
     protected override void InnerDeInitialize()

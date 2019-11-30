@@ -239,9 +239,10 @@ namespace NET_PACKET
                     StartUpdating(Client);
                     SetupPacketReception(PacketRecieved);
                     //blah
-                    yourID = GetPlayerNumber(Client) - 2;
-                    if (yourID < 0)
-                        yourID = 0;
+                    yourID = GetPlayerNumber(Client);
+                    //Debug.Log(GetPlayerNumber(Client));
+                    //if (yourID < 0)
+                    //    yourID = 0;
                     //Debug.Log(yourID);
                 }
 
@@ -376,6 +377,7 @@ namespace NET_PACKET
                         {
                             if (sender > 1 && sender <= FPSmax + 1)
                             {
+                                //Debug.Log(sender + " RECEIVED");
                                 ParseVector3(ref WriteFPS.playerData[sender - 2].position, parsedData, 0);
                                 ParseVector3(ref WriteFPS.playerData[sender - 2].rotation, parsedData, 3);
                                 WriteFPS.playerData[sender - 2].state = int.Parse(parsedData[6]);
