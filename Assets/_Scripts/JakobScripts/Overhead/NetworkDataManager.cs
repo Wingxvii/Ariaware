@@ -151,6 +151,7 @@ namespace NET_PACKET
 
         public int GetPlayerNum()
         {
+            yourID = GetPlayerNumber(Client) - 2;
             return yourID;
         }
 
