@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-[RequireComponent(typeof(Body), typeof(SpeedLimit))]
+[RequireComponent(typeof(Body), typeof(SpeedLimit), typeof(ApplyFriction))]
 public class PermitMovement : AbstractPermission<PermitMovement, CommandMovement, Body, Controller>
 {
     public float acceleration = 0f;
@@ -13,6 +13,7 @@ public class PermitMovement : AbstractPermission<PermitMovement, CommandMovement
     public bool tilt = true;
 
     SpeedLimit SP;
+    ApplyFriction FR;
     Vector3 direction = Vector3.zero;
 
     protected override bool CreateVars()
@@ -20,6 +21,7 @@ public class PermitMovement : AbstractPermission<PermitMovement, CommandMovement
         if (base.CreateVars())
         {
             SP = GetComponent<SpeedLimit>();
+            FR = GetComponent<ApplyFriction>();
 
             return true;
         }
@@ -29,6 +31,7 @@ public class PermitMovement : AbstractPermission<PermitMovement, CommandMovement
     protected override void DestroyVars()
     {
         SP = null;
+        FR = null;
         base.DestroyVars();
     }
 
@@ -45,6 +48,11 @@ public class PermitMovement : AbstractPermission<PermitMovement, CommandMovement
         Quaternion groundtransform = transform.rotation;
         if (tilt)
             groundtransform = SP.GC.groundAngle * groundtransform;
+
+        if (SP.GC.Grounded)
+        {
+            FR.Slow();
+        }
 
         SpecificActor.Rb.AddForce(groundtransform *
             SP.ForceAdjustment(direction * (SP.GC.Grounded ? acceleration : airborneAcceleration), tilt, globalSpeedLimit, axisSpeedLimits.x, axisSpeedLimits.y, axisSpeedLimits.z));

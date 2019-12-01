@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandFire : AbstractCommand<CommandFire, PermitFire, Controller, Gun>
+public class CommandFire : AbstractCommand<CommandFire, PermitFire, Controller, PACES.Gun>
 {
     public List<UnitButton> fireButton;
 

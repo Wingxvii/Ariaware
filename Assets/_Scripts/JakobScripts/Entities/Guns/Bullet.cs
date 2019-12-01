@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using netcodeRTS;
+//using Tobii.Gaming;
 
 [System.Serializable]
 public class FireStats
@@ -17,12 +18,20 @@ public class FireStats
 public class Bullet : UpdateableObject
 {
     public FireStats bulletStats;
+    public bool useHitscan = false;
+    bool usingHitscan = false;
+
+    public float timeActive = 0.1f;
+    float timeToHit = 0f;
+    bool hasReached = false;
 
     GunVector accuser;
     FireStats gunStats;
     Vector3 origin;
     Vector3 direction;
     Body ignoreThis;
+
+    TrailRenderer aTrail;
 
     float maxDist;
 
@@ -31,6 +40,15 @@ public class Bullet : UpdateableObject
         if (base.CreateVars())
         {
             AddFixedUpdate();
+
+            //Prevent a possible error for if it's changed in editor while firing
+            usingHitscan = useHitscan;
+            aTrail = GetComponentInChildren<TrailRenderer>();
+
+            if (aTrail != null)
+            {
+                aTrail.time = timeActive;
+            }
 
             return true;
         }
@@ -59,19 +77,60 @@ public class Bullet : UpdateableObject
 
     public void SetBulletStats(FireStats fs, GunVector culprit, Body ignore, AnimationCurve acc)
     {
+        //Quaternion offset = TOBIIkeeper.TK.tobiiPos;
         gunStats = fs;
+        ignoreThis = ignore;
         origin = culprit.transform.position;
         transform.position = origin;
-        Quaternion newDir = culprit.transform.rotation * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
-        transform.rotation = newDir;
+
         maxDist = bulletStats.range + gunStats.range;
+
+        //if (ignoreThis != null)
+        //{
+        //    ignoreThis.EnableColliders(false);
+        //}
+
+        RaycastHit[] rhit = Physics.RaycastAll(Camera.main.transform.position, Camera.main.transform.forward, maxDist, ManualUpdater.raycastPlayerLayer);
+
+        Quaternion whereTo = Quaternion.identity;
+
+        if (rhit.Length > 0 && !ignoreThis.notYourBody)
+        {
+            RaycastHit closest = rhit[0];
+
+            for (int i = 1; i < rhit.Length; ++i)
+            {
+                if (closest.distance > rhit[i].distance)
+                {
+                    closest = rhit[i];
+                }
+            }
+
+            whereTo = Quaternion.FromToRotation(culprit.transform.up, (closest.point - culprit.transform.position).normalized);
+        }
+
+        //if (ignoreThis != null)
+        //{
+        //    ignoreThis.EnableColliders(true);
+        //}
+
+        Quaternion newDir = whereTo * culprit.transform.rotation * Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
+        //Quaternion newDir = offset * culprit.transform.rotation; //Quaternion.Euler(acc.Evaluate(Random.Range(0f, 1f)) * (bulletStats.ConeAngle + gunStats.ConeAngle), Random.Range(0, 360f), 0);
+        transform.rotation = newDir;
         direction = newDir * Vector3.up;
-        ignoreThis = ignore;
         accuser = culprit;
     }
 
     protected override void FixedUpdateObject()
     //private void FixedUpdate()
+    {
+        if (usingHitscan)
+            HitscanBullet();
+        else
+            RaycastBullet();
+    }
+
+    void RaycastBullet()
     {
         float bulletDistance = (gunStats.speed + bulletStats.speed) * Time.fixedDeltaTime;
         origin = transform.position;
@@ -82,12 +141,12 @@ public class Bullet : UpdateableObject
         }
         else
         {
-            if (ignoreThis != null)
-            {
-                ignoreThis.EnableColliders(false);
-            }
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(false);
+            //}
 
-            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, Mathf.Min(bulletDistance, maxDist));
+            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, Mathf.Min(bulletDistance, maxDist), ManualUpdater.raycastPlayerLayer);
 
             if (rhit.Length > 0)
             {
@@ -100,36 +159,7 @@ public class Bullet : UpdateableObject
                     }
                 }
 
-                EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
-                if (ec != null)
-                {
-                    if (ec.ID > 3)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append(1);
-                        sb.Append(",");
-                        sb.Append(bulletStats.damage + gunStats.damage);
-                        sb.Append(",");
-                        sb.Append(ec.ID - 1);
-                        sb.Append(",");
-                        NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
-                    }
-
-                    //for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
-                    //{
-                    //    SlotBase sb = ec.AttachedSlots.GetObj(i);
-                    //    if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
-                    //    {
-                    //        Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
-                    //        if (b != null && b.TreeInit())
-                    //        {
-                    //            b.Damage(bulletStats.damage + gunStats.damage);
-                    //        }
-                    //
-                    //        break;
-                    //    }
-                    //}
-                }
+                NetworkBulletData(closest);
 
                 Destroy(gameObject);
 
@@ -141,7 +171,7 @@ public class Bullet : UpdateableObject
 
                 origin = transform.position;
 
-                rhit = Physics.RaycastAll(origin, -direction, Mathf.Min(bulletDistance, maxDist));
+                rhit = Physics.RaycastAll(origin, -direction, Mathf.Min(bulletDistance, maxDist), ManualUpdater.raycastPlayerLayer);
 
                 if (rhit.Length > 0)
                 {
@@ -154,47 +184,85 @@ public class Bullet : UpdateableObject
                         }
                     }
 
-                    EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
-                    if (ec != null)
-                    {
-                        if (ec.ID > 3)
-                        {
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append(1);
-                            sb.Append(",");
-                            sb.Append(bulletStats.damage + gunStats.damage);
-                            sb.Append(",");
-                            sb.Append(ec.ID - 1);
-                            sb.Append(",");
-                            NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
-                        }
-
-                        //for (int i = 0; i < ec.AttachedSlots.Amount; ++i)
-                        //{
-                        //    SlotBase sb = ec.AttachedSlots.GetObj(i);
-                        //    if (FType.FindIfType(sb.GetSlotType(), typeof(Body)) && sb.BranchInit())
-                        //    {
-                        //        Body b = EType<Body>.FindType(sb.EntityPlug.GetObj(0));
-                        //        if (b != null && b.TreeInit())
-                        //        {
-                        //            b.Damage(bulletStats.damage + gunStats.damage);
-                        //        }
-                        //
-                        //        break;
-                        //    }
-                        //}
-                    }
+                    NetworkBulletData(closest);
 
                     Destroy(gameObject);
                 }
             }
 
-            if (ignoreThis != null)
-            {
-                ignoreThis.EnableColliders(true);
-            }
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(true);
+            //}
         }
 
         maxDist -= bulletDistance;
+    }
+
+    void HitscanBullet()
+    {
+        if (!hasReached)
+        {
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(false);
+            //}
+
+            float place = maxDist;
+            RaycastHit[] rhit = Physics.RaycastAll(origin, direction, maxDist, ManualUpdater.raycastPlayerLayer);
+
+            if (rhit.Length > 0)
+            {
+
+                RaycastHit closest = rhit[0];
+
+                for (int i = 1; i < rhit.Length; ++i)
+                {
+                    if (closest.distance > rhit[i].distance)
+                    {
+                        closest = rhit[i];
+                    }
+                }
+
+                place = closest.distance;
+
+                NetworkBulletData(closest);
+            }
+
+            //if (ignoreThis != null)
+            //{
+            //    ignoreThis.EnableColliders(true);
+            //}
+
+            hasReached = true;
+            transform.position += direction * place;
+        }
+
+        timeToHit += Time.fixedDeltaTime;
+
+        if (timeToHit >= timeActive)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void NetworkBulletData(RaycastHit closest)
+    {
+        EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
+
+        if (!ignoreThis.notYourBody && ec != null)
+        {
+            if (ec.ID > 3)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(1);
+                sb.Append(",");
+                sb.Append(bulletStats.damage + gunStats.damage);
+                sb.Append(",");
+                sb.Append(ec.ID - 1);
+                sb.Append(",");
+                NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
+            }
+        }
     }
 }

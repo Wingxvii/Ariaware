@@ -117,8 +117,10 @@ namespace NET_PACKET
 
     public class NetworkDataManager : InitializableObject
     {
+
+
         const int droidMax = 100;
-        const int FPSmax = 3;
+        public const int FPSmax = 3;
 
         public static List<ReadBuild> builds { get; protected set; }
         public static List<ReadDamagePlayer> damagesPlayer { get; protected set; }
@@ -147,14 +149,24 @@ namespace NET_PACKET
         [DllImport("CNET.dll")]
         static extern int GetPlayerNumber(IntPtr client);
 
+        public int GetPlayerNum()
+        {
+            if (!noServer)
+                yourID = GetPlayerNumber(Client) - 2;
+            else
+                yourID = 0;
+            return yourID;
+        }
+
         public static void SendNetData(int type, string str)
         {
             SendData(type, str, Client);
         }
 
-        public string ip;
+        public string ip = null;
         private static IntPtr Client;
         private static int playerNumber = -1;
+        bool noServer = false;
 
         #endregion
 
@@ -173,6 +185,8 @@ namespace NET_PACKET
         public static Queue<BuildPackage> build = new Queue<BuildPackage>();
         public static Queue<int> kill = new Queue<int>();
         public static uint gameState;
+
+        int yourID = 0;
 
         private static void SwitchRTSBuffers()
         {
@@ -218,18 +232,26 @@ namespace NET_PACKET
 
                 if (SceneManagement.ScenePresent.Instance != null)
                 {
+                    //Debug.Log(ip);
                     ip = SceneManagement.ScenePresent.Instance.IP;
                 }
+                else
+                    noServer = true;
 
                 if (ip != null)
                 {
+                    //Debug.Log(ip);
                     //client Init  
                     Client = CreateClient();
                     Connect(ip, Client);
                     StartUpdating(Client);
                     SetupPacketReception(PacketRecieved);
                     //blah
-
+                    //yourID = GetPlayerNumber(Client);
+                    //Debug.Log(GetPlayerNumber(Client));
+                    //if (yourID < 0)
+                    //    yourID = 0;
+                    //Debug.Log(yourID);
                 }
 
                 //AddFirst();
@@ -363,6 +385,7 @@ namespace NET_PACKET
                         {
                             if (sender > 1 && sender <= FPSmax + 1)
                             {
+                                //Debug.Log(sender + " RECEIVED");
                                 ParseVector3(ref WriteFPS.playerData[sender - 2].position, parsedData, 0);
                                 ParseVector3(ref WriteFPS.playerData[sender - 2].rotation, parsedData, 3);
                                 WriteFPS.playerData[sender - 2].state = int.Parse(parsedData[6]);
@@ -395,6 +418,7 @@ namespace NET_PACKET
                     {
                         weaponStates[sender - 2].WeaponState = uint.Parse(parsedData[0]);
                         weaponStates[sender - 2].flag = true;
+                        //Debug.Log((sender - 2) + ", " + weaponStates[sender - 2].WeaponState);
                     }
                     else
                     {
@@ -416,7 +440,7 @@ namespace NET_PACKET
                     //}
                     if (sender == 1)
                     {
-                        DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]), int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
+                        DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]) - 1, int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
                         damagePlayer.Enqueue(dpp);
                     }
                     else if (sender > 1 && sender <= FPSmax + 1)
@@ -439,7 +463,7 @@ namespace NET_PACKET
                             {
                                 for (int i = 0; i < parsedData.Length - 1; i += 4)
                                 {
-                                    int index = int.Parse(parsedData[i]);
+                                    int index = int.Parse(parsedData[i]) - FPSmax - 1;
                                     //WriteRTS.droidData[i / 4].index = uint.Parse(parsedData[i]);
                                     ParseVector3(ref WriteRTS.droidData[index].position, parsedData, i + 1);
                                     //Debug.Log(index + ", " + WriteRTS.droidData[index].position);
@@ -470,6 +494,7 @@ namespace NET_PACKET
                     if (sender == 1)
                     {
                         //Debug.Log(parsedData[1]);
+                        //Debug.Log(uint.Parse(parsedData[0]));
                         BuildPackage bp = new BuildPackage(uint.Parse(parsedData[0]), uint.Parse(parsedData[1]), ParseIntoVector3(parsedData, 2));
                         build.Enqueue(bp);
                     }

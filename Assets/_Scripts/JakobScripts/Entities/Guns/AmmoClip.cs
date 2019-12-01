@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Gun))]
+[RequireComponent(typeof(PACES.Gun))]
 public class AmmoClip : ObjectStat
 {
-    public JoinedVar<AmmoClip, Gun> gun;
+    public JoinedVar<AmmoClip, PACES.Gun> gun;
     public Bullet bullet;
     public int maxBulletCount = 6;
     public int bulletCount { get; protected set; }
@@ -24,7 +24,7 @@ public class AmmoClip : ObjectStat
     {
         if (base.CreateVars())
         {
-            gun = new JoinedVar<AmmoClip, Gun>(this);
+            gun = new JoinedVar<AmmoClip, PACES.Gun>(this);
 
             return true;
         }
@@ -36,7 +36,7 @@ public class AmmoClip : ObjectStat
     {
         if (base.InnerInitialize())
         {
-            Gun g = GetComponent<Gun>();
+            PACES.Gun g = GetComponent<PACES.Gun>();
             if (g.InnerInit())
             {
                 gun.Attach(g.ammo);

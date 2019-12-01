@@ -5,6 +5,21 @@ using System;
 
 public class ManualUpdater : InitializableObject
 {
+    static bool raycastIgnoreSet = false;
+
+    public static int raycastPlayerLayer { get; private set; }
+
+    static void SetRaycastIgnore()
+    {
+        if (!raycastIgnoreSet)
+        {
+            raycastIgnoreSet = true;
+
+            raycastPlayerLayer = ~(1 << LayerMask.NameToLayer("FPSplayer"));
+            //Debug.Log(raycastPlayerLayer);
+        }
+    }
+
     public List<Action> ActFirst;
     public List<Action> ActSecond;
     public List<Action> ActThird;
@@ -17,6 +32,8 @@ public class ManualUpdater : InitializableObject
     protected override bool CreateVars()
     {
         FPSManager.FM.Parsed = false;
+
+        SetRaycastIgnore();
 
         if (base.CreateVars())
         {
@@ -51,6 +68,8 @@ public class ManualUpdater : InitializableObject
 
     protected void Update()
     {
+        TOBIIkeeper.TK.UPDATE_TOBII();
+        //TOBIIkeeper.TK.DEBUG_TOBII();
         //Debug.Log("UPDATE");
         for (int i = ActFirst.Count - 1; i >= 0; --i)
         {
@@ -103,4 +122,9 @@ public class ManualUpdater : InitializableObject
         }
         //Debug.Log("ENDOF");
     }
+
+    //protected void OnPostRender()
+    //{
+    //    TOBIIkeeper.TK.UPDATE_SCREEN();
+    //}
 }

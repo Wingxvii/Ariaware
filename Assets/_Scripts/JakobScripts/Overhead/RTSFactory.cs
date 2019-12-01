@@ -9,8 +9,11 @@ public class RTSFactory : InitializableObject
     Queue<EntityContainer>[] InactiveContainers;
 
     public List<EntityContainer> allContainers;
+    List<EntityContainer>[] allContainerTypes;
     //int listIter = 0;
     public int BatchAmount = 1;
+
+    public bool proper = true;
 
     protected override bool CreateVars()
     {
@@ -18,10 +21,12 @@ public class RTSFactory : InitializableObject
         {
             allContainers = new List<EntityContainer>();
             InactiveContainers = new Queue<EntityContainer>[(int)EntityType.TOTAL];
+            allContainerTypes = new List<EntityContainer>[(int)EntityType.TOTAL];
 
             for (int i = 0; i < InactiveContainers.Length; ++i)
             {
                 InactiveContainers[i] = new Queue<EntityContainer>();
+                allContainerTypes[i] = new List<EntityContainer>();
             }
 
             for (int i = 0; i < 3; ++i)
@@ -39,7 +44,14 @@ public class RTSFactory : InitializableObject
     {
         //Debug.Log(allContainers.Count);
         int nextID = -1;
-        nextID = FetchInactiveContainer(et);
+        if (!proper)
+            nextID = FetchInactiveContainer(et);
+        else
+        {
+            //Debug.Log(requestedID);
+            nextID = requestedID;
+            MakeObject(et, nextID);
+        }
 
         //Debug.Log(nextID);
         EntityContainer reference = allContainers[nextID];
@@ -87,6 +99,52 @@ public class RTSFactory : InitializableObject
         //return null;
     }
 
+    void MakeObject(EntityType et, int forceID)
+    {
+        while (allContainers.Count < forceID + 1)
+        {
+            allContainers.Add(null);
+        }
+
+        EnforceGeneration(et, forceID);
+    }
+
+    void EnforceGeneration(EntityType et, int forceID)
+    {
+        if (allContainers[forceID] == null)
+        {
+            int inst = -1;
+            switch (et)
+            {
+                case EntityType.Barracks:
+                    inst = 0;
+                    break;
+                case EntityType.Droid:
+                    inst = 1;
+                    break;
+                case EntityType.Turret:
+                    inst = 2;
+                    break;
+                case EntityType.Wall:
+                    inst = 3;
+                    break;
+                default:
+                    break;
+            }
+
+            for (int i = 0; i < BatchAmount; ++i)
+            {
+                EntityContainer reference = Instantiate(prefabList[inst]);
+
+                reference.ID = forceID;
+                reference.et = et;
+                reference.transform.SetParent(transform);
+
+                allContainers[forceID] = reference;
+            }
+        }
+    }
+
     int FetchInactiveContainer(EntityType et)
     {
         if (InactiveContainers[(int)et].Count == 0)
@@ -96,6 +154,8 @@ public class RTSFactory : InitializableObject
 
         return InactiveContainers[(int)et].Dequeue().ID - 1;
     }
+
+
 
     void GenerateNewContainers(EntityType et)
     {
@@ -152,8 +212,9 @@ public class RTSFactory : InitializableObject
         //    }
         //}
 
-        allContainers[id - 1].gameObject.SetActive(false);
-        allContainers[id - 1].transform.SetParent(transform);
-        InactiveContainers[(int)allContainers[id - 1].et].Enqueue(allContainers[id - 1]);
+        allContainers[id].gameObject.SetActive(false);
+        allContainers[id].transform.SetParent(transform);
+        if (!proper)
+            InactiveContainers[(int)allContainers[id].et].Enqueue(allContainers[id]);
     }
 }

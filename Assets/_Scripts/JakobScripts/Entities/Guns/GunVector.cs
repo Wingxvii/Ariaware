@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunVector : Empty
 {
-    public JoinedVar<GunVector, Gun> parentGun;
+    public JoinedVar<GunVector, PACES.Gun> parentGun;
 
     public AnimationCurve Xpattern;
     public AnimationCurve Zpattern;
@@ -13,7 +13,7 @@ public class GunVector : Empty
     {
         if (base.CreateVars())
         {
-            parentGun = new JoinedVar<GunVector, Gun>(this);
+            parentGun = new JoinedVar<GunVector, PACES.Gun>(this);
 
             return true;
         }
@@ -25,7 +25,7 @@ public class GunVector : Empty
     {
         if (base.HierarchyInitialize())
         {
-            Gun[] guns = GetComponentsInParent<Gun>();
+            PACES.Gun[] guns = GetComponentsInParent<PACES.Gun>();
             for (int i = 0; i < guns.Length; i++)
             {
                 if (guns[i].BranchInit())

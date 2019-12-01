@@ -25,12 +25,13 @@ public class ReadDroid : ReadBase
     {
         if (NDM != null && NDM.Init())
         {
-            if (NET_PACKET.NetworkDataManager.ReadRTS.droidData[b.ID].flag)
+            int dID = b.ID - NET_PACKET.NetworkDataManager.FPSmax - 1;
+            if (NET_PACKET.NetworkDataManager.ReadRTS.droidData[dID].flag)
             {
 
-                NET_PACKET.NetworkDataManager.ReadRTS.droidData[b.ID].flag = false;
+                NET_PACKET.NetworkDataManager.ReadRTS.droidData[dID].flag = false;
 
-                transform.position = NET_PACKET.NetworkDataManager.ReadRTS.droidData[b.ID].position;
+                transform.position = NET_PACKET.NetworkDataManager.ReadRTS.droidData[dID].position;
             }
         }
     }

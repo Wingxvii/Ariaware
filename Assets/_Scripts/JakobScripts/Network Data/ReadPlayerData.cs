@@ -6,6 +6,9 @@ using System;
 [Serializable]
 public class BindVec3
 {
+    public BindVec3() { }
+    public BindVec3(bool X, bool Y, bool Z) { x = X; y = Y; z = Z; }
+
     public bool x = false, y = false, z = false;
 }
 
@@ -47,13 +50,16 @@ public class ReadPlayerData : ReadBase
             //Debug.Log(NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID]);
             if (NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].flag)
             {
-                NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].flag = false;
+                //Debug.Log("GETTING IT");
+                //NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].flag = false;
 
                 transform.position = VectorSplit(NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].position, transform.position, bindPos);
-                transform.localRotation = Quaternion.Euler(VectorSplit(NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].rotation, transform.localRotation.eulerAngles, bindPos));
+                transform.localRotation = Quaternion.Euler(VectorSplit(NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].rotation, transform.localRotation.eulerAngles, bindRot));
 
                 if (bindState && b != null)
-                    b.pState = (uint)NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].state;
+                    if (b.Container.GetObj(0) != null)
+                        b.Container.GetObj(0).pState = (uint)NET_PACKET.NetworkDataManager.ReadFPS.playerData[p.ID].state;
+                //Debug.Log(name);
             }
         }
     }
