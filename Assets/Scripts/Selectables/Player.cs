@@ -6,6 +6,12 @@ using RTSManagers;
 
 public class Player : SelectableObject
 {
+    public enum PlayerState
+    {
+        Alive = (1 << 0),
+        Shooting = (1 << 1)
+    }
+
     public Transform playerTransform;
     public Rigidbody playerBody;
 
@@ -15,6 +21,7 @@ public class Player : SelectableObject
     static public Vector3 pos = new Vector3(0, 0, 0);
     public float moveSpeed = 1;
     public float maxSpeed = 20.0f;
+    public int state = (int)PlayerState.Alive;
 
     public GameObject[] weapons;
 
@@ -24,7 +31,7 @@ public class Player : SelectableObject
         currentHealth = 200;
         maxHealth = 200;
 
-        destructable = false;
+        destructable = false;        
 
         playerTransform = this.GetComponent<Transform>();
         playerBody = this.GetComponent<Rigidbody>();
@@ -45,6 +52,13 @@ public class Player : SelectableObject
         Debug.Log("Force Added");
         this.GetComponent<Rigidbody>().velocity = (pos - this.transform.position) * 10f;
         this.transform.rotation = Quaternion.Euler(new Vector3(0f, rot.y, 0f));
+        this.state = state;
+
+
+        if ((state & (int)PlayerState.Shooting) > 0)
+        {
+            Debug.Log("Player is Shooting");
+        }
 
 
     }
@@ -75,7 +89,11 @@ public class Player : SelectableObject
         anim.SetFloat("Turn", Vector3.Dot(this.GetComponent<Rigidbody>().velocity, transform.right) / 10);
 
     }
-
+    /*
+        if ((state & (int) PlayerState.Alive) > 0) { 
+        
+        }
+    */
 
 
     /*
