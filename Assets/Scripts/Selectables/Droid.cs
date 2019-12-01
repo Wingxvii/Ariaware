@@ -41,6 +41,8 @@ public class Droid : SelectableObject
     //animation
     public Animator anim;
 
+    private bool deathCheck = false;
+
     protected override void BaseStart()
     {
 
@@ -48,7 +50,7 @@ public class Droid : SelectableObject
         currentHealth = 100;
         maxHealth = 100;
         anim = this.GetComponent<Animator>();
-
+        deathCheck = false;
 
     }
 
@@ -148,6 +150,9 @@ public class Droid : SelectableObject
             case DroidState.Standing:
                 shortestDist = float.MaxValue;
 
+                anim.SetFloat("Walk", 0);
+                anim.SetFloat("Turn", 0);
+
                 foreach (Player player in DroidManager.Instance.playerTargets)
                 {
                     float dist = Vector3.Distance(player.transform.position, this.transform.position);
@@ -193,10 +198,11 @@ public class Droid : SelectableObject
 
     public override void OnDeath()
     {
-        Debug.Log("Dead droid");
-        DroidManager.Instance.KillDroid(this);
-        NetworkManager.SendKilledEntity(this);
-        SelectionManager.Instance.DeselectItem(this);
+        if (!deathCheck)
+        {
+            deathCheck = true;
+            StartCoroutine("PlayDeath");
+        }
     }
 
     //unique classes
@@ -237,4 +243,14 @@ public class Droid : SelectableObject
         }
     }
 
+    IEnumerator PlayDeath() {
+        anim.Play("Death");
+
+        yield return new WaitForSeconds(3.0f);
+
+        Debug.Log("Dead droid");
+        DroidManager.Instance.KillDroid(this);
+        NetworkManager.SendKilledEntity(this);
+        SelectionManager.Instance.DeselectItem(this);
+    }
 }

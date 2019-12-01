@@ -153,7 +153,12 @@ namespace RTSManagers
             {
                 Application.Quit();
             }
-
+            if (Input.GetKeyDown(KeyCode.T)) { 
+                foreach(Droid droid in DroidManager.Instance.ActiveDroidPool)
+                {
+                    droid.OnDeath();
+                }
+            }
 
 
             #endregion
