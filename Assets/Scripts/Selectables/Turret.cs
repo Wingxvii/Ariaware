@@ -73,7 +73,7 @@ public class Turret : SelectableObject
     void TickUpdate()
     {
         if (positionUpdated) {
-            Debug.Log("Added");
+            //Debug.Log("Added");
             NetworkManager.AddDataToStack(id, head.transform.rotation.eulerAngles, (int)state);
         }
         positionUpdated = false;

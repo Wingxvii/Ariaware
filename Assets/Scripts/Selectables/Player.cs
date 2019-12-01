@@ -49,7 +49,6 @@ public class Player : SelectableObject
     }
 
     public void SendUpdate(Vector3 pos, Vector3 rot, int state) {
-        Debug.Log("Force Added");
         this.GetComponent<Rigidbody>().velocity = (pos - this.transform.position) * 10f;
         this.transform.rotation = Quaternion.Euler(new Vector3(0f, rot.y, 0f));
         this.state = state;
@@ -57,7 +56,16 @@ public class Player : SelectableObject
 
         if ((state & (int)PlayerState.Shooting) > 0)
         {
-            Debug.Log("Player is Shooting");
+            if (!weapons[activeWeapon].GetComponent<WeaponLogic>().playing)
+            {
+                weapons[activeWeapon].GetComponent<WeaponLogic>().StartPlaying();
+            }
+        }
+        else {
+            if (weapons[activeWeapon].GetComponent<WeaponLogic>().playing)
+            {
+                weapons[activeWeapon].GetComponent<WeaponLogic>().StopPlaying();
+            }
         }
 
 
