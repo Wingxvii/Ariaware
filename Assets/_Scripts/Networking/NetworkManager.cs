@@ -427,6 +427,9 @@ namespace netcodeRTS
                 dataToSend.Append(",");
                 dataToSend.Append(droid.transform.position.z);
                 dataToSend.Append(",");
+                dataToSend.Append(droid.transform.rotation.eulerAngles.y);
+                dataToSend.Append(",");
+
             }
 
             SendData((int)PacketType.DROIDLOCATIONS, dataToSend.ToString(), Client);
