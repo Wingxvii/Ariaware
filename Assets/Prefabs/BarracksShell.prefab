@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4262164172365560118}
   - component: {fileID: 5339715081138403618}
   - component: {fileID: 5798582921153516454}
-  - component: {fileID: 672664529557748577}
   - component: {fileID: 5455284379780094098}
+  - component: {fileID: 4008334538890465209}
   m_Layer: 14
   m_Name: BarracksShell
   m_TagString: Shell
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7171218989621235658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.132122, y: 1.0100003, z: -16.399601}
-  m_LocalScale: {x: 8, y: 4, z: 8}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7171218989621235658}
-  m_Mesh: {fileID: -2432090755550338912, guid: fb8db639db3ef064bb2fdaa46e0609fe, type: 3}
+  m_Mesh: {fileID: -2432090755550338912, guid: 268f362df7c75d44bb09635bce0f8ae1, type: 3}
 --- !u!23 &5798582921153516454
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -80,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &672664529557748577
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171218989621235658}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.25
-  m_Height: 0.85156405
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.075782, z: 0}
 --- !u!114 &5455284379780094098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,3 +97,17 @@ MonoBehaviour:
   selfCollider: {fileID: 0}
   selfRenderer: {fileID: 0}
   placeable: 0
+  collisionCount: 0
+--- !u!65 &4008334538890465209
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7171218989621235658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 6.5, z: 9}
+  m_Center: {x: -0.5, y: 3.15, z: 0}

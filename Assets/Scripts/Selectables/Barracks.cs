@@ -75,7 +75,7 @@ public class Barracks : SelectableObject
     }
 
     public override void IssueLocation(Vector3 location) {
-        flagObj.transform.position = new Vector3(location.x, 2.11f, location.z);
+        flagObj.transform.position = new Vector3(location.x, location.y + 2.5f, location.z);
         flagActive = true;
     }
     public override void OnActivation()
