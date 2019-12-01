@@ -37,6 +37,7 @@ public class ReadWeaponSwitch : ReadBase
                 //Debug.Log(NET_PACKET.NetworkDataManager.weaponStates[b.ID]);
                 if (NET_PACKET.NetworkDataManager.weaponStates[inv.ID].flag)
                 {
+                    //Debug.Log(inv.ID);
                     NET_PACKET.NetworkDataManager.weaponStates[inv.ID].flag = false;
                     inv.SwapActive((int)NET_PACKET.NetworkDataManager.weaponStates[inv.ID].WeaponState);
                     //Debug.Log(NET_PACKET.NetworkDataManager.weaponStates[b.ID].WeaponState);

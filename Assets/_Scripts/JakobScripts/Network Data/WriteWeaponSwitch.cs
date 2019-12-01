@@ -14,6 +14,8 @@ public class WriteWeaponSwitch : WriteBase
         {
             i = GetComponent<Inventory>();
 
+            AddSecond();
+
             return true;
         }
 

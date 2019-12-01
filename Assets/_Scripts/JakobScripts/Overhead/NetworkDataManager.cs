@@ -418,6 +418,7 @@ namespace NET_PACKET
                     {
                         weaponStates[sender - 2].WeaponState = uint.Parse(parsedData[0]);
                         weaponStates[sender - 2].flag = true;
+                        Debug.Log((sender - 2) + ", " + weaponStates[sender - 2].WeaponState);
                     }
                     else
                     {

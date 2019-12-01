@@ -224,11 +224,11 @@ public class Inventory : Puppet
         Items.GetObj(activeObject).PseudoDisable();
         activeObject = index;
 
-        StringBuilder sb = new StringBuilder();
-        sb.Append(index);
-        sb.Append(",");
+        //StringBuilder sb = new StringBuilder();
+        //sb.Append(index);
+        //sb.Append(",");
 
-        NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.WEAPONSTATE, sb.ToString());
+        //NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.WEAPONSTATE, sb.ToString());
         Items.GetObj(activeObject).PseudoEnable();
     }
 
