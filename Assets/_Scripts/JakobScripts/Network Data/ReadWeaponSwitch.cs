@@ -30,16 +30,15 @@ public class ReadWeaponSwitch : ReadBase
 
     protected override void First()
     {
-        Body b = inv.body.GetObj(0);
         if (NDM != null && NDM.Init())
         {
-            if(b != null)
+            if (inv.contain)
             {
                 //Debug.Log(NET_PACKET.NetworkDataManager.weaponStates[b.ID]);
-                if (NET_PACKET.NetworkDataManager.weaponStates[b.ID].flag)
+                if (NET_PACKET.NetworkDataManager.weaponStates[inv.ID].flag)
                 {
-                    NET_PACKET.NetworkDataManager.weaponStates[b.ID].flag = false;
-                    inv.SwapActive((int)NET_PACKET.NetworkDataManager.weaponStates[b.ID].WeaponState);
+                    NET_PACKET.NetworkDataManager.weaponStates[inv.ID].flag = false;
+                    inv.SwapActive((int)NET_PACKET.NetworkDataManager.weaponStates[inv.ID].WeaponState);
                     //Debug.Log(NET_PACKET.NetworkDataManager.weaponStates[b.ID].WeaponState);
                 }
             }

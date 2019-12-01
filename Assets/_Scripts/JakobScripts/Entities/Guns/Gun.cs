@@ -95,8 +95,8 @@ namespace PACES
 
         protected override void FixedUpdateObject()
         {
-            if (b != null && !b.notYourBody)
-                Debug.Log(Container.GetObj(0).pState & (uint)PlayerState.Shooting);
+            //if (b != null && !b.notYourBody)
+            //    Debug.Log(Container.GetObj(0).pState & (uint)PlayerState.Shooting);
             if (b != null && b.notYourBody)
             {
                 FireBullet((Container.GetObj(0).pState & (uint)PlayerState.Shooting) > 0);
