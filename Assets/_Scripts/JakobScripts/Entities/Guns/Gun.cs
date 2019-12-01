@@ -93,33 +93,25 @@ namespace PACES
 
         public void FireBullet(bool canFire)
         {
+            uint saveShooting = 0;
             //Debug.Log("Firing");
             if (canFire && cooldown <= 0)
             {
                 //Debug.Log("Firing!!!!");
                 if (ammo.Amount > 0)
                 {
+                    saveShooting |= (uint)PlayerState.Shooting;
                     //Debug.Log("FIRING!!!!!!!!");
                     float time = Time.fixedDeltaTime;
-                    Bullet b;
+                    Bullet b = null;
                     while (time > FireDelay && ammo.GetObj(0).bulletCount > 0)
                     {
                         time -= FireDelay;
-                        for (int i = 0; i < gunScope.Amount; ++i)
-                        {
-                            ammo.GetObj(0).Shoot();
-                            b = Instantiate(ammo.GetObj(0).bullet);
-                            b.SetBulletStats(gunStats, gunScope.GetObj(i), CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
-                        }
+                        ShootBullets(b);
                     }
                     if (ammo.GetObj(0).bulletCount > 0)
                     {
-                        for (int i = 0; i < gunScope.Amount; ++i)
-                        {
-                            ammo.GetObj(0).Shoot();
-                            b = Instantiate(ammo.GetObj(0).bullet);
-                            b.SetBulletStats(gunStats, gunScope.GetObj(i), CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
-                        }
+                        ShootBullets(b);
 
                         cooldown = FireDelay;
                     }
@@ -127,6 +119,18 @@ namespace PACES
             }
             if (cooldown > 0)
                 cooldown -= Time.fixedDeltaTime;
+
+            Container.GetObj(0).pState |= (saveShooting & (uint)PlayerState.Shooting);
+        }
+
+        void ShootBullets(Bullet b)
+        {
+            for (int i = 0; i < gunScope.Amount; ++i)
+            {
+                ammo.GetObj(0).Shoot();
+                b = Instantiate(ammo.GetObj(0).bullet);
+                b.SetBulletStats(gunStats, gunScope.GetObj(i), CurrentInventory.GetObj(0).body.GetObj(0), accuracyCalc);
+            }
         }
     }
 }

@@ -274,6 +274,7 @@ MonoBehaviour:
   ID: 0
   sendData: 0
   Col: []
+  notYourBody: 0
 --- !u!114 &6090338462497764687
 MonoBehaviour:
   m_ObjectHideFlags: 0

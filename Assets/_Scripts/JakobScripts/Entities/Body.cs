@@ -12,7 +12,7 @@ public class Body : Puppet
     public JoinedVar<Body, CameraAnchor> LocalCamera;
     public Collider[] Col;
     public JoinedList<Body, Inventory> inventories;
-
+    public bool notYourBody = true;
 
     //public float IDENT_VELOCITY = 0f;
 

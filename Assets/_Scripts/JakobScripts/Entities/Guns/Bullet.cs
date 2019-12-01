@@ -159,21 +159,7 @@ public class Bullet : UpdateableObject
                     }
                 }
 
-                EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
-                if (ec != null)
-                {
-                    if (ec.ID > 3)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append(1);
-                        sb.Append(",");
-                        sb.Append(bulletStats.damage + gunStats.damage);
-                        sb.Append(",");
-                        sb.Append(ec.ID - 1);
-                        sb.Append(",");
-                        NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
-                    }
-                }
+                NetworkBulletData(closest);
 
                 Destroy(gameObject);
 
@@ -198,21 +184,7 @@ public class Bullet : UpdateableObject
                         }
                     }
 
-                    EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
-                    if (ec != null)
-                    {
-                        if (ec.ID > 3)
-                        {
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append(1);
-                            sb.Append(",");
-                            sb.Append(bulletStats.damage + gunStats.damage);
-                            sb.Append(",");
-                            sb.Append(ec.ID - 1);
-                            sb.Append(",");
-                            NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
-                        }
-                    }
+                    NetworkBulletData(closest);
 
                     Destroy(gameObject);
                 }
@@ -254,22 +226,7 @@ public class Bullet : UpdateableObject
 
                 place = closest.distance;
 
-                EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
-
-                if (ec != null)
-                {
-                    if (ec.ID > 3)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append(1);
-                        sb.Append(",");
-                        sb.Append(bulletStats.damage + gunStats.damage);
-                        sb.Append(",");
-                        sb.Append(ec.ID - 1);
-                        sb.Append(",");
-                        NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
-                    }
-                }
+                NetworkBulletData(closest);
             }
 
             //if (ignoreThis != null)
@@ -286,6 +243,26 @@ public class Bullet : UpdateableObject
         if (timeToHit >= timeActive)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void NetworkBulletData(RaycastHit closest)
+    {
+        EntityContainer ec = closest.collider.GetComponentInParent<EntityContainer>();
+
+        if (!ignoreThis.notYourBody && ec != null)
+        {
+            if (ec.ID > 3)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(1);
+                sb.Append(",");
+                sb.Append(bulletStats.damage + gunStats.damage);
+                sb.Append(",");
+                sb.Append(ec.ID - 1);
+                sb.Append(",");
+                NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.DAMAGEDEALT, sb.ToString());
+            }
         }
     }
 }
