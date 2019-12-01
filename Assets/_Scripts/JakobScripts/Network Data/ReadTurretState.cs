@@ -5,12 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Puppet))]
 public class ReadTurretState : ReadBase
 {
-    TurretState ts = TurretState.Idle;
+    public TurretBullet TB;
+
+    NET_PACKET.TurretStateData ts = NET_PACKET.TurretStateData.Idle;
     //public BindVec3 bindPos;
     public BindVec3 bindRot;
     public bool bindState;
 
+    public float FireRate = 0.05f;
+    float cooldown = 0f;
     Puppet p;
+
+    int barrel = 0;
 
     protected override bool CreateVars()
     {
@@ -19,6 +25,7 @@ public class ReadTurretState : ReadBase
             p = GetComponent<Puppet>();
 
             AddFourth();
+            AddUpdate();
 
             return true;
         }
@@ -39,11 +46,28 @@ public class ReadTurretState : ReadBase
         if (TUR != null)
         {
             transform.rotation = Quaternion.Euler(VectorSplit(TUR.euler, transform.rotation.eulerAngles, bindRot));
-            ts = (TurretState)TUR.state;
+            ts = (NET_PACKET.TurretStateData)TUR.state;
         }
-        else
+        //else
+        //{
+        //    ts = NET_PACKET.TurretStateData.Idle;
+        //}
+    }
+
+    protected override void UpdateObject()
+    {
+        if (ts == NET_PACKET.TurretStateData.IdleShooting || ts == NET_PACKET.TurretStateData.PositionalShooting || ts == NET_PACKET.TurretStateData.TargetedShooting || ts == NET_PACKET.TurretStateData.Recoil)
         {
-            ts = TurretState.Idle;
+            cooldown += Time.deltaTime;
+            while (cooldown > FireRate)
+            {
+                if (TB != null)
+                {
+                    Instantiate(TB, transform.position, transform.rotation);
+                }
+         
+                cooldown -= FireRate;
+            }
         }
     }
 

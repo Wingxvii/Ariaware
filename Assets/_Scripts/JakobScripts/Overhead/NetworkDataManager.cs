@@ -497,7 +497,7 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.DAMAGEDEALT:
-                    if (sender == 1 && (parsedData.Length != 4 || parsedData.Length != 3))
+                    if (sender == 1 && (parsedData.Length != 4 && parsedData.Length != 3))
                     {
                         Debug.Log(parsedData.Length);
                         Debug.Log("Error: Invalid DAMAGEDEALT Parsed Array Size");
@@ -616,7 +616,7 @@ namespace NET_PACKET
                     break;
                 case PacketType.TURRET_ROT:
 
-                    Debug.Log(parsedData.Length);
+                    //Debug.Log(parsedData.Length);
                     if (parsedData.Length % 5 - 1 == 0)
                     {
                         if (sender == 1)
