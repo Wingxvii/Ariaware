@@ -5,6 +5,16 @@ using UnityEngine;
 
 namespace NET_PACKET
 {
+    public enum TurretStateData
+    {
+        Idle,
+        IdleShooting,
+        PositionalShooting,
+        TargetedShooting,
+        Recoil,
+        Reloading,
+    }
+
     public enum PacketType
     {
         //initialization connection
@@ -32,12 +42,34 @@ namespace NET_PACKET
         KILL = 7,
         //int
         GAMESTATE = 8,
+        // list
+        TURRET_ROT = 9,
+    }
+
+    public class TurretSingle
+    {
+        public int ID;
+        public Vector3 euler;
+        public uint state;
+    }
+
+    public class TurretBuffer
+    {
+        public TurretBuffer()
+        {
+            turretData = new List<TurretSingle>();
+        }
+
+        public bool DataReady = false;
+
+        public List<TurretSingle> turretData;
     }
 
     public class RTSsingle
     {
         //public uint index;
         public Vector3 position = Vector3.zero;
+        public float Yrot = 0f;
         public bool flag = false;
     }
 
@@ -130,6 +162,7 @@ namespace NET_PACKET
         public static List<ReadKilled> kills { get; protected set; }
         public static List<ReadPlayerData> playersData { get; protected set; }
         public static List<ReadWeaponSwitch> weaponsSwitch { get; protected set; }
+        public static List<TurretSingle> orderedTurretData { get; protected set; }
 
         #region Netcode
 
@@ -178,6 +211,10 @@ namespace NET_PACKET
         private static FPSDataBuffer WriteFPS = new FPSDataBuffer(FPSmax);
         private static FPSDataBuffer tempFPS;
 
+        public static TurretBuffer ReadTurret = new TurretBuffer();
+        private static TurretBuffer WriteTurret = new TurretBuffer();
+        private static TurretBuffer tempTurret;
+
         public static WeaponDataPackage[] weaponStates = new WeaponDataPackage[FPSmax];
         public static Queue<DamagePlayerPackage> damagePlayer = new Queue<DamagePlayerPackage>();
         public static Queue<DamageNPCPackage> damageNPC = new Queue<DamageNPCPackage>();
@@ -202,6 +239,13 @@ namespace NET_PACKET
             WriteFPS = tempFPS;
         }
 
+        private static void SwitchTurretBuffers()
+        {
+            tempTurret = ReadTurret;
+            ReadTurret = WriteTurret;
+            WriteTurret = tempTurret;
+        }
+
         protected override bool CreateVars()
         {
             FPSManager.FM.netParsed = false;
@@ -216,6 +260,7 @@ namespace NET_PACKET
                 kills = new List<ReadKilled>();
                 playersData = new List<ReadPlayerData>();
                 weaponsSwitch = new List<ReadWeaponSwitch>();
+                orderedTurretData = new List<TurretSingle>();
 
                 for (int i = 0; i < FPSmax; ++i)
                 {
@@ -352,6 +397,31 @@ namespace NET_PACKET
             }
         }
 
+        public void ChugTurrets()
+        {
+            if (ReadTurret.DataReady)
+            {
+                for (int i = 0; i < orderedTurretData.Count; ++i)
+                {
+                    orderedTurretData[i] = null;
+                }
+
+                ReadTurret.DataReady = false;
+
+                for (int i = 0; i < ReadTurret.turretData.Count; ++i)
+                {
+                    while (orderedTurretData.Count <= ReadTurret.turretData[i].ID)
+                    {
+                        orderedTurretData.Add(null);
+                    }
+
+                    orderedTurretData[ReadTurret.turretData[i].ID] = ReadTurret.turretData[i];
+                }
+
+                //Debug.Log("turrets chugged");
+            }
+        }
+
         static void PacketRecieved(int type, int sender, string data)
         {
             //Debug.Log(type);
@@ -455,17 +525,18 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.DROIDLOCATIONS:
-                    if (parsedData.Length % 4 - 1 == 0)
+                    if (parsedData.Length % 5 - 1 == 0)
                     {
                         lock (WriteRTS)
                         {
                             if (sender == 1)
                             {
-                                for (int i = 0; i < parsedData.Length - 1; i += 4)
+                                for (int i = 0; i < parsedData.Length - 1; i += 5)
                                 {
                                     int index = int.Parse(parsedData[i]) - FPSmax - 1;
                                     //WriteRTS.droidData[i / 4].index = uint.Parse(parsedData[i]);
                                     ParseVector3(ref WriteRTS.droidData[index].position, parsedData, i + 1);
+                                    WriteRTS.droidData[index].Yrot = float.Parse(parsedData[i + 4]);
                                     //Debug.Log(index + ", " + WriteRTS.droidData[index].position);
                                     WriteRTS.droidData[index].flag = true;
                                 }
@@ -541,6 +612,44 @@ namespace NET_PACKET
                 default:
                     Debug.Log("Error: Invalid Datatype recieved");
                     Debug.Break();
+
+                    break;
+                case PacketType.TURRET_ROT:
+
+                    Debug.Log(parsedData.Length);
+                    if (parsedData.Length % 5 - 1 == 0)
+                    {
+                        if (sender == 1)
+                        {
+                            lock(WriteTurret)
+                            {
+                                WriteTurret.turretData.Clear();
+
+                                for (int i = 0; i < parsedData.Length - 1; i += 5)
+                                {
+                                    TurretSingle TS = new TurretSingle();
+                                    TS.ID = int.Parse(parsedData[i]);
+                                    ParseVector3(ref TS.euler, parsedData, i + 1);
+                                    TS.state = uint.Parse(parsedData[i + 4]);
+                                    WriteTurret.turretData.Add(TS);
+                                }
+
+                                WriteTurret.DataReady = true;
+                            }
+
+                            SwitchTurretBuffers();
+                        }
+                        else
+                        {
+                            Debug.Log("Error: TURRET_ROT Sender Invalid!");
+                            Debug.Break();
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Error: Invalid TURRET_ROT Parsed Array Size");
+                        Debug.Break();
+                    }
 
                     break;
             }

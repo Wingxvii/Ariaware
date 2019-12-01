@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   sendData: 0
+  pState: 1
 --- !u!114 &3189329987771526809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +188,7 @@ MonoBehaviour:
   ID: 0
   sendData: 0
   Col: []
-  pState: 1
+  notYourBody: 1
 --- !u!114 &4944619450480427475
 MonoBehaviour:
   m_ObjectHideFlags: 0

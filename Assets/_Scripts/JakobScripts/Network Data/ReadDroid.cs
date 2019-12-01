@@ -32,6 +32,7 @@ public class ReadDroid : ReadBase
                 NET_PACKET.NetworkDataManager.ReadRTS.droidData[dID].flag = false;
 
                 transform.position = NET_PACKET.NetworkDataManager.ReadRTS.droidData[dID].position;
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, NET_PACKET.NetworkDataManager.ReadRTS.droidData[dID].Yrot, transform.rotation.eulerAngles.z);
             }
         }
     }
