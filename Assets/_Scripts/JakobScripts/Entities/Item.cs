@@ -10,6 +10,8 @@ public abstract class Item : Puppet
 
     MeshRenderer[] mr;
 
+    public Body b { get; set; } = null;
+
     protected override bool CreateVars()
     {
         if (base.CreateVars())

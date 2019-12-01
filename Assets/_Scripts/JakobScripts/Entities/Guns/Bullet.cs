@@ -94,7 +94,7 @@ public class Bullet : UpdateableObject
 
         Quaternion whereTo = Quaternion.identity;
 
-        if (rhit.Length > 0)
+        if (rhit.Length > 0 && !ignoreThis.notYourBody)
         {
             RaycastHit closest = rhit[0];
 

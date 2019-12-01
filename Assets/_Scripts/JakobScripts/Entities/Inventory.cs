@@ -35,6 +35,12 @@ public class Inventory : Puppet
             Items.RunOnAttach.Add(SetActiveObject);
             Items.RunOnRemove.Add(ResetActiveObject);
 
+            Items.RunOnAttach.Add(AllowItemsToNetwork);
+            Items.RunOnRemove.Add(DisallowItemsToNetwork);
+
+            body.RunOnAttach.Add(AllowItemsToNetwork);
+            body.RunOnRemove.Add(DisallowItemsToNetwork);
+
             return true;
         }
 
@@ -268,6 +274,32 @@ public class Inventory : Puppet
                     }
                 }
             }
+        }
+    }
+
+    protected void AllowItemsToNetwork(Joined<Item, Inventory> join)
+    {
+        join.Obj.b = body.GetObj(0);
+    }
+
+    protected void DisallowItemsToNetwork(Joined<Item, Inventory> join)
+    {
+        join.Obj.b = null;
+    }
+
+    protected void AllowItemsToNetwork(Joined<Body, Inventory> join)
+    {
+        for (int i = 0; i < Items.Amount; ++i)
+        {
+            Items.GetObj(i).b = body.GetObj(0);
+        }
+    }
+
+    protected void DisallowItemsToNetwork(Joined<Body, Inventory> join)
+    {
+        for (int i = 0; i < Items.Amount; ++i)
+        {
+            Items.GetObj(i).b = null;
         }
     }
 }

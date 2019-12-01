@@ -21,6 +21,8 @@ namespace PACES
                 gunScope = new JoinedList<Gun, GunVector>(this);
                 ammo = new JoinedList<Gun, AmmoClip>(this);
 
+                AddFixedUpdate();
+
                 return true;
             }
 
@@ -91,6 +93,14 @@ namespace PACES
             base.DestroyVars();
         }
 
+        protected override void FixedUpdateObject()
+        {
+            if (b != null && b.notYourBody)
+            {
+                FireBullet((Container.GetObj(0).pState & (uint)PlayerState.Shooting) > 0);
+            }
+        }
+
         public void FireBullet(bool canFire)
         {
             uint saveShooting = 0;
@@ -120,7 +130,8 @@ namespace PACES
             if (cooldown > 0)
                 cooldown -= Time.fixedDeltaTime;
 
-            Container.GetObj(0).pState |= (saveShooting & (uint)PlayerState.Shooting);
+            if (!b.notYourBody)
+                Container.GetObj(0).pState |= (saveShooting & (uint)PlayerState.Shooting);
         }
 
         void ShootBullets(Bullet b)
