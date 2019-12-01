@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 7835622624858590210}
   - component: {fileID: 7313449728160672535}
   - component: {fileID: 632593857620505605}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: MA_Ramp_Large
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2952362473834040852
 Transform:
@@ -113,12 +113,12 @@ GameObject:
   - component: {fileID: 4653970802659564844}
   - component: {fileID: 5392771667297880575}
   - component: {fileID: 3743717843620439311}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4653970802659564844
 Transform:

@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 4764690832400602770}
   - component: {fileID: 3985527577876748224}
   - component: {fileID: 7149406355419334099}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: rock2_2
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7816026586910068829
 Transform:
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5123f28c713f3fa4d87fc692e59957ac, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

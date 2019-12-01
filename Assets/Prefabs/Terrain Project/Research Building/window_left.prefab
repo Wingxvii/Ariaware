@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 2289257397732620367}
   - component: {fileID: 3897772442536834607}
   - component: {fileID: 2822817227539769760}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: window_left
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4079748793743638925
 Transform:
@@ -112,12 +112,12 @@ GameObject:
   - component: {fileID: 5832427766853227189}
   - component: {fileID: 6534778777437570662}
   - component: {fileID: 2563269904391269014}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5832427766853227189
 Transform:

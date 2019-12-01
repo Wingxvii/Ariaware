@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 320445204730548469}
   - component: {fileID: 1023077688127374374}
   - component: {fileID: 8579376488412391638}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &320445204730548469
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 2824404140811893342}
   - component: {fileID: 4975467747732903355}
   - component: {fileID: 4629043486100609884}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PipeL_curveHalf
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7790291644505605069
 Transform:

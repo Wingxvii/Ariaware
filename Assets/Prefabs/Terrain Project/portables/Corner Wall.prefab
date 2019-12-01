@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 9142108991293793770}
   - component: {fileID: 2047433632841253784}
   - component: {fileID: 6638343536413178809}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Corner Wall
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4094841420034120724
 Transform:
@@ -112,12 +112,12 @@ GameObject:
   - component: {fileID: 5817827587781742380}
   - component: {fileID: 6556629548760701951}
   - component: {fileID: 2584909090600482575}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5817827587781742380
 Transform:

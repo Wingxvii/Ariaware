@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 9218501179273674629}
   - component: {fileID: 5393934626045114199}
   - component: {fileID: 5004104084349105498}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Floor Inner Corner
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3509243172579931181
 Transform:
@@ -113,12 +113,12 @@ GameObject:
   - component: {fileID: 6403425823421179669}
   - component: {fileID: 5952994924374913990}
   - component: {fileID: 3152497331128803126}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6403425823421179669
 Transform:

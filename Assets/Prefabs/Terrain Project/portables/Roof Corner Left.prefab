@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 1524807479532392906}
   - component: {fileID: 2263609500842312985}
   - component: {fileID: 7371079843447482857}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1524807479532392906
 Transform:
@@ -89,12 +89,12 @@ GameObject:
   - component: {fileID: 9027443035396457202}
   - component: {fileID: 3122759061308988349}
   - component: {fileID: 8878832627459652504}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Roof Corner Left
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &9027443035396457202
 Transform:

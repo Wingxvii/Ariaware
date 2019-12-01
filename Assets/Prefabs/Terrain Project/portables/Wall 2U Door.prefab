@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 211448398753062664}
   - component: {fileID: 8928569938522296167}
   - component: {fileID: 8964662886715324549}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wall 2U Door
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2185374039694206248
 Transform:
@@ -112,12 +112,12 @@ GameObject:
   - component: {fileID: 8519365542825899536}
   - component: {fileID: 8969513876963189443}
   - component: {fileID: 385268395149266483}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8519365542825899536
 Transform:

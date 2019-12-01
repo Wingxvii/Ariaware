@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4124597548382113291}
   - component: {fileID: 3710195429376760536}
   - component: {fileID: 5359250419675231784}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4124597548382113291
 Transform:
@@ -90,12 +90,12 @@ GameObject:
   - component: {fileID: 3756164993366925960}
   - component: {fileID: 7886547631960504973}
   - component: {fileID: 2308914452331853021}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wall 2U Window
-  m_TagString: Untagged
+  m_TagString: StaticObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5860129041260027187
 Transform:
