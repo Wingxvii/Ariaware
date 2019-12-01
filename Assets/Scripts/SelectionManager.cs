@@ -199,7 +199,7 @@ namespace RTSManagers
                         returnObject = GameObject.Instantiate(RTSManager.Instance.turretPrefab, pos, Quaternion.identity);
                         SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
                     }
-                    Debug.Log(returnObject.GetComponent<SelectableObject>().id);
+                    //Debug.Log(returnObject.GetComponent<SelectableObject>().id);
 
                     return returnObject;
                     break;

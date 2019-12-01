@@ -37,6 +37,9 @@ namespace netcodeRTS
         KILL = 7,
         //int
         GAMESTATE = 8,
+
+        //all updates to turrets
+        TURRETDATA = 9,
     }
 
     public class FPSDataBuffer
@@ -107,6 +110,8 @@ namespace netcodeRTS
         private static FPSDataBuffer WriteBuffer = new FPSDataBuffer();
         private static FPSDataBuffer tempBuffer;
 
+        //turret stack
+        static List<StringBuilder> turretSendStack = new List<StringBuilder>();
 
         // Start is called before the first frame update
         void Awake()
@@ -188,7 +193,6 @@ namespace netcodeRTS
                     }
                 }
             }
-
         }
 
         private void FixedUpdate()
@@ -512,6 +516,35 @@ namespace netcodeRTS
 
         }
 
+        public static void SendTurretStack() {
+            if (turretSendStack.Count != 0)
+            {
+                foreach (StringBuilder packetData in turretSendStack)
+                {
+                    SendData((int)PacketType.TURRETDATA, packetData.ToString(), Client);
+                }
+                turretSendStack.Clear();
+            }
+        }
 
+
+        public static void AddDataToStack(int id, Vector3 turretRot, int state) {
+
+            Debug.Log("Added to Stack");
+
+            StringBuilder dataToSend = new StringBuilder();
+            dataToSend.Append(id);
+            dataToSend.Append(",");
+            dataToSend.Append(turretRot.x);
+            dataToSend.Append(",");
+            dataToSend.Append(turretRot.y);
+            dataToSend.Append(",");
+            dataToSend.Append(turretRot.z);
+            dataToSend.Append(",");
+            dataToSend.Append(state);
+            dataToSend.Append(",");
+
+            turretSendStack.Add(dataToSend);
+        }
     }
 }

@@ -55,8 +55,6 @@ public class DroidManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        NetworkManager.SendDroidPositions();
-
         #region Fixed Tick
         //count down
         --fixedTimeStep;
@@ -80,7 +78,9 @@ public class DroidManager : MonoBehaviour
     //called 10 times per second
     public void TickUpdate()
     {
-        //NetworkManager.SendDroidPositions();
+        NetworkManager.SendDroidPositions();
+        //MOVE THIS SOMEWHERE ELSE
+        NetworkManager.SendTurretStack();
     }
 
 
