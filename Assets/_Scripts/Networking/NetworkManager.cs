@@ -254,6 +254,8 @@ namespace netcodeRTS
         //called on data recieve action, then process
         static void PacketRecieved(int type, int sender, string data)
         {
+            data.TrimEnd();
+
             //parse the data
             string[] parsedData = data.Split(',');
 
@@ -340,10 +342,12 @@ namespace netcodeRTS
                     break;
                 case PacketType.WEAPONSTATE:
                     //update state by sender type
-                    if (parsedData.Length != 1)
+
+                    Debug.Log("Data Recieved");
+                    if (parsedData.Length != 2)
                     {
-                        Debug.Log("Error: Invalid WEAPONSTATE Parsed Array Size");
-                        
+                        Debug.Log(parsedData.Length);
+                        Debug.Log("Error: Invalid WEAPONSTATE Parsed Array Size:" + data);
                     }
                     switch (sender)
                     {
