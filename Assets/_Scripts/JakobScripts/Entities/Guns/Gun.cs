@@ -99,8 +99,14 @@ namespace PACES
             //    Debug.Log(Container.GetObj(0).pState & (uint)PlayerState.Shooting);
             if (b != null && b.notYourBody)
             {
-                FireBullet((Container.GetObj(0).pState & (uint)PlayerState.Shooting) > 0);
+                Inventory inv = CurrentInventory.GetObj(0);
+                if (inv.Items.GetObj(inv.activeObject) == this)
+                {
+                    //Debug.Log(name);
+                    FireBullet((Container.GetObj(0).pState & (uint)PlayerState.Shooting) > 0);
+                }
             }
+            
         }
 
         public void FireBullet(bool canFire)
