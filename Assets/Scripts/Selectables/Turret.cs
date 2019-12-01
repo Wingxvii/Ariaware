@@ -276,7 +276,7 @@ public class Turret : SelectableObject
     }
 
     private bool HitPlayer() {
-        if (Physics.Raycast(this.transform.position, transform.forward , out hit, maxRange, turretLayerMask))
+        if (Physics.Raycast(head.transform.position, head.transform.forward , out hit, maxRange, turretLayerMask))
         {
             if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Wall)
             {
