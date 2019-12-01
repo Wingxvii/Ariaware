@@ -6,7 +6,7 @@ using System.Text;
 [RequireComponent(typeof(Puppet))]
 public class WritePlayerData : WriteBase
 {
-    Puppet p;
+    public Puppet p { get; protected set; }
 
     public Vector3 sendPos { get; set; }
     public Vector3 sendRot { get; set; }

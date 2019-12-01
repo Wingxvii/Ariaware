@@ -22,12 +22,15 @@ public class PlayerSourceListener : QuestListener<PlayerSourceListener, PlayerSo
 
     protected void UseEvent(PlayerSourceEvent questEvent)
     {
-        if (ec != null)
-            pState = ec.pState;
+        if (questEvent.WPD.p.ID == p.ID)
+        {
+            if (ec != null)
+                pState = ec.pState;
 
-        questEvent.WPD.sendPos = VectorSplit(transform.position, questEvent.WPD.sendPos, bindPos);
-        questEvent.WPD.sendPos = VectorSplit(transform.position, questEvent.WPD.sendPos, bindPos);
-        questEvent.WPD.sendState = bindState ? pState : questEvent.WPD.sendState;
+            questEvent.WPD.sendPos = VectorSplit(transform.position, questEvent.WPD.sendPos, bindPos);
+            questEvent.WPD.sendRot = VectorSplit(transform.rotation.eulerAngles, questEvent.WPD.sendRot, bindRot);
+            questEvent.WPD.sendState = bindState ? pState : questEvent.WPD.sendState;
+        }
     }
 
     Vector3 VectorSplit(Vector3 v1, Vector3 v2, BindVec3 bv)
