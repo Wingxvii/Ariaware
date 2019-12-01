@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RTSManagers;
 using netcodeRTS;
-
+using GlobalSettings;
 public enum TurretState
 {
     Idle,
@@ -88,7 +88,7 @@ public class Turret : SelectableObject
         --fixedTimeStep;
 
         //tick is called 10 times per 50 updates
-        if (fixedTimeStep % 5 == 0)
+        if (fixedTimeStep % Setting.FRAMETICK == 0)
         {
             TickUpdate();
         }

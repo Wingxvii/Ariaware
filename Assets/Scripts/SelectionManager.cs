@@ -363,7 +363,6 @@ namespace RTSManagers
                     else
                     {
                         Debug.Log("NOT ENOUGH CREDITS");
-
                     }
 
                 } else if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && !RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable) {
@@ -541,6 +540,9 @@ namespace RTSManagers
                     //check if enemy selected
                     if (HitObject != null && HitObject.type == EntityType.Player)
                     {
+
+
+                        Debug.Log("Player Hit");
                         switch (PrimarySelectable.type)
                         {
                             //droids will attack tether to enemy

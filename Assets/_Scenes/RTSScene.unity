@@ -3180,7 +3180,7 @@ MonoBehaviour:
   PoolParent: {fileID: 634751482}
   DroidPrefab: {fileID: 4037481489312127328, guid: 4ef75879c87c1124c9f1ababa0166f0e,
     type: 3}
-  spawnRange: 4
+  spawnRange: 10
   spawnHeight: 1
   playerTargets:
   - {fileID: 572459640}
