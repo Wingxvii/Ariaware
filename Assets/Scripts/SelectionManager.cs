@@ -204,7 +204,7 @@ namespace RTSManagers
                     return returnObject;
                     break;
                 case EntityType.Barracks:
-                    pos = new Vector3(pos.x, pos.y + 1.4f, pos.z);
+                    pos = new Vector3(pos.x, pos.y + 0.2f, pos.z);
                     if (deactivatedObjects[1].Count > 0)
                     {
                         returnObject = deactivatedObjects[1].Dequeue().gameObject;
