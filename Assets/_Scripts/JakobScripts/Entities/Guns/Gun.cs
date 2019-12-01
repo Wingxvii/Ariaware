@@ -95,6 +95,8 @@ namespace PACES
 
         protected override void FixedUpdateObject()
         {
+            if (b != null && !b.notYourBody)
+                Debug.Log(Container.GetObj(0).pState & (uint)PlayerState.Shooting);
             if (b != null && b.notYourBody)
             {
                 FireBullet((Container.GetObj(0).pState & (uint)PlayerState.Shooting) > 0);
@@ -129,8 +131,13 @@ namespace PACES
             if (cooldown > 0)
                 cooldown -= Time.fixedDeltaTime;
 
-            if (!b.notYourBody && canFire)
-                Container.GetObj(0).pState |= (uint)PlayerState.Shooting;
+            if (!b.notYourBody)
+            {
+                if (canFire)
+                    Container.GetObj(0).pState |= (uint)PlayerState.Shooting;
+                else
+                    Container.GetObj(0).pState &= ~(uint)PlayerState.Shooting;
+            }
         }
 
         void ShootBullets(Bullet b)
