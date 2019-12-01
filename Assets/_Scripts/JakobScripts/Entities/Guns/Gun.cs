@@ -103,14 +103,13 @@ namespace PACES
 
         public void FireBullet(bool canFire)
         {
-            uint saveShooting = 0;
             //Debug.Log("Firing");
             if (canFire && cooldown <= 0)
             {
                 //Debug.Log("Firing!!!!");
                 if (ammo.Amount > 0)
                 {
-                    saveShooting |= (uint)PlayerState.Shooting;
+                    //saveShooting |= (uint)PlayerState.Shooting;
                     //Debug.Log("FIRING!!!!!!!!");
                     float time = Time.fixedDeltaTime;
                     Bullet b = null;
@@ -130,8 +129,8 @@ namespace PACES
             if (cooldown > 0)
                 cooldown -= Time.fixedDeltaTime;
 
-            if (!b.notYourBody)
-                Container.GetObj(0).pState |= (saveShooting & (uint)PlayerState.Shooting);
+            if (!b.notYourBody && canFire)
+                Container.GetObj(0).pState |= (uint)PlayerState.Shooting;
         }
 
         void ShootBullets(Bullet b)
