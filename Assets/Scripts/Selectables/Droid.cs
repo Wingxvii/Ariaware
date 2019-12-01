@@ -10,6 +10,7 @@ public enum DroidState {
     AttackMoving = 2,
     TetherAttacking = 3,
     TargetAttacking = 4,
+    Dancing = 5,
 }
 
 public class Droid : SelectableObject
@@ -37,6 +38,8 @@ public class Droid : SelectableObject
     //models
     public GameObject body;
 
+    //animation
+    public Animator anim;
 
     protected override void BaseStart()
     {
@@ -44,7 +47,7 @@ public class Droid : SelectableObject
         selfRigid = this.GetComponent<Rigidbody>();
         currentHealth = 100;
         maxHealth = 100;
-
+        anim = this.GetComponent<Animator>();
 
 
     }
@@ -89,6 +92,7 @@ public class Droid : SelectableObject
                 }
                 else
                 {
+
                     MoveTo(new Vector2(journeyPoint.x, journeyPoint.z));
                    
                 }
@@ -201,12 +205,23 @@ public class Droid : SelectableObject
 
         Vector2 dir = new Vector2(pos.x - this.transform.position.x, pos.y - this.transform.position.z).normalized;
         selfRigid.velocity = new Vector3(dir.x, 0, dir.y) * maxSpeed;
+
+        anim.SetFloat("Walk", Vector3.Dot(selfRigid.velocity, transform.forward) / 10);
+        anim.SetFloat("Turn", Vector3.Dot(selfRigid.velocity, transform.right) / 10);
+
     }
     private void OnAttack() {
         if (currentCoolDown <= 0.0f) {
             attackPoint.OnDamage(attackDamage, this);
             currentCoolDown = coolDown;
+            anim.Play("Attack");
         }
+    }
+
+
+    private void OnDance() {
+        anim.Play("Dance");
+
     }
 
     private void OnTriggerStay(Collider other)
