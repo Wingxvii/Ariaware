@@ -6,6 +6,9 @@ using System;
 [Serializable]
 public class BindVec3
 {
+    public BindVec3() { }
+    public BindVec3(bool X, bool Y, bool Z) { x = X; y = Y; z = Z; }
+
     public bool x = false, y = false, z = false;
 }
 

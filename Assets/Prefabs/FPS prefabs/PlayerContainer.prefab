@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 6090338462497764656}
   - component: {fileID: 6090338462497764659}
   - component: {fileID: 6090338462497764662}
+  - component: {fileID: 4266755055854010290}
   m_Layer: 20
   m_Name: Capsule
   m_TagString: Untagged
@@ -393,6 +394,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11966b39e7e3a42408fb939faefe8777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4266755055854010290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090338462497764664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab52ccd1af855c47967850ee12e654c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bindPos:
+    x: 1
+    y: 1
+    z: 1
+  bindRot:
+    x: 0
+    y: 1
+    z: 0
+  bindState: 1
 --- !u!1 &6090338462711790258
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +472,7 @@ GameObject:
   - component: {fileID: 6090338462816635958}
   - component: {fileID: 6090338462816635961}
   - component: {fileID: 6090338462816635956}
+  - component: {fileID: 8356560838924343141}
   m_Layer: 20
   m_Name: Pivot
   m_TagString: Untagged
@@ -520,6 +543,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265aa5713f614c84fb16c1d12c1e6abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8356560838924343141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090338462816635963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab52ccd1af855c47967850ee12e654c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bindPos:
+    x: 0
+    y: 0
+    z: 0
+  bindRot:
+    x: 1
+    y: 0
+    z: 0
+  bindState: 0
 --- !u!1 &6090338463040266263
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +965,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4224107386096797693, guid: 53bc2f414e8e81d4d8d5806980aac903,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4224107387672683163, guid: 53bc2f414e8e81d4d8d5806980aac903,
         type: 3}
       propertyPath: gunStats.speed
@@ -930,11 +979,6 @@ PrefabInstance:
         type: 3}
       propertyPath: gunStats.damage
       value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4224107386096797693, guid: 53bc2f414e8e81d4d8d5806980aac903,
-        type: 3}
-      propertyPath: m_Layer
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53bc2f414e8e81d4d8d5806980aac903, type: 3}

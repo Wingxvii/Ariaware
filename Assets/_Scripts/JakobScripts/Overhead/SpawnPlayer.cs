@@ -47,7 +47,7 @@ public class SpawnPlayer : UpdateableObject
     {
         if (!spawned && NDM.Init() && NDM.GetPlayerNum() >= 0)
         {
-            Debug.Log(NDM.GetPlayerNum());
+            //Debug.Log(NDM.GetPlayerNum());
 
             for (int i = 0; i < NET_PACKET.NetworkDataManager.FPSmax; ++i)
             {

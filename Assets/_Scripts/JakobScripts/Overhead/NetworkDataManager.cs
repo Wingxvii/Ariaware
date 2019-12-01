@@ -151,7 +151,10 @@ namespace NET_PACKET
 
         public int GetPlayerNum()
         {
-            yourID = GetPlayerNumber(Client) - 2;
+            if (!noServer)
+                yourID = GetPlayerNumber(Client) - 2;
+            else
+                yourID = 0;
             return yourID;
         }
 
@@ -163,6 +166,7 @@ namespace NET_PACKET
         public string ip = null;
         private static IntPtr Client;
         private static int playerNumber = -1;
+        bool noServer = false;
 
         #endregion
 
@@ -231,16 +235,19 @@ namespace NET_PACKET
                     //Debug.Log(ip);
                     ip = SceneManagement.ScenePresent.Instance.IP;
                 }
+                else
+                    noServer = true;
 
                 if (ip != null)
                 {
+                    //Debug.Log(ip);
                     //client Init  
                     Client = CreateClient();
                     Connect(ip, Client);
                     StartUpdating(Client);
                     SetupPacketReception(PacketRecieved);
                     //blah
-                    yourID = GetPlayerNumber(Client);
+                    //yourID = GetPlayerNumber(Client);
                     //Debug.Log(GetPlayerNumber(Client));
                     //if (yourID < 0)
                     //    yourID = 0;

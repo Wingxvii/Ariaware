@@ -7,6 +7,11 @@ using System.Text;
 public class WritePlayerData : WriteBase
 {
     Puppet p;
+
+    public Vector3 sendPos { get; set; }
+    public Vector3 sendRot { get; set; }
+    public uint sendState { get; set; }
+
     protected override bool CreateVars()
     {
         if (base.CreateVars())
@@ -23,14 +28,16 @@ public class WritePlayerData : WriteBase
 
     protected override void Fifth()
     {
+        PlayerSourceEvent.FireEvent(new PlayerSourceEvent(this));
+
         StringBuilder sb = new StringBuilder();
-        sb.Append(transform.position.x); sb.Append(",");
-        sb.Append(transform.position.y); sb.Append(",");
-        sb.Append(transform.position.z); sb.Append(",");
-        sb.Append(transform.rotation.eulerAngles.x); sb.Append(",");
-        sb.Append(transform.rotation.eulerAngles.y); sb.Append(",");
-        sb.Append(transform.rotation.eulerAngles.z); sb.Append(",");
-        sb.Append(p.Container.GetObj(0).pState); sb.Append(",");
+        sb.Append(sendPos.x); sb.Append(",");
+        sb.Append(sendPos.y); sb.Append(",");
+        sb.Append(sendPos.z); sb.Append(",");
+        sb.Append(sendRot.x); sb.Append(",");
+        sb.Append(sendRot.y); sb.Append(",");
+        sb.Append(sendRot.z); sb.Append(",");
+        sb.Append(sendState); sb.Append(",");
 
         NET_PACKET.NetworkDataManager.SendNetData((int)NET_PACKET.PacketType.PLAYERDATA, sb.ToString());
     }
