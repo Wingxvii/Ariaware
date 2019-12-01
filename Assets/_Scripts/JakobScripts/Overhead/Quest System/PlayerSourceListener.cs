@@ -18,10 +18,12 @@ public class PlayerSourceListener : QuestListener<PlayerSourceListener, PlayerSo
         base.Awake();
         p = GetComponent<Puppet>();
         ec = p.Container.GetObj(0);
+        AddFunction(UseEvent);
     }
 
     protected void UseEvent(PlayerSourceEvent questEvent)
     {
+        //Debug.Log("RECEIVED");
         if (questEvent.WPD.p.ID == p.ID)
         {
             if (ec != null)

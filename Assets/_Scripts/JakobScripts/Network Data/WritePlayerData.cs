@@ -28,6 +28,7 @@ public class WritePlayerData : WriteBase
 
     protected override void Fifth()
     {
+        //Debug.Log("HAPPENING");
         PlayerSourceEvent.FireEvent(new PlayerSourceEvent(this));
 
         StringBuilder sb = new StringBuilder();
