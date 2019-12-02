@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{81d00e54-f94a-48de-ac64-3aac76f52b08}">
+		<property name="assetPath">
+			<value>_RTS/RTS_Boot.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.2324943310657597</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fbc1373c-b15a-4d76-b0c2-e3adea2cbe04}</destination>
+		</relationship>
+	</object>
+</objects>
