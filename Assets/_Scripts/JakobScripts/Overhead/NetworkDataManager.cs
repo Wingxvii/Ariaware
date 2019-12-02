@@ -395,10 +395,13 @@ namespace NET_PACKET
         {
             while (damagePlayer.Count > 0)
             {
+                //Debug.Log("POP");
                 for (int j = 0; j < damagesPlayer.Count; ++j)
                 {
-                    if (damagesPlayer[j].b.ID == damagePlayer.Peek().receiver)
+                    //Debug.Log(damagesPlayer[j].b.ID + ", " + (damagePlayer.Peek().receiver - 1));
+                    if (damagesPlayer[j].b.ID == damagePlayer.Peek().receiver - 1)
                     {
+                        //Debug.Log("victory");
                         damagesPlayer[j].Damages.Enqueue(new DamagePlayerUnit(damagePlayer.Peek().damage, damagePlayer.Peek().culprit));
                         //break;
                     }
@@ -415,7 +418,7 @@ namespace NET_PACKET
                 {
                     damagesNPC[j].Damages.Enqueue(damageNPC.Peek().damage);
                 }
-                damagePlayer.Dequeue();
+                damageNPC.Dequeue();
             }
         }
 
@@ -557,11 +560,13 @@ namespace NET_PACKET
                     //}
                     if (sender == 1)
                     {
+                        //Debug.Log("Damage2");
                         DamagePlayerPackage dpp = new DamagePlayerPackage(uint.Parse(parsedData[0]) - 1, int.Parse(parsedData[1]), uint.Parse(parsedData[2]));
                         damagePlayer.Enqueue(dpp);
                     }
                     else if (sender > 1 && sender <= FPSmax + 1)
                     {
+                        //Debug.Log("Damage");
                         DamageNPCPackage dnp = new DamageNPCPackage(int.Parse(parsedData[0]), uint.Parse(parsedData[1]));
                         damageNPC.Enqueue(dnp);
                     }

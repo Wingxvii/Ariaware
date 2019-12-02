@@ -56,6 +56,7 @@ public class ReadDamagePlayer : ReadBase
 
         while (Damages.Count > 0)
         {
+            Debug.Log("AHA");
             b.Damage(Damages.Peek().dmg);
             Damages.Dequeue();
         }

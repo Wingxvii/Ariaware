@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8737808812324619472}
   - component: {fileID: 4214777877485151902}
   - component: {fileID: 8968697089157458086}
-  - component: {fileID: 5051016376729196696}
+  - component: {fileID: 1784256562587529320}
   m_Layer: 10
   m_Name: TURRET_BODY (2)
   m_TagString: SelectableObject
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7606f1d6ff55947b0e325b6019f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5051016376729196696
+--- !u!114 &1784256562587529320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3922068694141043938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26f88cfec200134085f173bb8046e5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a91c14c6776d31b4ea80fc4b546d3150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TB: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4147927113763617610}
   - component: {fileID: 6731129539253731406}
   - component: {fileID: 2223798289588838777}
-  - component: {fileID: 3960449099219646734}
+  - component: {fileID: 5167656847862071400}
   m_Layer: 10
   m_Name: TURRET_BODY (1)
   m_TagString: SelectableObject
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7606f1d6ff55947b0e325b6019f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3960449099219646734
+--- !u!114 &5167656847862071400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4886871252410394511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26f88cfec200134085f173bb8046e5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a91c14c6776d31b4ea80fc4b546d3150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TB: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730639782665356063}
   - component: {fileID: 1152251253168753848}
-  - component: {fileID: 275831781004852674}
+  - component: {fileID: 1683636856573969423}
   m_Layer: 0
   m_Name: Shooter1
   m_TagString: Untagged
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   sendData: 0
---- !u!114 &275831781004852674
+--- !u!114 &1683636856573969423
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -462,10 +462,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7641301107622487303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26f88cfec200134085f173bb8046e5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a91c14c6776d31b4ea80fc4b546d3150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TB: {fileID: 2450480730385739914, guid: bba8c480ae51f5c4db175758a2e4736a, type: 3}
+  TB: {fileID: 5701806587341126465, guid: 8142701719cc1e54cb53abd5c0fc7bfc, type: 3}
   bindRot:
     x: 0
     y: 0
@@ -542,7 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 918736297606377414}
   - component: {fileID: 3239578844174628044}
-  - component: {fileID: 4641605967370629729}
+  - component: {fileID: 8181472467338129589}
   m_Layer: 0
   m_Name: Shooter2
   m_TagString: Untagged
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   sendData: 0
---- !u!114 &4641605967370629729
+--- !u!114 &8181472467338129589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,10 +587,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7976712008180011091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26f88cfec200134085f173bb8046e5d, type: 3}
+  m_Script: {fileID: 11500000, guid: a91c14c6776d31b4ea80fc4b546d3150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TB: {fileID: 2450480730385739914, guid: bba8c480ae51f5c4db175758a2e4736a, type: 3}
+  TB: {fileID: 5701806587341126465, guid: 8142701719cc1e54cb53abd5c0fc7bfc, type: 3}
   bindRot:
     x: 0
     y: 0
