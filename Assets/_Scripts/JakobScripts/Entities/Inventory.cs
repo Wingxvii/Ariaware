@@ -22,6 +22,7 @@ public class Inventory : Puppet
     }
 
     public int activeObject = -1;
+    public float pauseSwap { get; set; } = 0f;
 
     protected override bool CreateVars()
     {
@@ -40,6 +41,8 @@ public class Inventory : Puppet
 
             body.RunOnAttach.Add(AllowItemsToNetwork);
             body.RunOnRemove.Add(DisallowItemsToNetwork);
+
+            AddUpdate();
 
             return true;
         }
@@ -139,6 +142,11 @@ public class Inventory : Puppet
                 }
             }
         }
+
+        if (Items.Amount > 0)
+        {
+            activeObject = 0;
+        }
     }
 
     void AttachCursor()
@@ -219,37 +227,49 @@ public class Inventory : Puppet
         base.PostDisable();
     }
 
+    protected override void UpdateObject()
+    {
+        base.UpdateObject();
+        if (pauseSwap > 0f)
+        {
+            pauseSwap -= Time.deltaTime;
+        }
+    }
+
     public void SwapActive(int index)
     {
-        Items.GetObj(activeObject).PseudoDisable();
-        activeObject = index;
+        if (pauseSwap <= 0f)
+        {
+            Items.GetObj(activeObject).PseudoDisable();
+            activeObject = index;
 
-        //StringBuilder sb = new StringBuilder();
-        //sb.Append(index);
-        //sb.Append(",");
+            //StringBuilder sb = new StringBuilder();
+            //sb.Append(index);
+            //sb.Append(",");
 
-        //NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.WEAPONSTATE, sb.ToString());
-        Items.GetObj(activeObject).PseudoEnable();
+            //NET_PACKET.NetworkDataManager.SendNetData((int)PacketType.WEAPONSTATE, sb.ToString());
+            Items.GetObj(activeObject).PseudoEnable();
+        }
     }
 
 
     protected void SetActiveObject(Joined<Item, Inventory> join)
     {
-        if (activeObject < 0)
-        {
-            activeObject = Items.GetPositionOf(join);
-            if (join.Obj.InnerInit())
+            if (activeObject < 0)
             {
-                join.Obj.PseudoEnable();
+                activeObject = Items.GetPositionOf(join);
+                if (join.Obj.InnerInit())
+                {
+                    join.Obj.PseudoEnable();
+                }
             }
-        }
-        else
-        {
-            if (join.Obj.InnerInit())
+            else
             {
-                join.Obj.PseudoDisable();
+                if (join.Obj.InnerInit())
+                {
+                    join.Obj.PseudoDisable();
+                }
             }
-        }
     }
 
     protected void ResetActiveObject(Joined<Item, Inventory> join)

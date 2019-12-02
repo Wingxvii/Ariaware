@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 1494941908761096165}
   - component: {fileID: 1494941908761096162}
   - component: {fileID: 1494941908761096163}
+  - component: {fileID: 7999905760616609838}
   m_Layer: 0
   m_Name: Gun (1)
   m_TagString: Untagged
@@ -155,11 +156,11 @@ MonoBehaviour:
   ID: 0
   sendData: 0
   gunStats:
-    damage: 100
-    range: 100
+    damage: 150
+    range: 300
     speed: 200
     ConeAngle: 0.5
-  FireDelay: 1.2
+  FireDelay: 0.7
   accuracyCalc:
     serializedVersion: 2
     m_Curve:
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3872081158670643735, guid: 389191af8d1619f43aabd936ec9163a1, type: 3}
-  maxBulletCount: 10000
+  maxBulletCount: 10
 --- !u!114 &1494941908761096163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,3 +237,21 @@ MonoBehaviour:
   applyOnPreRender: 0
   applyOnLateUpdate: 0
   SetToInitial: 1
+--- !u!114 &7999905760616609838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494941908761096161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4e1f9d2bb928943a0601a9a9b94558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpecificActor: {fileID: 0}
+  channel:
+    cName: 0
+    cNum: 0
+    allChannelNums: 0
+  cooldownTime: 2

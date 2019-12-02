@@ -32,6 +32,9 @@ namespace SceneManagement
         public bool gameStart = false;
         public int loadedScene = 1;
         public string IP = "";
+
+        public int gameState = 0;
+
         //use to swap scene
         public void SwapScene(int scene)
         {
@@ -62,7 +65,6 @@ namespace SceneManagement
  * 1 - Start Menu
  * 2 - RTS
  * 3 - FPS
- * 4 - 
- * 5 - 
+ * 4 - End scene
  * 
  */

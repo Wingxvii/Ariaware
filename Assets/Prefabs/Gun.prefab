@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7015133690035238358}
   - component: {fileID: 7015133690035238357}
   - component: {fileID: 7015133690035238354}
+  - component: {fileID: 6673204746412288275}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -98,7 +99,7 @@ MonoBehaviour:
   ID: 0
   sendData: 0
   gunStats:
-    damage: 25
+    damage: 40
     range: 100
     speed: 50
     ConeAngle: 2
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3872081158670643735, guid: 389191af8d1619f43aabd936ec9163a1, type: 3}
-  maxBulletCount: 10000
+  maxBulletCount: 6
 --- !u!114 &7015133690035238354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +180,24 @@ MonoBehaviour:
   applyOnPreRender: 0
   applyOnLateUpdate: 0
   SetToInitial: 1
+--- !u!114 &6673204746412288275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7015133690035238347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4e1f9d2bb928943a0601a9a9b94558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpecificActor: {fileID: 0}
+  channel:
+    cName: 0
+    cNum: 0
+    allChannelNums: 0
+  cooldownTime: 2
 --- !u!1 &7015133690293472203
 GameObject:
   m_ObjectHideFlags: 0

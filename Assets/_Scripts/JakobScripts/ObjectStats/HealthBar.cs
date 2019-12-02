@@ -9,7 +9,9 @@ public class HealthBar : ObjectStat
     Body bodyRef = null;
     public float maxHealth = 10f;
     public float health = 0f;
-    Slider slide = null;
+    //Slider slide = null;
+
+    public Slider hpBar { get; set; }
 
     protected override bool CreateVars()
     {
@@ -19,7 +21,7 @@ public class HealthBar : ObjectStat
 
             health = maxHealth;
 
-            slide = GetComponentInChildren<Slider>();
+            //slide = GetComponentInChildren<Slider>();
 
             return true;
         }
@@ -50,17 +52,23 @@ public class HealthBar : ObjectStat
     {
         health = 0f;
 
-        slide = null;
+        //slide = null;
 
         base.DestroyVars();
     }
 
     protected override void UpdateObject()
     {
-        if (slide != null)
+        //Debug.Log(health / maxHealth);
+        if (hpBar != null)
         {
-            slide.value = health / maxHealth;
+            //Debug.Log(health / maxHealth);
+            hpBar.value = health / maxHealth;
         }
+        //if (slide != null)
+        //{
+        //    slide.value = health / maxHealth;
+        //}
     }
 
     public void Damage(float dam)
@@ -69,12 +77,18 @@ public class HealthBar : ObjectStat
         if (health <= 0f)
         {
             health = 0f;
-            EntityContainer HIT = bodyRef.Container.GetObj(0);
-            if (HIT != null)
+            bodyRef.KILL();
+
+            if (bodyRef.respawnable)
             {
-                HIT.gameObject.SetActive(false);
-                //Destroy(HIT.gameObject);
+                health = maxHealth;
             }
+            //EntityContainer HIT = bodyRef.Container.GetObj(0);
+            //if (HIT != null)
+            //{
+            //    HIT.gameObject.SetActive(false);
+            //    //Destroy(HIT.gameObject);
+            //}
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using netcodeRTS;
 
 namespace RTSManagers
 {
@@ -15,10 +16,17 @@ namespace RTSManagers
 
         public const int SUPPLY_PER_BARRACKS = 20;
 
-        public const bool CREDITS_OFF = true;
+        public const bool CREDITS_OFF = false;
         public const bool UNKILLABLEPLAYER = true;
 
         public const bool RTSPLAYERDEBUGMODE = true;
+    }
+
+    public enum GameState { 
+        Preparing = 0,
+        Running = 1,
+        Win = 2,
+        Loss = 3,
     }
 
     public class ResourceManager : MonoBehaviour
@@ -39,6 +47,8 @@ namespace RTSManagers
         }
         #endregion
 
+        public GameState gameState = GameState.Running;
+
         public int credits = 0;
         public int totalSupply = 0;
         public int supplyCurrent = 0;
@@ -55,28 +65,43 @@ namespace RTSManagers
         void Start()
         {
             credits = 1000;
-            timeElapsed = 0;
+            timeElapsed = 600;
         }
 
         private void Update()
         {
-            timeElapsed += Time.deltaTime;
-            time.text = ((int)(timeElapsed / 60.0f)).ToString("00") + ":" + ((int)(timeElapsed % 60)).ToString("00");
+            if (gameState == GameState.Running)
+            {
+                timeElapsed -= Time.deltaTime;
+                time.text = ((int)(timeElapsed / 60.0f)).ToString("00") + ":" + ((int)(timeElapsed % 60)).ToString("00");
+                if (timeElapsed < 0)
+                {
+                    RTSGameManager.Instance.GameEndWin();
+                }
+            }
+        }
+
+        public void StartGame() {
+            gameState = GameState.Running;
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-
-            if (ResourceConstants.CREDITS_OFF)
+            if (gameState == GameState.Running)
             {
-                credits = 99999;
-            }
-            else
-            {
-                credits += 1;
-            }
+                NetworkManager.SendGameData((int)gameState, timeElapsed);
 
+                if (ResourceConstants.CREDITS_OFF)
+                {
+                    credits = 99999;
+                }
+                else
+                {
+                    credits += 1;
+                }
+
+            }
             creditText.text = credits.ToString();
             supplyText.text = supplyCurrent.ToString() + "/" + totalSupply.ToString();
 

@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 6090338462497764659}
   - component: {fileID: 6090338462497764662}
   - component: {fileID: 4266755055854010290}
+  - component: {fileID: 5185644640216867013}
   m_Layer: 20
   m_Name: Capsule
   m_TagString: Untagged
@@ -275,6 +276,7 @@ MonoBehaviour:
   sendData: 0
   Col: []
   notYourBody: 0
+  respawnable: 1
 --- !u!114 &6090338462497764687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +418,20 @@ MonoBehaviour:
     y: 1
     z: 0
   bindState: 1
+--- !u!114 &5185644640216867013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090338462497764664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3322892f945cc3e4aa976aab8cec860b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 500
+  health: 0
 --- !u!1 &6090338462711790258
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,10 @@ public class GroundCheck : ObjectStat
             }
 
             if (CullSingle(collision))
+            {
+                //Ent.GetObj(0).Container.GetObj(0).pState &= ~(uint)PlayerState.Jumping;
                 Grounded = true;
+            }
         }
     }
 
@@ -54,7 +57,10 @@ public class GroundCheck : ObjectStat
             }
 
             if (CullSingle(collision))
+            {
+
                 Grounded = true;
+            }
         }
 
         if (DebugShit)
