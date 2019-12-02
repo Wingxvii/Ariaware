@@ -106,7 +106,7 @@ namespace PACES
             base.UpdateObject();
             if (ammoClip != null && CurrentInventory.GetObj(0) != null && CurrentInventory.GetObj(0).Items.GetObj(CurrentInventory.GetObj(0).activeObject) == this)
             {
-                Debug.Log("SET");
+                //Debug.Log("SET");
                 if (pauseShooting == 0f)
                 {
                     ammoClip.text = ammo.GetObj(0).maxBulletCount.ToString();
