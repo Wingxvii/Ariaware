@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{ac658d31-0858-4719-9d5a-e6ff37639a25}">
+		<property name="assetPath">
+			<value>MUSIC/INDIGNANT_v1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>56.837460317460319</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fbc1373c-b15a-4d76-b0c2-e3adea2cbe04}</destination>
+		</relationship>
+	</object>
+</objects>

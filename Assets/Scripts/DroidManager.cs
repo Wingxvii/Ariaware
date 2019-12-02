@@ -4,6 +4,7 @@ using UnityEngine;
 using netcodeRTS;
 using RTSManagers;
 using RTSUI;
+using GlobalSettings;
 
 public enum DroidType
 {
@@ -36,9 +37,6 @@ public class DroidManager : MonoBehaviour
     //droid types
     public GameObject DroidPrefab;
 
-    public float spawnRange;
-    public float spawnHeight;
-
     public Player[] playerTargets;
 
     int fixedTimeStep;
@@ -55,14 +53,12 @@ public class DroidManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        NetworkManager.SendDroidPositions();
-
         #region Fixed Tick
         //count down
         --fixedTimeStep;
 
         //tick is called 10 times per 50 updates
-        if (fixedTimeStep % 5 == 0)
+        if (fixedTimeStep % Setting.FRAMETICK == 0)
         {
             TickUpdate();
         }
@@ -80,7 +76,9 @@ public class DroidManager : MonoBehaviour
     //called 10 times per second
     public void TickUpdate()
     {
-        //NetworkManager.SendDroidPositions();
+        NetworkManager.SendDroidPositions();
+        //MOVE THIS SOMEWHERE ELSE
+        NetworkManager.SendTurretStack();
     }
 
 
@@ -129,12 +127,8 @@ public class DroidManager : MonoBehaviour
         switch (type)
         {
             case EntityType.Droid:
-                //add offset here
-                Vector3 pos = new Vector3(Random.Range(-1.0f, 1.0f), spawnHeight, Random.Range(-1.0f, 1.0f));
-                pos = pos.normalized * spawnRange;
-
-                SpawnDroid(type, new Vector3(home.position.x + pos.x, pos.y, home.position.z + pos.z));
-                break;
+                    SpawnDroid(type, home.position);
+                    break;
             default:
                 Debug.Log("ERROR: DROID TYPE INVALID");
                 break;
@@ -151,11 +145,8 @@ public class DroidManager : MonoBehaviour
             switch (type)
             {
                 case EntityType.Droid:
-                    //add offset here
-                    Vector3 pos = new Vector3(Random.Range(-1.0f, 1.0f), spawnHeight, Random.Range(-1.0f, 1.0f));
-                    pos = pos.normalized * spawnRange;
 
-                    SpawnDroid(type, new Vector3(home.position.x + pos.x, pos.y, home.position.z + pos.z));
+                    SpawnDroid(type, home.position);
                     ActiveDroidPool[ActiveDroidPool.Count - 1].IssueLocation(rally);
                     break;
                 default:

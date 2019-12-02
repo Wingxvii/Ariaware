@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 6304387413709053227}
   - component: {fileID: 5272284993896799570}
   - component: {fileID: -7796573466222358650}
+  - component: {fileID: 468991904907694862}
   m_Layer: 10
   m_Name: Turret
   m_TagString: SelectableObject
@@ -276,6 +277,9 @@ MonoBehaviour:
     m_Bits: 768
   head: {fileID: 8884248750197795924}
   body: {fileID: 8858981734660671219}
+  positionUpdated: 0
+  changedToIdle: 0
+  fixedTimeStep: 0
 --- !u!65 &5272284993896799570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -305,6 +309,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &468991904907694862
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508097730102920826}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.263413, y: 1.341848, z: 1.2493455}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.00002415975, y: 1.297343, z: -0.01085067}
+  m_TimeToStationary: 0.5
 --- !u!1 &5643998181816298562
 GameObject:
   m_ObjectHideFlags: 0

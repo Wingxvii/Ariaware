@@ -52,7 +52,10 @@ public class UpdateNetwork : MonoBehaviour
     }
     void TickUpdate()
     {
+        Debug.Log("Ticked");
         NetworkManager.SendDroidPositions();
+        NetworkManager.SendTurretStack();
+
     }
     private void LateUpdate()
     {

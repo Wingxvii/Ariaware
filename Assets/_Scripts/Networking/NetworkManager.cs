@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using RTSManagers;
 using SceneManagement;
 
+
 namespace netcodeRTS
 {
     public enum PacketType
@@ -35,8 +36,11 @@ namespace netcodeRTS
         BUILD = 6,
         //int
         KILL = 7,
-        //int
+        //int, float
         GAMESTATE = 8,
+
+        //all updates to turrets
+        TURRETDATA = 9,
     }
 
     public class FPSDataBuffer
@@ -107,6 +111,8 @@ namespace netcodeRTS
         private static FPSDataBuffer WriteBuffer = new FPSDataBuffer();
         private static FPSDataBuffer tempBuffer;
 
+        //turret stack
+        static List<StringBuilder> turretSendStack = new List<StringBuilder>();
 
         // Start is called before the first frame update
         void Awake()
@@ -188,11 +194,11 @@ namespace netcodeRTS
                     }
                 }
             }
-
         }
 
         private void FixedUpdate()
         {
+
             SwitchBuffers();
             //buffer processing
             if (ReadBuffer.updated1) {
@@ -209,7 +215,6 @@ namespace netcodeRTS
                 SelectionManager.Instance.players[2].GetComponent<Player>().SendUpdate(ReadBuffer.Player3Pos, ReadBuffer.Player3Rot, ReadBuffer.Player3State);
                 ReadBuffer.updated3 = false;
             }
-
         }
 
         //switches the buffers
@@ -275,6 +280,8 @@ namespace netcodeRTS
                 case PacketType.PLAYERDATA:
                     if (parsedData.Length == 8)
                     {
+
+
                         //lock and update by sender
                         lock (WriteBuffer)
                         {
@@ -427,6 +434,9 @@ namespace netcodeRTS
                 dataToSend.Append(",");
                 dataToSend.Append(droid.transform.position.z);
                 dataToSend.Append(",");
+                dataToSend.Append(droid.transform.rotation.eulerAngles.y);
+                dataToSend.Append(",");
+
             }
 
             SendData((int)PacketType.DROIDLOCATIONS, dataToSend.ToString(), Client);
@@ -467,6 +477,17 @@ namespace netcodeRTS
             SendData((int)PacketType.BUILD, dataToSend.ToString(), Client);
         }
 
+        public static void SendGameData(int state, float time) {
+            StringBuilder dataToSend = new StringBuilder();
+
+            dataToSend.Append(state);
+            dataToSend.Append(",");
+            dataToSend.Append(time);
+            dataToSend.Append(",");
+
+            SendData((int)PacketType.GAMESTATE, dataToSend.ToString(), Client);
+        }
+
         public static void SendKilledEntity(SelectableObject obj)
         {
 
@@ -478,16 +499,6 @@ namespace netcodeRTS
             dataToSend.Append(",");
 
             SendData((int)PacketType.KILL, dataToSend.ToString(), Client);
-        }
-
-        //send game state
-        public static void SendGameState(int state)
-        {
-            StringBuilder dataToSend = new StringBuilder();
-            dataToSend.Append(state);
-            dataToSend.Append(",");
-            SendData((int)PacketType.GAMESTATE, dataToSend.ToString(), Client);
-
         }
 
         //send damaged player
@@ -509,6 +520,35 @@ namespace netcodeRTS
 
         }
 
+        public static void SendTurretStack() {
+            if (turretSendStack.Count != 0)
+            {
+                foreach (StringBuilder packetData in turretSendStack)
+                {
+                    SendData((int)PacketType.TURRETDATA, packetData.ToString(), Client);
+                }
+                turretSendStack.Clear();
+            }
+        }
 
+
+        public static void AddDataToStack(int id, Vector3 turretRot, int state) {
+
+            //Debug.Log("Added to Stack");
+
+            StringBuilder dataToSend = new StringBuilder();
+            dataToSend.Append(id);
+            dataToSend.Append(",");
+            dataToSend.Append(turretRot.x);
+            dataToSend.Append(",");
+            dataToSend.Append(turretRot.y);
+            dataToSend.Append(",");
+            dataToSend.Append(turretRot.z);
+            dataToSend.Append(",");
+            dataToSend.Append(state);
+            dataToSend.Append(",");
+
+            turretSendStack.Add(dataToSend);
+        }
     }
 }

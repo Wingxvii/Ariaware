@@ -1,0 +1,1869 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8899176472487071646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108274921026706
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8876444007647365291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637109034200709032
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-8758010012061047765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108975310082246
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8671026370470306246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108952810687427
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8633838633990812431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108975308885442
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8541210631962103350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Boot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Boot
+  guid: 08eb631bf0f37d4aa26f1f79f53cc2a9
+  Banks:
+  - {fileID: 7661010372321158186}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7232
+--- !u!114 &-8251561916862786460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FPS/FPS_Gunshot1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FPS/FPS_Gunshot1
+  guid: 0ae72e747b029f4bb6fab6b3aa809f1d
+  Banks:
+  - {fileID: -2043621526172427435}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2326
+--- !u!114 &-8237858577952773052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108954725077691
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8101925012955093153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108298299020431
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-8096989723943737496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108274920777347
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-7952686073144208954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108263909392425
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-7910403937350183728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637109034200739283
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1076
+  Exists: 1
+--- !u!114 &-7782337603383202561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108298299399418
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-7009970290184518032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108328629202427
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-6702496322749885228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FPS/FPS_Gunshot1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FPS/FPS_Gunshot1
+  guid: 0ae72e747b029f4bb6fab6b3aa809f1d
+  Banks:
+  - {fileID: -3486960120955295464}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2326
+--- !u!114 &-6633924710445999284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108328630402283
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-6559652253809085749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108954786515116
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-6356932199154146537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108953136324803
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-5971888400223033683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108954725297099
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-5650343643908843477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select2
+  guid: 73d33157cc4bf449a93a3d57f4fdf2cc
+  Banks:
+  - {fileID: 7661010372321158186}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 79
+--- !u!114 &-5219239388193582744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Menu
+  guid: 5b048d30a6ccbe42b1b814724f3ad8fb
+  Banks:
+  - {fileID: 7661010372321158186}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2345
+--- !u!114 &-4967862427377679118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637109019892516910
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-4545223346218617815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/BGM_RTS
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/BGM_RTS
+  guid: 33f8058da8702c45b20f85abec0c5c4a
+  Banks:
+  - {fileID: 4496244316978584155}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 106666
+--- !u!114 &-4411186311819460664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/BGM_RTS
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/BGM_RTS
+  guid: 33f8058da8702c45b20f85abec0c5c4a
+  Banks:
+  - {fileID: -1398907368174288494}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 106666
+--- !u!114 &-4244364946677467870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108952400858909
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3992465589634770668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108237741906503
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3953048688644221704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108298300087574
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3738945247858721385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Boot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Boot
+  guid: 08eb631bf0f37d4aa26f1f79f53cc2a9
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7232
+--- !u!114 &-3535818307540348749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select2
+  guid: 73d33157cc4bf449a93a3d57f4fdf2cc
+  Banks:
+  - {fileID: 8789460497049640947}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 79
+--- !u!114 &-3529470875450639284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108287919422008
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3489782748226240718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108946242887744
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3486960120955295464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637109034176649347
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-3356941394321606141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108946244413663
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3293877086941670803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108952810378076
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-3217453862237789326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108223001623949
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-2920166880957879076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108264507902506
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-2700612176805214062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108954724638868
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-2630284502569675333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select1
+  guid: d0cd63ee679be342bee5ad71933a6ac1
+  Banks:
+  - {fileID: 8097283035684078397}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 223
+--- !u!114 &-2258447812564530676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108951380819838
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-2229946556688242995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108953136803654
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-2043621526172427435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637109020200460438
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-1917233071850476603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637109019220911457
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-1398907368174288494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108979519307997
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-840453662306821160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108287919021247
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &-506566599367738977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Boot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Boot
+  guid: 08eb631bf0f37d4aa26f1f79f53cc2a9
+  Banks:
+  - {fileID: 8789460497049640947}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7332
+--- !u!114 &-225628846577871166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108952401397469
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -7910403937350183728}
+  - {fileID: -3486960120955295464}
+  - {fileID: -8876444007647365291}
+  - {fileID: 8789460497049640947}
+  EditorEvents:
+  - {fileID: -6702496322749885228}
+  - {fileID: 5127752574461824058}
+  - {fileID: -506566599367738977}
+  - {fileID: 6754218799715393110}
+  - {fileID: -3535818307540348749}
+  - {fileID: 1142672092351283365}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -8876444007647365291}
+  StringsBanks:
+  - {fileID: -7910403937350183728}
+  stringsBankWriteTime: 637109034200739283
+  cacheVersion: 3
+--- !u!114 &419133822522293822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637108979519367818
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1076
+  Exists: 1
+--- !u!114 &428462683623752994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FPS/FPS_Gunshot1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FPS/FPS_Gunshot1
+  guid: 0ae72e747b029f4bb6fab6b3aa809f1d
+  Banks:
+  - {fileID: 3004066122279873350}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2326
+--- !u!114 &520789310216946687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108282341324793
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &678326098330590801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Boot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Boot
+  guid: 08eb631bf0f37d4aa26f1f79f53cc2a9
+  Banks:
+  - {fileID: 5826808654669819465}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7232
+--- !u!114 &1142672092351283365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select1
+  guid: d0cd63ee679be342bee5ad71933a6ac1
+  Banks:
+  - {fileID: 8789460497049640947}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 223
+--- !u!114 &1392683824912187709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108954787163379
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &1692205367255080648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/BGM_RTS
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/BGM_RTS
+  guid: 33f8058da8702c45b20f85abec0c5c4a
+  Banks:
+  - {fileID: 3279794927174303667}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 106666
+--- !u!114 &1695238295761009142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108953136604067
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &1903047019607683552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108979519028721
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &1963417206764242397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FPS/FPS_Gunshot1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FPS/FPS_Gunshot1
+  guid: 0ae72e747b029f4bb6fab6b3aa809f1d
+  Banks:
+  - {fileID: 1903047019607683552}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2326
+--- !u!114 &1982007655346521393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637109019893015587
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2092265656476662326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108236674985914
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2223396494827178018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108264508341334
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2320357033047566119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108263906899092
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2364216242480195247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637109019218878865
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2584177647763511613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108946245909657
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &2749279304231937111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select1
+  guid: d0cd63ee679be342bee5ad71933a6ac1
+  Banks:
+  - {fileID: 5826808654669819465}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 223
+--- !u!114 &3004066122279873350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108979519028721
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3152948831157294614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select1
+  guid: d0cd63ee679be342bee5ad71933a6ac1
+  Banks:
+  - {fileID: 7661010372321158186}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 223
+--- !u!114 &3279794927174303667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637109020200859367
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3794685392101274471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637109019195636488
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &3828905159634257321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Menu
+  guid: 5b048d30a6ccbe42b1b814724f3ad8fb
+  Banks:
+  - {fileID: 5826808654669819465}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2345
+--- !u!114 &4002427142873358440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108951381278620
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &4045024914055447403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637109020200909247
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1076
+  Exists: 1
+--- !u!114 &4496244316978584155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108979519307997
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &4644950254489256770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select2
+  guid: 73d33157cc4bf449a93a3d57f4fdf2cc
+  Banks:
+  - {fileID: 8097283035684078397}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 79
+--- !u!114 &4938990652065907170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108951381817169
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &4977249197096692791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Menu
+  guid: 5b048d30a6ccbe42b1b814724f3ad8fb
+  Banks:
+  - {fileID: 8097283035684078397}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2345
+--- !u!114 &5016863925150848441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108282341115356
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &5127752574461824058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/BGM_RTS
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/BGM_RTS
+  guid: 33f8058da8702c45b20f85abec0c5c4a
+  Banks:
+  - {fileID: -8876444007647365291}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 106666
+--- !u!114 &5192781387765031620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637109019892117991
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &5363678256099835698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108975309763124
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &5567251143049369241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/gunshot1
+  m_EditorClassIdentifier: 
+  Path: event:/gunshot1
+  guid: f0ee78ca6b1ffb48b8f37847d6ef8b09
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2326
+--- !u!114 &5826808654669819465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108979520262306
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &5970325456139368663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Boot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Boot
+  guid: 08eb631bf0f37d4aa26f1f79f53cc2a9
+  Banks:
+  - {fileID: 8097283035684078397}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7332
+--- !u!114 &6404595528641113043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108952810916637
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &6754218799715393110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Menu
+  guid: 5b048d30a6ccbe42b1b814724f3ad8fb
+  Banks:
+  - {fileID: 8789460497049640947}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2345
+--- !u!114 &6963797495100503700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_Select2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_Select2
+  guid: 73d33157cc4bf449a93a3d57f4fdf2cc
+  Banks:
+  - {fileID: 5826808654669819465}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 79
+--- !u!114 &7233499210492940815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.strings.bank
+  SubDir: 
+  lastModified: 637108979519367818
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1076
+  Exists: 1
+--- !u!114 &7661010372321158186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637108979520262306
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8097283035684078397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637109020201118677
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &8167951902526495588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/FPS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/FPS_Bank.bank
+  SubDir: 
+  lastModified: 637108952401686699
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &8485365139159506334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/RTS_Boot
+  m_EditorClassIdentifier: 
+  Path: event:/RTS_Boot
+  guid: 08eb631bf0f37d4aa26f1f79f53cc2a9
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7232
+--- !u!114 &8523262704896110127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108247494417983
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &8538986796871367543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/RTS/RTS_MenuPopup
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/RTS/RTS_MenuPopup
+  guid: e034846af101c949a67e169fc73fddc4
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2345
+--- !u!114 &8611505537506612981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108954786166060
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0
+--- !u!114 &8789460497049640947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/RTS_Bank.bank
+  m_EditorClassIdentifier: 
+  Path: RTSFPS_FMOD/Build/Desktop/RTS_Bank.bank
+  SubDir: 
+  lastModified: 637109034203349232
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &9192325327268496686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../FMOD Studio/RTSFPS_FMOD/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637108328628236194
+  LoadResult: 0
+  FileSizes: []
+  Exists: 0

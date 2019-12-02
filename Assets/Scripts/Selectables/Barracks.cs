@@ -15,6 +15,8 @@ public class Barracks : SelectableObject
     public GameObject flagObj;
     public bool flagActive = false;
 
+    public Transform spawnPoint;
+
     //inherited function realizations
     protected override void BaseStart()
     {
@@ -33,7 +35,15 @@ public class Barracks : SelectableObject
         flagObj = Instantiate(flagObj, Vector3.zero, Quaternion.identity);
         flagObj.SetActive(false);
     }
-    protected override void BaseUpdate()
+
+    protected override void BaseEnable()
+    {
+        currentHealth = 1000;
+        flagActive = false;
+
+    }
+
+protected override void BaseUpdate()
     {
 
         //add to queue
@@ -51,11 +61,11 @@ public class Barracks : SelectableObject
             {
                 if (flagActive)
                 {
-                    DroidManager.Instance.QueueFinished(this.transform, EntityType.Droid, flagObj.transform.position);
+                    DroidManager.Instance.QueueFinished(spawnPoint, EntityType.Droid, flagObj.transform.position);
                 }
                 else
                 {
-                    DroidManager.Instance.QueueFinished(this.transform, EntityType.Droid);
+                    DroidManager.Instance.QueueFinished(spawnPoint, EntityType.Droid);
                 }
             }
         }
@@ -75,7 +85,7 @@ public class Barracks : SelectableObject
     }
 
     public override void IssueLocation(Vector3 location) {
-        flagObj.transform.position = new Vector3(location.x, 2.11f, location.z);
+        flagObj.transform.position = new Vector3(location.x, location.y + 2.5f, location.z);
         flagActive = true;
     }
     public override void OnActivation()

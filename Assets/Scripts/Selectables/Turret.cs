@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RTSManagers;
-
+using netcodeRTS;
+using GlobalSettings;
 public enum TurretState
 {
     Idle,
@@ -46,9 +47,18 @@ public class Turret : SelectableObject
     public GameObject head;
     public GameObject body;
 
+    //position update dirty flag
+    public bool positionUpdated = false;
+
+    public bool changedToIdle = false;
+
+    public int fixedTimeStep;
+
 
     protected override void BaseStart()
     {
+        fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
+
         muzzle = GetComponentInChildren<ParticleSystem>();
         currentHealth = 500;
         maxHealth = 500;
@@ -56,16 +66,58 @@ public class Turret : SelectableObject
         turretLayerMask += LayerMask.GetMask("Wall");
 
     }
+    protected override void BaseEnable()
+    {
+        currentHealth = 500;
+        positionUpdated = false;
+
+        changedToIdle = false;
+    }
 
     protected override void BaseLateUpdate()
     {
 
     }
 
+    void TickUpdate()
+    {
+        if (positionUpdated) {
+            //Debug.Log("Added");
+            NetworkManager.AddDataToStack(id, head.transform.rotation.eulerAngles, (int)state);
+            changedToIdle = true;
+        }
+        else if (changedToIdle)
+        {
+            NetworkManager.AddDataToStack(id, head.transform.rotation.eulerAngles, (int)state);
+            changedToIdle = false;
+        }
+
+        positionUpdated = false;
+
+
+    }
 
     protected override void BaseFixedUpdate()
     {
         shortestDist = float.MaxValue;
+
+        #region Fixed Tick
+        //count down
+        --fixedTimeStep;
+
+        //tick is called 10 times per 50 updates
+        if (fixedTimeStep % Setting.FRAMETICK == 0)
+        {
+            TickUpdate();
+        }
+
+        //reset the clock
+        if (fixedTimeStep <= 0)
+        {
+            //updates 50Hz
+            fixedTimeStep = (int)(1f / Time.fixedDeltaTime);
+        }
+        #endregion
 
         switch (state)
         {
@@ -100,6 +152,10 @@ public class Turret : SelectableObject
                 }
                 if (shortestDist < maxRange)
                 {
+
+                    //tell networking to send updated data
+                    positionUpdated = true;
+
                     state = TurretState.IdleShooting;
                     faceingPoint = attackPoint.transform.position;
                     if (currentAmno > 0)
@@ -138,6 +194,9 @@ public class Turret : SelectableObject
                 if (shortestDist < maxRange)
                 {
                     faceingPoint = attackPoint.transform.position;
+
+                    //tell networking to send updated data
+                    positionUpdated = true;
 
                     if (currentAmno > 0)
                     {
@@ -178,6 +237,8 @@ public class Turret : SelectableObject
 
                 //look at
                 faceingPoint = attackPoint.transform.position;
+                //tell networking to send updated data
+                positionUpdated = true;
 
                 if (reloadTimer <= 0.0f)
                 {
@@ -210,7 +271,6 @@ public class Turret : SelectableObject
             // Move our position a step closer to the target.
             head.transform.rotation = Quaternion.LookRotation(newDir);
             body.transform.rotation = Quaternion.LookRotation(new Vector3(newDir.x, 0, newDir.z).normalized);
-            
 
         }
 
@@ -234,7 +294,7 @@ public class Turret : SelectableObject
     }
 
     private bool HitPlayer() {
-        if (Physics.Raycast(this.transform.position, transform.forward , out hit, maxRange, turretLayerMask))
+        if (Physics.Raycast(head.transform.position, head.transform.forward , out hit, maxRange, turretLayerMask))
         {
             if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Wall)
             {
@@ -244,7 +304,7 @@ public class Turret : SelectableObject
                 return false;
             }
             else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player) {
-                Debug.Log("Hit Player");
+                //Debug.Log("Hit Player");
                 return true;
             }
             else

@@ -9,7 +9,9 @@ public class Player : SelectableObject
     public enum PlayerState
     {
         Alive = (1 << 0),
-        Shooting = (1 << 1)
+        Shooting = (1 << 1),
+        Jumping = (1 << 2),
+
     }
 
     public Transform playerTransform;
@@ -49,7 +51,6 @@ public class Player : SelectableObject
     }
 
     public void SendUpdate(Vector3 pos, Vector3 rot, int state) {
-        Debug.Log("Force Added");
         this.GetComponent<Rigidbody>().velocity = (pos - this.transform.position) * 10f;
         this.transform.rotation = Quaternion.Euler(new Vector3(0f, rot.y, 0f));
         this.state = state;
@@ -57,28 +58,45 @@ public class Player : SelectableObject
 
         if ((state & (int)PlayerState.Shooting) > 0)
         {
-            Debug.Log("Player is Shooting");
+            if (!weapons[activeWeapon].GetComponent<WeaponLogic>().playing)
+            {
+                weapons[activeWeapon].GetComponent<WeaponLogic>().StartPlaying();
+            }
+        }
+        else {
+            if (weapons[activeWeapon].GetComponent<WeaponLogic>().playing)
+            {
+                weapons[activeWeapon].GetComponent<WeaponLogic>().StopPlaying();
+            }
         }
 
+        if ((state & (int)PlayerState.Jumping) > 0) 
+        {
+            Jump();
+        }
 
+    }
+
+    private void Jump() {
+        anim.Play("Jump");
     }
 
     // Update is called once per frame
     protected override void BaseUpdate()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(1 * moveSpeed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(1 * -moveSpeed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(0, 0, 1 * moveSpeed);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(0, 0, 1 * -moveSpeed);
         }
