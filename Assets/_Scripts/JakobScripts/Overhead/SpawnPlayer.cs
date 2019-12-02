@@ -55,11 +55,19 @@ public class SpawnPlayer : UpdateableObject
                 //Debug.Log(NDM.GetPlayerNum());
                 if (i == NDM.GetPlayerNum())
                 {
-                    EC = Instantiate(ControllablePlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
+                    EC = Instantiate(ControllablePlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity, transform);
+                    EC.transform.SetParent(null);
                 }
                 else
                 {
-                    EC = Instantiate(OtherPlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
+                    EC = Instantiate(
+                        OtherPlayer, 
+                        SpawnLoc.Locations[
+                            i % NET_PACKET.NetworkDataManager.FPSmax
+                            ].transform.position, 
+                        Quaternion.identity, transform);
+
+                    EC.transform.SetParent(null);
                 }
 
                 EC.SetContainerID(i);

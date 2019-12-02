@@ -797,7 +797,6 @@ GameObject:
   - component: {fileID: 3515611949932074262}
   - component: {fileID: 3515611949932074257}
   - component: {fileID: 3515611949932074256}
-  - component: {fileID: 2646347971862627129}
   m_Layer: 20
   m_Name: Gun (1)
   m_TagString: Untagged
@@ -962,24 +961,6 @@ MonoBehaviour:
   applyOnPreRender: 0
   applyOnLateUpdate: 0
   SetToInitial: 1
---- !u!114 &2646347971862627129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515611949932074258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4e1f9d2bb928943a0601a9a9b94558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpecificActor: {fileID: 0}
-  channel:
-    cName: 0
-    cNum: 0
-    allChannelNums: 0
-  cooldownTime: 2
 --- !u!1 &3515611950301427716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,7 +1266,6 @@ GameObject:
   - component: {fileID: 3515611950537481597}
   - component: {fileID: 3515611950537481596}
   - component: {fileID: 3515611950537481599}
-  - component: {fileID: 6836595153180901358}
   m_Layer: 20
   m_Name: Gun (2)
   m_TagString: Untagged
@@ -1450,24 +1430,6 @@ MonoBehaviour:
   applyOnPreRender: 0
   applyOnLateUpdate: 0
   SetToInitial: 1
---- !u!114 &6836595153180901358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515611950537481593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4e1f9d2bb928943a0601a9a9b94558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpecificActor: {fileID: 0}
-  channel:
-    cName: 0
-    cNum: 0
-    allChannelNums: 0
-  cooldownTime: 2
 --- !u!1 &3515611950683028573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,7 +1559,6 @@ GameObject:
   - component: {fileID: 3515611950994801216}
   - component: {fileID: 3515611950994801219}
   - component: {fileID: 3515611950994801220}
-  - component: {fileID: 2509298771354787702}
   m_Layer: 20
   m_Name: Gun
   m_TagString: Untagged
@@ -1762,24 +1723,6 @@ MonoBehaviour:
   applyOnPreRender: 0
   applyOnLateUpdate: 0
   SetToInitial: 1
---- !u!114 &2509298771354787702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515611950994801245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4e1f9d2bb928943a0601a9a9b94558, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpecificActor: {fileID: 0}
-  channel:
-    cName: 0
-    cNum: 0
-    allChannelNums: 0
-  cooldownTime: 2
 --- !u!1 &3515611950996173188
 GameObject:
   m_ObjectHideFlags: 0
