@@ -62,7 +62,7 @@ namespace SceneManagement
  * 1 - Start Menu
  * 2 - RTS
  * 3 - FPS
- * 4 - 
- * 5 - 
+ * 4 - WIN scene
+ * 5 - LOSE scene
  * 
  */
