@@ -34,6 +34,8 @@ namespace RTSManagers
         public GameObject barracksPrefab;
         public GameObject wallBlueprint;
         public GameObject wallPrefab;
+        public GameObject wallSideBlueprint;
+        public GameObject wallSidePrefab;
 
         public GameObject moveCursorPrefab;
         public GameObject attackCursorPrefab;
@@ -84,6 +86,11 @@ namespace RTSManagers
                 case 3:
                     wallBlueprint.SetActive(true);
                     prefabObject = wallBlueprint;
+                    prefabType = EntityType.Wall;
+                    break;
+                case 4:
+                    wallSideBlueprint.SetActive(true);
+                    prefabObject = wallSideBlueprint;
                     prefabType = EntityType.Wall;
                     break;
             }
@@ -148,6 +155,10 @@ namespace RTSManagers
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 OnPrefabSelect(3);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                OnPrefabSelect(4);
             }
             if (Input.GetKeyDown("escape"))
             {
