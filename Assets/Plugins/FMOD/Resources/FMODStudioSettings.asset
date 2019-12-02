@@ -15,7 +15,7 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: RTSFPS_FMOD\RTSFPS_FMOD.fspro
+  sourceProjectPath: RTSFPS_FMOD/RTSFPS_FMOD.fspro
   sourceBankPath: RTSFPS_FMOD\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
