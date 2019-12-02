@@ -6,7 +6,7 @@ namespace GlobalSettings
 {
     public static class Setting
     {
-        public const int FRAMETICK = 5;
+        public const int FRAMETICK = 1;
 
     }
 }

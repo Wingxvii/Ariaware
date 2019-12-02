@@ -47,11 +47,17 @@ public class Droid : SelectableObject
     {
 
         selfRigid = this.GetComponent<Rigidbody>();
-        currentHealth = 100;
         maxHealth = 100;
         anim = this.GetComponent<Animator>();
+        currentHealth = 100;
         deathCheck = false;
 
+    }
+
+    protected override void BaseEnable()
+    {
+        currentHealth = 100;
+        deathCheck = false;
     }
 
     protected override void BaseUpdate()

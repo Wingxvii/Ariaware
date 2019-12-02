@@ -66,6 +66,13 @@ public class Turret : SelectableObject
         turretLayerMask += LayerMask.GetMask("Wall");
 
     }
+    protected override void BaseEnable()
+    {
+        currentHealth = 500;
+        positionUpdated = false;
+
+        changedToIdle = false;
+    }
 
     protected override void BaseLateUpdate()
     {

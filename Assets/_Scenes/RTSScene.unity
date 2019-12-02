@@ -719,8 +719,6 @@ MonoBehaviour:
   PoolParent: {fileID: 634751482}
   DroidPrefab: {fileID: 4037481489312127328, guid: 4ef75879c87c1124c9f1ababa0166f0e,
     type: 3}
-  spawnRange: 10
-  spawnHeight: 1
   playerTargets:
   - {fileID: 572459640}
   - {fileID: 1036333245}
@@ -1672,7 +1670,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451111}
         m_MethodName: OnPageSwitch
         m_Mode: 3
         m_Arguments:
@@ -2121,7 +2119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451105}
         m_MethodName: OnSelectMove
         m_Mode: 1
         m_Arguments:
@@ -2460,7 +2458,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451105}
         m_MethodName: OnRally
         m_Mode: 1
         m_Arguments:
@@ -3411,7 +3409,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451111}
         m_MethodName: OnPageSwitch
         m_Mode: 3
         m_Arguments:
@@ -4434,7 +4432,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451105}
         m_MethodName: OnTrainBarracks
         m_Mode: 3
         m_Arguments:
@@ -4906,7 +4904,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451105}
         m_MethodName: OnReload
         m_Mode: 1
         m_Arguments:
@@ -5398,7 +5396,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451105}
         m_MethodName: OnSelectAttack
         m_Mode: 1
         m_Arguments:
@@ -5800,7 +5798,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451105}
         m_MethodName: OnSelectAttack
         m_Mode: 1
         m_Arguments:
@@ -6061,7 +6059,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 931451111}
         m_MethodName: OnPageSwitch
         m_Mode: 3
         m_Arguments:
