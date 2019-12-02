@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4224107387672683140}
   - component: {fileID: 4224107387672683141}
   - component: {fileID: 4224107387672683142}
-  - component: {fileID: 5124580441576961374}
+  - component: {fileID: 8122389863374396017}
   m_Layer: 0
   m_Name: Gun (2)
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MonoBehaviour:
   applyOnPreRender: 0
   applyOnLateUpdate: 0
   SetToInitial: 1
---- !u!114 &5124580441576961374
+--- !u!114 &8122389863374396017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4224107387672683136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4e1f9d2bb928943a0601a9a9b94558, type: 3}
+  m_Script: {fileID: 11500000, guid: d51763fe823c5d24cad69802d414c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SpecificActor: {fileID: 0}

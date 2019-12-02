@@ -59,7 +59,12 @@ public class SpawnPlayer : UpdateableObject
                 }
                 else
                 {
-                    EC = Instantiate(OtherPlayer, SpawnLoc.Locations[i % NET_PACKET.NetworkDataManager.FPSmax].transform.position, Quaternion.identity);
+                    EC = Instantiate(
+                        OtherPlayer, 
+                        SpawnLoc.Locations[
+                            i % NET_PACKET.NetworkDataManager.FPSmax
+                            ].transform.position, 
+                        Quaternion.identity);
                 }
 
                 EC.SetContainerID(i);
