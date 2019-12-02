@@ -60,6 +60,7 @@ public class Spawnpoint : Entity
                         if (b != null && b.TreeInit())
                         {
                             spawnableBody.Attach(b.spawn);
+                            transform.position = b.transform.position;
                             return;
                         }
                     }
