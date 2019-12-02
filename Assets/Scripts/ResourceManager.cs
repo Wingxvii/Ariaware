@@ -16,7 +16,7 @@ namespace RTSManagers
 
         public const int SUPPLY_PER_BARRACKS = 20;
 
-        public const bool CREDITS_OFF = true;
+        public const bool CREDITS_OFF = false;
         public const bool UNKILLABLEPLAYER = true;
 
         public const bool RTSPLAYERDEBUGMODE = true;
@@ -65,16 +65,16 @@ namespace RTSManagers
         void Start()
         {
             credits = 1000;
-            timeElapsed = 0;
+            timeElapsed = 600;
         }
 
         private void Update()
         {
             if (gameState == GameState.Running)
             {
-                timeElapsed += Time.deltaTime;
+                timeElapsed -= Time.deltaTime;
                 time.text = ((int)(timeElapsed / 60.0f)).ToString("00") + ":" + ((int)(timeElapsed % 60)).ToString("00");
-                if (timeElapsed > 600)
+                if (timeElapsed < 0)
                 {
                     RTSGameManager.Instance.GameEndWin();
                 }
