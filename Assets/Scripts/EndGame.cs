@@ -8,7 +8,7 @@ public class EndGame : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "SelectableObject" && other.gameObject.GetComponent<SelectableObject>().type == EntityType.Player) {
-            RTSGameManager.Instance.GameEndWin();
+            RTSGameManager.Instance.GameEndLose();
         }
     }
 

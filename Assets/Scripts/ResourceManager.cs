@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using netcodeRTS;
 
 namespace RTSManagers
 {
@@ -21,6 +22,13 @@ namespace RTSManagers
         public const bool RTSPLAYERDEBUGMODE = true;
     }
 
+    public enum GameState { 
+        Preparing,
+        Running,
+        Win,
+        Loss,
+    }
+
     public class ResourceManager : MonoBehaviour
     {
         #region SingletonCode
@@ -38,6 +46,8 @@ namespace RTSManagers
             }
         }
         #endregion
+
+        public GameState gameState = GameState.Running;
 
         public int credits = 0;
         public int totalSupply = 0;
@@ -60,23 +70,38 @@ namespace RTSManagers
 
         private void Update()
         {
-            timeElapsed += Time.deltaTime;
-            time.text = ((int)(timeElapsed / 60.0f)).ToString("00") + ":" + ((int)(timeElapsed % 60)).ToString("00");
+            if (gameState == GameState.Running)
+            {
+                timeElapsed += Time.deltaTime;
+                time.text = ((int)(timeElapsed / 60.0f)).ToString("00") + ":" + ((int)(timeElapsed % 60)).ToString("00");
+                if (timeElapsed > 600)
+                {
+                    RTSGameManager.Instance.GameEndWin();
+                }
+            }
+        }
+
+        public void StartGame() {
+            gameState = GameState.Running;
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-
-            if (ResourceConstants.CREDITS_OFF)
+            if (gameState == GameState.Running)
             {
-                credits = 99999;
-            }
-            else
-            {
-                credits += 1;
-            }
+                NetworkManager.SendGameData((int)gameState, timeElapsed);
 
+                if (ResourceConstants.CREDITS_OFF)
+                {
+                    credits = 99999;
+                }
+                else
+                {
+                    credits += 1;
+                }
+
+            }
             creditText.text = credits.ToString();
             supplyText.text = supplyCurrent.ToString() + "/" + totalSupply.ToString();
 

@@ -29,20 +29,14 @@ namespace RTSManagers
 
         public Animation missleLaunch;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
+        public void GameEndWin() {
+            ResourceManager.Instance.gameState = GameState.Win;
+            Debug.Log("Game End");
         }
 
-        // Update is called once per frame
-        void Update()
+        public void GameEndLose()
         {
-
-        }
-
-        public void GameEndWin()
-        {
+            ResourceManager.Instance.gameState = GameState.Loss;
             Debug.Log("Game End");
             missleLaunch.Play("Missle");
             //go to end scene
