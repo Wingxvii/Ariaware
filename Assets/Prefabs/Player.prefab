@@ -488,6 +488,7 @@ MonoBehaviour:
   anim: {fileID: 5625769189715965191}
   moveSpeed: 1
   maxSpeed: 20
+  state: 1
   weapons:
   - {fileID: 8960884383412306859}
   - {fileID: 3179726239517243243}
