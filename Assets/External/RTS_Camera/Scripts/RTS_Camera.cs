@@ -171,7 +171,8 @@ namespace RTS_Cam
         {
             m_Transform = transform;
             groundMaskFixed = LayerMask.GetMask("Background");
-                
+            groundMaskFixed += LayerMask.GetMask("StaticObject");
+
         }
 
         private void Update()
