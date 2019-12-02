@@ -231,7 +231,7 @@ namespace NET_PACKET
         public static Queue<BuildPackage> build = new Queue<BuildPackage>();
         public static Queue<int> kill = new Queue<int>();
         public static GameState gameState = GameState.Running;
-        public static float gameTime = 2f;
+        public static float gameTime = 600f;
 
         int yourID = 0;
 
