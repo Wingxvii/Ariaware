@@ -231,7 +231,7 @@ namespace NET_PACKET
         public static Queue<BuildPackage> build = new Queue<BuildPackage>();
         public static Queue<int> kill = new Queue<int>();
         public static GameState gameState = GameState.Running;
-        public static float gameTime = 599f;
+        public static float gameTime = 2f;
 
         int yourID = 0;
 
@@ -285,7 +285,7 @@ namespace NET_PACKET
                     WriteRTS.droidData[i] = new RTSsingle();
                 }
 
-                if (SceneManagement.ScenePresent.Instance != null)
+                if (SceneManagement.ScenePresent.Instance != null && SceneManagement.ScenePresent.Instance.IP.Length > 0)
                 {
                     //Debug.Log(ip);
                     ip = SceneManagement.ScenePresent.Instance.IP;
@@ -333,20 +333,28 @@ namespace NET_PACKET
 
         protected override void UpdateObject()
         {
-            if (gameTime >= 0f)
+            if (gameTime > 0f)
             {
                 gameTime -= Time.deltaTime;
                 gameTime = Mathf.Max(gameTime, 0);
             }
             else
             {
-                if(gameState == GameState.Win)
+                Debug.Log("FINISHED");
+                SceneManagement.ScenePresent.Instance.gameState = 3;
+                SceneManagement.ScenePresent.Instance.SwapScene(4);
+                return;
+                if (gameState == GameState.Win)
                 {
-                    
+                    SceneManagement.ScenePresent.Instance.gameState = 3;
+                    SceneManagement.ScenePresent.Instance.SwapScene(4);
+                    return;
                 }
                 else if (gameState == GameState.Loss)
                 {
-
+                    SceneManagement.ScenePresent.Instance.gameState = 4;
+                    SceneManagement.ScenePresent.Instance.SwapScene(4);
+                    return;
                 }
             }
 
