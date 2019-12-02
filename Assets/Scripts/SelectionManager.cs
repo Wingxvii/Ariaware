@@ -575,16 +575,17 @@ namespace RTSManagers
                     }
                     else
                     {
-
-                        switch (PrimarySelectable.type)
+                        if (PrimarySelectable != null)
                         {
-                            case EntityType.Droid:
-                                AnimationManager.Instance.PlayMove(mousePosition);
-                                break;
-                            default:
-                                break;
+                            switch (PrimarySelectable.type)
+                            {
+                                case EntityType.Droid:
+                                    AnimationManager.Instance.PlayMove(mousePosition);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-
                         //send the mouse location of all objects with the same type as the primary type
                         foreach (SelectableObject obj in SelectedObjects)
                         {

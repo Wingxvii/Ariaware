@@ -9,7 +9,9 @@ public class Player : SelectableObject
     public enum PlayerState
     {
         Alive = (1 << 0),
-        Shooting = (1 << 1)
+        Shooting = (1 << 1),
+        Jumping = (1 << 2),
+
     }
 
     public Transform playerTransform;
@@ -68,7 +70,15 @@ public class Player : SelectableObject
             }
         }
 
+        if ((state & (int)PlayerState.Jumping) > 0) 
+        {
+            Jump();
+        }
 
+    }
+
+    private void Jump() {
+        anim.Play("Jump");
     }
 
     // Update is called once per frame
