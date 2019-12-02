@@ -24,6 +24,9 @@ namespace RTS_Cam
 
 #endif
 
+        public LayerMask groundMaskFixed; //layermask of ground or other objects that affect height
+
+
         #endregion
 
         private Transform m_Transform; //camera tranform
@@ -43,7 +46,6 @@ namespace RTS_Cam
         #region Height
 
         public bool autoHeight = true;
-        public LayerMask groundMask = -1; //layermask of ground or other objects that affect height
 
         public float maxHeight = 10f; //maximal height
         public float minHeight = 15f; //minimnal height
@@ -168,6 +170,9 @@ namespace RTS_Cam
         private void Start()
         {
             m_Transform = transform;
+            groundMaskFixed = LayerMask.GetMask("Background");
+            groundMaskFixed += LayerMask.GetMask("StaticObject");
+
         }
 
         private void Update()
@@ -246,6 +251,9 @@ namespace RTS_Cam
                 desiredMove *= Time.deltaTime;
                 desiredMove = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f)) * desiredMove;
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
+
+                //Debug.Log(desiredMove.x.ToString() + ":" + desiredMove.y.ToString());
+
 
                 m_Transform.Translate(desiredMove, Space.Self);
             }
@@ -333,8 +341,9 @@ namespace RTS_Cam
         {
             Ray ray = new Ray(m_Transform.position, Vector3.down);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, groundMask.value))
+            if (Physics.Raycast(ray, out hit, groundMaskFixed))
                 return (hit.point - m_Transform.position).magnitude;
+
 
             return 0f;
         }

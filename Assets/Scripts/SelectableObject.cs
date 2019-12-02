@@ -53,6 +53,12 @@ public class SelectableObject : MonoBehaviour
         BaseStart();
     }
 
+    private void OnEnable()
+    {
+
+        BaseEnable();
+    }
+
     public void OnSelect()
     {
         selected = true;
@@ -112,6 +118,7 @@ public class SelectableObject : MonoBehaviour
 
     //base class overrides
     protected virtual void BaseStart() { }
+    protected virtual void BaseEnable() { }
     protected virtual void BaseUpdate() { }
     protected virtual void BaseLateUpdate() { }
     protected virtual void BaseFixedUpdate() { }

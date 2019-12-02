@@ -9,7 +9,9 @@ public class Player : SelectableObject
     public enum PlayerState
     {
         Alive = (1 << 0),
-        Shooting = (1 << 1)
+        Shooting = (1 << 1),
+        Jumping = (1 << 2),
+
     }
 
     public Transform playerTransform;
@@ -68,25 +70,33 @@ public class Player : SelectableObject
             }
         }
 
+        if ((state & (int)PlayerState.Jumping) > 0) 
+        {
+            Jump();
+        }
 
+    }
+
+    private void Jump() {
+        anim.Play("Jump");
     }
 
     // Update is called once per frame
     protected override void BaseUpdate()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(1 * moveSpeed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(1 * -moveSpeed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(0, 0, 1 * moveSpeed);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(0, 0, 1 * -moveSpeed);
         }

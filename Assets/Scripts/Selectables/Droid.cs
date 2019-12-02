@@ -47,11 +47,17 @@ public class Droid : SelectableObject
     {
 
         selfRigid = this.GetComponent<Rigidbody>();
-        currentHealth = 100;
         maxHealth = 100;
         anim = this.GetComponent<Animator>();
+        currentHealth = 100;
         deathCheck = false;
 
+    }
+
+    protected override void BaseEnable()
+    {
+        currentHealth = 100;
+        deathCheck = false;
     }
 
     protected override void BaseUpdate()
@@ -209,11 +215,11 @@ public class Droid : SelectableObject
     public void MoveTo(Vector2 pos) {
         faceingPoint = journeyPoint;
 
-        Vector2 dir = new Vector2(pos.x - this.transform.position.x, pos.y - this.transform.position.z).normalized;
-        selfRigid.velocity = new Vector3(dir.x, 0, dir.y) * maxSpeed;
+        Vector2 dir = new Vector2(pos.x - this.transform.position.x, pos.y - this.transform.position.z).normalized * maxSpeed;
+        selfRigid.velocity = new Vector3(dir.x, selfRigid.velocity.y, dir.y) ;
 
-        anim.SetFloat("Walk", Vector3.Dot(selfRigid.velocity, transform.forward) / 10);
-        anim.SetFloat("Turn", Vector3.Dot(selfRigid.velocity, transform.right) / 10);
+        anim.SetFloat("Walk", Vector3.Dot(selfRigid.velocity, transform.forward));
+        anim.SetFloat("Turn", Vector3.Dot(selfRigid.velocity, transform.right));
 
     }
     private void OnAttack() {

@@ -50,6 +50,8 @@ public class Turret : SelectableObject
     //position update dirty flag
     public bool positionUpdated = false;
 
+    public bool changedToIdle = false;
+
     public int fixedTimeStep;
 
 
@@ -64,6 +66,13 @@ public class Turret : SelectableObject
         turretLayerMask += LayerMask.GetMask("Wall");
 
     }
+    protected override void BaseEnable()
+    {
+        currentHealth = 500;
+        positionUpdated = false;
+
+        changedToIdle = false;
+    }
 
     protected override void BaseLateUpdate()
     {
@@ -75,8 +84,17 @@ public class Turret : SelectableObject
         if (positionUpdated) {
             //Debug.Log("Added");
             NetworkManager.AddDataToStack(id, head.transform.rotation.eulerAngles, (int)state);
+            changedToIdle = true;
         }
+        else if (changedToIdle)
+        {
+            NetworkManager.AddDataToStack(id, head.transform.rotation.eulerAngles, (int)state);
+            changedToIdle = false;
+        }
+
         positionUpdated = false;
+
+
     }
 
     protected override void BaseFixedUpdate()
@@ -286,7 +304,7 @@ public class Turret : SelectableObject
                 return false;
             }
             else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player) {
-                Debug.Log("Hit Player");
+                //Debug.Log("Hit Player");
                 return true;
             }
             else

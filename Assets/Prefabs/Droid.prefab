@@ -192,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129937545562923246}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.536, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children:
   - {fileID: 5541034243220252398}
@@ -646,12 +646,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915812634831935455}
-  - component: {fileID: 9126354485544795216}
   - component: {fileID: 8781647209726065249}
   - component: {fileID: 7709805804806494388}
   - component: {fileID: 8539590370312802865}
   - component: {fileID: 2040518663655672345}
   - component: {fileID: 664198289219914318}
+  - component: {fileID: 3418870684353746236}
   m_Layer: 11
   m_Name: Droid
   m_TagString: SelectableObject
@@ -667,7 +667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4037481489312127328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.82, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 2389856423360928284}
@@ -676,20 +676,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &9126354485544795216
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4037481489312127328}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.26929823
-  m_Height: 1.653019
-  m_Direction: 1
-  m_Center: {x: 0.018289745, y: -0.17349055, z: -0.0036480427}
 --- !u!114 &8781647209726065249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,8 +698,8 @@ MonoBehaviour:
   canvasTransform: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
-  maxSpeed: 10
-  minSpeed: 2
+  maxSpeed: 30
+  minSpeed: 10
   state: 0
   journeyAccuracy: 6
   attackDamage: 5
@@ -733,7 +719,7 @@ Rigidbody:
   m_GameObject: {fileID: 4037481489312127328}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0.5
+  m_Drag: 0.01
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -751,7 +737,7 @@ Halo:
   m_Color:
     serializedVersion: 2
     rgba: 4278251519
-  m_Size: 2
+  m_Size: 3
 --- !u!135 &2040518663655672345
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -784,6 +770,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &3418870684353746236
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037481489312127328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.17145556
+  m_Height: 1.3093432
+  m_Direction: 1
+  m_Center: {x: 0.0012966197, y: 0.68552154, z: 0}
 --- !u!1 &4186154981159603075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,7 +1198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7515589544995246165}
   m_LocalRotation: {x: 0.00000008146034, y: 5.551115e-17, z: -1.6653345e-16, w: 1}
-  m_LocalPosition: {x: 0, y: -2.2819998, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children: []
   m_Father: {fileID: 1915812634831935455}
