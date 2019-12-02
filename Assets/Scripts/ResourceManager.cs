@@ -17,6 +17,8 @@ namespace RTSManagers
 
         public const bool CREDITS_OFF = true;
         public const bool UNKILLABLEPLAYER = true;
+
+        public const bool RTSPLAYERDEBUGMODE = false;
     }
 
     public class ResourceManager : MonoBehaviour

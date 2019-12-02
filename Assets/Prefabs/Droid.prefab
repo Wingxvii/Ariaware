@@ -652,6 +652,7 @@ GameObject:
   - component: {fileID: 2040518663655672345}
   - component: {fileID: 664198289219914318}
   - component: {fileID: 3418870684353746236}
+  - component: {fileID: 2481412919436640565}
   m_Layer: 11
   m_Name: Droid
   m_TagString: SelectableObject
@@ -698,8 +699,8 @@ MonoBehaviour:
   canvasTransform: {fileID: 0}
   currentHealth: 1
   maxHealth: 1
-  maxSpeed: 10
-  minSpeed: 2
+  maxSpeed: 30
+  minSpeed: 10
   state: 0
   journeyAccuracy: 6
   attackDamage: 5
@@ -784,6 +785,28 @@ CapsuleCollider:
   m_Height: 1.3093432
   m_Direction: 1
   m_Center: {x: 0.0012966197, y: 0.68552154, z: 0}
+--- !u!195 &2481412919436640565
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037481489312127328}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &4186154981159603075
 GameObject:
   m_ObjectHideFlags: 0

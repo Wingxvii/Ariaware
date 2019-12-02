@@ -84,19 +84,19 @@ public class Player : SelectableObject
     // Update is called once per frame
     protected override void BaseUpdate()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(1 * moveSpeed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(1 * -moveSpeed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(0, 0, 1 * moveSpeed);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && ResourceConstants.RTSPLAYERDEBUGMODE)
         {
             playerBody.velocity += new Vector3(0, 0, 1 * -moveSpeed);
         }

@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60615993757660465}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -34,7 +34,7 @@ RectTransform:
   - {fileID: 7572946316872648674}
   m_Father: {fileID: 1181721094282208825}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 7.76}
@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 5664113259941518892}
   - component: {fileID: 7215965813452036916}
   - component: {fileID: 529462337750901962}
+  - component: {fileID: 3026202393422694419}
   m_Layer: 12
   m_Name: Barracks
   m_TagString: SelectableObject
@@ -627,7 +628,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5243640246768292037}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 5.44, y: 2, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -635,7 +636,7 @@ Transform:
   - {fileID: 5682699947807424358}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &7014941616866911789
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -751,6 +752,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11, y: 6.5, z: 9}
   m_Center: {x: -0.5, y: 3.15, z: 0}
+--- !u!208 &3026202393422694419
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243640246768292037}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5.5000005, y: 3.2500002, z: 4.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.5, y: 3.15, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6161573175498090389
 GameObject:
   m_ObjectHideFlags: 0
