@@ -15,7 +15,7 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: RTSFPS_FMOD\RTSFPS_FMOD.fspro
+  sourceProjectPath: RTSFPS_FMOD/RTSFPS_FMOD.fspro
   sourceBankPath: RTSFPS_FMOD\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
@@ -76,10 +76,7 @@ MonoBehaviour:
   - Platform: 20
     Value: 32
   Plugins: []
-  MasterBanks:
-  - Master
-  Banks:
-  - FPS_Bank
-  - RTS_Bank
+  MasterBanks: []
+  Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
