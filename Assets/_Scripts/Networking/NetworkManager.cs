@@ -531,7 +531,7 @@ namespace netcodeRTS
 
         public static void AddDataToStack(int id, Vector3 turretRot, int state) {
 
-            Debug.Log("Added to Stack");
+            //Debug.Log("Added to Stack");
 
             StringBuilder dataToSend = new StringBuilder();
             dataToSend.Append(id);

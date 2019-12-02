@@ -307,5 +307,17 @@ namespace RTSManagers
                 }
             }
         }
+
+        public void OnRally()
+        {
+            Object.Destroy(prefabObject);
+
+            prefabObject = (GameObject)Instantiate(rallyPrefab);
+            prefabObject.SetActive(true);
+
+            SelectionManager.Instance.currentEvent = MouseEvent.Rally;
+
+        }
+
     }
 }
