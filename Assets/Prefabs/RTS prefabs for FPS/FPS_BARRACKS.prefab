@@ -71,9 +71,9 @@ GameObject:
   - component: {fileID: 2021709654388970850}
   - component: {fileID: 7868574771869848950}
   - component: {fileID: 8597378226948112370}
-  - component: {fileID: 3349967086123259701}
   - component: {fileID: 9172830282005201917}
   - component: {fileID: 1466445857333642705}
+  - component: {fileID: 3129927808204411255}
   m_Layer: 0
   m_Name: Barracks
   m_TagString: Untagged
@@ -141,20 +141,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3349967086123259701
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4948884444720341918}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.25
-  m_Height: 0.85156405
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.075782, z: 0}
 --- !u!114 &9172830282005201917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,3 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7606f1d6ff55947b0e325b6019f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3129927808204411255
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948884444720341918}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11, y: 6.5, z: 9}
+  m_Center: {x: -0.5, y: 3.15, z: 0}
