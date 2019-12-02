@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/JakobScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/_Scenes/YouWIN.unity
+    guid: 1930eff5bf83ff54abf0797e23e09229
+  - enabled: 1
+    path: Assets/_Scenes/YouLOSE.unity
+    guid: a99fe834b12041e43bd4b6bd6c940bc4
   m_configObjects: {}

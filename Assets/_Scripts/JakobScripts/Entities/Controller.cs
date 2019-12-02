@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : Entity
 {
     public JoinedList<Controller, Puppet> puppets;
     public JoinedList<Controller, Command> commands;
+
+    public Slider HPbar;
+    public Text ammo;
+    public Text clip;
 
     protected override bool CreateVars()
     {
@@ -84,6 +89,17 @@ public class Controller : Entity
                         if (p != null && p.TreeInit())
                         {
                             puppets.Attach(p.controller);
+                            HealthBar hb = p.GetComponent<HealthBar>();
+                            if (hb != null)
+                            {
+                                hb.hpBar = HPbar;
+                            }
+                            PACES.Gun pGun = p.GetComponent<PACES.Gun>();
+                            if (pGun != null)
+                            {
+                                pGun.ammoCount = ammo;
+                                pGun.ammoClip = clip;
+                            }
                         }
                     }
                 }

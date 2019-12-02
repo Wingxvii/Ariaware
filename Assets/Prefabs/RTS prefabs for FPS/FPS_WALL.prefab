@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   sendData: 0
+  pState: 1
 --- !u!114 &4880311618229614676
 MonoBehaviour:
   m_ObjectHideFlags: 0
