@@ -13,6 +13,7 @@ public class PermitJump : AbstractPermission<PermitJump, CommandJump, Body, Cont
     bool cooldown = false;
 
     bool jump = false;
+    Animator anim;
 
     SpeedLimit SP;
 
@@ -21,6 +22,7 @@ public class PermitJump : AbstractPermission<PermitJump, CommandJump, Body, Cont
         if (base.CreateVars())
         {
             SP = GetComponent<SpeedLimit>();
+            anim = GetComponent<Animator>();
 
             return true;
         }
@@ -44,6 +46,8 @@ public class PermitJump : AbstractPermission<PermitJump, CommandJump, Body, Cont
     {
         if (jump && SP.GC.Grounded && cooldown)
         {
+            SpecificActor.Container.GetObj(0).pState |= (uint)PlayerState.Jumping;
+
             Quaternion groundtransform = transform.rotation;
             if (tilt)
                 groundtransform = SP.GC.groundAngle * groundtransform;
@@ -57,7 +61,10 @@ public class PermitJump : AbstractPermission<PermitJump, CommandJump, Body, Cont
             cooldown = false;
         }
         else if (!cooldown)
+        {
+            SpecificActor.Container.GetObj(0).pState &= ~(uint)PlayerState.Jumping;
             cooldown = true;
+        }
 
         jump = false;
     }

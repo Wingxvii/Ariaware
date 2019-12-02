@@ -646,6 +646,7 @@ GameObject:
   - component: {fileID: 991372997108186936}
   - component: {fileID: 2453387009412316863}
   - component: {fileID: 3189329987771526809}
+  - component: {fileID: 8179933105075950959}
   m_Layer: 0
   m_Name: FPS_DROID
   m_TagString: Untagged
@@ -693,6 +694,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ad65290feeb0c34f990dfb6944d430c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8179933105075950959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5448695165986735780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78825f101efccc448a947845c829a2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5719863139975204133
@@ -776,7 +789,7 @@ CapsuleCollider:
   m_Radius: 0.26929823
   m_Height: 1.653019
   m_Direction: 1
-  m_Center: {x: 0.018289745, y: -0.17349055, z: -0.0036480427}
+  m_Center: {x: 0, y: 0.833333, z: 0}
 --- !u!54 &533572716448923808
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1048,6 +1061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1884887325339785202}
+  - component: {fileID: 444036534769678510}
   m_Layer: 0
   m_Name: Armature
   m_TagString: Untagged
@@ -1063,13 +1077,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7077198177767307514}
   m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.9140001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children:
   - {fileID: 2412996196756897530}
   m_Father: {fileID: 8579163192384016331}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &444036534769678510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077198177767307514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3564abab1b5608247aa5b7467a884191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  sendData: 0
 --- !u!1 &7201103477849086412
 GameObject:
   m_ObjectHideFlags: 0

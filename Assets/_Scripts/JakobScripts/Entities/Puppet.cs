@@ -81,6 +81,17 @@ public class Puppet : Entity
                         if (c != null && c.TreeInit())
                         {
                             controller.Attach(c.puppets);
+                            HealthBar hb = GetComponent<HealthBar>();
+                            if (hb != null)
+                            {
+                                hb.hpBar = c.HPbar;
+                            }
+                            PACES.Gun pGun = GetComponent<PACES.Gun>();
+                            if (pGun != null)
+                            {
+                                pGun.ammoCount = c.ammo;
+                                pGun.ammoClip = c.clip;
+                            }
                             return;
                         }
                     }

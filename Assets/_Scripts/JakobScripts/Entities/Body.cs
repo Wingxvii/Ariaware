@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Body : Puppet
@@ -13,6 +13,7 @@ public class Body : Puppet
     public Collider[] Col;
     public JoinedList<Body, Inventory> inventories;
     public bool notYourBody = true;
+    public bool respawnable = true;
 
     //public float IDENT_VELOCITY = 0f;
 
@@ -180,6 +181,15 @@ public class Body : Puppet
                     transform.position = spawn.GetObj(0).transform.position;
                 }
             }
+        }
+    }
+
+    public void KILL()
+    {
+        if (spawn.GetObj(0) != null && respawnable)
+        {
+            transform.position = spawn.GetObj(0).transform.position;
+            transform.rotation = spawn.GetObj(0).transform.rotation;
         }
     }
 }

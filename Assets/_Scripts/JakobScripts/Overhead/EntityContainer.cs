@@ -5,7 +5,8 @@ using UnityEngine;
 public enum PlayerState
 {
     Alive = 1,
-    Shooting = 2
+    Shooting = 2,
+    Jumping = 4,
 }
 
 public class EntityContainer : BasePACES
