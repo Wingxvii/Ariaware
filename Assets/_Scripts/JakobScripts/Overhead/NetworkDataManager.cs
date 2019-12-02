@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NET_PACKET
 {
+    public enum GameState
+    {
+        Preparing,
+        Running,
+        Loss,
+        Win
+    }
+
     public enum TurretStateData
     {
         Idle,
@@ -147,9 +156,9 @@ namespace NET_PACKET
         public Vector3 position;
     }
 
-    public class NetworkDataManager : InitializableObject
+    public class NetworkDataManager : UpdateableObject
     {
-
+        public Text time;
 
         const int droidMax = 100;
         public const int FPSmax = 3;
@@ -221,7 +230,8 @@ namespace NET_PACKET
 
         public static Queue<BuildPackage> build = new Queue<BuildPackage>();
         public static Queue<int> kill = new Queue<int>();
-        public static uint gameState;
+        public static GameState gameState = GameState.Running;
+        public static float gameTime = 599f;
 
         int yourID = 0;
 
@@ -305,6 +315,8 @@ namespace NET_PACKET
                 //AddFourth();
                 //AddFifth();
 
+                AddUpdate();
+
                 return true;
             }
 
@@ -317,6 +329,37 @@ namespace NET_PACKET
             DeleteClient(Client);
 
             base.DestroyVars();
+        }
+
+        protected override void UpdateObject()
+        {
+            if (gameTime >= 0f)
+            {
+                gameTime -= Time.deltaTime;
+                gameTime = Mathf.Max(gameTime, 0);
+            }
+            else
+            {
+                if(gameState == GameState.Win)
+                {
+                    
+                }
+                else if (gameState == GameState.Loss)
+                {
+
+                }
+            }
+
+            if (time != null)
+            {
+                string am = (((int)gameTime) % 60).ToString();
+                if (am.Length == 1)
+                {
+                    am = "0" + am;
+                }
+                am = (((int)gameTime) / 60).ToString() + ":" + am;
+                time.text = am;
+            }
         }
 
         //protected override void First()
@@ -593,14 +636,15 @@ namespace NET_PACKET
                     }
                     break;
                 case PacketType.GAMESTATE:
-                    if (parsedData.Length != 2)
+                    if (parsedData.Length != 3)
                     {
                         Debug.Log("Error: Invalid GAMESTATE Parsed Array Size");
                         Debug.Break();
                     }
                     if (sender == 1)
                     {
-                        gameState = uint.Parse(parsedData[0]);
+                        gameState = (GameState)uint.Parse(parsedData[0]);
+                        gameTime = float.Parse(parsedData[1]);
                     }
                     else
                     {
