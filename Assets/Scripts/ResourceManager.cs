@@ -23,10 +23,10 @@ namespace RTSManagers
     }
 
     public enum GameState { 
-        Preparing,
-        Running,
-        Win,
-        Loss,
+        Preparing = 0,
+        Running = 1,
+        Win = 2,
+        Loss = 3,
     }
 
     public class ResourceManager : MonoBehaviour
