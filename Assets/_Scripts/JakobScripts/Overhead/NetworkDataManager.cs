@@ -340,10 +340,6 @@ namespace NET_PACKET
             }
             else
             {
-                Debug.Log("FINISHED");
-                SceneManagement.ScenePresent.Instance.gameState = 3;
-                SceneManagement.ScenePresent.Instance.SwapScene(4);
-                return;
                 if (gameState == GameState.Win)
                 {
                     SceneManagement.ScenePresent.Instance.gameState = 3;
