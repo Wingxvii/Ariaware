@@ -187,7 +187,7 @@ namespace RTSManagers
             switch (type)
             {
                 case EntityType.Turret:
-                    pos = new Vector3(pos.x, pos.y , pos.z);
+                    pos = new Vector3(pos.x, 0.0f, pos.z);
                     if (deactivatedObjects[0].Count > 0) {
                         returnObject = deactivatedObjects[0].Dequeue().gameObject;
 
@@ -204,7 +204,7 @@ namespace RTSManagers
                     return returnObject;
                     break;
                 case EntityType.Barracks:
-                    pos = new Vector3(pos.x, pos.y + 0.2f, pos.z);
+                    pos = new Vector3(pos.x, 1.0f, pos.z);
                     if (deactivatedObjects[1].Count > 0)
                     {
                         returnObject = deactivatedObjects[1].Dequeue().gameObject;
@@ -221,7 +221,7 @@ namespace RTSManagers
                     return returnObject;
                     break;
                 case EntityType.Wall:
-                    pos = new Vector3(pos.x, pos.y + 3.0f, pos.z);
+                    pos = new Vector3(pos.x, 2.0f, pos.z);
                     if (deactivatedObjects[2].Count > 0)
                     {
                         returnObject = deactivatedObjects[2].Dequeue().gameObject;
@@ -363,6 +363,7 @@ namespace RTSManagers
                     else
                     {
                         Debug.Log("NOT ENOUGH CREDITS");
+
                     }
 
                 } else if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && !RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable) {
@@ -540,9 +541,6 @@ namespace RTSManagers
                     //check if enemy selected
                     if (HitObject != null && HitObject.type == EntityType.Player)
                     {
-
-
-                        Debug.Log("Player Hit");
                         switch (PrimarySelectable.type)
                         {
                             //droids will attack tether to enemy

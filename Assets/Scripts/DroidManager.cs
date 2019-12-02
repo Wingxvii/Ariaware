@@ -4,7 +4,6 @@ using UnityEngine;
 using netcodeRTS;
 using RTSManagers;
 using RTSUI;
-using GlobalSettings;
 
 public enum DroidType
 {
@@ -61,7 +60,7 @@ public class DroidManager : MonoBehaviour
         --fixedTimeStep;
 
         //tick is called 10 times per 50 updates
-        if (fixedTimeStep % Setting.FRAMETICK == 0)
+        if (fixedTimeStep % 5 == 0)
         {
             TickUpdate();
         }
