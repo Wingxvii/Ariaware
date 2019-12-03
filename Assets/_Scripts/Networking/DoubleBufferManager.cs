@@ -29,7 +29,7 @@ public class DoubleBufferManager : MonoBehaviour
     public Text Counter;
     public Text bufferOn;
     
-    public const bool USEDOUBLEBUFFER = true;
+    public const bool USEDOUBLEBUFFER = false;
 
     [SerializeField]
     int packetsPerFrame = 1;

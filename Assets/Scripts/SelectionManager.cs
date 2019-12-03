@@ -309,7 +309,6 @@ namespace RTSManagers
                 ClearSelection();
             }
 
-
             //handles primary selectable cycling
             if (Input.GetKeyDown(KeyCode.Tab) && PrimarySelectable != null && currentEvent == MouseEvent.Selection)
             {
@@ -344,30 +343,39 @@ namespace RTSManagers
 
         private void HandleLeftMouseClicks()
         {
-
             //check if anything events need to be handled
             if (Input.GetMouseButtonDown(0))
             {
-
+                #region Prefab Logic
+                //check for prefab placeable
                 if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable)
                 {
+                    //check for continous placement
                     if (!Input.GetKey(KeyCode.LeftShift))
                     {
                         RTSManager.Instance.prefabObject.SetActive(false);
                         ClearSelection();
                     }
+                    //check for purchaseability
                     if (ResourceManager.Instance.Purchase(RTSManager.Instance.prefabType))
                     {
                         RTSManager.Instance.OnPlace(UseFactoryPattern(mousePosition, RTSManager.Instance.prefabType));
                     }
+                    //not purchaseable
                     else
                     {
                         Debug.Log("NOT ENOUGH CREDITS");
                     }
 
-                } else if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && !RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable) {
+                } 
+                //handle prefab not placeable exception
+                else if (currentEvent == MouseEvent.PrefabBuild && RTSManager.Instance.prefabObject != null && !RTSManager.Instance.prefabObject.GetComponent<ShellPlacement>().placeable) {
                     Debug.Log("INVALID PLACEMENT");
                 }
+                #endregion
+
+                #region Unit Command Logic
+                //handle unit movement commands
                 else if (currentEvent == MouseEvent.UnitMove)
                 {
                     //send the mouse location of all objects with the same type as the primary type
@@ -384,6 +392,7 @@ namespace RTSManagers
                     currentEvent = MouseEvent.Selection;
 
                 }
+                //handle unit/building attack commands
                 else if (currentEvent == MouseEvent.UnitAttack)
                 {
                     if (HitObject != null && HitObject.type == EntityType.Player)
@@ -442,8 +451,8 @@ namespace RTSManagers
                         RTSManager.Instance.prefabObject.SetActive(false);
                         currentEvent = MouseEvent.Selection;
                     }
-
                 }
+                //handle barracks rally point
                 else if (currentEvent == MouseEvent.Rally)
                 {
                     //send the mouse location of all objects with the same type as the primary type
@@ -459,13 +468,17 @@ namespace RTSManagers
                     currentEvent = MouseEvent.Selection;
 
                 }
+
+                #endregion
+
+                #region Selection Logic
+                //selection logic
                 else
                 {
-
                     //selection checking
                     if (!EventSystem.current.IsPointerOverGameObject())
                     {
-
+                        //handle deselection
                         if (HitObject == null)
                         {
                             foreach (SelectableObject obj in SelectedObjects)
@@ -474,11 +487,13 @@ namespace RTSManagers
                             }
                             SelectedObjects.Clear();
                         }
+                        //check if object is active
                         else if (HitObject.gameObject.activeSelf)
                         {
                             //check to see if already selected
                             if (SelectedObjects.Contains(HitObject))
                             {
+                                //Selective Deselection
                                 if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
                                 {
                                     ClearSelection();
@@ -494,8 +509,10 @@ namespace RTSManagers
                                     DeselectItem(HitObject);
                                 }
                             }
+                            //if not already selected
                             else
                             {
+                                //Selective Deselection
                                 if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.LeftControl))
                                 {
                                     ClearSelection();
@@ -521,6 +538,7 @@ namespace RTSManagers
                         selectionChanged = true;
                     }
                 }
+                #endregion
             }
         }
 
@@ -528,20 +546,18 @@ namespace RTSManagers
         {
             if (Input.GetKeyUp(KeyCode.Mouse1))
             {
+                //disable current command and revert to selection 
                 if (currentEvent == MouseEvent.PrefabBuild || currentEvent == MouseEvent.UnitMove || currentEvent == MouseEvent.UnitAttack || currentEvent == MouseEvent.Rally)
                 {
                     RTSManager.Instance.prefabObject.SetActive(false);
                     currentEvent = MouseEvent.Selection;
                 }
-
+                //if current event is selection
                 if (currentEvent == MouseEvent.Selection)
                 {
-
                     //check if enemy selected
                     if (HitObject != null && HitObject.type == EntityType.Player)
                     {
-
-
                         Debug.Log("Player Hit");
                         switch (PrimarySelectable.type)
                         {
@@ -575,6 +591,7 @@ namespace RTSManagers
                     }
                     else
                     {
+                        //handle state default right-click commands
                         if (PrimarySelectable != null)
                         {
                             switch (PrimarySelectable.type)
@@ -586,7 +603,7 @@ namespace RTSManagers
                                     break;
                             }
                         }
-                        //send the mouse location of all objects with the same type as the primary type
+                        //apply command to all objects selected of the same type
                         foreach (SelectableObject obj in SelectedObjects)
                         {
                             if (obj.type == PrimarySelectable.type)

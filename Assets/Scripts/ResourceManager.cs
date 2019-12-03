@@ -13,13 +13,14 @@ namespace RTSManagers
         public const int COST_DROIDS = 200;
         public const int COST_TURRERT = 400;
         public const int COST_WALL = 250;
+        public const int TRICKLERATE = 4;
 
         public const int SUPPLY_PER_BARRACKS = 20;
 
         public const bool CREDITS_OFF = false;
         public const bool UNKILLABLEPLAYER = true;
 
-        public const bool RTSPLAYERDEBUGMODE = true;
+        public const bool RTSPLAYERDEBUGMODE = false;
     }
 
     public enum GameState { 
@@ -98,7 +99,7 @@ namespace RTSManagers
                 }
                 else
                 {
-                    credits += 1;
+                    credits += 4;
                 }
 
             }

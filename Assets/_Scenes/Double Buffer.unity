@@ -683,9 +683,9 @@ MonoBehaviour:
   DisplayField: {fileID: 1935481984}
   Counter: {fileID: 724800544}
   bufferOn: {fileID: 778557136}
-  packetsPerFrame: 1
-  testDuration: 1
-  ip: 10.10.121.45
+  packetsPerFrame: 10
+  testDuration: 10
+  ip: 10.190.36.178
 --- !u!114 &1062133053
 MonoBehaviour:
   m_ObjectHideFlags: 0
