@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using netcodeRTS;
+using dll;
 
 namespace RTSManagers
 {
@@ -11,7 +12,7 @@ namespace RTSManagers
         public const int SUPPLY_MAX = 100;
         public const int COST_BARRACKS = 500;
         public const int COST_DROIDS = 200;
-        public const int COST_TURRERT = 400;
+        public const int COST_TURRET = 400;
         public const int COST_WALL = 250;
         public const int TRICKLERATE = 4;
 
@@ -100,6 +101,7 @@ namespace RTSManagers
                 else
                 {
                     credits += 4;
+                    UserMetrics.CreditEarnedIncrease(4);
                 }
 
             }
@@ -116,6 +118,7 @@ namespace RTSManagers
                     if (credits >= ResourceConstants.COST_BARRACKS)
                     {
                         credits -= ResourceConstants.COST_BARRACKS;
+                        UserMetrics.CreditSpentIncrease(ResourceConstants.COST_BARRACKS);
                         return true;
                     }
                     return false;
@@ -124,14 +127,16 @@ namespace RTSManagers
                     if (credits >= ResourceConstants.COST_DROIDS)
                     {
                         credits -= ResourceConstants.COST_DROIDS;
+                        UserMetrics.CreditSpentIncrease(ResourceConstants.COST_DROIDS);
                         return true;
                     }
                     return false;
                     break;
                 case EntityType.Turret:
-                    if (credits >= ResourceConstants.COST_TURRERT)
+                    if (credits >= ResourceConstants.COST_TURRET)
                     {
-                        credits -= ResourceConstants.COST_TURRERT;
+                        credits -= ResourceConstants.COST_TURRET;
+                        UserMetrics.CreditSpentIncrease(ResourceConstants.COST_TURRET);
                         return true;
                     }
                     return false;
@@ -140,6 +145,7 @@ namespace RTSManagers
                     if (credits >= ResourceConstants.COST_WALL)
                     {
                         credits -= ResourceConstants.COST_WALL;
+                        UserMetrics.CreditSpentIncrease(ResourceConstants.COST_WALL);
                         return true;
                     }
                     return false;
@@ -163,7 +169,7 @@ namespace RTSManagers
                     supplyCurrent--;
                     break;
                 case EntityType.Turret:
-                    credits += ResourceConstants.COST_TURRERT;
+                    credits += ResourceConstants.COST_TURRET;
                     break;
                 case EntityType.Wall:
                     credits += ResourceConstants.COST_WALL;

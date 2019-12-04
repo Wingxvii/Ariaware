@@ -113,7 +113,7 @@ namespace RTSManagers
 
             prefabObject = turretBlueprint;
 
-
+            dll.UserMetrics.ClearFile();
         }
 
         // Update is called once per frame
@@ -170,6 +170,8 @@ namespace RTSManagers
                     droid.OnDeath();
                 }
             }
+
+            dll.UserMetrics.UpdateFile();
 
 
             #endregion
