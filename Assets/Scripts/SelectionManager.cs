@@ -198,6 +198,7 @@ namespace RTSManagers
                     else { 
                         returnObject = GameObject.Instantiate(RTSManager.Instance.turretPrefab, pos, Quaternion.identity);
                         SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                        dll.UserMetrics.TurretIncrease();
                     }
                     //Debug.Log(returnObject.GetComponent<SelectableObject>().id);
 
@@ -217,6 +218,7 @@ namespace RTSManagers
                     {
                         returnObject = GameObject.Instantiate(RTSManager.Instance.barracksPrefab, pos, Quaternion.identity);
                         SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                        dll.UserMetrics.BuildingIncrease();
                     }
                     return returnObject;
                     break;
@@ -234,6 +236,7 @@ namespace RTSManagers
                     {
                         returnObject = GameObject.Instantiate(RTSManager.Instance.wallPrefab, pos, Quaternion.identity);
                         SelectionManager.Instance.AllObjects.Add(returnObject.GetComponent<SelectableObject>());
+                        dll.UserMetrics.BuildingIncrease();
                     }
                     return returnObject;
                     break;

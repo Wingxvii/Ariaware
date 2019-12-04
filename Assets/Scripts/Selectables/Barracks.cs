@@ -113,6 +113,7 @@ protected override void BaseUpdate()
         if (ResourceManager.Instance.Purchase(EntityType.Droid) && buildTimes.Count < 25)
         {
             buildTimes.Enqueue(DroidManager.Instance.RequestQueue(EntityType.Droid));
+            dll.UserMetrics.DroidIncrease();
         }
         else if (buildTimes.Count >= 25)
         {
