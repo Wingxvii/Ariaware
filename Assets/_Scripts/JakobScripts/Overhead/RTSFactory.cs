@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RTSFactory : InitializableObject
 {
-    public List<EntityContainer> prefabList;
+    //[HideInInspector]
+    //public List<EntityContainer> prefabList;
+
+    public List<TextureHook> objectCustom;
 
     Queue<EntityContainer>[] InactiveContainers;
 
@@ -134,7 +137,10 @@ public class RTSFactory : InitializableObject
 
             for (int i = 0; i < BatchAmount; ++i)
             {
-                EntityContainer reference = Instantiate(prefabList[inst]);
+                //EntityContainer reference = Instantiate(prefabList[inst]);
+                EntityContainer reference = Instantiate(objectCustom[inst].chosenPrefab);
+                MeshRenderer mr = reference.GetComponentInChildren<MeshRenderer>();
+                mr.material = objectCustom[inst].getRandomTexture();
 
                 reference.ID = forceID;
                 reference.et = et;
@@ -180,7 +186,10 @@ public class RTSFactory : InitializableObject
 
         for (int i = 0; i < BatchAmount; ++i)
         {
-            EntityContainer reference = Instantiate(prefabList[inst]);
+            //EntityContainer reference = Instantiate(prefabList[inst]);
+            EntityContainer reference = Instantiate(objectCustom[inst].chosenPrefab);
+            MeshRenderer mr = reference.GetComponentInChildren<MeshRenderer>();
+            mr.material = objectCustom[inst].getRandomTexture();
 
             reference.ID = allContainers.Count + 1;
             reference.et = et;
