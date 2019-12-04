@@ -28,8 +28,10 @@ public class DoubleBufferManager : MonoBehaviour
     public Text DisplayField;
     public Text Counter;
     public Text bufferOn;
-    
-    public const bool USEDOUBLEBUFFER = false;
+    public Text sbOn;
+
+    public const bool USEDOUBLEBUFFER = true;
+    public const bool USESTRINGBUILDER = true;
 
     [SerializeField]
     int packetsPerFrame = 1;
@@ -58,6 +60,17 @@ public class DoubleBufferManager : MonoBehaviour
         else {
             bufferOn.text = "Off";
         }
+
+        if (USESTRINGBUILDER)
+        {
+            sbOn.text = "On";
+        }
+        else
+        {
+            sbOn.text = "Off";
+        }
+
+
 
         if (ip != null)
         {
@@ -164,22 +177,44 @@ public class DoubleBufferManager : MonoBehaviour
 
     public void OnSendMessage(List<String> messageStack)
     {
-        StringBuilder finalMessage = new StringBuilder();
-        foreach (String message in messageStack)
+        if (USESTRINGBUILDER)
         {
-            finalMessage.Append(message);
-            finalMessage.Append(",");
+            StringBuilder finalMessage = new StringBuilder();
+            foreach (String message in messageStack)
+            {
+                finalMessage.Append(message);
+                finalMessage.Append(",");
+            }
+            SendData(1, finalMessage.ToString(), Client);
         }
-        SendData(1, finalMessage.ToString(), Client);
+        else {
+            string finalMessage = "";
+            foreach (string message in messageStack)
+            {
+                finalMessage += message;
+                finalMessage += ",";
+            }
+            SendData(1, finalMessage, Client);
 
+        }
     }
 
     public void OnSendMessage(string message)
     {
-        StringBuilder finalMessage = new StringBuilder();
-        finalMessage.Append(message);
-        finalMessage.Append(",");
-        SendData(1, finalMessage.ToString(), Client);
+        if (USESTRINGBUILDER)
+        {
+            StringBuilder finalMessage = new StringBuilder();
+            finalMessage.Append(message);
+            finalMessage.Append(",");
+            SendData(1, finalMessage.ToString(), Client);
+        }
+        else
+        {
+            string finalMessage = "";
+            finalMessage += message;
+            finalMessage += ",";
+            SendData(1, finalMessage, Client);
+        }
 
     }
 
@@ -195,19 +230,37 @@ public class DoubleBufferManager : MonoBehaviour
         int sender = int.Parse(parsedData[0]);
 
         if (USEDOUBLEBUFFER) {
-            StringBuilder sb = new StringBuilder();
-
-            for (int counter = 1; counter < parsedData.Count; counter++)
+            if (USESTRINGBUILDER)
             {
-                sb.Append(parsedData[counter]);
-                sb.Append("\n");
-                //Debug.Log("added message");
+                StringBuilder sb = new StringBuilder();
+
+                for (int counter = 1; counter < parsedData.Count; counter++)
+                {
+                    sb.Append(parsedData[counter]);
+                    sb.Append("\n");
+                    //Debug.Log("added message");
+                }
+                DisplayField.text = sb.ToString();
             }
-            DisplayField.text = sb.ToString();
+            else {
+                string sb = "";
+
+                for (int counter = 1; counter < parsedData.Count; counter++)
+                {
+                    sb += parsedData[counter];
+                    sb += "\n";
+                    //Debug.Log("added message");
+                }
+                DisplayField.text = sb;
+
+            }
         }
         else
         {
-            StringBuilder sb = new StringBuilder();
+            if (USESTRINGBUILDER)
+            {
+
+                StringBuilder sb = new StringBuilder();
 
             for (int counter = 1; counter < parsedData.Count; counter++)
             {
@@ -216,6 +269,21 @@ public class DoubleBufferManager : MonoBehaviour
                 //Debug.Log("added message");
             }
             DisplayField.text = sb.ToString();
+            }
+            else
+            {
+                string sb = "";
+
+                for (int counter = 1; counter < parsedData.Count; counter++)
+                {
+                    sb += parsedData[counter];
+                    sb += "\n";
+                    //Debug.Log("added message");
+                }
+                DisplayField.text = sb;
+
+            }
+
         }
 
 
