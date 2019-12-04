@@ -114,6 +114,7 @@ namespace RTSManagers
             prefabObject = turretBlueprint;
 
             dll.UserMetrics.ClearFile();
+            dll.UserMetrics.Reset();
         }
 
         // Update is called once per frame

@@ -13,6 +13,8 @@ namespace dll
         [DllImport(DLL_NAME)]
         public static extern void ClearFile();
         [DllImport(DLL_NAME)]
+        public static extern void Reset();
+        [DllImport(DLL_NAME)]
         public static extern void BuildingIncrease();
         [DllImport(DLL_NAME)]
         public static extern void TurretIncrease();
