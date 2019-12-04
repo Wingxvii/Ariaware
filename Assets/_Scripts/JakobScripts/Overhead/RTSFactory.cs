@@ -139,7 +139,7 @@ public class RTSFactory : InitializableObject
             {
                 //EntityContainer reference = Instantiate(prefabList[inst]);
                 EntityContainer reference = Instantiate(objectCustom[inst].chosenPrefab);
-                MeshRenderer mr = reference.GetComponentInChildren<MeshRenderer>();
+                MeshRenderer mr = reference.GetComponentInChildren<MeshRenderer>(true);
                 mr.material = objectCustom[inst].getRandomTexture();
 
                 reference.ID = forceID;
@@ -188,7 +188,7 @@ public class RTSFactory : InitializableObject
         {
             //EntityContainer reference = Instantiate(prefabList[inst]);
             EntityContainer reference = Instantiate(objectCustom[inst].chosenPrefab);
-            MeshRenderer mr = reference.GetComponentInChildren<MeshRenderer>();
+            MeshRenderer mr = reference.GetComponentInChildren<MeshRenderer>(true);
             mr.material = objectCustom[inst].getRandomTexture();
 
             reference.ID = allContainers.Count + 1;
