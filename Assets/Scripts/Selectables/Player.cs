@@ -101,28 +101,11 @@ public class Player : SelectableObject
             playerBody.velocity += new Vector3(0, 0, 1 * -moveSpeed);
         }
 
-        //Debug.Log(Vector3.Project(this.GetComponent<Rigidbody>().velocity.normalized, transform.forward).magnitude);
-
         anim.SetFloat("Walk", Vector3.Dot(this.GetComponent<Rigidbody>().velocity, transform.forward) / 10);
         anim.SetFloat("Turn", Vector3.Dot(this.GetComponent<Rigidbody>().velocity, transform.right) / 10);
 
     }
-    /*
-        if ((state & (int) PlayerState.Alive) > 0) { 
-        
-        }
-    */
 
-
-    /*
-    protected override void BaseFixedUpdate()
-    {
-        if (playerBody.velocity.magnitude > maxSpeed)
-        {
-            playerBody.velocity = playerBody.velocity.normalized * maxSpeed;
-        }
-    }
-    */
     public override void OnDeath()
     {
         Debug.Log("Player's Dead");

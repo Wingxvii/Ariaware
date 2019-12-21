@@ -20,7 +20,6 @@ public class Turret : SelectableObject
     public float visionRange = 30.0f;
     public float maxRange = 50.0f;
     private Player attackPoint;
-    private Vector3 attackTarget;
     public float shortestDist;
     public ParticleSystem muzzle;
 
@@ -29,8 +28,6 @@ public class Turret : SelectableObject
     public float recoilRate = 0.5f;
     public int attackAmno = 10;
     public int attackDamage = 5;
-
-    public float accuracy = 0.85f;
 
     public float reloadTimer = 0.0f;
     public int currentAmno = 10;
@@ -74,15 +71,9 @@ public class Turret : SelectableObject
         changedToIdle = false;
     }
 
-    protected override void BaseLateUpdate()
-    {
-
-    }
-
     void TickUpdate()
     {
         if (positionUpdated) {
-            //Debug.Log("Added");
             NetworkManager.AddDataToStack(id, head.transform.rotation.eulerAngles, (int)state);
             changedToIdle = true;
         }
@@ -99,7 +90,9 @@ public class Turret : SelectableObject
 
     protected override void BaseFixedUpdate()
     {
+        
         shortestDist = float.MaxValue;
+        float dist = 0.0f;
 
         #region Fixed Tick
         //count down
@@ -125,13 +118,12 @@ public class Turret : SelectableObject
                 //search for shortest player
                 foreach (Player player in DroidManager.Instance.playerTargets)
                 {
-                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
-                    //Debug.Log(dist);
+                    dist = Vector3.Distance(player.transform.position, this.transform.position);
+
                     if (dist < shortestDist)
                     {
                         shortestDist = dist;
                         attackPoint = player;
-                        //Debug.Log("Seen");
                     }
                 }
                 if (shortestDist < maxRange)
@@ -143,7 +135,7 @@ public class Turret : SelectableObject
                 //search for shortest player
                 foreach (Player player in DroidManager.Instance.playerTargets)
                 {
-                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    dist = Vector3.Distance(player.transform.position, this.transform.position);
                     if (dist < shortestDist)
                     {
                         shortestDist = dist;
@@ -180,15 +172,8 @@ public class Turret : SelectableObject
                 break;
             case TurretState.TargetedShooting:
                 //search for shortest player
-                foreach (Player player in DroidManager.Instance.playerTargets)
-                {
-                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
-                    if (dist < shortestDist)
-                    {
-                        shortestDist = dist;
-                        attackPoint = player;
-                    }
-                }
+                dist = Vector3.Distance(attackPoint.transform.position, this.transform.position);
+                shortestDist = dist;
 
                 //look at
                 if (shortestDist < maxRange)
@@ -227,7 +212,7 @@ public class Turret : SelectableObject
                 //search for shortest player
                 foreach (Player player in DroidManager.Instance.playerTargets)
                 {
-                    float dist = Vector3.Distance(player.transform.position, this.transform.position);
+                    dist = Vector3.Distance(player.transform.position, this.transform.position);
                     if (dist < shortestDist)
                     {
                         shortestDist = dist;
@@ -242,6 +227,7 @@ public class Turret : SelectableObject
 
                 if (reloadTimer <= 0.0f)
                 {
+                    ///BUG: If recoiling from TargettedShooting, will go to IdleShooting
                     state = TurretState.IdleShooting;
                 }
                 break;
@@ -281,7 +267,6 @@ public class Turret : SelectableObject
     }
     public void IssueAttack(Player attackee)
     {
-        Debug.Log("attack issueds");
         if (state != TurretState.Reloading)
         {
             state = TurretState.TargetedShooting;
@@ -298,19 +283,15 @@ public class Turret : SelectableObject
         {
             if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Wall)
             {
-                Debug.Log("Hit Wall");
                 hit.transform.GetComponent<Wall>().WallIsHit(hit.point);
                 hit.transform.GetComponent<Wall>().OnDamage(attackDamage, this);
                 return false;
             }
             else if (hit.transform.gameObject.tag == "SelectableObject" && hit.transform.GetComponent<SelectableObject>().type == EntityType.Player) {
-                //Debug.Log("Hit Player");
                 return true;
             }
             else
             {
-                Debug.Log("Hit Something Else");
-                Debug.Log(hit.transform.gameObject.name);
                 return false;
             }
 

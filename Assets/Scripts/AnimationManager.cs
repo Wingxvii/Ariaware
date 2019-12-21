@@ -23,6 +23,7 @@ public class AnimationManager : MonoBehaviour
 
     public Animator Movement;
     public Animator Attack;
+    public Animation Missle;
 
     public void PlayMove(Vector3 location) {
         Movement.transform.position = location;
@@ -33,5 +34,11 @@ public class AnimationManager : MonoBehaviour
         Attack.transform.position = location;
         Attack.Play("IssueMovement");
     }
+
+    public void MissleLaunch()
+    {
+        Missle.Play("Missle");
+    }
+
 
 }

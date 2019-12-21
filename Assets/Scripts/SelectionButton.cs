@@ -10,12 +10,6 @@ namespace RTSUI
         public EntityType prefabType;
         public SelectableObject parentObject;
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void OnCreate(SelectableObject parentObj)
         {
             parentObject = parentObj;

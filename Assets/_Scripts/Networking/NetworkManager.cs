@@ -137,29 +137,6 @@ namespace netcodeRTS
         // Update is called once per frame
         void Update()
         {
-            /*
-            if (Input.GetKey(KeyCode.F)) {
-                StringBuilder finalMessage = new StringBuilder();
-
-
-                finalMessage.Append(SelectionManager.Instance.mousePosition.x);
-                finalMessage.Append(",");
-                finalMessage.Append("0");
-                finalMessage.Append(",");
-                finalMessage.Append(SelectionManager.Instance.mousePosition.z);
-                finalMessage.Append(",");
-                finalMessage.Append("0");
-                finalMessage.Append(",");
-                finalMessage.Append("0");
-                finalMessage.Append(",");
-                finalMessage.Append("0");
-                finalMessage.Append(",");
-                finalMessage.Append("0");
-                finalMessage.Append(",");
-
-                SendData((int)PacketType.PLAYERDATA, finalMessage.ToString(), Client);
-            }
-            */
 
             //process instanced information recieved
             if (updatedWeaponP1Flag)
@@ -287,20 +264,7 @@ namespace netcodeRTS
                         {
                             switch (sender)
                             {
-                                /*
-                                //REMOVE THIS
-                                case 1:
-                                    Debug.Log("Recieved info");
-                                    WriteBuffer.Player1Pos.x = float.Parse(parsedData[0]);
-                                    WriteBuffer.Player1Pos.y = float.Parse(parsedData[1]);
-                                    WriteBuffer.Player1Pos.z = float.Parse(parsedData[2]);
-                                    WriteBuffer.Player1Rot.x = float.Parse(parsedData[3]);
-                                    WriteBuffer.Player1Rot.y = float.Parse(parsedData[4]);
-                                    WriteBuffer.Player1Rot.z = float.Parse(parsedData[5]);
-                                    WriteBuffer.Player1State = int.Parse(parsedData[6]);
-                                    WriteBuffer.updated1 = true;
-                                    break;
-                                    */
+
                                 case 2:
 
                                     WriteBuffer.Player1Pos.x = float.Parse(parsedData[0]);
@@ -491,7 +455,6 @@ namespace netcodeRTS
         public static void SendKilledEntity(SelectableObject obj)
         {
 
-            //Debug.Log("Dead Droid Sent");
             StringBuilder dataToSend = new StringBuilder();
 
             //add object id
@@ -508,7 +471,6 @@ namespace netcodeRTS
 
             //RESET THIS
             dataToSend.Append(player);
-            //dataToSend.Append("1");
 
             dataToSend.Append(",");
             dataToSend.Append(damage);
@@ -533,8 +495,6 @@ namespace netcodeRTS
 
 
         public static void AddDataToStack(int id, Vector3 turretRot, int state) {
-
-            //Debug.Log("Added to Stack");
 
             StringBuilder dataToSend = new StringBuilder();
             dataToSend.Append(id);

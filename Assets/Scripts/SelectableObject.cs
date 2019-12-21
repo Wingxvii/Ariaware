@@ -14,6 +14,8 @@ public enum EntityType
     Droid,
     Turret,
     Player,
+
+
     TOTAL,
 }
 
@@ -62,7 +64,7 @@ public class SelectableObject : MonoBehaviour
     public void OnSelect()
     {
         selected = true;
-        if (halo != null) { halo.enabled = true; }
+        halo.enabled = true;
     }
     public void OnDeselect()
     {
@@ -111,9 +113,10 @@ public class SelectableObject : MonoBehaviour
         this.gameObject.transform.rotation = Quaternion.identity;
         this.currentHealth = maxHealth;
         this.level = 1;
-
         OnDeactivation();
         BaseResetValues();
+
+        this.gameObject.SetActive(false);
     }
 
     //base class overrides
@@ -130,11 +133,13 @@ public class SelectableObject : MonoBehaviour
     public virtual void OnDeactivation() { }
 
 
-    public virtual void OnDeath() {
+    public virtual void OnDeath()
+    {
         if (gameObject.activeSelf)
         {
 
-            switch (type) {
+            switch (type)
+            {
                 case EntityType.Barracks:
                     SelectionManager.Instance.deactivatedObjects[1].Enqueue(this);
                     break;
@@ -151,7 +156,7 @@ public class SelectableObject : MonoBehaviour
             OnDeselect();
             NetworkManager.SendKilledEntity(this);
             SelectionManager.Instance.DeselectItem(this);
-            gameObject.SetActive(false);
+            ResetValues();
         }
     }
 }

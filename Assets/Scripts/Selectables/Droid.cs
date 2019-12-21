@@ -180,11 +180,6 @@ public class Droid : SelectableObject
 
     }
 
-    public override void OnDeactivation()
-    {
-        //OnDeath();
-    }
-
     public override void IssueLocation(Vector3 location)
     {
         state = DroidState.Moving;
@@ -251,12 +246,12 @@ public class Droid : SelectableObject
 
     IEnumerator PlayDeath() {
         anim.Play("Death");
+        NetworkManager.SendKilledEntity(this);
 
         yield return new WaitForSeconds(3.0f);
 
         Debug.Log("Dead droid");
         DroidManager.Instance.KillDroid(this);
-        NetworkManager.SendKilledEntity(this);
         SelectionManager.Instance.DeselectItem(this);
     }
 }

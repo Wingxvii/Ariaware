@@ -9,12 +9,12 @@ namespace RTSManagers
 
     public enum MouseEvent
     {
-        Nothing = 0,
-        Selection = 1,
-        PrefabBuild = 2,
-        UnitMove = 3,
-        UnitAttack = 4,
-        Rally = 5,
+        Nothing = 0,        //nothing
+        Selection = 1,      //when objects are selected
+        PrefabBuild = 2,    //when a prefab is selected
+        UnitMove = 3,       //move order for unit command selected
+        UnitAttack = 4,     //attack order for unit command selected
+        Rally = 5,          //rally point for barracks selected
     }
 
     public class SelectionManager : MonoBehaviour
@@ -36,28 +36,35 @@ namespace RTSManagers
         //single pattern ends here
         #endregion
 
+        #region SelectionBoxVar
         public Vector2 boxStart;
         public Vector2 boxEnd;
-
-        public GameObject[] players;
         public bool boxActive = false;
         public Texture selectionBox;
+        public int BoxThreshold = 15;
+
+
+        #endregion
+
+        public GameObject[] players;
 
         //mouse selection
         public MouseEvent currentEvent = MouseEvent.Nothing;
 
+        #region Object Storage
         //list of all objects
         public List<SelectableObject> AllObjects;
         //list of all selected objects
         public List<SelectableObject> SelectedObjects;
         //primary selected object
         public SelectableObject PrimarySelectable;
-        //currently hit object
-        public SelectableObject HitObject;
 
-
+        ///TODO: Add List of Active Objects
         //list of all deactivated object
         public List<Queue<SelectableObject>> deactivatedObjects;
+        #endregion
+
+
 
         //selected types
         public bool selectedTypeFlag = false;
@@ -65,11 +72,15 @@ namespace RTSManagers
         //dirty flag for selection changes
         public bool selectionChanged = false;
 
+        #region Raycasting
         //raycasting
         public Vector3 mousePosition;
         private Ray ray;
         private RaycastHit hit;
         public LayerMask selectables;
+        //currently hit object
+        public SelectableObject HitObject;
+        #endregion
 
         //layermask for placements
         public LayerMask groundMask;
@@ -109,10 +120,7 @@ namespace RTSManagers
         // Update is called once per frame
         void Update()
         {
-
-            //handle selection box first
-            HandleSelectionBox();
-
+            #region Raycast
             //raycast the mouse
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (currentEvent == MouseEvent.PrefabBuild)
@@ -130,15 +138,20 @@ namespace RTSManagers
                     mousePosition = hit.point;
                 }
             }
+            #endregion
 
             //check to see if anything gets hit
             if (hit.collider && hit.collider.gameObject.tag == "SelectableObject")
             {
                 HitObject = hit.collider.gameObject.GetComponent<SelectableObject>();
             }
-            else {
+            else
+            {
                 HitObject = null;
             }
+
+            //handle selection box first
+            HandleSelectionBox();
 
             //handle left mouse click events
             HandleLeftMouseClicks();
@@ -192,7 +205,6 @@ namespace RTSManagers
                         returnObject = deactivatedObjects[0].Dequeue().gameObject;
 
                         returnObject.SetActive(true);
-                        returnObject.GetComponent<SelectableObject>().ResetValues();
                         returnObject.transform.position = pos;
                     }
                     else { 
@@ -211,7 +223,6 @@ namespace RTSManagers
                         returnObject = deactivatedObjects[1].Dequeue().gameObject;
 
                         returnObject.SetActive(true);
-                        returnObject.GetComponent<SelectableObject>().ResetValues();
                         returnObject.transform.position = pos;
                     }
                     else
@@ -229,7 +240,6 @@ namespace RTSManagers
                         returnObject = deactivatedObjects[2].Dequeue().gameObject;
 
                         returnObject.SetActive(true);
-                        returnObject.GetComponent<SelectableObject>().ResetValues();
                         returnObject.transform.position = pos;
                     }
                     else
@@ -258,7 +268,7 @@ namespace RTSManagers
             //handle box drag updates
             else if (Input.GetMouseButton(0) && boxActive)
             {
-                if (Mathf.Abs(boxStart.x - Input.mousePosition.x) > 15 || Mathf.Abs(boxStart.y - Input.mousePosition.y) > 15)
+                if (Mathf.Abs(boxStart.x - Input.mousePosition.x) > BoxThreshold || Mathf.Abs(boxStart.y - Input.mousePosition.y) > BoxThreshold)
                 {
                     boxEnd = Input.mousePosition;
                 }
@@ -270,35 +280,29 @@ namespace RTSManagers
             //handle box release
             if (Input.GetMouseButtonUp(0) && boxActive)
             {
-                Vector3 worldSelection1;
-
-                Ray rayCast = Camera.main.ScreenPointToRay(boxStart);
-                RaycastHit castHit;
-                if (Physics.Raycast(rayCast, out castHit, 500))
+                foreach (SelectableObject obj in AllObjects)
                 {
-                    worldSelection1 = castHit.point;
+                    Vector3 screenPoint = Camera.main.WorldToScreenPoint(obj.GetComponent<Transform>().position);
 
-                    foreach (SelectableObject obj in AllObjects)
+                    if (screenPoint.x >= Mathf.Min(boxStart.x, Input.mousePosition.x) &&
+                        screenPoint.x <= Mathf.Max(boxStart.x, Input.mousePosition.x) &&
+                        screenPoint.y >= Mathf.Min(boxStart.y, Input.mousePosition.y) &&
+                        screenPoint.y <= Mathf.Max(boxStart.y, Input.mousePosition.y) && !SelectedObjects.Contains(obj) &&
+                        obj.gameObject.activeSelf)
                     {
-                        if (obj.GetComponent<Transform>().position.x >= Mathf.Min(worldSelection1.x, mousePosition.x) &&
-                            obj.GetComponent<Transform>().position.x <= Mathf.Max(worldSelection1.x, mousePosition.x) &&
-                            obj.GetComponent<Transform>().position.z >= Mathf.Min(worldSelection1.z, mousePosition.z) &&
-                            obj.GetComponent<Transform>().position.z <= Mathf.Max(worldSelection1.z, mousePosition.z) && !SelectedObjects.Contains(obj) &&
-                            obj.gameObject.activeSelf)
-                        {
-                            //Debug.Log(obj.name);
-                            SelectedObjects.Add(obj);
-                            currentEvent = MouseEvent.Selection;
-                            obj.GetComponent<SelectableObject>().OnSelect();
-                            selectionChanged = true;
-                        }
+                        //Debug.Log(obj.name);
+                        SelectedObjects.Add(obj);
+                        currentEvent = MouseEvent.Selection;
+                        obj.GetComponent<SelectableObject>().OnSelect();
+                        selectionChanged = true;
                     }
-                    SwitchPrimarySelected();
                 }
+                SwitchPrimarySelected();
 
                 boxStart = Vector2.zero;
                 boxEnd = Vector2.zero;
                 boxActive = false;
+
             }
         }
 
@@ -631,8 +635,6 @@ namespace RTSManagers
 
         }
 
-
-
         public void SwitchPrimarySelected(SelectableObject primary = null)
         {
             if (primary == null && SelectedObjects.Count > 0)
@@ -643,7 +645,6 @@ namespace RTSManagers
             {
                 PrimarySelectable = primary;
             }
-            //selectionChanged = true;
         }
 
         //deselects an object

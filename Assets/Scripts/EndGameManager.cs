@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SceneManagement;
-
 public class EndGameManager : MonoBehaviour
 {
     public Text EndgameUI;
-    public Animation fireMissle;
 
 
     private void Start()
@@ -19,7 +17,7 @@ public class EndGameManager : MonoBehaviour
         else if (ScenePresent.Instance.gameState == 1) {
             Debug.Log("win");
             EndgameUI.text = "YOU WIN!";
-            fireMissle.Play("Missle");
+            AnimationManager.Instance.MissleLaunch();
         }
         else if (ScenePresent.Instance.gameState == 2)
         {
@@ -35,7 +33,7 @@ public class EndGameManager : MonoBehaviour
         {
             Debug.Log("Lose");
             EndgameUI.text = "YOU LOSE!";
-            fireMissle.Play("Missle");
+            AnimationManager.Instance.MissleLaunch();
         }
 
     }

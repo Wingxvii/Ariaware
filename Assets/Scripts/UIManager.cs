@@ -7,7 +7,6 @@ using RTSManagers;
 
 namespace RTSUI
 {
-
     public class UIManager : MonoBehaviour
     {
         #region SingletonCode
@@ -78,7 +77,8 @@ namespace RTSUI
                         break;
 
                     default:
-                        EnableUI();
+                        Debug.LogError("Selectable Type Unidentified: UIMANAGER");
+
                         break;
                 }
 
@@ -98,7 +98,7 @@ namespace RTSUI
             }
         }
 
-        void EnableUI(GameObject enabledUI = null)
+        void EnableUI(GameObject enabledUI)
         {
 
             if (!enabledUI.activeSelf)

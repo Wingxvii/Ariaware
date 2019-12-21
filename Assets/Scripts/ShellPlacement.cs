@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using RTSManagers;
 public class ShellPlacement : MonoBehaviour
 {
     public Material red;
@@ -20,7 +20,6 @@ public class ShellPlacement : MonoBehaviour
     {
         selfCollider = this.GetComponent<Collider>();
         selfRenderer = this.GetComponent<MeshRenderer>();
-
     }
 
     void OnEnable() {
@@ -30,6 +29,7 @@ public class ShellPlacement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //checks for placeability
         if (collisionCount == 0) {
             placeable = true;
             selfRenderer.material = green;
@@ -39,8 +39,6 @@ public class ShellPlacement : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(collision.gameObject);
-
         collisionCount++;
         selfRenderer.material = red;
         placeable = false;

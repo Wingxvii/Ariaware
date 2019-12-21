@@ -10,12 +10,16 @@ public class Barracks : SelectableObject
     public Queue<float> buildTimes;
     public float currentBuildTime = 0;
 
+    public static float droidTrainTime = 5.0f;
+    public static int maxTrainingCap = 25;
+
     public Canvas canvas;
 
     public GameObject flagObj;
     public bool flagActive = false;
 
     public Transform spawnPoint;
+
 
     //inherited function realizations
     protected override void BaseStart()
@@ -43,7 +47,7 @@ public class Barracks : SelectableObject
 
     }
 
-protected override void BaseUpdate()
+    protected override void BaseUpdate()
     {
 
         //add to queue
@@ -55,9 +59,9 @@ protected override void BaseUpdate()
         //tick queue
         else if (currentBuildTime > 0)
         {
-            buildProcess.value = currentBuildTime / 5.0f;
+            buildProcess.value = currentBuildTime / droidTrainTime;
             currentBuildTime -= Time.deltaTime;
-            if (currentBuildTime < 0)
+            if (currentBuildTime <= 0)
             {
                 if (flagActive)
                 {
@@ -110,12 +114,12 @@ protected override void BaseUpdate()
 
     //child-sepific functions
     public void OnTrainRequest() {
-        if (ResourceManager.Instance.Purchase(EntityType.Droid) && buildTimes.Count < 25)
+        if (ResourceManager.Instance.Purchase(EntityType.Droid) && buildTimes.Count < maxTrainingCap)
         {
             buildTimes.Enqueue(DroidManager.Instance.RequestQueue(EntityType.Droid));
             dll.UserMetrics.DroidIncrease();
         }
-        else if (buildTimes.Count >= 25)
+        else if (buildTimes.Count >= maxTrainingCap)
         {
             Debug.Log("QUEUE IS FULL");
         }
